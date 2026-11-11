@@ -1,0 +1,6 @@
+{
+  "name": "ChromArchive",
+  "description": "Yapay Zekâ Destekli Görsel Renk Analizi ve Dijital Arşiv Sistemi. Açık erişimli sanat ve fotoğraf koleksiyonlarının renk tabanlı analizi, akıllı renk araması ve dijital kürasyon platformu.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
