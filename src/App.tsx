@@ -26,6 +26,7 @@ import { ArchiveGallery } from './components/ArchiveGallery';
 import { SearchBar } from './components/SearchBar';
 import { Statistics } from './components/Statistics';
 import { About } from './components/About';
+import { HomeOverview } from './components/HomeOverview';
 import { ArtworkModal } from './components/ArtworkModal';
 import { Footer } from './components/Footer';
 import { Toast } from './components/Toast';
@@ -199,7 +200,8 @@ export default function App() {
       <main className="main-content container" id="mainContent">
         {/* HERO / HOME SECTION */}
         {activeSection === 'home' && (
-          <section className="hero-section">
+          <>
+            <section className="hero-section">
             <div className="hero-text-container">
               <div className="curatorial-badge">
                 <span className="badge-dot" />
@@ -256,6 +258,10 @@ export default function App() {
               )}
             </div>
           </section>
+
+          {/* Zengin Editoryal Alt Bölüm (A: Proje Hakkında, B: Nasıl Çalışır, C: Özellikler, D: Misyon) */}
+          <HomeOverview onNavigate={setActiveSection} />
+        </>
         )}
 
         {/* ANALYZER SECTION */}

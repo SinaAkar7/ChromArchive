@@ -48,6 +48,7 @@ chromarchive/
 │   │   ├── ArtworkModal.tsx        # Eser ve metadata detay inceleme modalı
 │   │   ├── ColorPalette.tsx        # K-Means renk kartları ve dağılım çubuğu
 │   │   ├── Footer.tsx              # Küratöryel alt bilgi ve navigasyon
+│   │   ├── HomeOverview.tsx        # Ana sayfa zengin editoryal bölümleri (Hakkında, Akış, Özellikler, Misyon)
 │   │   ├── ImageUploader.tsx       # Sürükle-bırak yükleyici ve örnek eserler
 │   │   ├── Navbar.tsx              # 3 Bölgeli üst menü navigasyonu
 │   │   ├── SearchBar.tsx           # Hedef renk bazlı kromatik arama

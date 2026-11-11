@@ -325,19 +325,6 @@ export const ColorPalette: React.FC<ColorPaletteProps> = ({
           </span>
         </div>
       </div>
-
-      {/* JSON Metadata Önizleyicisi */}
-      <div className="json-viewer-container">
-        <div className="json-viewer-header">
-          <span className="json-viewer-title">JSON Metadata Çıktısı</span>
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-            Doğrulanmış Standart Şema
-          </span>
-        </div>
-        <pre className="json-pre" id="analysisJsonPre">
-          {JSON.stringify(analysisData, null, 2)}
-        </pre>
-      </div>
     </div>
   );
 };
