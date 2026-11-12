@@ -56,7 +56,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         return {
           artwork: item,
           similarityScore,
-          matchedColorHex: closestColor?.hex || item.dominantColors[0]?.hex || '#000000',
+          matchedColorHex: closestColor?.hex || item.dominantColors?.[0]?.hex || '#000000',
         };
       })
       .filter((res) => res.similarityScore >= minThreshold)
@@ -246,7 +246,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
                 {/* Artwork palette mini strip */}
                 <div className="mini-palette-strip">
-                  {artwork.dominantColors.map((col, idx) => (
+                  {artwork.dominantColors?.map((col, idx) => (
                     <div
                       key={idx}
                       className="mini-strip-color"

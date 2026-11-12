@@ -13,28 +13,70 @@ import {
 const STORAGE_KEY = 'chromarchive_user_items';
 
 /**
+ * Ham arşiv verisini tam ve kararlı ArtworkMetadata modeline dönüştürür.
+ */
+export function normalizeArchiveItem(raw: any): ArtworkMetadata {
+  const objectId = raw.objectId || (raw.id && !isNaN(Number(raw.id)) ? Number(raw.id) : undefined);
+  const id = String(raw.id || raw.objectId || Math.random().toString(36).substring(2, 9));
+
+  return {
+    id,
+    objectId,
+    title: raw.title || 'İsimsiz Eser',
+    artist: raw.artist || 'Bilinmeyen Sanatçı',
+    date: raw.date || raw.year || 'Tarih Belirtilmemiş',
+    year: raw.year || raw.date || 'Tarih Belirtilmemiş',
+    category: raw.department || raw.category || 'Müze Arşivi',
+    department: raw.department || 'European Paintings',
+    period: raw.period || raw.department || 'Açık Erişim Koleksiyonu',
+    institution: raw.source || raw.institution || 'The Metropolitan Museum of Art',
+    source: raw.source || 'The Metropolitan Museum of Art',
+    accessionNumber: raw.accessionNumber || (objectId ? `MET-${objectId}` : 'MET-OA'),
+    sourceUrl: raw.museumRecordUrl || raw.sourceUrl || (objectId ? `https://www.metmuseum.org/art/collection/search/${objectId}` : ''),
+    museumUrl: raw.museumRecordUrl || raw.museumUrl || (objectId ? `https://www.metmuseum.org/art/collection/search/${objectId}` : ''),
+    museumRecordUrl: raw.museumRecordUrl || (objectId ? `https://www.metmuseum.org/art/collection/search/${objectId}` : ''),
+    license: raw.license || 'Kamu Malı (Public Domain / CC0)',
+    rights: raw.rights || 'Kamu Malı (Public Domain / CC0)',
+    isPublicDomain: raw.isPublicDomain ?? true,
+    medium: raw.medium || 'Tuval üzerine yağlıboya',
+    dimensions: raw.dimensions || 'Müze Arşiv Standartları',
+    description: raw.description || `${raw.artist || 'Sanatçı'} tarafından ${raw.date || ''} tarihinde üretilen, The Metropolitan Museum of Art açık erişim koleksiyonunda yer alan kamu malı başyapıt.`,
+    imageUrl: raw.imageUrl,
+    thumbnailUrl: raw.thumbnailUrl || raw.imageUrl,
+    culture: raw.culture || '',
+    tags: raw.tags || (raw.department ? [raw.department, 'The Met', 'Open Access'] : ['The Met', 'Open Access']),
+    dominantColors: Array.isArray(raw.dominantColors) ? raw.dominantColors : [],
+    overallTemperature: raw.overallTemperature || 'Dengeli / Nötr',
+    dominantCount: Array.isArray(raw.dominantColors) ? raw.dominantColors.length : 0,
+    analysisDate: raw.analysisDate || new Date().toISOString().split('T')[0],
+    colorDiversityScore: raw.colorDiversityScore || 75,
+  };
+}
+
+/**
  * Başlangıç verisi ve kullanıcının yerel kayıtlarını birleştirerek tüm arşivi döndürür.
  */
 export function getArchiveItems(): ArtworkMetadata[] {
-  const defaultItems = initialArchiveData as ArtworkMetadata[];
+  const normalizedDefault = (initialArchiveData as any[]).map(normalizeArchiveItem);
 
   if (typeof window === 'undefined') {
-    return defaultItems;
+    return normalizedDefault;
   }
 
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return defaultItems;
+    if (!raw) return normalizedDefault;
 
-    const userItems: ArtworkMetadata[] = JSON.parse(raw);
+    const userItems: any[] = JSON.parse(raw);
     if (Array.isArray(userItems)) {
-      return [...userItems, ...defaultItems];
+      const normalizedUser = userItems.map(normalizeArchiveItem);
+      return [...normalizedUser, ...normalizedDefault];
     }
   } catch (err) {
     console.error('LocalStorage okuma hatası:', err);
   }
 
-  return defaultItems;
+  return normalizedDefault;
 }
 
 /**

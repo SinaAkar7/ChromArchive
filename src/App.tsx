@@ -181,14 +181,20 @@ export default function App() {
     (artwork: ArtworkMetadata) => {
       setSelectedImageSrc(artwork.imageUrl);
       setCurrentArtworkMeta(artwork);
-      setAnalysisData(artwork);
-      setCurrentMetaStrip(
-        `${artwork.dimensions || 'Müze Kaydı'} · ${artwork.dominantColors.length} Küme · ${artwork.overallTemperature}`
-      );
       setActiveSection('analyzer');
-      showToast(`'${artwork.title}' analizöre aktarıldı.`, 'info');
+
+      if (artwork.dominantColors && artwork.dominantColors.length > 0) {
+        setAnalysisData(artwork);
+        setCurrentMetaStrip(
+          `${artwork.dimensions || 'Müze Kaydı'} · ${artwork.dominantColors.length} Küme · ${artwork.overallTemperature}`
+        );
+        showToast(`'${artwork.title}' analizöre aktarıldı.`, 'info');
+      } else {
+        showToast(`'${artwork.title}' için piksel renk analizi başlatılıyor...`, 'info');
+        performAnalysis(artwork.imageUrl, artwork, clusterCount);
+      }
     },
-    [showToast]
+    [showToast, clusterCount, performAnalysis]
   );
 
   return (
@@ -312,6 +318,7 @@ export default function App() {
               temperatureFilter={galleryTempFilter}
               onTemperatureFilterChange={setGalleryTempFilter}
               onInspectArtwork={handleInspectArtwork}
+              onAnalyzeArtwork={handleLoadIntoAnalyzer}
             />
           </section>
         )}

@@ -15,6 +15,7 @@ interface ArchiveGalleryProps {
   temperatureFilter: string;
   onTemperatureFilterChange: (temp: string) => void;
   onInspectArtwork: (item: ArtworkMetadata) => void;
+  onAnalyzeArtwork?: (item: ArtworkMetadata) => void;
 }
 
 export const ArchiveGallery: React.FC<ArchiveGalleryProps> = ({
@@ -26,7 +27,28 @@ export const ArchiveGallery: React.FC<ArchiveGalleryProps> = ({
   temperatureFilter,
   onTemperatureFilterChange,
   onInspectArtwork,
+  onAnalyzeArtwork,
 }) => {
+  const [artistFilter, setArtistFilter] = React.useState<string>('all');
+  const [departmentFilter, setDepartmentFilter] = React.useState<string>('all');
+
+  const uniqueArtists = useMemo(() => {
+    const set = new Set<string>();
+    items.forEach((item) => {
+      if (item.artist && item.artist !== 'Unknown Artist') set.add(item.artist);
+    });
+    return Array.from(set).sort((a, b) => a.localeCompare(b, 'tr'));
+  }, [items]);
+
+  const uniqueDepartments = useMemo(() => {
+    const set = new Set<string>();
+    items.forEach((item) => {
+      if (item.department) set.add(item.department);
+      else if (item.period) set.add(item.period);
+    });
+    return Array.from(set).sort((a, b) => a.localeCompare(b, 'tr'));
+  }, [items]);
+
   const filteredItems = useMemo(() => {
     const q = searchQuery.toLowerCase().trim();
 
@@ -37,12 +59,25 @@ export const ArchiveGallery: React.FC<ArchiveGalleryProps> = ({
         item.title.toLowerCase().includes(q) ||
         item.artist.toLowerCase().includes(q) ||
         (item.period && item.period.toLowerCase().includes(q)) ||
+        (item.department && item.department.toLowerCase().includes(q)) ||
         (item.institution && item.institution.toLowerCase().includes(q)) ||
         (item.description && item.description.toLowerCase().includes(q)) ||
         item.dominantColors?.some(
           (c) =>
             c.name.toLowerCase().includes(q) || c.hex.toLowerCase().includes(q)
         );
+
+      // Sanatçı filtresi
+      if (artistFilter !== 'all' && item.artist !== artistFilter) {
+        return false;
+      }
+
+      // Departman / Dönem filtresi
+      if (departmentFilter !== 'all') {
+        const matchesDept =
+          item.department === departmentFilter || item.period === departmentFilter;
+        if (!matchesDept) return false;
+      }
 
       // Kategori filtresi
       let matchesCategory = true;
@@ -67,7 +102,7 @@ export const ArchiveGallery: React.FC<ArchiveGalleryProps> = ({
 
       return matchesQuery && matchesCategory && matchesTemp;
     });
-  }, [items, searchQuery, categoryFilter, temperatureFilter]);
+  }, [items, searchQuery, categoryFilter, temperatureFilter, artistFilter, departmentFilter]);
 
   return (
     <section id="archive" className="app-section active">
@@ -106,6 +141,36 @@ export const ArchiveGallery: React.FC<ArchiveGalleryProps> = ({
           </div>
 
           <div className="archive-filters-group">
+            <select
+              id="archiveArtistSelect"
+              className="filter-select"
+              value={artistFilter}
+              onChange={(e) => setArtistFilter(e.target.value)}
+              title="Sanatçıya Göre Filtrele"
+            >
+              <option value="all">Tüm Sanatçılar ({uniqueArtists.length})</option>
+              {uniqueArtists.map((artist) => (
+                <option key={artist} value={artist}>
+                  {artist}
+                </option>
+              ))}
+            </select>
+
+            <select
+              id="archiveDeptSelect"
+              className="filter-select"
+              value={departmentFilter}
+              onChange={(e) => setDepartmentFilter(e.target.value)}
+              title="Dönem ve Departmana Göre Filtrele"
+            >
+              <option value="all">Tüm Dönem / Departmanlar</option>
+              {uniqueDepartments.map((dept) => (
+                <option key={dept} value={dept}>
+                  {dept}
+                </option>
+              ))}
+            </select>
+
             <select
               id="archiveCategorySelect"
               className="filter-select"
@@ -174,17 +239,27 @@ export const ArchiveGallery: React.FC<ArchiveGalleryProps> = ({
           ) : (
             filteredItems.map((item) => (
               <div key={item.id} className="archive-card" data-id={item.id}>
-                <div className="archive-card-image-box">
+                <div
+                  className="archive-card-image-box"
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => onInspectArtwork(item)}
+                  title="Detayları incelemek için tıklayın"
+                >
                   <img
-                    src={item.imageUrl}
+                    src={item.thumbnailUrl || item.imageUrl}
                     alt={item.title}
                     className="archive-card-img"
                     loading="lazy"
                     referrerPolicy="no-referrer"
                     onError={(e) => {
                       const target = e.currentTarget;
+                      // Fallback to primary imageUrl if thumbnailUrl failed
+                      if (item.imageUrl && target.src !== item.imageUrl) {
+                        target.src = item.imageUrl;
+                        return;
+                      }
                       target.onerror = null;
-                      target.src = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%23f0ebe1'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%236b7280' font-family='serif' font-size='18'>${encodeURIComponent(
+                      target.src = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%23f0ebe1'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%236b7280' font-family='serif' font-size='16'>${encodeURIComponent(
                         item.title
                       )}</text></svg>`;
                     }}
@@ -206,40 +281,60 @@ export const ArchiveGallery: React.FC<ArchiveGalleryProps> = ({
 
                 <div className="archive-card-content">
                   <div className="archive-card-meta-line">
-                    <span>{item.period || 'Müze Koleksiyonu'}</span>
+                    <span>{item.department || item.period || 'Müze Koleksiyonu'}</span>
                     <span>·</span>
                     <span>{item.date}</span>
                   </div>
-                  <h3 className="archive-card-title">{item.title}</h3>
+                  <h3
+                    className="archive-card-title"
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => onInspectArtwork(item)}
+                  >
+                    {item.title}
+                  </h3>
                   <p className="archive-card-artist">{item.artist}</p>
 
                   <div className="archive-card-palette-details">
-                    {item.dominantColors?.map((c, i) => (
-                      <div
-                        key={i}
-                        className="mini-swatch"
-                        style={{ backgroundColor: c.hex }}
-                        title={`${c.hex} - ${c.name}`}
-                      />
-                    ))}
-                    <span
-                      style={{
-                        fontSize: '0.75rem',
-                        color: 'var(--text-muted)',
-                        marginLeft: 'auto',
-                      }}
-                    >
-                      {item.overallTemperature}
-                    </span>
+                    {item.dominantColors && item.dominantColors.length > 0 ? (
+                      <>
+                        {item.dominantColors.map((c, i) => (
+                          <div
+                            key={i}
+                            className="mini-swatch"
+                            style={{ backgroundColor: c.hex }}
+                            title={`${c.hex} - ${c.name}`}
+                          />
+                        ))}
+                        <span
+                          style={{
+                            fontSize: '0.75rem',
+                            color: 'var(--text-muted)',
+                            marginLeft: 'auto',
+                          }}
+                        >
+                          {item.overallTemperature}
+                        </span>
+                      </>
+                    ) : (
+                      <span
+                        style={{
+                          fontSize: '0.75rem',
+                          color: 'var(--text-muted)',
+                        }}
+                      >
+                        Açık Erişim · The Met
+                      </span>
+                    )}
                   </div>
 
-                  <div className="archive-card-footer">
+                  <div className="archive-card-footer" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
                     <button
                       type="button"
                       className="btn-view-detail"
+                      style={{ flex: 1, minWidth: '95px' }}
                       onClick={() => onInspectArtwork(item)}
                     >
-                      <span>Detayları İncele</span>
+                      <span>Detaylar</span>
                       <svg
                         width="14"
                         height="14"
@@ -251,6 +346,35 @@ export const ArchiveGallery: React.FC<ArchiveGalleryProps> = ({
                         <path d="M5 12h14M12 5l7 7-7 7" />
                       </svg>
                     </button>
+                    {onAnalyzeArtwork && (
+                      <button
+                        type="button"
+                        className="btn-view-detail"
+                        style={{
+                          flex: 1,
+                          minWidth: '105px',
+                          backgroundColor: 'var(--color-primary, #1e3a5f)',
+                          color: '#ffffff',
+                          borderColor: 'var(--color-primary, #1e3a5f)'
+                        }}
+                        onClick={() => onAnalyzeArtwork(item)}
+                        title="Bu eseri Canvas piksel renk analizine aktar"
+                      >
+                        <span>Renk Analizi</span>
+                        <svg
+                          width="14"
+                          height="14"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <circle cx="12" cy="12" r="10" />
+                          <path d="m4.93 4.93 4.24 4.24" />
+                          <path d="m14.83 9.17 4.24-4.24" />
+                        </svg>
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>

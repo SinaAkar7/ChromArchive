@@ -107,51 +107,82 @@ export const ArtworkModal: React.FC<ArtworkModalProps> = ({
               </div>
 
               {/* Proportional Chromatic Bar */}
-              <div className="modal-color-strip-container">
-                <div className="strip-title">
-                  <Palette size={14} />
-                  <span>Kromatik Spektrum Dağılımı</span>
-                </div>
-                <div className="modal-proportional-bar">
-                  {artwork.dominantColors.map((color, idx) => (
-                    <div
-                      key={idx}
-                      className="modal-bar-segment"
-                      style={{
-                        backgroundColor: color.hex,
-                        width: `${color.percentage}%`
-                      }}
-                      title={`${color.name || color.hex}: %${color.percentage}`}
-                      onClick={() => onCopyColor(color.hex)}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              {/* Dominant Color Swatches */}
-              <div className="modal-swatches-grid">
-                {artwork.dominantColors.map((col, idx) => (
-                  <div
-                    key={idx}
-                    className="modal-swatch-card"
-                    onClick={() => onCopyColor(col.hex)}
-                    title="HEX Kodunu Kopyala"
-                  >
-                    <div className="modal-swatch-box" style={{ backgroundColor: col.hex }} />
-                    <div className="modal-swatch-details">
-                      <div className="modal-swatch-hex mono-font">{col.hex}</div>
-                      <div className="modal-swatch-sub">
-                        <span>%{col.percentage}</span>
-                        <span className="swatch-temperature">{col.temperature}</span>
-                      </div>
-                      {col.name && (
-                        <div className="modal-swatch-name">{col.name}</div>
-                      )}
+              {/* Proportional Chromatic Bar & Swatches */}
+              {artwork.dominantColors && artwork.dominantColors.length > 0 ? (
+                <>
+                  <div className="modal-color-strip-container">
+                    <div className="strip-title">
+                      <Palette size={14} />
+                      <span>Kromatik Spektrum Dağılımı</span>
                     </div>
-                    <Copy size={12} className="copy-hint-icon" />
+                    <div className="modal-proportional-bar">
+                      {artwork.dominantColors.map((color, idx) => (
+                        <div
+                          key={idx}
+                          className="modal-bar-segment"
+                          style={{
+                            backgroundColor: color.hex,
+                            width: `${color.percentage}%`
+                          }}
+                          title={`${color.name || color.hex}: %${color.percentage}`}
+                          onClick={() => onCopyColor(color.hex)}
+                        />
+                      ))}
+                    </div>
                   </div>
-                ))}
-              </div>
+
+                  <div className="modal-swatches-grid">
+                    {artwork.dominantColors.map((col, idx) => (
+                      <div
+                        key={idx}
+                        className="modal-swatch-card"
+                        onClick={() => onCopyColor(col.hex)}
+                        title="HEX Kodunu Kopyala"
+                      >
+                        <div className="modal-swatch-box" style={{ backgroundColor: col.hex }} />
+                        <div className="modal-swatch-details">
+                          <div className="modal-swatch-hex mono-font">{col.hex}</div>
+                          <div className="modal-swatch-sub">
+                            <span>%{col.percentage}</span>
+                            <span className="swatch-temperature">{col.temperature}</span>
+                          </div>
+                          {col.name && (
+                            <div className="modal-swatch-name">{col.name}</div>
+                          )}
+                        </div>
+                        <Copy size={12} className="copy-hint-icon" />
+                      </div>
+                    ))}
+                  </div>
+                </>
+              ) : (
+                <div style={{
+                  padding: '1.25rem',
+                  backgroundColor: 'var(--bg-surface, #ffffff)',
+                  border: '1px solid var(--border-light, #e5e0d8)',
+                  borderRadius: 'var(--radius-md, 8px)',
+                  textAlign: 'center',
+                  marginBottom: '1rem'
+                }}>
+                  <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary, #666)', marginBottom: '0.75rem' }}>
+                    Bu açık erişimli başyapıtın kromatik paletini Canvas K-Means++ piksel kümeleme motoruyla anında çıkarabilirsiniz.
+                  </p>
+                  {onLoadIntoAnalyzer && (
+                    <button
+                      type="button"
+                      className="modal-action-btn secondary"
+                      style={{ width: '100%', justifyContent: 'center' }}
+                      onClick={() => {
+                        onLoadIntoAnalyzer(artwork);
+                        onClose();
+                      }}
+                    >
+                      <Palette size={14} />
+                      <span>Gerçek Piksel Renk Analizini Başlat</span>
+                    </button>
+                  )}
+                </div>
+              )}
             </div>
 
             {/* Right Column: Metadata & Curatorial Notes */}

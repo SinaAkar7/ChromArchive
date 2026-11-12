@@ -62,6 +62,12 @@ export interface ArtworkMetadata {
   isCustom?: boolean;
   similarityScore?: number;
   closestColor?: DominantColor;
+  objectId?: number;
+  thumbnailUrl?: string;
+  department?: string;
+  isPublicDomain?: boolean;
+  museumRecordUrl?: string;
+  source?: string;
 }
 
 export type ClusterCountOption = 'auto' | 5 | 6 | 7 | 8;

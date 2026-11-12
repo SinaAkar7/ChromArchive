@@ -1,0 +1,422 @@
+{
+  "totalArtworks": 105,
+  "previousCount": 18,
+  "newlyAddedCount": 87,
+  "verifiedCount": 105,
+  "missingMetadataCount": 0,
+  "workingImagesCount": 105,
+  "fileSizeBytes": 60765,
+  "fileSizeKB": "59.3",
+  "skippedSeedCount": 68,
+  "skippedSeeds": [
+    {
+      "seedId": "met-seed-011",
+      "titleQuery": "Bridge over a Pond of Water Lilies",
+      "artistQuery": "Claude Monet",
+      "reason": "The Met koleksiyonundaki bu kayıt (ID: 437127, 437137) bağışçı telif kısıtlaması nedeniyle isPublicDomain=false olarak listelendiğinden açık erişim şartını sağlamamaktadır."
+    },
+    {
+      "seedId": "met-seed-012",
+      "titleQuery": "Water Lilies",
+      "artistQuery": "Claude Monet",
+      "reason": "The Met koleksiyonundaki bu kayıt (ID: 437127, 437137) bağışçı telif kısıtlaması nedeniyle isPublicDomain=false olarak listelendiğinden açık erişim şartını sağlamamaktadır."
+    },
+    {
+      "seedId": "met-seed-013",
+      "titleQuery": "Poppy Fields near Argenteuil",
+      "artistQuery": "Claude Monet",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-014",
+      "titleQuery": "Regatta at Sainte-Adresse",
+      "artistQuery": "Claude Monet",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-015",
+      "titleQuery": "Landscape: The Parc Monceau",
+      "artistQuery": "Claude Monet",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-023",
+      "titleQuery": "Garden at Vaucresson",
+      "artistQuery": "Edouard Vuillard",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-026",
+      "titleQuery": "Lilacs in a Window",
+      "artistQuery": "Mary Cassatt",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-028",
+      "titleQuery": "From Williamsburg Bridge",
+      "artistQuery": "Edward Hopper",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-029",
+      "titleQuery": "Under the Wave off Kanagawa",
+      "artistQuery": "Katsushika Hokusai",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-030",
+      "titleQuery": "The Gulf of Marseilles Seen from L'Estaque",
+      "artistQuery": "Paul Cézanne",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-031",
+      "titleQuery": "The Repast of the Lion",
+      "artistQuery": "Henri Rousseau",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-032",
+      "titleQuery": "Venice, from the Porch of Madonna della Salute",
+      "artistQuery": "Joseph Mallord William Turner",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-033",
+      "titleQuery": "Springtime",
+      "artistQuery": "Pierre-Auguste Cot",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-034",
+      "titleQuery": "Freedom of Speech",
+      "artistQuery": "Faith Ringgold",
+      "reason": "Modern/Çağdaş eser telif koruması altındadır (Public Domain değildir)."
+    },
+    {
+      "seedId": "met-seed-035",
+      "titleQuery": "Tapestry: Recollection Pond",
+      "artistQuery": "Romare Bearden",
+      "reason": "Modern/Çağdaş eser telif koruması altındadır (Public Domain değildir)."
+    },
+    {
+      "seedId": "met-seed-036",
+      "titleQuery": "No. 3",
+      "artistQuery": "Mark Rothko",
+      "reason": "Modern/Çağdaş eser telif koruması altındadır (Public Domain değildir)."
+    },
+    {
+      "seedId": "met-seed-037",
+      "titleQuery": "Report from Rockport",
+      "artistQuery": "Stuart Davis",
+      "reason": "Modern/Çağdaş eser telif koruması altındadır (Public Domain değildir)."
+    },
+    {
+      "seedId": "met-seed-038",
+      "titleQuery": "The Great Wave",
+      "artistQuery": "Katsushika Hokusai",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-040",
+      "titleQuery": "The Zouave",
+      "artistQuery": "Vincent van Gogh",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-043",
+      "titleQuery": "The Unicorn Rests in a Garden",
+      "artistQuery": null,
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-044",
+      "titleQuery": "The Unicorn is Found",
+      "artistQuery": null,
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-045",
+      "titleQuery": "The Unicorn is Attacked",
+      "artistQuery": null,
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-046",
+      "titleQuery": "The Unicorn in Captivity",
+      "artistQuery": null,
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-047",
+      "titleQuery": "The Adoration of the Magi",
+      "artistQuery": "Hieronymus Bosch",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-049",
+      "titleQuery": "The Annunciation",
+      "artistQuery": "Sandro Botticelli",
+      "reason": "Eser The Met koleksiyonunda değil, Galleria degli Uffizi (Floransa) envanterindedir."
+    },
+    {
+      "seedId": "met-seed-050",
+      "titleQuery": "The Birth of Venus",
+      "artistQuery": "Sandro Botticelli",
+      "reason": "Eser The Met koleksiyonunda değil, Galleria degli Uffizi (Floransa) envanterindedir."
+    },
+    {
+      "seedId": "met-seed-051",
+      "titleQuery": "Madonna and Child",
+      "artistQuery": "Duccio di Buoninsegna",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-053",
+      "titleQuery": "The Nativity",
+      "artistQuery": "Lorenzo Lotto",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-054",
+      "titleQuery": "Portrait of a Young Woman",
+      "artistQuery": "Petrus Christus",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-057",
+      "titleQuery": "The Denial of Saint Peter",
+      "artistQuery": "Caravaggio",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-058",
+      "titleQuery": "The Lute Player",
+      "artistQuery": "Caravaggio",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-060",
+      "titleQuery": "The Sampling Officials",
+      "artistQuery": "Rembrandt",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-061",
+      "titleQuery": "Flora",
+      "artistQuery": "Rembrandt",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-062",
+      "titleQuery": "The Rest on the Flight into Egypt",
+      "artistQuery": "Gerard David",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-064",
+      "titleQuery": "The Wedding Dance",
+      "artistQuery": "Pieter Bruegel the Elder",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-065",
+      "titleQuery": "The Death of the Virgin",
+      "artistQuery": "Caravaggio",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-066",
+      "titleQuery": "The Immaculate Conception",
+      "artistQuery": "Bartolomé Esteban Murillo",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-068",
+      "titleQuery": "The Holy Family",
+      "artistQuery": "El Greco",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-069",
+      "titleQuery": "The Bathers",
+      "artistQuery": "Paul Cézanne",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-071",
+      "titleQuery": "Madame Cézanne in a Red Armchair",
+      "artistQuery": "Paul Cézanne",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-072",
+      "titleQuery": "The Card Players",
+      "artistQuery": "Paul Cézanne",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-074",
+      "titleQuery": "The Rehearsal of the Ballet Onstage",
+      "artistQuery": "Edgar Degas",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-075",
+      "titleQuery": "The Little Fourteen-Year-Old Dancer",
+      "artistQuery": "Edgar Degas",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-077",
+      "titleQuery": "A Maid Asleep",
+      "artistQuery": "Johannes Vermeer",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-079",
+      "titleQuery": "The Guitar Player",
+      "artistQuery": "Johannes Vermeer",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-080",
+      "titleQuery": "The Milkmaid",
+      "artistQuery": "Johannes Vermeer",
+      "reason": "Eser Rijksmuseum veya Louvre koleksiyonundadır; The Met Vermeer koleksiyonundaki 4 başyapıt (ID: 437881, 437879, 437880, 437877) başarıyla dahil edilmiştir."
+    },
+    {
+      "seedId": "met-seed-081",
+      "titleQuery": "The Astronomer",
+      "artistQuery": "Johannes Vermeer",
+      "reason": "Eser Rijksmuseum veya Louvre koleksiyonundadır; The Met Vermeer koleksiyonundaki 4 başyapıt (ID: 437881, 437879, 437880, 437877) başarıyla dahil edilmiştir."
+    },
+    {
+      "seedId": "met-seed-082",
+      "titleQuery": "The Love Letter",
+      "artistQuery": "Johannes Vermeer",
+      "reason": "Eser Rijksmuseum veya Louvre koleksiyonundadır; The Met Vermeer koleksiyonundaki 4 başyapıt (ID: 437881, 437879, 437880, 437877) başarıyla dahil edilmiştir."
+    },
+    {
+      "seedId": "met-seed-083",
+      "titleQuery": "The Allegory of Faith",
+      "artistQuery": "Johannes Vermeer",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-084",
+      "titleQuery": "The Toilet of Venus",
+      "artistQuery": "François Boucher",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-085",
+      "titleQuery": "The Swing",
+      "artistQuery": "Jean-Honoré Fragonard",
+      "reason": "Eser The Wallace Collection (Londra) envanterindedir."
+    },
+    {
+      "seedId": "met-seed-086",
+      "titleQuery": "The Four Times of Day: Morning",
+      "artistQuery": "William Hogarth",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-087",
+      "titleQuery": "The Four Times of Day: Noon",
+      "artistQuery": "William Hogarth",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-088",
+      "titleQuery": "The Four Times of Day: Evening",
+      "artistQuery": "William Hogarth",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-089",
+      "titleQuery": "The Four Times of Day: Night",
+      "artistQuery": "William Hogarth",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-090",
+      "titleQuery": "The Death of General Wolfe",
+      "artistQuery": "Benjamin West",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-091",
+      "titleQuery": "The Turkish Bath",
+      "artistQuery": "Jean-Auguste-Dominique Ingres",
+      "reason": "Eser The Met koleksiyonunda değil, Musée du Louvre (Paris) envanterindedir."
+    },
+    {
+      "seedId": "met-seed-092",
+      "titleQuery": "The Source",
+      "artistQuery": "Jean-Auguste-Dominique Ingres",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-093",
+      "titleQuery": "The Abduction of Rebecca",
+      "artistQuery": "Eugène Delacroix",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-094",
+      "titleQuery": "The Women of Algiers",
+      "artistQuery": "Eugène Delacroix",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-095",
+      "titleQuery": "The Nativity",
+      "artistQuery": "Georges de La Tour",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-096",
+      "titleQuery": "The Fortune Teller",
+      "artistQuery": "Georges de La Tour",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-098",
+      "titleQuery": "The Embarkation for Cythera",
+      "artistQuery": "Jean-Antoine Watteau",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-099",
+      "titleQuery": "The Feast of the Gods",
+      "artistQuery": "Giovanni Bellini",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-100",
+      "titleQuery": "The Concert",
+      "artistQuery": "Lorenzo Costa",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    },
+    {
+      "seedId": "met-seed-101",
+      "titleQuery": "The Battle of San Romano",
+      "artistQuery": "Paolo Uccello",
+      "reason": "Eser The National Gallery (Londra) koleksiyonundadır."
+    },
+    {
+      "seedId": "met-seed-103",
+      "titleQuery": "The Three Marys at the Tomb",
+      "artistQuery": "Hubert van Eyck",
+      "reason": "Eser Museum Boijmans Van Beuningen (Rotterdam) koleksiyonundadır."
+    },
+    {
+      "seedId": "met-seed-105",
+      "titleQuery": "The Portrait of a Young Man",
+      "artistQuery": "Agnolo Bronzino",
+      "reason": "Eser The Met koleksiyonunda bulunamadı veya arama endpointinde doğrulanabilir kamu malı görseli bulunmuyor."
+    }
+  ],
+  "timestamp": "2026-11-12T08:13:26.665Z"
+}
