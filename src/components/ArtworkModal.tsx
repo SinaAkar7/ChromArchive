@@ -18,8 +18,10 @@ import {
   ShieldCheck,
   Building2
 } from 'lucide-react';
-import type { ArtworkMetadata } from '../types';
+import type { ArtworkMetadata, ColorMeaningEntry } from '../types';
 import { exportMetadataAsJson } from '../services/archiveService';
+import { ColorMeaningModal } from './ColorMeaningModal';
+import { getColorMeaningByQuery } from '../services/colorMeaningsService';
 
 interface ArtworkModalProps {
   artwork: ArtworkMetadata | null;
@@ -36,6 +38,8 @@ export const ArtworkModal: React.FC<ArtworkModalProps> = ({
   onCopyColor,
   onLoadIntoAnalyzer
 }) => {
+  const [meaningColor, setMeaningColor] = React.useState<ColorMeaningEntry | null>(null);
+
   // ESC key to close modal
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -132,27 +136,53 @@ export const ArtworkModal: React.FC<ArtworkModalProps> = ({
                   </div>
 
                   <div className="modal-swatches-grid">
-                    {artwork.dominantColors.map((col, idx) => (
-                      <div
-                        key={idx}
-                        className="modal-swatch-card"
-                        onClick={() => onCopyColor(col.hex)}
-                        title="HEX Kodunu Kopyala"
-                      >
-                        <div className="modal-swatch-box" style={{ backgroundColor: col.hex }} />
-                        <div className="modal-swatch-details">
-                          <div className="modal-swatch-hex mono-font">{col.hex}</div>
-                          <div className="modal-swatch-sub">
-                            <span>%{col.percentage}</span>
-                            <span className="swatch-temperature">{col.temperature}</span>
+                    {artwork.dominantColors.map((col, idx) => {
+                      const meaning = getColorMeaningByQuery(col.family || col.name);
+                      return (
+                        <div
+                          key={idx}
+                          className="modal-swatch-card"
+                          onClick={() => onCopyColor(col.hex)}
+                          title="HEX Kodunu Kopyala"
+                        >
+                          <div className="modal-swatch-box" style={{ backgroundColor: col.hex }} />
+                          <div className="modal-swatch-details">
+                            <div className="modal-swatch-hex mono-font">{col.hex}</div>
+                            <div className="modal-swatch-sub">
+                              <span>%{col.percentage}</span>
+                              <span className="swatch-temperature">{col.temperature}</span>
+                            </div>
+                            {col.name && (
+                              <div className="modal-swatch-name">{col.name}</div>
+                            )}
+                            {meaning && (
+                              <button
+                                type="button"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setMeaningColor(meaning);
+                                }}
+                                style={{
+                                  marginTop: '0.2rem',
+                                  fontSize: '0.65rem',
+                                  color: 'var(--color-primary, #1e3a5f)',
+                                  background: 'none',
+                                  border: 'none',
+                                  cursor: 'pointer',
+                                  textDecoration: 'underline',
+                                  padding: 0,
+                                  textAlign: 'left'
+                                }}
+                                title={`${meaning.name.tr} (${meaning.name.en}) kültürel anlam ve tarihçesini incele`}
+                              >
+                                {meaning.name.tr} Anlamı →
+                              </button>
+                            )}
                           </div>
-                          {col.name && (
-                            <div className="modal-swatch-name">{col.name}</div>
-                          )}
+                          <Copy size={12} className="copy-hint-icon" />
                         </div>
-                        <Copy size={12} className="copy-hint-icon" />
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </>
               ) : (
@@ -307,6 +337,13 @@ export const ArtworkModal: React.FC<ArtworkModalProps> = ({
           </div>
         </div>
       </div>
+
+      {/* Renk Ailesi Kültürel Anlam & Tarihçe Modalı */}
+      <ColorMeaningModal
+        color={meaningColor}
+        isOpen={!!meaningColor}
+        onClose={() => setMeaningColor(null)}
+      />
     </div>
   );
 };

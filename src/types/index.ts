@@ -117,3 +117,59 @@ export interface SampleArtworkPreset {
   artist: string;
   period: string;
 }
+
+export interface ColorMeaningSource {
+  id: string;
+  title: string;
+  url: string;
+  type: string;
+  notes: string;
+}
+
+export interface HistoricalContextItem {
+  period: string;
+  region: string;
+  detail: string;
+  sourceIds: string[];
+}
+
+export interface DocumentedMeaningItem {
+  context: string;
+  meanings: string[];
+  note?: string;
+  sourceIds: string[];
+}
+
+export interface ColorMeaningEntry {
+  id: string;
+  name: {
+    tr: string;
+    en: string;
+  };
+  family: 'warm' | 'cool' | 'neutral' | 'mixed' | 'earth' | string;
+  displayHex: string;
+  displayHexNote?: string;
+  description: string;
+  historicalContext: HistoricalContextItem[];
+  documentedMeanings: DocumentedMeaningItem[];
+  modernUses: string[];
+  evidenceLevel: 'mixed' | 'historical' | 'limited' | string;
+  tags: string[];
+  editorialNote?: string;
+}
+
+export interface ColorMeaningsDataset {
+  schemaVersion: string;
+  dataset: {
+    id: string;
+    name: string;
+    language: string;
+    description: string;
+    created: string;
+    license: string;
+    editorialPolicy: string[];
+  };
+  sources: ColorMeaningSource[];
+  colors: ColorMeaningEntry[];
+}
+

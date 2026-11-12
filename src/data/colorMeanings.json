@@ -1,0 +1,577 @@
+{
+  "schemaVersion": "1.0.0",
+  "dataset": {
+    "id": "chromarchive-color-meanings",
+    "name": "ChromArchive Color Meanings",
+    "language": "tr",
+    "description": "Ana renk aileleri için tarihsel pigment bilgileri, kaynaklandırılmış kültürel anlam örnekleri ve güncel tasarım kullanım notları. Renk anlamları evrensel veya değişmez kabul edilmez.",
+    "created": "2026-11-12",
+    "license": "CC BY 4.0 for original editorial summaries; cited sources retain their own licenses and terms.",
+    "editorialPolicy": [
+      "Kültürel anlamlar belirli toplum, dönem ve bağlamla birlikte okunmalıdır.",
+      "Bir rengin tek ve evrensel bir anlamı olduğu iddia edilmez.",
+      "Tarihsel pigment kullanımı ile sembolik anlam birbirinden ayrı tutulur.",
+      "HEX değerleri tarihsel pigment ölçümü değil, arayüzde gösterim için yaklaşık renk örnekleridir.",
+      "Kaynakların desteklemediği tarih veya kültürel iddia eklenmez."
+    ]
+  },
+  "sources": [
+    {
+      "id": "S1",
+      "title": "Global Color Meaning Database — Methodology",
+      "url": "https://www.globalcolormeaning.org/methodology/index.html",
+      "type": "methodology",
+      "notes": "Renk anlamlarını kaynaklandırma, kanıt türlerini ayırma ve kültürel genellemelerden kaçınma yaklaşımı. Kayıt metinleri CC BY 4.0 olarak belirtilmiştir; kaynakların kendi lisansları ayrıca geçerlidir."
+    },
+    {
+      "id": "S2",
+      "title": "Global Color Meaning Database",
+      "url": "https://www.globalcolormeaning.org/",
+      "type": "cross-cultural color reference",
+      "notes": "Kırmızı, mavi, yeşil, sarı, siyah ve pembe için kaynaklandırılmış anlam ve kültürler arası değişim derlemeleri. Site erişimi geçici olarak askıda olabilir; ChromArchive bu kaynağı çalışma anında canlı API gibi çağırmamalıdır."
+    },
+    {
+      "id": "S3",
+      "title": "Artists’ Pigments: A Handbook of Their History and Characteristics, Volume 3",
+      "url": "https://www.nga.gov/research/publications/artists-pigments-handbook-their-history-and-characteristics-volume-3",
+      "type": "museum conservation reference",
+      "notes": "National Gallery of Art tarafından sunulan pigment tarihi ve bilimsel inceleme yayını. Mavi, yeşil, kahverengi, beyaz ve diğer pigmentler için tarihsel malzeme bilgisi."
+    },
+    {
+      "id": "S4",
+      "title": "Colour and art: A brief history of pigments",
+      "url": "https://doi.org/10.1016/j.optlastec.2005.06.005",
+      "type": "scholarly article",
+      "notes": "Tarih öncesi toprak pigmentleri, Mısır mavisi, vermilyon ve Prusya mavisi gibi pigmentlerin tarihine ilişkin akademik makale."
+    },
+    {
+      "id": "S5",
+      "title": "Color Charts in 18th-century Europe: Natural, Pigmentary, and Trichromatic",
+      "url": "https://books.ub.uni-heidelberg.de/arthistoricum/catalog/view/1483/2522/121489",
+      "type": "open scholarly book chapter",
+      "notes": "Rönesans ve erken modern Avrupa'da renk sınıflandırmaları ve ressamların ana renk kategorileri üzerine tarihsel çalışma."
+    },
+    {
+      "id": "S6",
+      "title": "A002: Prehistoric Pigments",
+      "url": "https://edu.rsc.org/download?ac=14343",
+      "type": "educational research resource",
+      "notes": "Tarih öncesi pigmentler ve Berlin–Kay renk terimleri yaklaşımına ilişkin kaynak; renk terimlerinin evrimsel sıralamasının tartışmalı olduğu unutulmamalıdır."
+    },
+    {
+      "id": "S7",
+      "title": "Artists’ Pigments — National Gallery of Art, Volume 3 (PDF)",
+      "url": "https://www.nga.gov/research/publications/artists-pigments-handbook-their-history-and-characteristics-volume-3",
+      "type": "open museum publication",
+      "notes": "NGA sayfasından indirilebilen, pigmentlerin bileşimi, tarihi ve sanat eserlerindeki kullanımını ele alan yayın."
+    }
+  ],
+  "colors": [
+    {
+      "id": "red",
+      "name": {
+        "tr": "Kırmızı",
+        "en": "Red"
+      },
+      "family": "warm",
+      "displayHex": "#C0392B",
+      "displayHexNote": "Arayüz için yaklaşık örnek; tarihsel pigment veya evrensel standart değildir.",
+      "description": "Kırmızı, güçlü görsel dikkat çeken ana renk ailelerinden biridir. Anlamı bağlama göre sevgi, canlılık, tehlike, güç veya kutlama gibi farklı çağrışımlara kayabilir.",
+      "historicalContext": [
+        {
+          "period": "Tarih öncesi",
+          "region": "Birden fazla bölge",
+          "detail": "Kırmızı aşı boyası (red ochre), tarih öncesi kaya ve mağara resimlerinde kullanılan erken mineral pigmentler arasındadır.",
+          "sourceIds": [
+            "S4",
+            "S6"
+          ]
+        },
+        {
+          "period": "Antik Çin ve Akdeniz dünyası",
+          "region": "Çin ve Roma dünyası",
+          "detail": "Vermilyon/cinnabar temelli kırmızı pigmentler farklı dönemlerde üretilmiş ve kullanılmıştır; kaynak, Çin'de vermilyon üretiminin Roma kullanımından daha eski olduğunu belirtir.",
+          "sourceIds": [
+            "S4"
+          ]
+        }
+      ],
+      "documentedMeanings": [
+        {
+          "context": "Farklı kültürler ve çağdaş araştırmalar",
+          "meanings": [
+            "canlılık",
+            "tehlike",
+            "şans",
+            "sevgi",
+            "devrim"
+          ],
+          "note": "Bunlar farklı kaynaklarda belgelenen çağrışımlardır; tek bir kültüre veya her kullanıcıya genellenemez.",
+          "sourceIds": [
+            "S1",
+            "S2"
+          ]
+        }
+      ],
+      "modernUses": [
+        "uyarı ve dikkat işaretleri",
+        "enerji ve hareket vurgusu",
+        "kutlama ve etkinlik tasarımı",
+        "marka kimliğinde güçlü vurgu"
+      ],
+      "evidenceLevel": "mixed",
+      "tags": [
+        "sıcak",
+        "yüksek dikkat",
+        "mineral pigment"
+      ]
+    },
+    {
+      "id": "blue",
+      "name": {
+        "tr": "Mavi",
+        "en": "Blue"
+      },
+      "family": "cool",
+      "displayHex": "#2874A6",
+      "displayHexNote": "Arayüz için yaklaşık örnek; tarihsel pigment veya evrensel standart değildir.",
+      "description": "Mavi, doğal mineral ve sentetik pigmentlerin tarihiyle yakından ilişkili geniş bir renk ailesidir. Sakinlik veya güven gibi çağrışımlar bazı araştırmalarda görülse de anlamı kültüre ve kullanıma göre değişir.",
+      "historicalContext": [
+        {
+          "period": "MÖ yaklaşık 3000",
+          "region": "Antik Mısır",
+          "detail": "Mısır mavisi, erken dönem sentetik pigment örneklerinden biridir; kalsiyum-bakır silikat esaslıdır.",
+          "sourceIds": [
+            "S4",
+            "S3"
+          ]
+        },
+        {
+          "period": "18. yüzyıl başı",
+          "region": "Avrupa",
+          "detail": "Prusya mavisi 1704 civarında geliştirilen erken modern sentetik mavi pigmentlerden biridir.",
+          "sourceIds": [
+            "S4",
+            "S3"
+          ]
+        }
+      ],
+      "documentedMeanings": [
+        {
+          "context": "Farklı kültürler ve çağdaş araştırmalar",
+          "meanings": [
+            "sakinlik",
+            "güven",
+            "üzüntü",
+            "kutsallık",
+            "mesafe"
+          ],
+          "note": "Kaynak derlemesinde belgelenen farklı çağrışımlardır; evrensel anlamlar değildir.",
+          "sourceIds": [
+            "S1",
+            "S2"
+          ]
+        }
+      ],
+      "modernUses": [
+        "kurumsal ve dijital arayüzler",
+        "bilgi ve teknoloji temaları",
+        "su ve gökyüzü temalı görsel anlatım",
+        "sakin veya mesafeli atmosfer kurma"
+      ],
+      "evidenceLevel": "mixed",
+      "tags": [
+        "soğuk",
+        "mineral pigment",
+        "sentetik pigment"
+      ]
+    },
+    {
+      "id": "green",
+      "name": {
+        "tr": "Yeşil",
+        "en": "Green"
+      },
+      "family": "cool",
+      "displayHex": "#27864A",
+      "displayHexNote": "Arayüz için yaklaşık örnek; tarihsel pigment veya evrensel standart değildir.",
+      "description": "Yeşil; bitki örtüsü, büyüme ve doğayla kolayca ilişkilendirilen bir renk ailesidir. Ancak kültürel ve dini çağrışımlar bulunduğu topluma göre değişir.",
+      "historicalContext": [
+        {
+          "period": "Tarihsel sanat üretimi",
+          "region": "Avrupa ve diğer bölgeler",
+          "detail": "Sanatçılar farklı dönemlerde mineral ve sentetik yeşil pigmentler kullanmıştır. NGA pigment el kitabı Scheele yeşili, zümrüt yeşili ve krom oksit yeşili gibi pigmentleri ele alır.",
+          "sourceIds": [
+            "S3"
+          ]
+        }
+      ],
+      "documentedMeanings": [
+        {
+          "context": "Çağdaş ve tarihsel kültürel derlemeler",
+          "meanings": [
+            "doğa",
+            "büyüme",
+            "kutsallık (bazı İslami bağlamlarda)",
+            "kıskançlık",
+            "izin/onay"
+          ],
+          "note": "Özellikle dini ve kültürel anlamlar belirli bağlamlarla sınırlıdır; bütün Müslüman toplumlara veya tüm kültürlere tek biçimde atfedilmemelidir.",
+          "sourceIds": [
+            "S1",
+            "S2"
+          ]
+        }
+      ],
+      "modernUses": [
+        "çevre ve sürdürülebilirlik temaları",
+        "sağlık ve yaşam tarzı tasarımı",
+        "başarı veya tamamlanma durumları",
+        "botanik ve doğal ürün görselleri"
+      ],
+      "evidenceLevel": "mixed",
+      "tags": [
+        "soğuk",
+        "doğa",
+        "pigment tarihi"
+      ]
+    },
+    {
+      "id": "yellow",
+      "name": {
+        "tr": "Sarı",
+        "en": "Yellow"
+      },
+      "family": "warm",
+      "displayHex": "#F1C40F",
+      "displayHexNote": "Arayüz için yaklaşık örnek; tarihsel pigment veya evrensel standart değildir.",
+      "description": "Sarı, parlaklık ve yüksek görünürlükle ilişkilendirilen renk ailesidir. Neşe, ihtişam veya uyarı gibi farklı anlamlar belirli dönem ve toplumlarda ortaya çıkabilir.",
+      "historicalContext": [
+        {
+          "period": "Tarih öncesi",
+          "region": "Birden fazla bölge",
+          "detail": "Sarı aşı boyası, tarih öncesi sanat üretiminde kullanılan doğal toprak pigmentleri arasındadır.",
+          "sourceIds": [
+            "S4",
+            "S6"
+          ]
+        },
+        {
+          "period": "Antik dönemden modern döneme",
+          "region": "Birden fazla bölge",
+          "detail": "Sarı pigmentler doğal minerallerden ve daha sonra farklı kimyasal bileşiklerden elde edilmiştir; pigment tarihçeleri orpiment gibi tarihsel örnekleri de kapsar.",
+          "sourceIds": [
+            "S3"
+          ]
+        }
+      ],
+      "documentedMeanings": [
+        {
+          "context": "Farklı kültürler ve çağdaş araştırmalar",
+          "meanings": [
+            "neşe",
+            "imparatorluk otoritesi (tarihsel Çin bağlamı)",
+            "dikkat/uyarı",
+            "korkaklık (bazı Batı deyimsel bağlamları)"
+          ],
+          "note": "Bu çağrışımların her biri kendi tarihsel veya kültürel bağlamında değerlendirilmelidir.",
+          "sourceIds": [
+            "S1",
+            "S2"
+          ]
+        }
+      ],
+      "modernUses": [
+        "uyarı ve yönlendirme",
+        "iyimserlik ve enerji vurgusu",
+        "öne çıkarma ve dikkat çekme",
+        "ışık ve sıcaklık temalı görsel anlatım"
+      ],
+      "evidenceLevel": "mixed",
+      "tags": [
+        "sıcak",
+        "yüksek görünürlük",
+        "toprak pigmenti"
+      ]
+    },
+    {
+      "id": "black",
+      "name": {
+        "tr": "Siyah",
+        "en": "Black"
+      },
+      "family": "neutral",
+      "displayHex": "#202124",
+      "displayHexNote": "Arayüz için yaklaşık örnek; tarihsel pigment veya evrensel standart değildir.",
+      "description": "Siyah, koyuluk ve ışığın yokluğu ile ilişkili algısal bir kategoridir; sanatta is, kömür ve farklı mineral pigmentlerle temsil edilmiştir.",
+      "historicalContext": [
+        {
+          "period": "Tarih öncesi",
+          "region": "Birden fazla bölge",
+          "detail": "Kömür ve is, tarih öncesi resimlerde kullanılan erken siyah renklendiriciler arasındadır.",
+          "sourceIds": [
+            "S4",
+            "S6"
+          ]
+        }
+      ],
+      "documentedMeanings": [
+        {
+          "context": "Özellikle Batı Avrupa ve Kuzey Amerika'daki bazı modern bağlamlar",
+          "meanings": [
+            "yas",
+            "ölüm"
+          ],
+          "note": "Yas rengi kültürler arasında değişir; siyahın yasla ilişkilendirilmesi evrensel değildir.",
+          "sourceIds": [
+            "S1",
+            "S2"
+          ]
+        },
+        {
+          "context": "Çağdaş tasarım ve giyim bağlamları",
+          "meanings": [
+            "güç",
+            "resmiyet",
+            "zarafet"
+          ],
+          "note": "Bunlar kaynak derlemesinde belgelenen çağrışımlardır.",
+          "sourceIds": [
+            "S1",
+            "S2"
+          ]
+        }
+      ],
+      "modernUses": [
+        "lüks ve resmi marka kimliği",
+        "yüksek kontrastlı tipografi",
+        "minimalist arayüzler",
+        "yas ve anma tasarımları (yerel geleneklere bağlı olarak)"
+      ],
+      "evidenceLevel": "mixed",
+      "tags": [
+        "nötr",
+        "kontrast",
+        "kömür ve is"
+      ]
+    },
+    {
+      "id": "white",
+      "name": {
+        "tr": "Beyaz",
+        "en": "White"
+      },
+      "family": "neutral",
+      "displayHex": "#F4F4F0",
+      "displayHexNote": "Arayüz için yaklaşık örnek; tarihsel pigment veya evrensel standart değildir.",
+      "description": "Beyaz, ışık, açıklık ve yüzey rengi olarak sanat ve tasarımda temel bir kategoridir. Beyaz pigmentlerin bileşimi ve kullanımı dönemlere göre değişmiştir.",
+      "historicalContext": [
+        {
+          "period": "Antik dönemden 20. yüzyıla",
+          "region": "Birden fazla bölge",
+          "detail": "Sanatçı pigmentleri literatürü kurşun beyazı gibi tarihsel pigmentlerden 20. yüzyılda kullanılan titanyum dioksite kadar farklı beyaz pigmentleri belgeler.",
+          "sourceIds": [
+            "S3"
+          ]
+        }
+      ],
+      "documentedMeanings": [
+        {
+          "context": "Bazı Doğu Asya toplumları ve bağlamları",
+          "meanings": [
+            "yas ve ölümle ilişkili gelenekler"
+          ],
+          "note": "Beyazın yasla ilişkisi bölge, dönem ve ritüele göre değişir; tek bir Asya geleneği varmış gibi sunulmamalıdır.",
+          "sourceIds": [
+            "S1",
+            "S2"
+          ]
+        }
+      ],
+      "modernUses": [
+        "boşluk ve sadelik hissi",
+        "minimalist arayüzler",
+        "temizlik ve açıklık temaları",
+        "tipografik ve görsel kontrast"
+      ],
+      "evidenceLevel": "mixed",
+      "tags": [
+        "nötr",
+        "açık ton",
+        "beyaz pigment"
+      ]
+    },
+    {
+      "id": "purple",
+      "name": {
+        "tr": "Mor",
+        "en": "Purple"
+      },
+      "family": "mixed",
+      "displayHex": "#7D3C98",
+      "displayHexNote": "Arayüz için yaklaşık örnek; tarihsel pigment veya evrensel standart değildir.",
+      "description": "Mor, kırmızı ve mavi aralığındaki tonları kapsayan geniş bir renk ailesidir. Tarihsel önemi yalnızca sembolik anlamlarından değil, bazı mor boyaların üretimindeki zorluktan da kaynaklanır.",
+      "historicalContext": [
+        {
+          "period": "Rönesans ve erken modern Avrupa",
+          "region": "İtalya ve Avrupa",
+          "detail": "Renk sınıflandırmalarına ilişkin bazı tarihsel metinlerde mor ayrı bir ana renk kategorisi olarak yer almıştır; diğer metinlerde ana renk listeleri farklıdır.",
+          "sourceIds": [
+            "S5"
+          ]
+        },
+        {
+          "period": "18. yüzyıl başı",
+          "region": "Avrupa",
+          "detail": "Prusya mavisinin keşfi sırasında pigment üretiminde beklenmedik mor bir ürün de gözlenmiştir; bu örnek sentetik pigment kimyasının tarihine aittir.",
+          "sourceIds": [
+            "S4"
+          ]
+        }
+      ],
+      "documentedMeanings": [
+        {
+          "context": "Tarihsel Avrupa renk sınıflandırmaları",
+          "meanings": [
+            "ayrı bir renk kategorisi olarak sınıflandırılma"
+          ],
+          "note": "Bu kaynak morun tarihsel sınıflandırmalardaki yerini destekler; evrensel bir sembolik anlam iddiasını desteklemez.",
+          "sourceIds": [
+            "S5"
+          ]
+        }
+      ],
+      "modernUses": [
+        "yaratıcılık ve hayal gücü temaları",
+        "sanatsal ve deneysel marka kimliği",
+        "premium veya teatral görsel vurgu",
+        "mor tonlu dijital illüstrasyonlar"
+      ],
+      "evidenceLevel": "historical",
+      "tags": [
+        "karma",
+        "renk sınıflandırması",
+        "sentetik pigment tarihi"
+      ]
+    },
+    {
+      "id": "orange",
+      "name": {
+        "tr": "Turuncu",
+        "en": "Orange"
+      },
+      "family": "warm",
+      "displayHex": "#E67E22",
+      "displayHexNote": "Arayüz için yaklaşık örnek; tarihsel pigment veya evrensel standart değildir.",
+      "description": "Turuncu, kırmızı ile sarı arasındaki sıcak renk ailesidir. Tarihsel sanat paletlerinde turuncu tonlar farklı doğal ve yapay pigment karışımlarıyla elde edilmiştir.",
+      "historicalContext": [
+        {
+          "period": "Tarih öncesinden tarihsel dönemlere",
+          "region": "Birden fazla bölge",
+          "detail": "Tarihsel renk kategorilerinin adlandırılması ve sıralanması toplumlara ve dillere göre değişmiştir; turuncu, Berlin–Kay yaklaşımında daha geç temel renk terimlerinden biri olarak ele alınır, ancak bu model tartışmalıdır.",
+          "sourceIds": [
+            "S6"
+          ]
+        }
+      ],
+      "documentedMeanings": [],
+      "modernUses": [
+        "enerji ve hareket vurgusu",
+        "çağrı ve eylem düğmeleri",
+        "sıcak ve davetkâr marka dili",
+        "sonbahar ve hasat temalı tasarım"
+      ],
+      "evidenceLevel": "limited",
+      "tags": [
+        "sıcak",
+        "renk terimi tarihi"
+      ],
+      "editorialNote": "Bu sürümde turuncu için belirli bir kültürel sembolizm iddiası eklenmemiştir; daha fazla birincil kaynak araştırması gerekir."
+    },
+    {
+      "id": "brown",
+      "name": {
+        "tr": "Kahverengi",
+        "en": "Brown"
+      },
+      "family": "earth",
+      "displayHex": "#795548",
+      "displayHexNote": "Arayüz için yaklaşık örnek; tarihsel pigment veya evrensel standart değildir.",
+      "description": "Kahverengi, toprak ve mineral pigmentlerle güçlü biçimde ilişkili bir renk ailesidir. Sanat tarihinde kahverengi tonlar doğal topraklardan ve karışımlardan elde edilmiştir.",
+      "historicalContext": [
+        {
+          "period": "Tarih öncesi ve tarihsel dönemler",
+          "region": "Birden fazla bölge",
+          "detail": "Toprak pigmentleri tarih öncesi resimlerde kullanılmıştır. Umber gibi kahverengi pigmentlerin sanat malzemesi olarak kullanımı Avrupa kaynaklarında özellikle geç Orta Çağ ve erken modern dönemlerde belgelenir.",
+          "sourceIds": [
+            "S4",
+            "S3"
+          ]
+        }
+      ],
+      "documentedMeanings": [],
+      "modernUses": [
+        "doğal ve organik ürün kimliği",
+        "ahşap, deri ve zanaat temaları",
+        "sıcak ve topraklı paletler",
+        "geleneksel veya rustik görsel dil"
+      ],
+      "evidenceLevel": "historical",
+      "tags": [
+        "toprak",
+        "mineral pigment",
+        "doğal ton"
+      ],
+      "editorialNote": "Kahverenginin kültürel sembolik anlamları bu sürümde kaynakla desteklenmediği için boş bırakılmıştır."
+    },
+    {
+      "id": "pink",
+      "name": {
+        "tr": "Pembe",
+        "en": "Pink"
+      },
+      "family": "warm",
+      "displayHex": "#E8A0B5",
+      "displayHexNote": "Arayüz için yaklaşık örnek; tarihsel pigment veya evrensel standart değildir.",
+      "description": "Pembe, açık kırmızı tonlarından oluşan geniş bir renk ailesidir. Günümüzde bazı pazarlarda cinsiyetlendirilmiş çağrışımları olsa da bu ilişki tarih boyunca sabit kalmamıştır.",
+      "historicalContext": [
+        {
+          "period": "Modern dönem",
+          "region": "Batı toplumları ve küresel tüketim kültürü",
+          "detail": "Pembe ile kadınlık veya kız çocukluğu arasındaki pazar ve toplumsal ilişki tarihsel olarak değişmiştir; bu bağlantı kadim ve evrensel bir kural olarak sunulmamalıdır.",
+          "sourceIds": [
+            "S1",
+            "S2"
+          ]
+        }
+      ],
+      "documentedMeanings": [
+        {
+          "context": "Bazı çağdaş Batı pazarları",
+          "meanings": [
+            "kadınlıkla ilişkilendirme",
+            "tatlılık",
+            "bakım"
+          ],
+          "note": "Bu çağrışımlar toplumsal ve pazarlama bağlamlarında belgelenmiştir; tüm toplumlar veya bireyler için geçerli değildir.",
+          "sourceIds": [
+            "S1",
+            "S2"
+          ]
+        }
+      ],
+      "modernUses": [
+        "kozmetik ve kişisel bakım iletişimi",
+        "şefkat ve bakım temalı tasarım",
+        "oyuncu ve yumuşak görsel dil",
+        "kontrastlı çağdaş marka kimliği"
+      ],
+      "evidenceLevel": "mixed",
+      "tags": [
+        "sıcak",
+        "açık kırmızı",
+        "modern renk kültürü"
+      ]
+    }
+  ]
+}

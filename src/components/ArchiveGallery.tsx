@@ -3,8 +3,11 @@
  * @description Açık erişimli sanat ve fotoğraf arşivi, arama, filtreleme ve galeri listeleme bileşeni.
  */
 
-import React, { useMemo } from 'react';
-import { ArtworkMetadata } from '../types';
+import React, { useMemo, useState } from 'react';
+import { ArtworkMetadata, ColorMeaningEntry } from '../types';
+import { ColorMeaningModal } from './ColorMeaningModal';
+import { ColorMeaningsGrid } from './ColorMeaningsGrid';
+import { getColorMeanings } from '../services/colorMeaningsService';
 
 interface ArchiveGalleryProps {
   items: ArtworkMetadata[];
@@ -29,8 +32,23 @@ export const ArchiveGallery: React.FC<ArchiveGalleryProps> = ({
   onInspectArtwork,
   onAnalyzeArtwork,
 }) => {
-  const [artistFilter, setArtistFilter] = React.useState<string>('all');
-  const [departmentFilter, setDepartmentFilter] = React.useState<string>('all');
+  const [artistFilter, setArtistFilter] = useState<string>('all');
+  const [departmentFilter, setDepartmentFilter] = useState<string>('all');
+  const [archiveSubView, setArchiveSubView] = useState<'artworks' | 'meanings'>('artworks');
+  const [selectedColorMeaning, setSelectedColorMeaning] = useState<ColorMeaningEntry | null>(null);
+  const [isColorModalOpen, setIsColorModalOpen] = useState<boolean>(false);
+
+  const colorMeaningsList = useMemo(() => getColorMeanings(), []);
+
+  const handleOpenColorMeaning = (entry: ColorMeaningEntry) => {
+    setSelectedColorMeaning(entry);
+    setIsColorModalOpen(true);
+  };
+
+  const handleFilterByColorMeaning = (colorNameTr: string) => {
+    onCategoryFilterChange(colorNameTr);
+    setArchiveSubView('artworks');
+  };
 
   const uniqueArtists = useMemo(() => {
     const set = new Set<string>();
@@ -117,8 +135,219 @@ export const ArchiveGallery: React.FC<ArchiveGalleryProps> = ({
           </p>
         </div>
 
-        {/* Filtre ve Arama Çubuğu */}
-        <div className="archive-controls-bar">
+        {/* Arşiv Görünüm Sekmeleri: Eserler Kataloğu & Renk Anlamları */}
+        <div
+          style={{
+            display: 'flex',
+            gap: '0.625rem',
+            marginBottom: '1.25rem',
+            borderBottom: '1px solid var(--border-light, #e8e2d8)',
+            paddingBottom: '0.75rem',
+            flexWrap: 'wrap'
+          }}
+        >
+          <button
+            type="button"
+            onClick={() => setArchiveSubView('artworks')}
+            style={{
+              padding: '0.55rem 1.15rem',
+              borderRadius: '6px',
+              border: archiveSubView === 'artworks' ? '1px solid var(--color-primary, #1e3a5f)' : '1px solid var(--border-light, #ddd)',
+              backgroundColor: archiveSubView === 'artworks' ? 'var(--color-primary, #1e3a5f)' : '#ffffff',
+              color: archiveSubView === 'artworks' ? '#ffffff' : 'var(--text-secondary, #555)',
+              fontWeight: 600,
+              fontSize: '0.875rem',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              transition: 'all 0.15s ease'
+            }}
+          >
+            <span>Sanat Eserleri Kataloğu</span>
+            <span
+              style={{
+                fontSize: '0.75rem',
+                padding: '0.1rem 0.45rem',
+                borderRadius: '10px',
+                backgroundColor: archiveSubView === 'artworks' ? 'rgba(255,255,255,0.2)' : 'var(--bg-warm, #f0ebe1)',
+                color: archiveSubView === 'artworks' ? '#ffffff' : 'var(--text-secondary, #666)'
+              }}
+            >
+              {filteredItems.length}
+            </span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setArchiveSubView('meanings')}
+            style={{
+              padding: '0.55rem 1.15rem',
+              borderRadius: '6px',
+              border: archiveSubView === 'meanings' ? '1px solid var(--color-primary, #1e3a5f)' : '1px solid var(--border-light, #ddd)',
+              backgroundColor: archiveSubView === 'meanings' ? 'var(--color-primary, #1e3a5f)' : '#ffffff',
+              color: archiveSubView === 'meanings' ? '#ffffff' : 'var(--text-secondary, #555)',
+              fontWeight: 600,
+              fontSize: '0.875rem',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              transition: 'all 0.15s ease'
+            }}
+          >
+            <span>Renk Aileleri & Kültürel Anlamlar</span>
+            <span
+              style={{
+                fontSize: '0.75rem',
+                padding: '0.1rem 0.45rem',
+                borderRadius: '10px',
+                backgroundColor: archiveSubView === 'meanings' ? 'rgba(255,255,255,0.2)' : 'var(--bg-warm, #f0ebe1)',
+                color: archiveSubView === 'meanings' ? '#ffffff' : 'var(--text-secondary, #666)'
+              }}
+            >
+              10 Renk
+            </span>
+          </button>
+        </div>
+
+        {archiveSubView === 'meanings' ? (
+          <div>
+            <div
+              style={{
+                padding: '1.25rem',
+                backgroundColor: 'var(--bg-surface, #ffffff)',
+                border: '1px solid var(--border-light, #e8e2d8)',
+                borderRadius: 'var(--radius-md, 8px)',
+                marginBottom: '1.25rem'
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem' }}>
+                <span
+                  style={{
+                    fontSize: '0.75rem',
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em',
+                    color: 'var(--color-primary, #1e3a5f)'
+                  }}
+                >
+                  Kromatik Miras & Kaynaklandırılmış Kültür Veritabanı
+                </span>
+              </div>
+              <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary, #555)', margin: 0, lineHeight: 1.55 }}>
+                Bu arşiv bölümü; ana renk aileleri için tarihsel pigment bilgilerini, National Gallery of Art ve akademik kaynaklarla
+                belgelenmiş kültürel anlamları ve modern tasarım kullanım alanlarını sunar. Renk anlamları evrensel veya değişmez
+                kabul edilmez; her anlam kaynaklandırılmış bağlamıyla ele alınır.
+              </p>
+            </div>
+
+            <ColorMeaningsGrid
+              onInspectColor={handleOpenColorMeaning}
+              onFilterByColor={handleFilterByColorMeaning}
+            />
+          </div>
+        ) : (
+          <>
+            {/* Hızlı Renk Filtre Şeridi */}
+            <div
+              style={{
+                display: 'flex',
+                gap: '0.4rem',
+                alignItems: 'center',
+                overflowX: 'auto',
+                padding: '0.35rem 0 0.85rem 0',
+                marginBottom: '0.5rem'
+              }}
+            >
+              <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted, #777)', whiteSpace: 'nowrap', marginRight: '0.25rem' }}>
+                Renk Ailesi Filtresi & Kültürel Bilgi:
+              </span>
+              {colorMeaningsList.map((cm) => {
+                const isSelected = categoryFilter.toLowerCase() === cm.name.tr.toLowerCase();
+                return (
+                  <div
+                    key={cm.id}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      backgroundColor: isSelected ? 'var(--color-primary, #1e3a5f)' : '#ffffff',
+                      color: isSelected ? '#ffffff' : 'var(--text-primary, #232529)',
+                      borderRadius: '16px',
+                      padding: '0.2rem 0.35rem 0.2rem 0.55rem',
+                      fontSize: '0.75rem',
+                      gap: '0.35rem',
+                      border: isSelected ? '1px solid var(--color-primary, #1e3a5f)' : '1px solid var(--border-light, #e0d8cc)',
+                      whiteSpace: 'nowrap',
+                      boxShadow: '0 1px 2px rgba(0,0,0,0.03)'
+                    }}
+                  >
+                    <span
+                      style={{
+                        width: '9px',
+                        height: '9px',
+                        borderRadius: '50%',
+                        backgroundColor: cm.displayHex,
+                        cursor: 'pointer'
+                      }}
+                      onClick={() => onCategoryFilterChange(isSelected ? 'all' : cm.name.tr)}
+                    />
+                    <span
+                      style={{ cursor: 'pointer', fontWeight: 500 }}
+                      onClick={() => onCategoryFilterChange(isSelected ? 'all' : cm.name.tr)}
+                      title={`${cm.name.tr} tonundaki eserleri filtrele`}
+                    >
+                      {cm.name.tr}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleOpenColorMeaning(cm);
+                      }}
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        padding: '0.1rem',
+                        color: isSelected ? '#ffffff' : 'var(--text-muted, #888)',
+                        display: 'flex',
+                        alignItems: 'center'
+                      }}
+                      title={`${cm.name.tr} (${cm.name.en}) tarihsel pigment ve kültürel anlam detayını aç`}
+                      aria-label={`${cm.name.tr} renk detayını aç`}
+                    >
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="16" x2="12" y2="12" />
+                        <line x1="12" y1="8" x2="12.01" y2="8" />
+                      </svg>
+                    </button>
+                  </div>
+                );
+              })}
+              {categoryFilter !== 'all' && (
+                <button
+                  type="button"
+                  onClick={() => onCategoryFilterChange('all')}
+                  style={{
+                    fontSize: '0.75rem',
+                    color: 'var(--color-accent, #c9702c)',
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    textDecoration: 'underline',
+                    whiteSpace: 'nowrap',
+                    fontWeight: 600
+                  }}
+                >
+                  Filtreyi Temizle
+                </button>
+              )}
+            </div>
+
+            {/* Filtre ve Arama Çubuğu */}
+            <div className="archive-controls-bar">
           <div className="archive-search-box">
             <svg
               className="search-icon-svg"
@@ -381,6 +610,17 @@ export const ArchiveGallery: React.FC<ArchiveGalleryProps> = ({
             ))
           )}
         </div>
+          </>
+        )}
+
+        {/* Renk Ailesi Kültürel Anlam & Pigment Tarihçesi Detay Modalı */}
+        <ColorMeaningModal
+          color={selectedColorMeaning}
+          isOpen={isColorModalOpen}
+          onClose={() => setIsColorModalOpen(false)}
+          onSelectColor={(c) => setSelectedColorMeaning(c)}
+          onFilterArchiveByColor={handleFilterByColorMeaning}
+        />
       </div>
     </section>
   );
