@@ -88,14 +88,14 @@ export const Statistics: React.FC<StatisticsProps> = ({ archiveItems }) => {
           <div className="box-header">
             <div className="box-title-group">
               <PieChart size={18} className="box-icon" />
-              <h3>Sıcaklık Dağılımı (Kromatik Termal Denge)</h3>
+              <h3>Göreli Sıcaklık Dağılımı (Görsel Yönelim)</h3>
             </div>
-            <span className="box-badge">Algısal Termal Model</span>
+            <span className="box-badge">sRGB / HSL + CIELAB C*ab</span>
           </div>
 
           <p className="box-description">
-            Eserlerdeki renklerin HSV renk dairesi üzerindeki açılarına göre yapılan sınıflandırmada
-            sıcak tonlar (kırmızı, turuncu, sarı), soğuk tonlar (mavi, camgöbeği, mor) ve nötr tonlar (gri, bej, siyah, beyaz).
+            Eserlerdeki baskın renk kümelerinin HSL hue yönelimi ve CIELAB kroma (<code className="mono-inline">C*ab</code>)
+            kapısı üzerinden hesaplanan ağırlıklı göreli sıcaklık dağılımı (fiziksel Kelvin değeri değildir).
           </p>
 
           {/* Visual Bar */}
@@ -104,16 +104,25 @@ export const Statistics: React.FC<StatisticsProps> = ({ archiveItems }) => {
               <div
                 className="temp-bar-segment warm-segment"
                 style={{ width: `${stats.warmPercent}%` }}
-                title={`Sıcak: %${stats.warmPercent}`}
+                title={`Sıcak yönelimli: %${stats.warmPercent}`}
               >
                 <span>%{stats.warmPercent}</span>
+              </div>
+            )}
+            {(stats.transitionalPercent ?? 0) > 0 && (
+              <div
+                className="temp-bar-segment transitional-segment"
+                style={{ width: `${stats.transitionalPercent}%` }}
+                title={`Dengeli / geçişli: %${stats.transitionalPercent}`}
+              >
+                <span>%{stats.transitionalPercent}</span>
               </div>
             )}
             {stats.coolPercent > 0 && (
               <div
                 className="temp-bar-segment cool-segment"
                 style={{ width: `${stats.coolPercent}%` }}
-                title={`Soğuk: %${stats.coolPercent}`}
+                title={`Soğuk yönelimli: %${stats.coolPercent}`}
               >
                 <span>%{stats.coolPercent}</span>
               </div>
@@ -122,7 +131,7 @@ export const Statistics: React.FC<StatisticsProps> = ({ archiveItems }) => {
               <div
                 className="temp-bar-segment neutral-segment"
                 style={{ width: `${stats.neutralPercent}%` }}
-                title={`Nötr: %${stats.neutralPercent}`}
+                title={`Nötr / Analiz Edilmemiş: %${stats.neutralPercent}`}
               >
                 <span>%{stats.neutralPercent}</span>
               </div>
@@ -130,20 +139,29 @@ export const Statistics: React.FC<StatisticsProps> = ({ archiveItems }) => {
           </div>
 
           {/* Temperature Legend Cards */}
-          <div className="temp-cards-row">
+          <div className="temp-cards-row temp-cards-four">
             <div className="temp-indicator-card warm">
               <div className="indicator-top">
                 <Flame size={16} />
-                <span className="indicator-title">Sıcak Tonlar</span>
+                <span className="indicator-title">Sıcak Yönelimli</span>
               </div>
               <div className="indicator-val">%{stats.warmPercent}</div>
               <span className="indicator-count">{stats.warmCount} eser</span>
             </div>
 
+            <div className="temp-indicator-card transitional">
+              <div className="indicator-top">
+                <Scale size={16} />
+                <span className="indicator-title">Dengeli / Geçişli</span>
+              </div>
+              <div className="indicator-val">%{stats.transitionalPercent ?? 0}</div>
+              <span className="indicator-count">{stats.transitionalCount ?? 0} eser</span>
+            </div>
+
             <div className="temp-indicator-card cool">
               <div className="indicator-top">
                 <Snowflake size={16} />
-                <span className="indicator-title">Soğuk Tonlar</span>
+                <span className="indicator-title">Soğuk Yönelimli</span>
               </div>
               <div className="indicator-val">%{stats.coolPercent}</div>
               <span className="indicator-count">{stats.coolCount} eser</span>
@@ -152,12 +170,26 @@ export const Statistics: React.FC<StatisticsProps> = ({ archiveItems }) => {
             <div className="temp-indicator-card neutral">
               <div className="indicator-top">
                 <Scale size={16} />
-                <span className="indicator-title">Nötr Tonlar</span>
+                <span className="indicator-title">Nötr / Katalog</span>
               </div>
               <div className="indicator-val">%{stats.neutralPercent}</div>
               <span className="indicator-count">{stats.neutralCount} eser</span>
             </div>
           </div>
+
+          {(stats.analyzedArtworkCount ?? 0) > 0 && (
+            <div className="stats-weighted-note">
+              <strong>
+                Piksel Analizi Tamamlanmış {stats.analyzedArtworkCount} Eserin Ortalama Payı:
+              </strong>{' '}
+              %{stats.weightedWarmSharePercent ?? 0} sıcak · %
+              {stats.weightedTransitionalSharePercent ?? 0} geçişli · %
+              {stats.weightedCoolSharePercent ?? 0} soğuk · %
+              {stats.weightedNeutralSharePercent ?? 0} nötr
+              {typeof stats.avgWarmthScore === 'number' &&
+                ` · Ortalama Kromatik Skor: ${stats.avgWarmthScore}/100`}
+            </div>
+          )}
         </div>
 
         {/* Right: Top Dominant Color Families */}
@@ -207,8 +239,8 @@ export const Statistics: React.FC<StatisticsProps> = ({ archiveItems }) => {
         </div>
       </div>
 
-      {/* Category Breakdown & Curatorial Note */}
-      <div className="analytics-footer-grid">
+      {/* Category Breakdown */}
+      <div className="analytics-footer-grid analytics-footer-single">
         <div className="category-tax-card">
           <h4 className="card-subtitle">Koleksiyon Dönem ve Tür Dağılımı</h4>
           <div className="category-tags-wrap">
@@ -219,16 +251,6 @@ export const Statistics: React.FC<StatisticsProps> = ({ archiveItems }) => {
               </div>
             ))}
           </div>
-        </div>
-
-        <div className="methodology-note-card">
-          <h4 className="card-subtitle">Bilimsel Analiz Yöntemi</h4>
-          <p className="note-text">
-            ChromArchive renk analizinde görsel pikselleri tarayıcı belleğindeki HTML5 Canvas üzerinde 300×300 çözünürlüğe ölçeklenerek örneklenir.
-            K-Means++ kümeleme algoritması insan görme sisteminin renk algısına göre optimize edilmiş ağırlıklı Öklid metriği
-            (<code className="mono-inline">2ΔR² + 4ΔG² + 3ΔB²</code>) kullanarak 5 ila 8 baskın renk vektörünü belirler.
-            Tüm hesaplamalar kullanıcının cihazında istemci taraflı gerçekleşir ve hiçbir harici API bağımlılığı gerektirmez.
-          </p>
         </div>
       </div>
     </div>

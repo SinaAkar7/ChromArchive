@@ -1,0 +1,1998 @@
+{
+  "schemaVersion": "1.0.0",
+  "dataset": {
+    "id": "chromarchive-historical-pigments-v1",
+    "name": "ChromArchive Tarihsel Pigmentler ve Renk Aileleri",
+    "language": "tr",
+    "created": "2026-11-15",
+    "totalPigments": 38,
+    "totalColorFamilies": 13,
+    "description": "Müze konservasyon kaynakları ve sanatçı pigmentleri yayınlarından yararlanılarak hazırlanmış, Türkçe özgün özetler içeren tarihsel pigment veri seti.",
+    "licenseNote": "Türkçe açıklamalar özgün özet metinlerdir. Kaynak sayfaların, kitapların, görsellerin ve yayınların kendi telif/lisans koşulları saklıdır; bu dosya üçüncü taraf kaynak metinlerini veya görsellerini kopyalamaz. Açık erişim bağlantıları kaynak gösterimi içindir.",
+    "displayHexPolicy": "Pigment HEX/RGB değerleri tarihsel numunelerin bilimsel ölçümü değildir. Bunlar yalnızca kullanıcı arayüzünde renk ailesini temsil eden yaklaşık sRGB örnekleridir.",
+    "editorialPolicy": [
+      "Renk ailesi, kimyasal pigment kimliği değildir.",
+      "Bir dijital görseldeki piksel rengi, pigmenti tek başına tanımlamaz.",
+      "Pigment kimliği için XRF, Raman, FTIR, mikroskopi veya kromatografi gibi uygun teknik incelemeler gerekir.",
+      "Tarihsel dönem ve coğrafya yalnızca listelenen kaynakların desteklediği ölçüde verilir.",
+      "Benzer pigment adları veya farklı tarihsel reçeteler aynı kimyasal madde kabul edilmez.",
+      "Arsenik, cıva, kurşun veya kadmiyum içeren pigmentlerde toksisite bilgisi özellikle belirtilir."
+    ],
+    "totalSources": 40,
+    "methodNote": "Renk ailesi özetleri ve pigment kayıtları, kaynak listesinde gösterilen müze konservasyon sayfaları ve sanatçı pigmenti yayınlarına dayalı özgün Türkçe özetlerdir. Her pigment kaydının sourceIds alanı onu destekleyen kaynak kayıtlarına bağlanır."
+  },
+  "sources": [
+    {
+      "id": "S01",
+      "title": "Artists’ Pigments: A Handbook of Their History and Characteristics, Volume 1",
+      "publisher": "National Gallery of Art",
+      "url": "https://www.nga.gov/research/publications/artists-pigments-handbook-their-history-and-characteristics-volume-1",
+      "type": "museum research publication",
+      "access": "Open publication page with PDF; pigment chapters include Indian yellow, cobalt yellow, red lead/minium, green earth, zinc white, chrome yellow, lead antimonate yellow, cochineal and kermes carmine."
+    },
+    {
+      "id": "S02",
+      "title": "Artists’ Pigments: A Handbook of Their History and Characteristics, Volume 2",
+      "publisher": "National Gallery of Art",
+      "url": "https://www.nga.gov/research/publications/artists-pigments-handbook-their-history-and-characteristics-volume-2",
+      "type": "museum research publication",
+      "access": "Open publication page with PDF; includes azurite, ultramarine, lead white, lead-tin yellow, smalt, verdigris, vermilion, malachite and calcium carbonate whites."
+    },
+    {
+      "id": "S03",
+      "title": "Artists’ Pigments: A Handbook of Their History and Characteristics, Volume 3",
+      "publisher": "National Gallery of Art",
+      "url": "https://www.nga.gov/research/publications/artists-pigments-handbook-their-history-and-characteristics-volume-3",
+      "type": "museum research publication",
+      "access": "Open publication page with PDF; includes Egyptian blue, gamboge, titanium dioxide whites, orpiment/realgar, indigo/woad, madder/alizarin, Vandyke brown, Prussian blue, emerald/Scheele greens and chromium oxide greens."
+    },
+    {
+      "id": "S04",
+      "title": "Ocher",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Ocher",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; naturally occurring earth pigments and historical use."
+    },
+    {
+      "id": "S05",
+      "title": "Red ocher",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Red_ocher",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; hematite-bearing red earth pigment."
+    },
+    {
+      "id": "S06",
+      "title": "Vermilion",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Vermilion",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; mercury sulfide pigment and manufacturing history."
+    },
+    {
+      "id": "S07",
+      "title": "Red lead",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Red_lead",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; lead tetroxide, early historical objects, and use history."
+    },
+    {
+      "id": "S08",
+      "title": "Madder",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Madder",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; plant-derived red dye and lake pigment history."
+    },
+    {
+      "id": "S09",
+      "title": "Carmine lake",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Carmine_lake",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; cochineal- and kermes-derived red lakes."
+    },
+    {
+      "id": "S10",
+      "title": "Cochineal",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Cochineal",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; insect-derived red dye and its European trade history."
+    },
+    {
+      "id": "S11",
+      "title": "Kermes",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Kermes",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; ancient insect dye used for crimson lake."
+    },
+    {
+      "id": "S12",
+      "title": "Murex purple / Tyrian purple",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Murex_purple",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; shellfish-derived purple dye in Greek/Roman and medieval contexts."
+    },
+    {
+      "id": "S13",
+      "title": "Yellow ocher",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Yellow_ocher",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; goethite/limonite and prehistoric use."
+    },
+    {
+      "id": "S14",
+      "title": "Orpiment",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Orpiment",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; arsenic trisulfide yellow pigment and historical uses."
+    },
+    {
+      "id": "S15",
+      "title": "Realgar",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Realgar",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; arsenic disulfide orange-red pigment."
+    },
+    {
+      "id": "S16",
+      "title": "Gamboge",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Gamboge",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; Asian plant resin yellow colorant."
+    },
+    {
+      "id": "S17",
+      "title": "Indian yellow",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Indian_yellow",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; magnesium euxanthate and historical production context."
+    },
+    {
+      "id": "S18",
+      "title": "Green earth",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Green_earth",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; celadonite/glauconite earth pigment and documented regions."
+    },
+    {
+      "id": "S19",
+      "title": "Malachite",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Malachite",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; copper carbonate mineral pigment used since before 3000 BCE."
+    },
+    {
+      "id": "S20",
+      "title": "Verdigris",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Verdigris",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; copper acetate pigment made by exposing copper to fermenting grape-skin vapors."
+    },
+    {
+      "id": "S21",
+      "title": "Scheele’s green",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Scheele%27s_green",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; 1775 discovery and arsenic toxicity."
+    },
+    {
+      "id": "S22",
+      "title": "Emerald green",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Emerald_green",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; copper acetoarsenite, 1814 commercial manufacture, nineteenth-century uses."
+    },
+    {
+      "id": "S23",
+      "title": "Chromic oxide",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Chromic_oxide",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; chromium oxide green and nineteenth-century artists’ pigment use."
+    },
+    {
+      "id": "S24",
+      "title": "Egyptian blue",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Egyptian_blue",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; synthetic calcium-copper silicate frit used in Egypt more than 5,000 years ago."
+    },
+    {
+      "id": "S25",
+      "title": "Ultramarine blue, natural",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Ultramarine_blue%2C_natural",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; lapis lazuli source and historical extraction method."
+    },
+    {
+      "id": "S26",
+      "title": "Azurite",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Azurite",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; naturally occurring copper carbonate blue pigment."
+    },
+    {
+      "id": "S27",
+      "title": "Smalt",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Smalt",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; cobalt glass pigment and East Asian/European chronology."
+    },
+    {
+      "id": "S28",
+      "title": "Prussian blue",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Prussian_blue",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; 1704 Berlin development and ferric ferrocyanide composition."
+    },
+    {
+      "id": "S29",
+      "title": "Indigo",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Indigo",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; plant-derived blue dye and historical trade/use chronology."
+    },
+    {
+      "id": "S30",
+      "title": "Cobalt blue",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Cobalt_blue",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; cobalt aluminate and early nineteenth-century synthesis."
+    },
+    {
+      "id": "S31",
+      "title": "Vandyke brown",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Vandyke_brown",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; seventeenth-century organic earth/peat pigment."
+    },
+    {
+      "id": "S32",
+      "title": "Geological Contributions to the History of the Artist’s Iron-Based Natural Earth Pigments and the Case Study of Terra d’Ombra",
+      "publisher": "Geosciences (MDPI)",
+      "url": "https://www.mdpi.com/2079-6447/5/1/2",
+      "type": "open scholarly article",
+      "access": "Open article on ochres, sienna and umber nomenclature, origins and use."
+    },
+    {
+      "id": "S33",
+      "title": "Lead white",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Lead_white",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; basic lead carbonate pigment made synthetically since Classical antiquity."
+    },
+    {
+      "id": "S34",
+      "title": "Zinc white",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Zinc_white",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; zinc oxide, watercolor introduction and later oil-paint use."
+    },
+    {
+      "id": "S35",
+      "title": "Titanium white",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Titanium_white",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; titanium dioxide pigment industrial development in the twentieth century."
+    },
+    {
+      "id": "S36",
+      "title": "Bone black",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Bone_black",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; charred bone carbon/calcium phosphate pigment."
+    },
+    {
+      "id": "S37",
+      "title": "Chrome yellow",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Chrome_yellow",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; lead chromate pigment marketed in the early nineteenth century."
+    },
+    {
+      "id": "S38",
+      "title": "Cadmium yellow",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Cadmium_yellow",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; cadmium sulfide yellow, synthesized in 1817."
+    },
+    {
+      "id": "S39",
+      "title": "Cobalt pigments",
+      "publisher": "CAMEO, Museum of Fine Arts Boston",
+      "url": "https://cameo.mfa.org/wiki/Cobalt_pigments",
+      "type": "museum conservation encyclopedia",
+      "access": "Open reference entry; cobalt yellow, cobalt green, cobalt violet and related pigments."
+    },
+    {
+      "id": "S41",
+      "title": "Phoenicia and the Bible",
+      "publisher": "The Metropolitan Museum of Art",
+      "url": "https://www.metmuseum.org/exhibitions/listings/2014/assyria-to-iberia/blog/posts/phoenicia-and-the-bible",
+      "type": "museum essay",
+      "access": "Open essay on Phoenician trade and purple dye derived from murex shells."
+    }
+  ],
+  "colorFamilies": [
+    {
+      "id": "red",
+      "name": {
+        "tr": "Kırmızı",
+        "en": "Red"
+      },
+      "historicalOverview": "Kırmızı aralığında mineral topraklar (hematit/kırmızı aşı boyası), cıva sülfür temelli vermilyon, kurşun kırmızısı ve bitki/böcek kaynaklı lake boyalar farklı dönemlerde kullanılmıştır. Bunlar aynı malzeme değildir; dayanıklılıkları ve üretim biçimleri değişir.",
+      "pigmentIds": [
+        "red-ochre",
+        "vermilion",
+        "red-lead-minium",
+        "madder-lake",
+        "cochineal-carmine",
+        "kermes-crimson-lake"
+      ]
+    },
+    {
+      "id": "orange",
+      "name": {
+        "tr": "Turuncu",
+        "en": "Orange"
+      },
+      "historicalOverview": "Turuncu tonlar realgar, minium, bazı demir oksitli topraklar ve daha geç dönem sentetik pigmentlerle üretilebilmiştir. Bir eserde turuncu piksel görülmesi tek başına bu malzemelerden birini göstermez.",
+      "pigmentIds": [
+        "realgar",
+        "red-lead-minium",
+        "burnt-sienna"
+      ]
+    },
+    {
+      "id": "yellow",
+      "name": {
+        "tr": "Sarı",
+        "en": "Yellow"
+      },
+      "historicalOverview": "Sarı pigment tarihi; doğal aşı boyası, arsenik sülfür minerali orpiment, bitkisel reçine gamboge, organik Hint sarısı ve kurşun/krom/kadmiyum gibi inorganik pigmentleri kapsar. Renk benzerliği kimyasal özdeşlik anlamına gelmez.",
+      "pigmentIds": [
+        "yellow-ochre",
+        "orpiment",
+        "gamboge",
+        "indian-yellow",
+        "lead-tin-yellow",
+        "chrome-yellow",
+        "cadmium-yellow",
+        "cobalt-yellow",
+        "naples-yellow"
+      ]
+    },
+    {
+      "id": "green",
+      "name": {
+        "tr": "Yeşil",
+        "en": "Green"
+      },
+      "historicalOverview": "Yeşil, mineral kökenli yeşil toprak ve malakitin yanı sıra bakır bileşikleri ve 18.–19. yüzyıl sentetik pigmentleriyle elde edilmiştir. Bazı arsenikli yeşiller toksisiteleri nedeniyle tarihsel açıdan önemlidir fakat günümüzde kullanım için uygun değildir.",
+      "pigmentIds": [
+        "green-earth",
+        "malachite",
+        "verdigris",
+        "scheeles-green",
+        "emerald-green",
+        "chromium-oxide-green"
+      ]
+    },
+    {
+      "id": "cyan",
+      "name": {
+        "tr": "Camgöbeği / Turkuaz",
+        "en": "Cyan / Turquoise"
+      },
+      "historicalOverview": "Turkuazımsı mavi-yeşil tonlar doğal bakır minerallerinden, bakır asetat ürünlerinden ve farklı mavi pigment karışımlarından gelebilir. Tek bir tarihsel pigment ailesine indirgenemez.",
+      "pigmentIds": [
+        "verdigris",
+        "malachite",
+        "azurite"
+      ]
+    },
+    {
+      "id": "blue",
+      "name": {
+        "tr": "Mavi",
+        "en": "Blue"
+      },
+      "historicalOverview": "Mavi pigmentlerin tarihi Mısır mavisi gibi erken sentetik fritleri, lapis lazuliden doğal ultramarini, azuriti, smaltı, Prusya mavisini ve 19. yüzyıl kobalt mavisini kapsar. Farklı kimyasal bileşimler benzer ekrandaki mavi örnekler verebilir.",
+      "pigmentIds": [
+        "egyptian-blue",
+        "natural-ultramarine",
+        "azurite",
+        "smalt",
+        "prussian-blue",
+        "indigo",
+        "cobalt-blue"
+      ]
+    },
+    {
+      "id": "purple",
+      "name": {
+        "tr": "Mor",
+        "en": "Purple"
+      },
+      "historicalOverview": "Mor renk tarihinde Murex kabuklu deniz canlılarından elde edilen Tyrian purple gibi pahalı doğal boyalar ile farklı lake ve sentetik pigmentler görülür. Boya (dye) ve pigment ayrımı önemlidir; Tyrian purple esasen tekstil boyasıdır.",
+      "pigmentIds": [
+        "tyrian-purple",
+        "cochineal-carmine",
+        "kermes-crimson-lake"
+      ]
+    },
+    {
+      "id": "pink",
+      "name": {
+        "tr": "Pembe",
+        "en": "Pink"
+      },
+      "historicalOverview": "Pembe ve açık kırmızı tonlar kök boya, koşinil ve kermes gibi organik boyaların mordan, taşıyıcı ve karışımlarına göre elde edilebilmiştir. Aynı HEX tonu farklı boyar maddelerle üretilebilir.",
+      "pigmentIds": [
+        "madder-lake",
+        "cochineal-carmine",
+        "kermes-crimson-lake"
+      ]
+    },
+    {
+      "id": "brown",
+      "name": {
+        "tr": "Kahverengi",
+        "en": "Brown"
+      },
+      "historicalOverview": "Kahverengiler doğal demir/manganez toprakları, sienna ve umber gibi yerel mineraller veya hümüs/peat kökenli Van Dyke brown gibi farklı maddelerden elde edilmiştir. Kaynağa ve ısıl işleme göre ton ve kimyasal yapı değişir.",
+      "pigmentIds": [
+        "vandyke-brown",
+        "umber-earth",
+        "burnt-sienna",
+        "yellow-ochre",
+        "red-ochre"
+      ]
+    },
+    {
+      "id": "beige",
+      "name": {
+        "tr": "Bej",
+        "en": "Beige"
+      },
+      "historicalOverview": "Bej ve açık toprak tonları çoğu zaman tek bir pigmentten değil; açık renkli topraklar, kalsiyum karbonat, beyaz pigmentler ve kahverengi/sarı pigment karışımlarından oluşur.",
+      "pigmentIds": [
+        "yellow-ochre",
+        "calcium-carbonate-white",
+        "lead-white"
+      ]
+    },
+    {
+      "id": "gray",
+      "name": {
+        "tr": "Gri",
+        "en": "Gray"
+      },
+      "historicalOverview": "Gri, doğal kül ve mineral karışımları, siyah-beyaz pigment karışımları veya yaşlanma/bozulma süreçleriyle görülebilir. Örneğin smalt bazı yağlıboya filmlerinde zamanla gri-kahverengi görünüme dönüşebilir.",
+      "pigmentIds": [
+        "smalt",
+        "bone-black",
+        "lead-white"
+      ]
+    },
+    {
+      "id": "black",
+      "name": {
+        "tr": "Siyah",
+        "en": "Black"
+      },
+      "historicalOverview": "Siyah pigmentler karbon kaynaklarından (kemik kömürü vb.) ve mineral kaynaklardan elde edilmiştir. Aynı koyu dijital ton, farklı karbon pigmentleri veya yaşlanmış malzemelerden kaynaklanabilir.",
+      "pigmentIds": [
+        "bone-black"
+      ]
+    },
+    {
+      "id": "white",
+      "name": {
+        "tr": "Beyaz",
+        "en": "White"
+      },
+      "historicalOverview": "Beyaz pigment tarihi kalsiyum karbonat ve kurşun beyazı gibi antik malzemelerden çinko beyazı ve 20. yüzyılda yaygınlaşan titanyum beyazına uzanır. Örtücülük ve kimyasal yapı birbirinden farklıdır.",
+      "pigmentIds": [
+        "lead-white",
+        "zinc-white",
+        "titanium-white",
+        "calcium-carbonate-white"
+      ]
+    }
+  ],
+  "pigments": [
+    {
+      "id": "red-ochre",
+      "name": {
+        "tr": "Kırmızı aşı boyası",
+        "en": "Red ochre"
+      },
+      "aliases": [],
+      "family": "red",
+      "displayHex": "#A34A28",
+      "displayRgb": {
+        "r": 163,
+        "g": 74,
+        "b": 40
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Hematit (Fe₂O₃) içeren doğal demir oksitli toprak; kil ve başka mineral bileşenler içerebilir.",
+      "historicalBackground": [
+        {
+          "period": "Tarih öncesinden günümüze",
+          "region": "Birçok coğrafya",
+          "detail": "Kırmızı aşı boyası, demir oksitli doğal toprak pigmentlerindendir. CAMEO, hematit içeriğini ve antik dönemlerden beri kullanımını belirtir.",
+          "sourceIds": [
+            "S04",
+            "S05"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Kaya ve mağara resimleri; duvar resmi ve çeşitli resim ortamları."
+      ],
+      "conservationAndSafetyNotes": "Genellikle dayanıklı ve ışığa dirençli bir toprak pigmentidir; doğal kaynağa göre tonu değişir.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S04",
+        "S05"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "vermilion",
+      "name": {
+        "tr": "Vermilyon / Sürme kırmızısı",
+        "en": "Vermilion"
+      },
+      "aliases": [],
+      "family": "red",
+      "displayHex": "#E34234",
+      "displayRgb": {
+        "r": 227,
+        "g": 66,
+        "b": 52
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Sentetik kırmızı cıva sülfür (HgS); doğal mineral karşılığı zinober/cinnabar ile kimyasal olarak aynıdır.",
+      "historicalBackground": [
+        {
+          "period": "Antik dönem ve Orta Çağ",
+          "region": "Roma dünyası, Çin ve Avrupa",
+          "detail": "Roma duvar resminde doğal zinober yaygın biçimde kullanılmıştır. CAMEO, kuru yöntemle vermilyon üretiminin Çin’de geliştirildiğini ve Avrupa’ya yaklaşık 8. yüzyılda ulaştığını belirtir.",
+          "sourceIds": [
+            "S06"
+          ]
+        },
+        {
+          "period": "17. yüzyıl sonu–19. yüzyıl",
+          "region": "Almanya ve Avrupa",
+          "detail": "Islak üretim yöntemi 17. yüzyıl sonunda Almanya’da geliştirildi; ticari ölçekte kullanımı 19. yüzyılda arttı.",
+          "sourceIds": [
+            "S06"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Duvar resmi, tempera, suluboya ve yağlıboya."
+      ],
+      "conservationAndSafetyNotes": "Cıva içerir ve toksiktir. Işık, oksijen ve klorür gibi etkenlerle koyulaşma görülebilir.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S06"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "red-lead-minium",
+      "name": {
+        "tr": "Minium / Kurşun kırmızısı",
+        "en": "Red lead / Minium"
+      },
+      "aliases": [],
+      "family": "orange",
+      "displayHex": "#E85B2A",
+      "displayRgb": {
+        "r": 232,
+        "g": 91,
+        "b": 42
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Kurşun tetroksit (Pb₃O₄); ağır, opak, turuncu-kırmızı inorganik pigment.",
+      "historicalBackground": [
+        {
+          "period": "MÖ 5. yüzyıldan önce ve sonrası",
+          "region": "Mısır, Çin, Japonya, Hindistan, İran ve Roma",
+          "detail": "CAMEO, kurşun kırmızısının kurşun beyazının ısıtılmasıyla tarihsel olarak üretildiğini ve farklı erken dönem nesnelerinde tespit edildiğini bildirir. “Minium” adı tarihsel kaynaklarda zaman zaman zinober/vermilyon için de kullanılmıştır; adlandırma bağlama göre kontrol edilmelidir.",
+          "sourceIds": [
+            "S07"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "El yazmaları, resim ve renkli baskılar; ayrıca cam ve seramik sırlarında renk verici."
+      ],
+      "conservationAndSafetyNotes": "Kurşun bileşiğidir ve toksiktir; ışık dayanımı ve boya işleme özellikleri sınırlıdır.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S07",
+        "S01"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "madder-lake",
+      "name": {
+        "tr": "Kök boya kırmızısı / Alizarin gölü",
+        "en": "Madder lake / Alizarin lake"
+      },
+      "aliases": [],
+      "family": "red",
+      "displayHex": "#A72C42",
+      "displayRgb": {
+        "r": 167,
+        "g": 44,
+        "b": 66
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Rubia türlerinin köklerinden çıkarılan alizarin ve ilişkili antrakinon boyar maddelerinin alümina gibi bir taşıyıcı üzerine çöktürülmesiyle elde edilen lake pigment.",
+      "historicalBackground": [
+        {
+          "period": "Antik çağlardan 19. yüzyıla",
+          "region": "Hindistan, İran, Mısır, Akdeniz, Avrupa ve Doğu Asya",
+          "detail": "Kök boya tekstil boyamada antik dönemlerden beri kullanılmıştır; Yunan ve Roma dünyasında hem boya hem pigment olarak bilinmiştir. Avrupa’da 13. yüzyıldan itibaren önemli bir tarımsal ve ticari ürün hâline geldi.",
+          "sourceIds": [
+            "S08"
+          ]
+        },
+        {
+          "period": "19. yüzyıl",
+          "region": "Avrupa",
+          "detail": "Doğal kök boyadaki alizarin bileşeni 19. yüzyılda incelendi; sentetik alizarinin 1871’de ticari olarak sunulması doğal boyanın tekstildeki önemini azalttı.",
+          "sourceIds": [
+            "S08"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Tekstil boyası, lake pigment, suluboya ve sanatçı boyaları (ör. rose madder)."
+      ],
+      "conservationAndSafetyNotes": "Lake pigmentler ışıkta solabilir; bağlayıcı, taşıyıcı ve mordan seçimi sonucu etkiler.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S08",
+        "S01"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "cochineal-carmine",
+      "name": {
+        "tr": "Koşinil / Karmin gölü",
+        "en": "Cochineal / Carmine lake"
+      },
+      "aliases": [],
+      "family": "red",
+      "displayHex": "#9E1B32",
+      "displayRgb": {
+        "r": 158,
+        "g": 27,
+        "b": 50
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Dactylopius coccus böceğinden elde edilen karminik asit; alüminyum veya kalay tuzlarıyla çöktürülerek lake pigment hazırlanabilir.",
+      "historicalBackground": [
+        {
+          "period": "16. yüzyıl ortasından itibaren Avrupa ticareti",
+          "region": "Meksika, Orta ve Güney Amerika, Kanarya Adaları ve Avrupa",
+          "detail": "Koşinil, kaktüsler üzerinde yaşayan dişi böceklerden elde edilen kırmızı boyadır. Avrupa’ya 1540’lardan itibaren ithal edildi ve kısa sürede kermesin yerini alan başlıca kırmızı boyalardan biri oldu.",
+          "sourceIds": [
+            "S10"
+          ]
+        },
+        {
+          "period": "Erken modern dönem ve sonrası",
+          "region": "Avrupa ve Atlantik ticaret ağları",
+          "detail": "Koşinil çözeltisi veya karmin lake biçiminde kullanıldı; CAMEO, lake formunun saydam fakat güçlü ışıkta solmaya yatkın olduğunu belirtir.",
+          "sourceIds": [
+            "S09",
+            "S10"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Tekstil boyası, lake pigment ve sanatçı renkleri."
+      ],
+      "conservationAndSafetyNotes": "Işık dayanımı sınırlı olabilir; karminin tonu pH ve çöktürme yönteminden etkilenir.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S09",
+        "S10",
+        "S01"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "kermes-crimson-lake",
+      "name": {
+        "tr": "Kermes kırmızısı / Kermes gölü",
+        "en": "Kermes / Crimson lake"
+      },
+      "aliases": [],
+      "family": "red",
+      "displayHex": "#9B1C3C",
+      "displayRgb": {
+        "r": 155,
+        "g": 28,
+        "b": 60
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Güney Avrupa’daki kermes meşesi üzerinde yaşayan dişi Kermes böceklerinden çıkarılan kermesik asit; alümina üzerine çöktürülebilir.",
+      "historicalBackground": [
+        {
+          "period": "Antik Mısır, Yunan ve Roma dönemleri",
+          "region": "Güney Avrupa ve Akdeniz",
+          "detail": "Kermes boyası antik çağlardan beri kullanılmıştır. CAMEO, kermes gölünün Mısır, Yunan ve Roma dönemlerinde kullanıldığını; 16. yüzyılda koşinil karmininin yaygınlaşmasıyla daha seyrekleştiğini kaydeder.",
+          "sourceIds": [
+            "S11",
+            "S09"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Tekstil boyası ve crimson/carmine lake pigment."
+      ],
+      "conservationAndSafetyNotes": "Işığa ve oksidasyona duyarlıdır; koşinil ile aynı kaynak veya bileşim değildir.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S11",
+        "S09"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "tyrian-purple",
+      "name": {
+        "tr": "Tir moru / Murex moru",
+        "en": "Tyrian purple / Murex purple"
+      },
+      "aliases": [],
+      "family": "purple",
+      "displayHex": "#6C2B5B",
+      "displayRgb": {
+        "r": 108,
+        "g": 43,
+        "b": 91
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Murex cinsi deniz yumuşakçalarından elde edilen, başlıca 6,6’-dibromoindigo içeren doğal boya.",
+      "historicalBackground": [
+        {
+          "period": "Minoan ve antik Akdeniz; Yunan ve Roma dönemleri",
+          "region": "Doğu Akdeniz, Fenike kıyıları ve Akdeniz ticaret merkezleri",
+          "detail": "Murex salgısı ışıkta oksitlenerek mor-kırmızı tonlara dönüşür. Her yumuşakçadan çok az boya çıktığı için üretim pahalıydı; Fenike kentleri mor boya ticaretiyle tanındı.",
+          "sourceIds": [
+            "S12",
+            "S41"
+          ]
+        },
+        {
+          "period": "Orta Çağ",
+          "region": "Akdeniz ve Avrupa",
+          "detail": "Murex moru tekstil boyamasının yanı sıra el yazmalarının süslenmesinde de kullanıldı.",
+          "sourceIds": [
+            "S12"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Lüks tekstiller, toga ve saray/elit giysileri; bazı el yazması süslemeleri."
+      ],
+      "conservationAndSafetyNotes": "Tarihsel kaynaklarda “mor” tek bir standart tonu anlatmaz; kaynak ve işlem rengin kırmızımsı veya mavimsi görünmesini değiştirebilir.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S12",
+        "S41"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "yellow-ochre",
+      "name": {
+        "tr": "Sarı aşı boyası",
+        "en": "Yellow ochre"
+      },
+      "aliases": [],
+      "family": "yellow",
+      "displayHex": "#C49A32",
+      "displayRgb": {
+        "r": 196,
+        "g": 154,
+        "b": 50
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Başlıca goetit (FeO(OH)) veya limonit ve kil içeren doğal demir oksitli toprak pigment.",
+      "historicalBackground": [
+        {
+          "period": "Tarih öncesinden günümüze",
+          "region": "Dünya genelinde doğal demirce zengin alanlar",
+          "detail": "Sarı aşı boyası, tarih öncesi dönemlerden beri kullanılan doğal toprak pigmentidir. Isıtma/kalsinasyonla goetit içeren sarı toprak kırmızı tona dönüşebilir.",
+          "sourceIds": [
+            "S13",
+            "S04"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Mağara ve kaya resimleri, duvar resmi, tempera, yağlıboya ve seramik."
+      ],
+      "conservationAndSafetyNotes": "Genellikle kalıcı ve ışığa dayanıklıdır; bileşim ve kaynak rengi belirler.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S13",
+        "S04"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "orpiment",
+      "name": {
+        "tr": "Oropiment",
+        "en": "Orpiment"
+      },
+      "aliases": [],
+      "family": "yellow",
+      "displayHex": "#E3C13B",
+      "displayRgb": {
+        "r": 227,
+        "g": 193,
+        "b": 59
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Arsenik trisülfür (As₂S₃) içeren doğal sarı mineral pigment.",
+      "historicalBackground": [
+        {
+          "period": "Antik çağlardan 18. yüzyıla kadar belgelenmiş geniş kullanım",
+          "region": "Mısır, Suriye, İran, Hindistan, Çin ve Avrupa",
+          "detail": "Oropiment antik toplumlarda kullanılmış; Avrupa’da Roma döneminden itibaren resim, el yazması ve çok renkli heykel uygulamalarında görülmüştür. 16. yüzyıl Venedik resminde önemli sarılardan biri olmuştur.",
+          "sourceIds": [
+            "S14"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "El yazması bezemesi, heykel polikromisi ve resim."
+      ],
+      "conservationAndSafetyNotes": "Arsenik içerdiğinden toksiktir; bakır ve kurşun pigmentleriyle reaksiyona girerek kararma oluşturabilir.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S14",
+        "S03"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "realgar",
+      "name": {
+        "tr": "Realgar",
+        "en": "Realgar"
+      },
+      "aliases": [],
+      "family": "orange",
+      "displayHex": "#D65A2A",
+      "displayRgb": {
+        "r": 214,
+        "g": 90,
+        "b": 42
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Arsenik disülfür (As₄S₄) içeren doğal turuncu-kırmızı mineral pigment.",
+      "historicalBackground": [
+        {
+          "period": "Erken dönemlerden 18. yüzyıl ortalarına kadar",
+          "region": "Çin, Hindistan, Orta Asya, Mısır ve Avrupa",
+          "detail": "Realgar, Çin, Hindistan, Orta Asya ve Mısır sanat eserlerinde erken tarihlerden beri görülür. Avrupa’da 16. yüzyıl Venedik resminde ve 17.–18. yüzyıl natürmortlarında kullanılmıştır.",
+          "sourceIds": [
+            "S15"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Resim, özellikle parlak turuncu-kırmızı ayrıntılar ve çiçek tasvirleri."
+      ],
+      "conservationAndSafetyNotes": "Çok toksiktir ve ışıkla sarı pararealgar fazına dönüşebilir; boya filminde bozulabilir.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S15",
+        "S03"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "gamboge",
+      "name": {
+        "tr": "Gamboge / Gummigüt",
+        "en": "Gamboge"
+      },
+      "aliases": [],
+      "family": "yellow",
+      "displayHex": "#E6B72E",
+      "displayRgb": {
+        "r": 230,
+        "g": 183,
+        "b": 46
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Garcinia türlerinin gövdesinden elde edilen sarı-turuncu reçine ve suda çözünen zamksı bileşen.",
+      "historicalBackground": [
+        {
+          "period": "8. yüzyıldan itibaren",
+          "region": "Güney ve Güneydoğu Asya; Japonya",
+          "detail": "Gamboge, Asya’da ve Japonya’da en az 8. yüzyıldan beri sarı renk verici olarak kullanılmıştır. Avrupa’ya düzenli ithalatı 17. yüzyılda artmıştır.",
+          "sourceIds": [
+            "S16",
+            "S03"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Suluboya, şeffaf glaze ve verniklerde sarı renk verici."
+      ],
+      "conservationAndSafetyNotes": "Şeffaf ve sıcak sarı bir ton verir; ışık ve ozon etkisiyle solabilir.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S16",
+        "S03"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "indian-yellow",
+      "name": {
+        "tr": "Hint sarısı",
+        "en": "Indian yellow"
+      },
+      "aliases": [],
+      "family": "yellow",
+      "displayHex": "#E7B83F",
+      "displayRgb": {
+        "r": 231,
+        "g": 184,
+        "b": 63
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Magnezyum euxanthate içeren tarihsel organik sarı pigment.",
+      "historicalBackground": [
+        {
+          "period": "15.–20. yüzyıl başı",
+          "region": "Hindistan; daha sonra Avrupa sanat malzemesi pazarları",
+          "detail": "CAMEO, Hint sarısını Hindistan’da 15. yüzyıldan 20. yüzyıla kadar üretilmiş organik pigment olarak tanımlar. Tarihsel üretim yöntemine ilişkin anlatılar kaynakta verilir; bu geleneksel yöntem günümüzde yeniden üretilen ticari “Indian yellow” boyalarla aynı değildir.",
+          "sourceIds": [
+            "S17",
+            "S01"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Suluboya ve tempera."
+      ],
+      "conservationAndSafetyNotes": "Tarihsel üretimin 1908’de yasaklandığı bildirilir; günümüzde aynı adla satılan boyalar sentetik ikameler olabilir.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S17",
+        "S01"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "lead-tin-yellow",
+      "name": {
+        "tr": "Kurşun-kalay sarısı",
+        "en": "Lead-tin yellow"
+      },
+      "aliases": [],
+      "family": "yellow",
+      "displayHex": "#D8B34A",
+      "displayRgb": {
+        "r": 216,
+        "g": 179,
+        "b": 74
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Kurşun ve kalay oksitleri içeren tarihsel inorganik sarı pigment; farklı tipleri/üretim tarifleri vardır.",
+      "historicalBackground": [
+        {
+          "period": "Orta Çağ ve erken modern Avrupa",
+          "region": "Avrupa resim ve el yazması atölyeleri",
+          "detail": "Kurşun-kalay sarısı, NGA’nın sanatçı pigmentleri el kitabında ayrı bir pigment grubu olarak incelenir. Dönem ve tip ayrımı önemlidir; kaynakta farklı bileşim ve kullanım öyküleri ele alınır.",
+          "sourceIds": [
+            "S02"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Tarihsel resim ve el yazması üretimi."
+      ],
+      "conservationAndSafetyNotes": "Kurşun bileşikleri içerdiği için toksisite riski taşır; iki tarihsel tip aynı kimyasal reçete değildir.",
+      "evidenceLevel": "moderate",
+      "sourceIds": [
+        "S02"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "chrome-yellow",
+      "name": {
+        "tr": "Krom sarısı",
+        "en": "Chrome yellow"
+      },
+      "aliases": [],
+      "family": "yellow",
+      "displayHex": "#E6B422",
+      "displayRgb": {
+        "r": 230,
+        "g": 180,
+        "b": 34
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Kurşun kromat (PbCrO₄); bazı ticari örneklerde kurşun sülfatla karışımlar bulunabilir.",
+      "historicalBackground": [
+        {
+          "period": "19. yüzyıl başlarından itibaren",
+          "region": "Avrupa ve endüstriyel boya üretim merkezleri",
+          "detail": "Krom sarısı 1800’lerin başında piyasaya çıktı. CAMEO, tonunun tane boyutu ve bileşime bağlı olarak limon sarısından turuncuya değişebildiğini belirtir.",
+          "sourceIds": [
+            "S37",
+            "S01"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Sanatçı boyaları, endüstriyel boyalar ve seramik sırları."
+      ],
+      "conservationAndSafetyNotes": "Kurşun ve krom içerir; toksiktir. UV ve hidrojen sülfür etkisiyle kararma görülebilir.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S37",
+        "S01"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "cadmium-yellow",
+      "name": {
+        "tr": "Kadmiyum sarısı",
+        "en": "Cadmium yellow"
+      },
+      "aliases": [],
+      "family": "yellow",
+      "displayHex": "#F2C230",
+      "displayRgb": {
+        "r": 242,
+        "g": 194,
+        "b": 48
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Kadmiyum sülfür (CdS) esaslı sentetik sarı pigment; bileşim/partikül değişimi turuncuya kayan tonlar verebilir.",
+      "historicalBackground": [
+        {
+          "period": "1817’de sentezi; 1840’ların ortalarından itibaren sanatçı boyalarında",
+          "region": "Almanya ve Avrupa",
+          "detail": "CAMEO, kadmiyum sarısının 1817’de Almanya’da sentetik olarak üretildiğini ve 1840’ların ortalarında sanatçı boyalarında kullanılmaya başlandığını bildirir. 20. yüzyıl başlarında popülerliği arttı.",
+          "sourceIds": [
+            "S38",
+            "S01"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Yağlıboya ve diğer sanatçı boyaları."
+      ],
+      "conservationAndSafetyNotes": "Kadmiyum bileşiğidir; toz veya pigmentle temas için modern güvenlik kuralları geçerlidir.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S38",
+        "S01"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "cobalt-yellow",
+      "name": {
+        "tr": "Kobalt sarısı / Aureolin",
+        "en": "Cobalt yellow / Aureolin"
+      },
+      "aliases": [],
+      "family": "yellow",
+      "displayHex": "#E8D14A",
+      "displayRgb": {
+        "r": 232,
+        "g": 209,
+        "b": 74
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Kobalt nitrit esaslı sarı pigment ailesi; kaynaklarda potassium cobalt nitrite olarak tanımlanan türü bulunur.",
+      "historicalBackground": [
+        {
+          "period": "19. yüzyıl pigment sınıflandırması",
+          "region": "Avrupa",
+          "detail": "Kobalt sarısı, NGA’nın sanatçı pigmentleri el kitabında tarihsel pigment olarak ele alınır; CAMEO kobalt pigmentleri içinde aureolin/kobalt sarısını listeler.",
+          "sourceIds": [
+            "S01",
+            "S39"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Sanatçı renkleri ve suluboya paletleri."
+      ],
+      "conservationAndSafetyNotes": "Kobalt pigmentleri soluma veya yutma halinde sağlık riski taşır; spesifik ürün formülü üreticiye göre değişebilir.",
+      "evidenceLevel": "moderate",
+      "sourceIds": [
+        "S01",
+        "S39"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "naples-yellow",
+      "name": {
+        "tr": "Napoli sarısı / Kurşun antimonat sarısı",
+        "en": "Naples yellow / Lead antimonate yellow"
+      },
+      "aliases": [],
+      "family": "yellow",
+      "displayHex": "#D9B34A",
+      "displayRgb": {
+        "r": 217,
+        "g": 179,
+        "b": 74
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Kurşun antimonat esaslı sarı pigment ailesi; tarixsel üretimde bileşim değişkenlik gösterebilir.",
+      "historicalBackground": [
+        {
+          "period": "Antik dönemlerden erken modern döneme kadar pigment literatüründe izlenen malzeme",
+          "region": "Akdeniz ve Avrupa sanat malzemeleri tarihi",
+          "detail": "Kurşun antimonat sarısı, NGA’nın sanatçı pigmentleri el kitabında tarihsel sarı pigmentlerden biri olarak ayrı bölümde incelenir. Napoli sarısı adıyla ilişkilendirilse de tarihsel numuneler ve reçeteler kimyasal analizle ayırt edilmelidir.",
+          "sourceIds": [
+            "S01"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Seramik sırları ve resim malzemeleri."
+      ],
+      "conservationAndSafetyNotes": "Kurşun ve antimon içerir; dijital HEX eşleşmesi kimyasal tespit sağlamaz.",
+      "evidenceLevel": "moderate",
+      "sourceIds": [
+        "S01"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "green-earth",
+      "name": {
+        "tr": "Yeşil toprak / Terre verte",
+        "en": "Green earth / Terre verte"
+      },
+      "aliases": [],
+      "family": "green",
+      "displayHex": "#788B62",
+      "displayRgb": {
+        "r": 120,
+        "g": 139,
+        "b": 98
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Celadonit ve glokonit başta olmak üzere yeşil, silisli, demirce zengin kil mineralleri.",
+      "historicalBackground": [
+        {
+          "period": "Antik çağlardan itibaren",
+          "region": "Roma dünyası, Akdeniz, Hindistan ve farklı kaya sanatı gelenekleri",
+          "detail": "CAMEO, yeşil toprağın Roma duvar resimlerinde; ayrıca Kaliforniya’daki Chumash kaya sanatında, Arjantin kaya sanatında ve Hindistan’daki Budist fresklerde kullanıldığını bildirir.",
+          "sourceIds": [
+            "S18"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Duvar resmi, fresk ve yağlıboya."
+      ],
+      "conservationAndSafetyNotes": "Genellikle kararlı ve kalıcıdır; doğal mineral kaynağına göre sarı-yeşilden gri-yeşile değişebilir.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S18",
+        "S01"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "malachite",
+      "name": {
+        "tr": "Malakit",
+        "en": "Malachite"
+      },
+      "aliases": [],
+      "family": "green",
+      "displayHex": "#2B8A57",
+      "displayRgb": {
+        "r": 43,
+        "g": 138,
+        "b": 87
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Bazik bakır karbonat (Cu₂CO₃(OH)₂) içeren yeşil mineral.",
+      "historicalBackground": [
+        {
+          "period": "MÖ 3000’den önceye uzanan kullanım",
+          "region": "Antik Mısır ve Akdeniz dâhil farklı bölgeler",
+          "detail": "Malakit, azurit ile doğal olarak birlikte bulunabilen bakır minerallerindendir. CAMEO, her ikisinin de MÖ 3000’den önce değerli taş ve boya pigmenti olarak kullanıldığını belirtir.",
+          "sourceIds": [
+            "S19"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Pigment, değerli taş, duvar ve obje bezemesi."
+      ],
+      "conservationAndSafetyNotes": "Asitlere ve kükürtlü gazlara duyarlıdır; tane boyutu ve öğütme rengi değiştirir.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S19",
+        "S02"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "verdigris",
+      "name": {
+        "tr": "Verdigris / Bakır yeşili",
+        "en": "Verdigris"
+      },
+      "aliases": [],
+      "family": "green",
+      "displayHex": "#4C9A76",
+      "displayRgb": {
+        "r": 76,
+        "g": 154,
+        "b": 118
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Bazik bakır asetat; tarihsel üretimde bakırın fermente üzüm posası/sıvısının asetik asit buharına maruz bırakılmasıyla oluşabilir.",
+      "historicalBackground": [
+        {
+          "period": "Antik çağlardan itibaren",
+          "region": "Akdeniz ve Avrupa dahil bakır işçiliği bulunan bölgeler",
+          "detail": "CAMEO, bakır levhaların fermente üzüm kabukları üzerine yerleştirilmesiyle bazik bakır asetat elde edilen tarihsel üretim yöntemini açıklar.",
+          "sourceIds": [
+            "S20",
+            "S02"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Resim, lake/rezinat üretimi, tekstil boyama ve yağ kurutucu."
+      ],
+      "conservationAndSafetyNotes": "Yağlıboyada koyulaşabilir, suluboyada solabilir ve kâğıtla reaksiyona girebilir.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S20",
+        "S02"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "scheeles-green",
+      "name": {
+        "tr": "Scheele yeşili",
+        "en": "Scheele’s green"
+      },
+      "aliases": [],
+      "family": "green",
+      "displayHex": "#8A9B42",
+      "displayRgb": {
+        "r": 138,
+        "g": 155,
+        "b": 66
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Bakır arsenit (CuHAsO₃) içeren sarımsı-yeşil sentetik pigment.",
+      "historicalBackground": [
+        {
+          "period": "1775’te keşif; 18.–19. yüzyıl kullanımları",
+          "region": "İsveç ve Avrupa",
+          "detail": "Carl Wilhelm Scheele pigmenti 1775’te keşfetti; tarifini 1778’de yayımladı. Toksisite ve asit/kükürt etkisiyle renk değişimi nedeniyle sanatçı boyası olarak yaygınlaşmadı.",
+          "sourceIds": [
+            "S21",
+            "S03"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Tarihsel boya ve çeşitli endüstriyel renk verici uygulamalar."
+      ],
+      "conservationAndSafetyNotes": "Çok toksik arsenik bileşiğidir; yalnızca tarihsel-küratoryal bilgi olarak ele alınmalıdır.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S21",
+        "S03"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "emerald-green",
+      "name": {
+        "tr": "Zümrüt yeşili / Paris yeşili",
+        "en": "Emerald green / Paris green"
+      },
+      "aliases": [],
+      "family": "green",
+      "displayHex": "#009B63",
+      "displayRgb": {
+        "r": 0,
+        "g": 155,
+        "b": 99
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Bakır asetoarsenit içeren parlak sentetik yeşil pigment.",
+      "historicalBackground": [
+        {
+          "period": "1814’te ticari üretim; 19. yüzyıl kullanımı",
+          "region": "Schweinfurt, Almanya ve Avrupa",
+          "detail": "Pigment 1814’te Schweinfurt’ta ticari olarak üretildi. 19. yüzyılda yağlıboya, suluboya ve farklı dekoratif ürünlerde kullanıldı; 20. yüzyıl başında duvar kâğıdı, kumaş ve oyuncaklarda da yer aldı.",
+          "sourceIds": [
+            "S22",
+            "S03"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Yağlıboya, suluboya, pastel, duvar kâğıdı ve tekstil."
+      ],
+      "conservationAndSafetyNotes": "Arsenik içerdiğinden çok toksiktir; günümüzde sanatçı pigmenti olarak kullanılmaz.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S22",
+        "S03"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "chromium-oxide-green",
+      "name": {
+        "tr": "Krom oksit yeşili",
+        "en": "Chromium oxide green"
+      },
+      "aliases": [],
+      "family": "green",
+      "displayHex": "#657B45",
+      "displayRgb": {
+        "r": 101,
+        "g": 123,
+        "b": 69
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Krom(III) oksit (Cr₂O₃) esaslı opak, mat yeşil pigment.",
+      "historicalBackground": [
+        {
+          "period": "1809’da sentetik üretim süreci; 1840 kataloğunda sanatçı pigmenti",
+          "region": "Fransa ve Avrupa",
+          "detail": "CAMEO, Vauquelin’in 1809’da sentetik üretim sürecini geliştirdiğini ve krom oksit yeşilinin 1840 Winsor & Newton kataloğunda sanatçı pigmenti olarak listelendiğini belirtir.",
+          "sourceIds": [
+            "S23",
+            "S03"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Sanatçı boyaları, seramik sırları ve endüstriyel kaplamalar."
+      ],
+      "conservationAndSafetyNotes": "Dayanıklı ve ışığa dirençli olabilir; chrome green karışımlarıyla aynı pigment değildir.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S23",
+        "S03"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "egyptian-blue",
+      "name": {
+        "tr": "Mısır mavisi",
+        "en": "Egyptian blue"
+      },
+      "aliases": [],
+      "family": "blue",
+      "displayHex": "#2864A0",
+      "displayRgb": {
+        "r": 40,
+        "g": 100,
+        "b": 160
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Kalsiyum-bakır silikat (cuprorivait) esaslı sentetik inorganik frit pigment.",
+      "historicalBackground": [
+        {
+          "period": "5.000 yıldan daha eski kullanım",
+          "region": "Antik Mısır; daha sonra İtalya ve Akdeniz",
+          "detail": "Mısır mavisi, silis, bakır tuzları ve kalsit içeren karışımın yüksek sıcaklıkta pişirilmesiyle üretilirdi. Antik Mısır’da seramik sırlarında ve duvar resmi sulu boya pigmenti olarak kullanıldı.",
+          "sourceIds": [
+            "S24",
+            "S03"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Duvar resmi, fresk, seramik ve dekoratif objeler."
+      ],
+      "conservationAndSafetyNotes": "Frit yapısı ve içindeki safsızlıklar gerçek rengi etkiler; ekran HEX’i tarihsel numune rengi değildir.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S24",
+        "S03"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "natural-ultramarine",
+      "name": {
+        "tr": "Doğal ultramarin / Lapis lazuli mavisi",
+        "en": "Natural ultramarine"
+      },
+      "aliases": [],
+      "family": "blue",
+      "displayHex": "#283B79",
+      "displayRgb": {
+        "r": 40,
+        "g": 59,
+        "b": 121
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Lapis lazuli taşından seçilip ayrılan lazuritçe zengin mavi parçacıkların öğütülmesiyle elde edilen pigment.",
+      "historicalBackground": [
+        {
+          "period": "MÖ 3. binyıldan itibaren taş ticareti; 13. yüzyıldan itibaren ayrıştırma yöntemi",
+          "region": "Badahşan/Afganistan, Avrupa ve Uzak Doğu ticaret ağları",
+          "detail": "Lapis lazuli, Afganistan’daki Badahşan madenlerinden en az MÖ 3. binyıldan beri çıkarılmıştır. 13. yüzyılda mavi parçacıkları diğer minerallerden ayıran yoğurma ve alkali çözeltide ayıklama yöntemi belgelenir.",
+          "sourceIds": [
+            "S25",
+            "S02"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "El yazmaları, panel resmi ve yağlıboya; yüksek değerli mavi pigment."
+      ],
+      "conservationAndSafetyNotes": "Saflık ve üretim partileri mavi tonunu etkiler; tarihsel ultramarin külü daha gri olabilir.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S25",
+        "S02"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "azurite",
+      "name": {
+        "tr": "Azurit",
+        "en": "Azurite"
+      },
+      "aliases": [],
+      "family": "blue",
+      "displayHex": "#285A91",
+      "displayRgb": {
+        "r": 40,
+        "g": 90,
+        "b": 145
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Bazik bakır karbonat (2CuCO₃·Cu(OH)₂) içeren doğal mavi mineral.",
+      "historicalBackground": [
+        {
+          "period": "Antik çağlardan itibaren",
+          "region": "Avrupa ve Asya dahil bakır yataklarının bulunduğu bölgeler",
+          "detail": "Azurit, malakit ile birlikte bulunabilen doğal bakır karbonattır. Antik çağlardan beri değerli taş ve boya pigmenti olarak kullanılmıştır; öğütme derecesi daha koyu veya açık mavi etkiler yaratır.",
+          "sourceIds": [
+            "S26",
+            "S02"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Panel resmi, duvar resmi, el yazması ve dekoratif objeler."
+      ],
+      "conservationAndSafetyNotes": "Asitlere ve kükürtlü gazlara duyarlıdır; ince ve iri taneler aynı mavi görünümü vermez.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S26",
+        "S02"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "smalt",
+      "name": {
+        "tr": "Smalt",
+        "en": "Smalt"
+      },
+      "aliases": [],
+      "family": "blue",
+      "displayHex": "#466A9B",
+      "displayRgb": {
+        "r": 70,
+        "g": 106,
+        "b": 155
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Kobalt oksitle renklendirilmiş, öğütülmüş potasyum camı.",
+      "historicalBackground": [
+        {
+          "period": "11.–13. yüzyıl Çin duvar resmi; 15.–17. yüzyıl Avrupa resmi",
+          "region": "Çin, Almanya, İtalya ve Hollanda",
+          "detail": "Smalt Çin duvar resminde 11.–13. yüzyıllarda kullanılmıştır. Avrupa resminde 15. yüzyıl başlarından itibaren görülür, 16.–17. yüzyıllarda yaygınlaşır; 18. yüzyıl başından itibaren Prusya mavisiyle kısmen yer değiştirmiştir.",
+          "sourceIds": [
+            "S27",
+            "S02"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Duvar resmi, yağlıboya, cam/sır, tekstil ve kâğıt boyama."
+      ],
+      "conservationAndSafetyNotes": "Yağlıboyada potasyum ve kobaltın bağlayıcıyla etkileşimi sonucu gri-kahverengi tonlara dönüşebilir.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S27",
+        "S02"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "prussian-blue",
+      "name": {
+        "tr": "Prusya mavisi",
+        "en": "Prussian blue"
+      },
+      "aliases": [],
+      "family": "blue",
+      "displayHex": "#173B65",
+      "displayRgb": {
+        "r": 23,
+        "g": 59,
+        "b": 101
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Sentetik ferrik ferro-siyanür (demir(III) hekzasiyanoferrat) pigmenti.",
+      "historicalBackground": [
+        {
+          "period": "1704’te Berlin’de geliştirilme; 18. yüzyıl ve sonrası",
+          "region": "Berlin/Prusya ve Avrupa",
+          "detail": "CAMEO’ya göre Prusya mavisi 1704’te Berlin’de Diesbach tarafından geliştirildi. 18. yüzyılın erken sentetik mavi pigmentlerinden biri oldu ve sulu boya, yağlıboya, baskı mürekkebi ile tekstil boyamada kullanıldı.",
+          "sourceIds": [
+            "S28",
+            "S03"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Suluboya, yağlıboya, baskı mürekkebi ve tekstil."
+      ],
+      "conservationAndSafetyNotes": "Alkali veya ısıyla kahverengileşebilir; pigment karışımları ve bağlayıcı sonucu etkiler.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S28",
+        "S03"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "indigo",
+      "name": {
+        "tr": "Çivit / İndigo",
+        "en": "Indigo"
+      },
+      "aliases": [],
+      "family": "blue",
+      "displayHex": "#354477",
+      "displayRgb": {
+        "r": 53,
+        "g": 68,
+        "b": 119
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Indigofera türlerinden elde edilen indigotin esaslı doğal bitkisel boya; tarihsel olarak pigment biçiminde de kullanılmıştır.",
+      "historicalBackground": [
+        {
+          "period": "MÖ 4. yüzyıl Hindistan kaynaklarında anılış; Roma dönemi ticareti ve 17. yüzyıl Avrupa arz artışı",
+          "region": "Hindistan, Java, Peru, tropikal bölgeler ve Avrupa",
+          "detail": "CAMEO, indigonun Hindistan’da MÖ 4. yüzyıla tarihlenen metinlerde anıldığını; Roma döneminde Avrupa’ya ihraç edildiğini ve deniz yollarının gelişmesiyle 17. yüzyılda daha bol hâle geldiğini belirtir.",
+          "sourceIds": [
+            "S29",
+            "S03"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Tekstil boyası; yağlıboya, tempera ve suluboyada pigment."
+      ],
+      "conservationAndSafetyNotes": "Güçlü güneş ışığında solabilir; doğal ve sentetik indigo kimyasal olarak aynı indigotin yapısını taşıyabilir.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S29",
+        "S03"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "cobalt-blue",
+      "name": {
+        "tr": "Kobalt mavisi",
+        "en": "Cobalt blue"
+      },
+      "aliases": [],
+      "family": "blue",
+      "displayHex": "#2857A4",
+      "displayRgb": {
+        "r": 40,
+        "g": 87,
+        "b": 164
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Kobalt alüminat (CoO·Al₂O₃) esaslı sentetik mavi pigment.",
+      "historicalBackground": [
+        {
+          "period": "1802–1804’te geliştirme ve yayın; 19. yüzyılda sanatçı boyalarında yayılma",
+          "region": "Fransa ve Avrupa",
+          "detail": "Louis-Jacques Thénard’ın kobalt mavisi üretim yöntemi 1802’deki deneylere dayanır; 1803/04’te yayımlandı. 19. yüzyıl başında smalt ve ultramarine alternatif olarak sanatçı pigmenti hâline geldi.",
+          "sourceIds": [
+            "S30",
+            "S39",
+            "S40"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Yağlıboya, suluboya ve diğer sanatçı boyaları."
+      ],
+      "conservationAndSafetyNotes": "Işığa ve hava koşullarına dirençli bir pigmenttir; kobalt içeren maddeler yine de iş sağlığı açısından dikkat gerektirir.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S30",
+        "S39"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "vandyke-brown",
+      "name": {
+        "tr": "Van Dyke kahverengisi",
+        "en": "Vandyke brown"
+      },
+      "aliases": [],
+      "family": "brown",
+      "displayHex": "#5A3F2E",
+      "displayRgb": {
+        "r": 90,
+        "g": 63,
+        "b": 46
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Hümüs, turba veya kömür kökenli, demir oksit içerebilen kahverengi doğal malzeme; ürünlerin bileşimi değişebilir.",
+      "historicalBackground": [
+        {
+          "period": "17. yüzyıldan günümüze",
+          "region": "Köln ve Kassel, Almanya; daha sonra farklı kaynaklar",
+          "detail": "Pigmentin adı erken kaynak bölgelerinden Köln ve Kassel ile ilişkilidir. Farklı yataklardan elde edilen örneklerin rengi ve bileşimi değişebilir; bazı ticari ürünler bitümlü veya sentetik karışım olabilir.",
+          "sourceIds": [
+            "S31",
+            "S03"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Tarihsel yağlıboya ve kahverengi tonlu resim uygulamaları."
+      ],
+      "conservationAndSafetyNotes": "UV ışığında solabilir; “Vandyke brown” adı tek ve sabit bir kimyasal bileşimi garanti etmez.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S31",
+        "S03"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "umber-earth",
+      "name": {
+        "tr": "Umber / Umbra toprağı",
+        "en": "Umber earth"
+      },
+      "aliases": [],
+      "family": "brown",
+      "displayHex": "#756047",
+      "displayRgb": {
+        "r": 117,
+        "g": 96,
+        "b": 71
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Manganez ve demir oksitleri içerebilen doğal toprak pigmenti; bileşimi kaynağa göre değişir.",
+      "historicalBackground": [
+        {
+          "period": "Antik ve erken modern dönemlerden günümüze",
+          "region": "Özellikle İtalya/Toskana ve farklı doğal toprak yatakları",
+          "detail": "Umber, sienna ve aşı boyası gibi demir esaslı doğal toprak pigmentleri tarihsel sanat malzemeleri arasında yer alır. Modern jeolojik çalışma, terra d’ombra/umber adlandırması, kökenleri ve Toskana’daki kaynak bağlamını ele alır.",
+          "sourceIds": [
+            "S32"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Yağlıboya, tempera, astar ve gölgeleme."
+      ],
+      "conservationAndSafetyNotes": "“Raw” ve “burnt” umber ısıl işlem nedeniyle farklı ton ve bileşim gösterebilir; tek HEX ile tanımlanamaz.",
+      "evidenceLevel": "moderate",
+      "sourceIds": [
+        "S32"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "burnt-sienna",
+      "name": {
+        "tr": "Yanık sienna",
+        "en": "Burnt sienna"
+      },
+      "aliases": [],
+      "family": "brown",
+      "displayHex": "#A65336",
+      "displayRgb": {
+        "r": 166,
+        "g": 83,
+        "b": 54
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Demir oksitli doğal toprak pigmentinin ısıtılmasıyla daha kırmızı-kahverengi tona dönüşen çeşidi.",
+      "historicalBackground": [
+        {
+          "period": "Erken modern Avrupa ve sonrasındaki sanat malzemesi literatürü",
+          "region": "İtalya/Toskana başta olmak üzere doğal toprak kaynakları",
+          "detail": "Sienna, umber ve aşı boyası tarihsel demir esaslı toprak pigmentleri grubundadır. Isıl işlem, demir oksit fazını ve tonu değiştirerek raw sienna’dan daha sıcak/kırmızımsı burnt sienna elde edilmesini sağlar.",
+          "sourceIds": [
+            "S32",
+            "S04"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Yağlıboya, tempera, astar, çizim ve sıcak toprak tonları."
+      ],
+      "conservationAndSafetyNotes": "Doğal yatak ve ısıl işleme bağlı olarak turuncu-kırmızıdan kahverengiye değişir.",
+      "evidenceLevel": "moderate",
+      "sourceIds": [
+        "S32",
+        "S04"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "lead-white",
+      "name": {
+        "tr": "Kurşun beyazı",
+        "en": "Lead white"
+      },
+      "aliases": [],
+      "family": "white",
+      "displayHex": "#E9E4D8",
+      "displayRgb": {
+        "r": 233,
+        "g": 228,
+        "b": 216
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Bazik kurşun karbonat/hidroksikarbonat; tarihsel üretimde metal kurşunun sirke/asetik asit buharına maruz bırakılmasıyla hazırlanmıştır.",
+      "historicalBackground": [
+        {
+          "period": "Klasik Antik Çağdan 20. yüzyıl başlarına kadar",
+          "region": "Akdeniz ve Avrupa, daha geniş sanat malzemesi ticareti",
+          "detail": "CAMEO, kurşun beyazının Klasik Antik Çağ’dan beri sentetik olarak hazırlandığını ve 20. yüzyıl başlarına kadar resim ile seramik sırlarında başlıca beyaz pigmentlerden biri olduğunu belirtir.",
+          "sourceIds": [
+            "S33",
+            "S02"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Yağlıboya, tempera ve seramik sırları."
+      ],
+      "conservationAndSafetyNotes": "Kurşun içerir ve toksiktir; günümüzde koruma ve güvenlik protokolleri olmadan kullanılmamalıdır.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S33",
+        "S02"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "zinc-white",
+      "name": {
+        "tr": "Çinko beyazı",
+        "en": "Zinc white"
+      },
+      "aliases": [],
+      "family": "white",
+      "displayHex": "#F0F0E9",
+      "displayRgb": {
+        "r": 240,
+        "g": 240,
+        "b": 233
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Çinko oksit (ZnO) esaslı beyaz pigment.",
+      "historicalBackground": [
+        {
+          "period": "Orta Çağ’da bileşik bilgisi; 1834’te suluboya pigmenti olarak sunum; 19. yüzyıl sonlarında yağlıboyada yaygınlaşma",
+          "region": "Avrupa",
+          "detail": "Çinko beyazı, Çin beyazı adıyla 1834’te suluboya pigmenti olarak listelendi; 19. yüzyılın son çeyreğinde yağlıboyada kurşun beyazına alternatif olarak yaygınlaştı.",
+          "sourceIds": [
+            "S34",
+            "S01"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Suluboya, yağlıboya, seramik sırları, baskı mürekkebi."
+      ],
+      "conservationAndSafetyNotes": "Genellikle kararlı ve toksik olmayan bir beyaz olarak tanımlanır; yağlıboyada örtücülüğü kurşun beyazından düşüktür.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S34",
+        "S01"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "titanium-white",
+      "name": {
+        "tr": "Titanyum beyazı",
+        "en": "Titanium white"
+      },
+      "aliases": [],
+      "family": "white",
+      "displayHex": "#F7F7F2",
+      "displayRgb": {
+        "r": 247,
+        "g": 247,
+        "b": 242
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Başlıca titanyum dioksit (TiO₂); anatase veya rutile kristal biçimleri ve kimi ticari karışımlarda dolgu maddeleri.",
+      "historicalBackground": [
+        {
+          "period": "1910’lardan itibaren endüstriyel geliştirme; 1918–1937 arasında ticari üretimin yaygınlaşması",
+          "region": "Norveç, ABD, Fransa ve Avrupa",
+          "detail": "Titanyum dioksit beyazlarının endüstriyel üretim süreçleri 1910’dan itibaren geliştirildi; 1918–1919’da tam ölçekli üretim başladı ve rutile ürünler 1937’de ticari üretime ulaştı. Kurşun beyazına alternatif arayışı yaygınlaşmasını hızlandırdı.",
+          "sourceIds": [
+            "S35",
+            "S03"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Modern sanatçı boyaları, endüstriyel boya, kâğıt, plastik, seramik ve tekstil."
+      ],
+      "conservationAndSafetyNotes": "Yüksek örtücülüğü ve kararlılığıyla modern beyaz paletin temel pigmentlerinden biridir; ticari boyalarda karışım bulunabilir.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S35",
+        "S03"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "calcium-carbonate-white",
+      "name": {
+        "tr": "Kalsiyum karbonat beyazı / Tebeşir",
+        "en": "Calcium carbonate white / Chalk"
+      },
+      "aliases": [],
+      "family": "white",
+      "displayHex": "#F3F1E9",
+      "displayRgb": {
+        "r": 243,
+        "g": 241,
+        "b": 233
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Kalsiyum karbonat (CaCO₃); tebeşir, kalsit ve benzeri doğal formlar.",
+      "historicalBackground": [
+        {
+          "period": "Antik dönemlerden günümüze",
+          "region": "Birçok coğrafya",
+          "detail": "Kalsiyum karbonat beyazları, NGA’nın sanatçı pigmentleri el kitabında beyaz pigment grubu içinde incelenir. Doğal tebeşir ve kalsit, açık tonlar, astar ve dolgu uygulamalarında tarihsel malzemelerdir.",
+          "sourceIds": [
+            "S02",
+            "S21"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Astar, zemin hazırlığı, duvar boyası, dolgu ve bazı resim teknikleri."
+      ],
+      "conservationAndSafetyNotes": "Beyaz görünümü saflık, tane boyutu ve bağlayıcıdan etkilenir; tebeşir ile alçı aynı kimyasal madde değildir.",
+      "evidenceLevel": "moderate",
+      "sourceIds": [
+        "S02",
+        "S21"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    },
+    {
+      "id": "bone-black",
+      "name": {
+        "tr": "Kemik siyahı / Fildişi siyahı",
+        "en": "Bone black / Ivory black"
+      },
+      "aliases": [],
+      "family": "black",
+      "displayHex": "#242522",
+      "displayRgb": {
+        "r": 36,
+        "g": 37,
+        "b": 34
+      },
+      "displayHexNote": "Bu HEX, tarihsel pigmentten alınmış cihazla ölçülmüş bir renk örneği değildir; yalnızca ekranda karşılaştırma amacıyla seçilmiş yaklaşık sRGB temsilidir. Aynı pigmentin tonu kaynak, tane boyutu, bağlayıcı, karışım, yaşlanma ve ışık koşullarına göre değişebilir.",
+      "composition": "Hayvan kemiklerinin oksijensiz ortamda kömürleştirilmesiyle elde edilen karbon ve kalsiyum fosfat karışımı.",
+      "historicalBackground": [
+        {
+          "period": "Tarihsel sanat malzemeleri; 19. yüzyılda ticari boya ürünleri",
+          "region": "Avrupa ve uluslararası sanat malzemesi ticareti",
+          "detail": "CAMEO, kemik siyahını kömürleştirilmiş kemikten hazırlanan mavi-siyah pigment olarak tanımlar. İnce öğütülmüş türü tarihsel olarak fildişi siyahı adıyla da satılmıştır.",
+          "sourceIds": [
+            "S36"
+          ]
+        }
+      ],
+      "documentedArtisticUses": [
+        "Yağlıboya, suluboya, gravür mürekkebi ve boya."
+      ],
+      "conservationAndSafetyNotes": "Pigmentin tonu karbon oranı ve mineral kül miktarıyla değişir; gerçek fildişi elde edilmesiyle aynı şey değildir.",
+      "evidenceLevel": "high",
+      "sourceIds": [
+        "S36"
+      ],
+      "analysisCaution": "Bu kayda yakın HEX eşleşmesi, eserde bu pigmentin bulunduğunu kanıtlamaz. Pigment kimliği ancak uygun teknik inceleme (ör. XRF, Raman, FTIR, mikroskopi veya kromatografi) ve bağlamla değerlendirilebilir."
+    }
+  ]
+}

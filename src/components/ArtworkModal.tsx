@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import type { ArtworkMetadata, ColorMeaningEntry } from '../types';
 import { exportMetadataAsJson } from '../services/archiveService';
+import { hydrateLegacyArtworkTemperature } from '../services/colorTemperatureService';
 import { ColorMeaningModal } from './ColorMeaningModal';
 import { getColorMeaningByQuery } from '../services/colorMeaningsService';
 
@@ -63,12 +64,17 @@ export const ArtworkModal: React.FC<ArtworkModalProps> = ({
     };
   }, [isOpen, handleKeyDown]);
 
-  if (!isOpen || !artwork) {
+  const hydratedArtwork = React.useMemo(
+    () => (artwork ? hydrateLegacyArtworkTemperature(artwork) : null),
+    [artwork]
+  );
+
+  if (!isOpen || !hydratedArtwork) {
     return null;
   }
 
   const handleDownloadJson = () => {
-    exportMetadataAsJson(artwork);
+    exportMetadataAsJson(hydratedArtwork);
   };
 
   return (
@@ -77,11 +83,11 @@ export const ArtworkModal: React.FC<ArtworkModalProps> = ({
         {/* Modal Header */}
         <div className="modal-header">
           <div className="modal-header-titles">
-            <span className="modal-category-tag">{artwork.category || 'Müze Arşivi'}</span>
-            <h2 className="modal-artwork-title">{artwork.title}</h2>
+            <span className="modal-category-tag">{hydratedArtwork.category || 'Müze Arşivi'}</span>
+            <h2 className="modal-artwork-title">{hydratedArtwork.title}</h2>
             <div className="modal-artist-subtitle">
-              <span className="artist-bold">{artwork.artist}</span>
-              <span className="artist-dates">{artwork.year}</span>
+              <span className="artist-bold">{hydratedArtwork.artist}</span>
+              <span className="artist-dates">{hydratedArtwork.year}</span>
             </div>
           </div>
           <button
@@ -101,8 +107,8 @@ export const ArtworkModal: React.FC<ArtworkModalProps> = ({
             <div className="modal-image-col">
               <div className="modal-image-wrapper">
                 <img
-                  src={artwork.imageUrl}
-                  alt={artwork.title}
+                  src={hydratedArtwork.imageUrl}
+                  alt={hydratedArtwork.title}
                   className="modal-image-preview"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400"><rect fill="%23232529" width="600" height="400"/><text fill="%23EAE5D9" x="50%" y="50%" text-anchor="middle" font-family="serif">Görsel Yüklenemedi</text></svg>';
@@ -112,7 +118,7 @@ export const ArtworkModal: React.FC<ArtworkModalProps> = ({
 
               {/* Proportional Chromatic Bar */}
               {/* Proportional Chromatic Bar & Swatches */}
-              {artwork.dominantColors && artwork.dominantColors.length > 0 ? (
+              {hydratedArtwork.dominantColors && hydratedArtwork.dominantColors.length > 0 ? (
                 <>
                   <div className="modal-color-strip-container">
                     <div className="strip-title">
@@ -120,7 +126,7 @@ export const ArtworkModal: React.FC<ArtworkModalProps> = ({
                       <span>Kromatik Spektrum Dağılımı</span>
                     </div>
                     <div className="modal-proportional-bar">
-                      {artwork.dominantColors.map((color, idx) => (
+                      {hydratedArtwork.dominantColors.map((color, idx) => (
                         <div
                           key={idx}
                           className="modal-bar-segment"
@@ -133,10 +139,17 @@ export const ArtworkModal: React.FC<ArtworkModalProps> = ({
                         />
                       ))}
                     </div>
+                    {hydratedArtwork.temperatureSummary && (
+                      <div className="modal-temp-summary-note">
+                        <strong>Göreli Sıcaklık Özeti:</strong>{' '}
+                        {hydratedArtwork.temperatureSummary}{' '}
+                        <span className="modal-nonkelvin-tag">(Fiziksel Kelvin değildir)</span>
+                      </div>
+                    )}
                   </div>
 
                   <div className="modal-swatches-grid">
-                    {artwork.dominantColors.map((col, idx) => {
+                    {hydratedArtwork.dominantColors.map((col, idx) => {
                       const meaning = getColorMeaningByQuery(col.family || col.name);
                       return (
                         <div
@@ -150,10 +163,20 @@ export const ArtworkModal: React.FC<ArtworkModalProps> = ({
                             <div className="modal-swatch-hex mono-font">{col.hex}</div>
                             <div className="modal-swatch-sub">
                               <span>%{col.percentage}</span>
-                              <span className="swatch-temperature">{col.temperature}</span>
+                              <span className="swatch-temperature">
+                                {col.temperatureLabel || col.temperature}
+                                {typeof col.warmthScore === 'number' ? ` (${col.warmthScore}/100)` : ''}
+                              </span>
                             </div>
                             {col.name && (
                               <div className="modal-swatch-name">{col.name}</div>
+                            )}
+                            {(col.temperatureConfidenceLabel || col.relativeToPalette) && (
+                              <div className="modal-swatch-rel">
+                                {col.temperatureConfidenceLabel ? `Güven: ${col.temperatureConfidenceLabel}` : ''}
+                                {col.temperatureConfidenceLabel && col.relativeToPalette ? ' · ' : ''}
+                                {col.relativeToPalette ?? ''}
+                              </div>
                             )}
                             {meaning && (
                               <button
@@ -203,7 +226,7 @@ export const ArtworkModal: React.FC<ArtworkModalProps> = ({
                       className="modal-action-btn secondary"
                       style={{ width: '100%', justifyContent: 'center' }}
                       onClick={() => {
-                        onLoadIntoAnalyzer(artwork);
+                        onLoadIntoAnalyzer(hydratedArtwork);
                         onClose();
                       }}
                     >
@@ -226,68 +249,68 @@ export const ArtworkModal: React.FC<ArtworkModalProps> = ({
                 <dl className="metadata-definition-list">
                   <div className="meta-item">
                     <dt>Sanatçı / Yaratıcı</dt>
-                    <dd>{artwork.artist}</dd>
+                    <dd>{hydratedArtwork.artist}</dd>
                   </div>
 
                   <div className="meta-item">
                     <dt>Tarih / Dönem</dt>
                     <dd>
-                      {artwork.year} {artwork.period ? `(${artwork.period})` : ''}
+                      {hydratedArtwork.year} {hydratedArtwork.period ? `(${hydratedArtwork.period})` : ''}
                     </dd>
                   </div>
 
                   <div className="meta-item">
                     <dt>Kültür / Coğrafya</dt>
-                    <dd>{artwork.culture || 'Avrupa Sanatı'}</dd>
+                    <dd>{hydratedArtwork.culture || 'Avrupa Sanatı'}</dd>
                   </div>
 
                   <div className="meta-item">
                     <dt>Teknik & Malzeme</dt>
-                    <dd>{artwork.medium || 'Tuval üzerine yağlıboya'}</dd>
+                    <dd>{hydratedArtwork.medium || 'Tuval üzerine yağlıboya'}</dd>
                   </div>
 
                   <div className="meta-item">
                     <dt>Boyutlar</dt>
-                    <dd>{artwork.dimensions || 'Müze standart kayıtları'}</dd>
+                    <dd>{hydratedArtwork.dimensions || 'Müze standart kayıtları'}</dd>
                   </div>
 
                   <div className="meta-item">
                     <dt>Kurum / Koleksiyon</dt>
                     <dd className="institution-entry">
                       <Building2 size={13} className="inline-meta-icon" />
-                      <span>{artwork.institution || 'Açık Erişim Dijital Arşivi'}</span>
+                      <span>{hydratedArtwork.institution || 'Açık Erişim Dijital Arşivi'}</span>
                     </dd>
                   </div>
 
                   <div className="meta-item">
                     <dt>Envanter No (Accession)</dt>
-                    <dd className="mono-font">{artwork.accessionNumber || 'N/A'}</dd>
+                    <dd className="mono-font">{hydratedArtwork.accessionNumber || 'N/A'}</dd>
                   </div>
 
                   <div className="meta-item">
                     <dt>Telif & Lisans</dt>
                     <dd className="license-tag">
                       <ShieldCheck size={13} className="inline-meta-icon text-success" />
-                      <span>{artwork.rights || 'Kamu Malı (Public Domain / CC0)'}</span>
+                      <span>{hydratedArtwork.rights || 'Kamu Malı (Public Domain / CC0)'}</span>
                     </dd>
                   </div>
                 </dl>
               </div>
 
               {/* Description & Curatorial text */}
-              {artwork.description && (
+              {hydratedArtwork.description && (
                 <div className="meta-card-block">
                   <h3 className="block-title">Eser Hakkında</h3>
-                  <p className="curatorial-description">{artwork.description}</p>
+                  <p className="curatorial-description">{hydratedArtwork.description}</p>
                 </div>
               )}
 
               {/* Tags */}
-              {artwork.tags && artwork.tags.length > 0 && (
+              {hydratedArtwork.tags && hydratedArtwork.tags.length > 0 && (
                 <div className="meta-card-block">
                   <h3 className="block-title">Küratöryel Etiketler</h3>
                   <div className="tags-container">
-                    {artwork.tags.map((tag, i) => (
+                    {hydratedArtwork.tags.map((tag, i) => (
                       <span key={i} className="meta-tag-pill">
                         #{tag}
                       </span>
@@ -312,7 +335,7 @@ export const ArtworkModal: React.FC<ArtworkModalProps> = ({
                     type="button"
                     className="modal-action-btn secondary"
                     onClick={() => {
-                      onLoadIntoAnalyzer(artwork);
+                      onLoadIntoAnalyzer(hydratedArtwork);
                       onClose();
                     }}
                   >
@@ -321,9 +344,9 @@ export const ArtworkModal: React.FC<ArtworkModalProps> = ({
                   </button>
                 )}
 
-                {artwork.museumUrl && (
+                {hydratedArtwork.museumUrl && (
                   <a
-                    href={artwork.museumUrl}
+                    href={hydratedArtwork.museumUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="modal-action-btn tertiary"

@@ -69,7 +69,9 @@ export const ColorMeaningModal: React.FC<ColorMeaningModalProps> = ({
   // Bu renk için kullanılan tüm benzersiz kaynak ID'lerini topla
   const allSourceIds = Array.from(
     new Set([
-      ...color.historicalContext.flatMap((h) => h.sourceIds || []),
+      ...(color.historicalContext || []).flatMap((h) => h.sourceIds || []),
+      ...(color.historicalPigments || []).flatMap((p) => p.sourceIds || []),
+      ...(color.meaningShifts || []).flatMap((m) => m.sourceIds || []),
       ...(color.documentedMeanings || []).flatMap((m) => m.sourceIds || [])
     ])
   );
@@ -375,6 +377,76 @@ export const ColorMeaningModal: React.FC<ColorMeaningModalProps> = ({
                 ))}
               </div>
             </div>
+
+            {/* Sanat Tarihinde Kullanım & Pigment Örnekleri */}
+            {(color.artHistoryUsage || (color.historicalPigments && color.historicalPigments.length > 0)) && (
+              <div className="meta-card-block">
+                <h3 className="block-title">
+                  <Sparkles size={16} />
+                  <span>Sanat Tarihindeki Kullanımı ve Tarihsel Pigment Örnekleri</span>
+                </h3>
+                {color.artHistoryUsage && (
+                  <p style={{ fontSize: '0.875rem', lineHeight: 1.6, color: 'var(--text-primary, #333)', margin: '0 0 0.875rem 0' }}>
+                    {color.artHistoryUsage}
+                  </p>
+                )}
+                {color.historicalPigments && color.historicalPigments.length > 0 && (
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))', gap: '0.75rem' }}>
+                    {color.historicalPigments.map((pig, pIdx) => (
+                      <div
+                        key={pIdx}
+                        style={{
+                          padding: '0.75rem',
+                          backgroundColor: 'var(--bg-warm, #faf8f5)',
+                          borderRadius: '6px',
+                          border: '1px solid var(--border-light, #ebe5db)'
+                        }}
+                      >
+                        <div style={{ fontWeight: 600, fontSize: '0.875rem', color: 'var(--color-primary, #1e3a5f)', marginBottom: '0.2rem' }}>
+                          {pig.name}
+                        </div>
+                        <div style={{ fontSize: '0.725rem', color: 'var(--text-muted, #777)', marginBottom: '0.35rem' }}>
+                          {pig.period} · {pig.region}
+                        </div>
+                        <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary, #555)', lineHeight: 1.45 }}>
+                          <strong>Malzeme:</strong> {pig.materials}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Dönemlere Göre Anlam Değişiklikleri */}
+            {color.meaningShifts && color.meaningShifts.length > 0 && (
+              <div className="meta-card-block">
+                <h3 className="block-title">
+                  <History size={16} />
+                  <span>Dönemlere Göre Anlam Değişiklikleri</span>
+                </h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                  {color.meaningShifts.map((ms, msIdx) => (
+                    <div
+                      key={msIdx}
+                      style={{
+                        padding: '0.75rem',
+                        backgroundColor: 'var(--bg-surface, #ffffff)',
+                        borderRadius: '6px',
+                        border: '1px solid var(--border-light, #ebe5db)'
+                      }}
+                    >
+                      <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-primary, #1e3a5f)', marginBottom: '0.25rem' }}>
+                        {ms.period} — {ms.region}
+                      </div>
+                      <p style={{ fontSize: '0.85rem', lineHeight: 1.55, color: 'var(--text-primary, #333)', margin: 0 }}>
+                        {ms.shift}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Kültürel ve Sembolik Anlamlar (Rule 6: Boşsa gizle, bilgi uydurma) */}
             {hasDocumentedMeanings && (

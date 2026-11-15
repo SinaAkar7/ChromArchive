@@ -1,0 +1,275 @@
+{
+  "schemaVersion": "1.0.0",
+  "dataset": {
+    "id": "manalansan-webster-2025-warm-cool-summary",
+    "title": "Warm-cool color dimension: published summary measurements",
+    "primaryPublication": {
+      "authors": "Manalansan, J., Whitehead, L. A., & Webster, M. A.",
+      "year": 2025,
+      "title": "Warm versus cool colors and their relation to color perception",
+      "journal": "Journal of Vision",
+      "volume": "25",
+      "issue": "4",
+      "article": "13",
+      "doi": "10.1167/jov.25.4.13",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12025320/",
+      "license": "CC BY 4.0"
+    },
+    "curatedExport": {
+      "repository": "color-perception-datasets",
+      "maintainer": "Görkem Yıldız",
+      "canonicalCsvUrl": "https://raw.githubusercontent.com/Grkmyldz148/color-perception-datasets/main/datasets/manalansan_2025_warm_cool_colors/canonical.csv",
+      "metadataUrl": "https://raw.githubusercontent.com/Grkmyldz148/color-perception-datasets/main/datasets/manalansan_2025_warm_cool_colors/meta.yaml",
+      "datasetPage": "https://grkmyldz148.github.io/color-perception-datasets/datasets/manalansan_2025_warm_cool_colors.html",
+      "license": "CC BY 4.0",
+      "note": "20 satırlık canonical.csv özet tablosunun JSON'a dönüştürülmüş halidir; tam ham katılımcı verisi değildir."
+    },
+    "recordCount": 20,
+    "includedParticipants": 19,
+    "totalParticipants": 25,
+    "hueAnglesTested": 36,
+    "luminanceLevelsCdM2": [
+      10,
+      20,
+      40
+    ],
+    "dataType": "published_summary_statistics",
+    "coordinateSystem": {
+      "name": "Webster-style cone-opponent space",
+      "axes": "LvsM × SvsLM",
+      "unit": "degree",
+      "warning": "Bu açılar CSS HSL hue, HSV hue, RGB hue veya CIELAB LCh hue değildir. HEX renklerinden hesaplanan HSL açılarıyla doğrudan karşılaştırılamaz."
+    },
+    "method": {
+      "apparatus": "Calibrated CRT display; chromaticity equivalent to illuminant C",
+      "stimulus": "36 chromatic angles, fixed chromatic contrast, three luminance levels",
+      "warmCoolScale": "7-point rating from very cool to very warm",
+      "repetitions": "Four repeats per angle and luminance per observer",
+      "backgroundLuminanceCdM2": 100
+    },
+    "caveats": [
+      "This export contains 20 summary rows, not the full 36 hue × 19 observers × 3 luminance × 4 repetitions dataset.",
+      "The full supplementary participant data are not included in this small JSON export.",
+      "The large standard deviations for warm/cool peaks indicate observer variability.",
+      "Do not plug cone-opponent angles directly into the app's HSL hue calculation."
+    ],
+    "attribution": "Data summary from Manalansan, Whitehead & Webster (2025), Journal of Vision 25(4), 13, CC BY 4.0; canonical summary transcribed from color-perception-datasets (Görkem Yıldız), CC BY 4.0."
+  },
+  "measurements": [
+    {
+      "measurement": "Warm_peak",
+      "luminanceCdM2": 10,
+      "meanHueAngleDeg": 343.7,
+      "sdHueAngleDeg": 27.4,
+      "category": "warm_cool"
+    },
+    {
+      "measurement": "Warm_peak",
+      "luminanceCdM2": 20,
+      "meanHueAngleDeg": 341.7,
+      "sdHueAngleDeg": 25.3,
+      "category": "warm_cool"
+    },
+    {
+      "measurement": "Warm_peak",
+      "luminanceCdM2": 40,
+      "meanHueAngleDeg": 340.5,
+      "sdHueAngleDeg": 27.6,
+      "category": "warm_cool"
+    },
+    {
+      "measurement": "Cool_peak",
+      "luminanceCdM2": 10,
+      "meanHueAngleDeg": 143.5,
+      "sdHueAngleDeg": 36.1,
+      "category": "warm_cool"
+    },
+    {
+      "measurement": "Cool_peak",
+      "luminanceCdM2": 20,
+      "meanHueAngleDeg": 146.9,
+      "sdHueAngleDeg": 30.5,
+      "category": "warm_cool"
+    },
+    {
+      "measurement": "Cool_peak",
+      "luminanceCdM2": 40,
+      "meanHueAngleDeg": 148.7,
+      "sdHueAngleDeg": 30.2,
+      "category": "warm_cool"
+    },
+    {
+      "measurement": "Boundary_1",
+      "luminanceCdM2": 10,
+      "meanHueAngleDeg": 53.9,
+      "sdHueAngleDeg": 32.1,
+      "category": "warm_cool"
+    },
+    {
+      "measurement": "Boundary_1",
+      "luminanceCdM2": 20,
+      "meanHueAngleDeg": 58.4,
+      "sdHueAngleDeg": 24.3,
+      "category": "warm_cool"
+    },
+    {
+      "measurement": "Boundary_1",
+      "luminanceCdM2": 40,
+      "meanHueAngleDeg": 63.7,
+      "sdHueAngleDeg": 31.2,
+      "category": "warm_cool"
+    },
+    {
+      "measurement": "Boundary_2",
+      "luminanceCdM2": 10,
+      "meanHueAngleDeg": 258.9,
+      "sdHueAngleDeg": 31.3,
+      "category": "warm_cool"
+    },
+    {
+      "measurement": "Boundary_2",
+      "luminanceCdM2": 20,
+      "meanHueAngleDeg": 249.1,
+      "sdHueAngleDeg": 18.7,
+      "category": "warm_cool"
+    },
+    {
+      "measurement": "Boundary_2",
+      "luminanceCdM2": 40,
+      "meanHueAngleDeg": 252.9,
+      "sdHueAngleDeg": 30.4,
+      "category": "warm_cool"
+    },
+    {
+      "measurement": "Yellow",
+      "luminanceCdM2": 20,
+      "meanHueAngleDeg": 292.7,
+      "sdHueAngleDeg": 5.7,
+      "category": "unique_hue"
+    },
+    {
+      "measurement": "Blue",
+      "luminanceCdM2": 20,
+      "meanHueAngleDeg": 139.9,
+      "sdHueAngleDeg": 5.9,
+      "category": "unique_hue"
+    },
+    {
+      "measurement": "Green",
+      "luminanceCdM2": 20,
+      "meanHueAngleDeg": 220.2,
+      "sdHueAngleDeg": 6.5,
+      "category": "unique_hue"
+    },
+    {
+      "measurement": "Red",
+      "luminanceCdM2": 20,
+      "meanHueAngleDeg": 350.2,
+      "sdHueAngleDeg": 16.1,
+      "category": "unique_hue"
+    },
+    {
+      "measurement": "Blue_green",
+      "luminanceCdM2": 20,
+      "meanHueAngleDeg": 181.8,
+      "sdHueAngleDeg": 6.9,
+      "category": "binary_hue"
+    },
+    {
+      "measurement": "Orange",
+      "luminanceCdM2": 20,
+      "meanHueAngleDeg": 316.1,
+      "sdHueAngleDeg": 5.5,
+      "category": "binary_hue"
+    },
+    {
+      "measurement": "Purple",
+      "luminanceCdM2": 20,
+      "meanHueAngleDeg": 95.5,
+      "sdHueAngleDeg": 7.6,
+      "category": "binary_hue"
+    },
+    {
+      "measurement": "Yellow_green",
+      "luminanceCdM2": 20,
+      "meanHueAngleDeg": 272.1,
+      "sdHueAngleDeg": 10.3,
+      "category": "binary_hue"
+    }
+  ],
+  "correlationsAcrossLuminance": [
+    {
+      "measurement": "Warm_peak",
+      "corr10vs20": 0.91,
+      "corr10vs40": 0.95,
+      "corr20vs40": 0.94,
+      "significant": "yes"
+    },
+    {
+      "measurement": "Cool_peak",
+      "corr10vs20": 0.89,
+      "corr10vs40": 0.82,
+      "corr20vs40": 0.96,
+      "significant": "yes"
+    },
+    {
+      "measurement": "Boundary_1",
+      "corr10vs20": 0.79,
+      "corr10vs40": 0.96,
+      "corr20vs40": 0.76,
+      "significant": "yes"
+    },
+    {
+      "measurement": "Boundary_2",
+      "corr10vs20": 0.84,
+      "corr10vs40": 0.22,
+      "corr20vs40": 0.3,
+      "significant": "partial"
+    }
+  ],
+  "correlationsWithinLuminance": [
+    {
+      "comparison": "Warm_vs_Cool",
+      "corr10cd": 0.5,
+      "corr20cd": 0.41,
+      "corr40cd": 0.23
+    },
+    {
+      "comparison": "Warm_vs_Boundary1",
+      "corr10cd": 0.59,
+      "corr20cd": 0.83,
+      "corr40cd": 0.51
+    },
+    {
+      "comparison": "Warm_vs_Boundary2",
+      "corr10cd": 0.2,
+      "corr20cd": 0.23,
+      "corr40cd": -0.24
+    },
+    {
+      "comparison": "Cool_vs_Boundary1",
+      "corr10cd": 0.64,
+      "corr20cd": 0.49,
+      "corr40cd": 0.67
+    },
+    {
+      "comparison": "Cool_vs_Boundary2",
+      "corr10cd": 0.48,
+      "corr20cd": 0.73,
+      "corr40cd": 0.36
+    },
+    {
+      "comparison": "Boundary1_vs_Boundary2",
+      "corr10cd": -0.07,
+      "corr20cd": 0.13,
+      "corr40cd": -0.07
+    }
+  ],
+  "keyFindings": {
+    "warmPeakMeanConeOpponentDegAt20cd": 341.7,
+    "coolPeakMeanConeOpponentDegAt20cd": 146.9,
+    "boundary1MeanConeOpponentDegAt20cd": 58.4,
+    "boundary2MeanConeOpponentDegAt20cd": 249.1,
+    "interpretation": "Çalışmanın warm-cool boyutu katılımcıların renk görünümüne ilişkin yargılarıyla ilişkilidir. Bulgular, ChromArchive'ın HSL formülüne doğrudan açı eşikleri olarak taşınmamalıdır."
+  }
+}

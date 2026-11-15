@@ -1,0 +1,345 @@
+{
+  "schemaVersion": "1.0.0",
+  "dataset": {
+    "id": "chromarchive-relative-color-temperature",
+    "name": "ChromArchive Göreli Renk Sıcaklığı Kuralları",
+    "language": "tr",
+    "created": "2026-11-15",
+    "purpose": "HEX/RGB ile elde edilen K-Means renk kümelerine ve sanat eseri görsel analizlerine sıcak-soğuk yönelimi eklemek.",
+    "modelType": "heuristic_hue_chroma_and_context",
+    "runtimeNetworkRequired": false,
+    "licenseNote": "Bu dosya ChromArchive için hazırlanmış uygulama kuralı yapılandırmasıdır. Dayandığı bilimsel ve kurumsal kaynaklar sources alanında listelenmiştir."
+  },
+  "importantDefinitions": {
+    "visualTemperature": "Sıcak/soğuk, rengin fiziksel veya termodinamik sıcaklığı değildir; algısal ve görsel-sanat bağlamında kullanılan göreli bir nitelemedir.",
+    "absoluteVsRelative": "Bir rengin genel sıcak/soğuk yönelimi ile aynı renk ailesindeki başka bir renge göre daha sıcak/soğuk olması ayrı sonuçlar olarak tutulmalıdır.",
+    "hexLimitation": "HEX yalnızca sRGB renk kodudur. Tek başına tarihsel pigmenti, sanatçının niyetini veya eserin renklerinin fiziksel pigment bileşimini kanıtlamaz.",
+    "contextLimitation": "Aynı HEX renk çevresindeki renklere göre daha sıcak, soğuk, daha doygun veya daha açık algılanabilir. Bu nedenle bağlam analizi, tekil HEX sınıflandırmasından ayrı raporlanmalıdır."
+  },
+  "inputColorSpace": {
+    "primary": "sRGB",
+    "acceptedInput": [
+      "#RRGGBB",
+      "RGB"
+    ],
+    "derivedRepresentations": [
+      "HSL",
+      "CIELAB"
+    ],
+    "hslConventions": {
+      "hueUnit": "degree",
+      "redHue": 0,
+      "greenHue": 120,
+      "blueHue": 240,
+      "saturationRange": [
+        0,
+        1
+      ],
+      "lightnessRange": [
+        0,
+        1
+      ],
+      "note": "HSL hue, sıcak-soğuk modelinde pratik sınıflandırma girdisidir; algısal olarak eşit aralıklı bir uzay değildir."
+    },
+    "cielabChroma": {
+      "formula": "C*ab = sqrt(a*^2 + b*^2)",
+      "purpose": "Nötr renklere yakınlığı ve sıcak-soğuk sınıflandırmasının güven düzeyini değerlendirmek.",
+      "note": "CIELAB chroma, tek başına sıcaklık ölçümü değildir. Uygulama mevcut D65/sRGB dönüşümünü kullanmalı ve ikinci bir renk dönüşüm kütüphanesi eklememelidir."
+    }
+  },
+  "classificationModel": {
+    "id": "multi-factor-warm-cool-v2",
+    "description": "Sanat eğitimindeki sıcak-soğuk yönelimini yalnızca hue açısına indirgemeden; Hue, HSL/HSV doygunluk, Lightness, CIELAB kroma (C*ab), Lab a*/b* alt-ton dengesi ve renk ailesi bağlamıyla birlikte değerlendiren sürekli (0–100) model.",
+    "coordinateSystem": "sRGB -> HSL + HSV + CIELAB (D65)",
+    "anchors": {
+      "warmPoleHueDeg": 20,
+      "warmPoleLabel": "Kırmızı-turuncu yönü",
+      "coolPoleHueDeg": 200,
+      "coolPoleLabel": "Mavi-yeşil / turkuaz yönü",
+      "anchorNote": "Bu iki HSL açısı ChromArchive için pratik ve ayarlanabilir yön ekseni noktalarıdır; nihai skor doygunluk, açıklık ve CIELAB kroma ile modüle edilir ve 2025 makalesindeki koni-karşıt açılarıyla aynı uzay değildir."
+    },
+    "warmthScore": {
+      "range": [
+        0,
+        100
+      ],
+      "meaning": "0 = güçlü soğuk yönelim, 50 = dengeli / geçişli veya nötr-belirsiz, 100 = güçlü sıcak yönelim.",
+      "formula": "50 + 50 * cos(shortestCircularHueDistance(hueDeg, warmPoleHueDeg) * PI / 180) * thermalStrength(chroma, sat, lightness, lab, family)",
+      "implementationNotes": [
+        "Hue açısı 0–360 derece aralığına normalize edilir ve yön polaritesi kosinüs ile [-1, +1] arasında hesaplanır.",
+        "HSL yüksek/düşük açıklıkta doygunluğu şişirebildiği için HSV doygunluğu (%55) ve HSL doygunluğu (%45) birleştirilir.",
+        "CIELAB C*ab kroması düşük olan kahverengi, gri-bej, parşömen ve soluk tonlarda termal genlik sürekli olarak daraltılır; yapay 90–100 veya 0–10 uç skorlar engellenir.",
+        "Sarımsı kahverengi (düşük Lab +a*) ile turuncumsu/kızıl kahverengi (yüksek Lab +a*) arasında anlamlı alt-ton ayrımı yapılır.",
+        "Bu skor fiziksel Kelvin sıcaklığı değildir; görsel-sanat palet karşılaştırmasına yönelik açıklanabilir çok boyutlu bir yönelim indeksidir."
+      ]
+    },
+    "categories": {
+      "warm": {
+        "minInclusive": 60,
+        "labelTr": "Sıcak yönelimli"
+      },
+      "transitional": {
+        "minInclusive": 40,
+        "maxExclusive": 60,
+        "labelTr": "Geçişli / dengeli"
+      },
+      "cool": {
+        "maxExclusive": 40,
+        "labelTr": "Soğuk yönelimli"
+      },
+      "neutral": {
+        "condition": "neutralGate koşullarından en az biri sağlanır",
+        "labelTr": "Nötr / sıcaklık yönelimi belirsiz"
+      }
+    },
+    "neutralGate": {
+      "hslSaturationBelow": 0.15,
+      "hsvSaturationBelow": 0.13,
+      "cielabChromaBelow": 10.5,
+      "extremeLightnessLow": 0.12,
+      "extremeLightnessHigh": 0.92,
+      "extremeLightnessMaxChroma": 15,
+      "combineWith": "OR",
+      "note": "Siyah, beyaz, gri, gri-bej ve çok düşük kromalı koyu toprak tonlarında hue açısı kararsızlaştığı için bu kapı rengi doğrudan nötr/belirsiz (skor 50, düşük güven) olarak sınıflandırır."
+    },
+    "multiFactorWeighting": {
+      "chromaFloor": 8,
+      "chromaFullRange": 56,
+      "effectiveSatWeights": {
+        "hsl": 0.45,
+        "hsv": 0.55
+      },
+      "satFloor": 0.08,
+      "satFullRange": 0.52,
+      "strengthBlend": {
+        "chroma": 0.58,
+        "saturation": 0.42
+      },
+      "lightnessPeakRange": [0.28, 0.72],
+      "lightnessFloorEnvelope": 0.45,
+      "earthBeigeModeration": {
+        "hueRangeDeg": [10, 65],
+        "mutedChromaThreshold": 38,
+        "mutedEffectiveSatThreshold": 0.56,
+        "lightBeigeThreshold": 0.68,
+        "darkEarthThreshold": 0.34,
+        "minRednessRatioForFullWarmth": 0.32,
+        "yellowishBrownFactor": 0.56,
+        "paleBeigeFactor": 0.58,
+        "mutedUmberFactor": 0.66,
+        "orangishEarthFactor": 0.88,
+        "neutralFamilyFactor": 0.55
+      }
+    },
+    "confidence": {
+      "formula": "0.7 * clamp(CIELAB_Cstar / 30, 0, 1) + 0.3 * clamp(abs(warmthScore - 50) / 35, 0, 1)",
+      "levels": [
+        {
+          "id": "high",
+          "minInclusive": 0.75,
+          "labelTr": "Yüksek"
+        },
+        {
+          "id": "medium",
+          "minInclusive": 0.45,
+          "maxExclusive": 0.75,
+          "labelTr": "Orta"
+        },
+        {
+          "id": "low",
+          "maxExclusive": 0.45,
+          "labelTr": "Düşük"
+        }
+      ],
+      "neutralConfidence": "Nötr kapısı devredeyse confidence low olarak döndürülür."
+    }
+  },
+  "familyRelativeUndertones": [
+    {
+      "familyId": "Kırmızı",
+      "warmDirectionTr": "Turuncuya / kırmızı-turuncuya kayan alt ton daha sıcak kabul edilir.",
+      "coolDirectionTr": "Viyoleye / mora kayan alt ton daha soğuk kabul edilir.",
+      "note": "Aynı kırmızı ailesindeki iki tonu karşılaştırırken kullan; mutlak sıcaklık etiketi değildir."
+    },
+    {
+      "familyId": "Turuncu",
+      "warmDirectionTr": "Kırmızıya ve kızıl-turuncuya kayan alt ton daha sıcak kabul edilir.",
+      "coolDirectionTr": "Sarının daha limonî tarafına kayan alt ton görece daha serin kabul edilir."
+    },
+    {
+      "familyId": "Sarı",
+      "warmDirectionTr": "Turuncuya / altın sarısına kayan alt ton daha sıcak kabul edilir.",
+      "coolDirectionTr": "Yeşile / limon sarısına kayan alt ton daha serin kabul edilir."
+    },
+    {
+      "familyId": "Yeşil",
+      "warmDirectionTr": "Sarıya / zeytine kayan alt ton daha sıcak kabul edilir.",
+      "coolDirectionTr": "Camgöbeğine / mavi-yeşile kayan alt ton daha soğuk kabul edilir."
+    },
+    {
+      "familyId": "Mavi",
+      "warmDirectionTr": "Viyoleye / mora kayan alt ton daha sıcak mavi olarak yorumlanabilir.",
+      "coolDirectionTr": "Camgöbeğine / yeşile kayan alt ton daha soğuk mavi olarak yorumlanabilir."
+    },
+    {
+      "familyId": "Mor",
+      "warmDirectionTr": "Kırmızıya / magentaya kayan alt ton daha sıcak kabul edilir.",
+      "coolDirectionTr": "Maviye kayan alt ton daha soğuk kabul edilir."
+    },
+    {
+      "familyId": "Nötr",
+      "warmDirectionTr": "Tek başına sıcak/soğuk hükmü verme; çevredeki kromatik renklerle karşılaştır.",
+      "coolDirectionTr": "Tek başına sıcak/soğuk hükmü verme; çevredeki kromatik renklerle karşılaştır."
+    }
+  ],
+  "paletteAggregation": {
+    "weightBy": "dominantColor.percentage",
+    "ignoreNeutralForChromaticMean": true,
+    "calculate": [
+      "warmthScoreWeightedMean",
+      "warmSharePercent",
+      "coolSharePercent",
+      "transitionalSharePercent",
+      "neutralSharePercent"
+    ],
+    "overallLabels": [
+      {
+        "condition": "warmSharePercent >= 55",
+        "labelTr": "Sıcak ağırlıklı"
+      },
+      {
+        "condition": "coolSharePercent >= 55",
+        "labelTr": "Soğuk ağırlıklı"
+      },
+      {
+        "condition": "neutralSharePercent >= 60",
+        "labelTr": "Nötr ağırlıklı / belirsiz"
+      },
+      {
+        "condition": "abs(warmSharePercent - coolSharePercent) < 12 OR transitionalSharePercent is dominant",
+        "labelTr": "Dengeli / geçişli"
+      },
+      {
+        "condition": "otherwise",
+        "labelTr": "Hafif sıcak veya soğuk eğilimli"
+      }
+    ],
+    "relativeToPalette": {
+      "deltaThreshold": 8,
+      "labels": {
+        "above": "Palet ortalamasına göre daha sıcak",
+        "below": "Palet ortalamasına göre daha soğuk",
+        "within": "Palet ortalamasına yakın"
+      },
+      "formula": "cluster.warmthScore - palette.warmthScoreWeightedMean"
+    }
+  },
+  "spatialContext": {
+    "enabled": true,
+    "purpose": "Birbirine komşu renk kümeleri arasındaki göreli sıcaklık farkını bulmak; aynı HEX rengin farklı çevrelerde nasıl konumlandığını incelemek.",
+    "recommendedSampling": {
+      "gridSampling": true,
+      "maxCanvasDimensionPx": 240,
+      "sampleStepPx": 2,
+      "adjacency": "4-neighbour",
+      "minSharedBoundarySamples": 8
+    },
+    "analysisRules": [
+      "K-Means örneklerinin x/y koordinatlarını veya örnek-grid indeksini koru.",
+      "Küme atamalarından yatay ve dikey komşu küme çiftlerini say.",
+      "Komşu iki kümenin warmthScore farkı 8 puandan fazlaysa sıcak/soğuk göreli ilişkisini raporla.",
+      "Yeterli komşuluk kanıtı yoksa mekânsal ilişki iddiası üretme; yalnızca palet içi karşılaştırmayı kullan.",
+      "Komşuluk özeti görselin tüm alanının piksellerle tam segmentasyonu değildir; örneklem tabanlı yaklaşık analiz olarak etiketle."
+    ],
+    "outputExample": {
+      "clusterA": "#D86A32",
+      "clusterB": "#2A8290",
+      "relation": "A, B'ye göre daha sıcak yönelimli",
+      "warmthScoreDifference": 42,
+      "evidence": "shared_sampled_boundary"
+    }
+  },
+  "artworkOutputFields": {
+    "optionalDominantColorFields": [
+      "warmthScore",
+      "temperatureLabel",
+      "temperatureConfidence",
+      "temperatureBasis",
+      "relativeToPalette",
+      "undertoneNote"
+    ],
+    "optionalArtworkFields": [
+      "warmthScoreWeightedMean",
+      "warmSharePercent",
+      "coolSharePercent",
+      "transitionalSharePercent",
+      "neutralSharePercent",
+      "temperatureSummary"
+    ],
+    "backwardCompatibility": "Yeni alanları opsiyonel tut. Eski localStorage kayıtlarında alan yoksa HEX/RGB üzerinden yeniden hesapla; mevcut kayıtları silme veya yeni alanlar yok diye hata üretme."
+  },
+  "guardrails": [
+    "Sıcak/soğuk etiketini fiziksel renk sıcaklığı veya Kelvin değeri gibi sunma.",
+    "Sıcak/soğuk ayrımını evrensel ve tartışmasız bir gerçek olarak sunma.",
+    "Yeşil, mor, pembe, kahverengi ve nötr renklerde aile içi alt ton ile bağlamı dikkate al.",
+    "Renklerin psikolojik etkisi, tarihsel anlamı veya sanatçının niyeti hakkında yalnızca sıcaklık skorundan sonuç çıkarma.",
+    "Renk ilişkisini ölçmek için K-Means yüzde dağılımını ve varsa örnek-grid komşuluğunu kullan; dosyanın kendisinden fiziksel komşuluk çıkarma.",
+    "HSL hue değerleri algısal olarak eşit aralıklı değildir. Renk farkı/eşleşme için projedeki mevcut CIELAB ve Delta E 2000 sistemini koru.",
+    "Bu JSON sınıflandırma parametrelerini saklar; her piksel için sabit HEX kayıtlarını tek tek listelemeye gerek yoktur."
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "title": "The Phenomena of Light and Color",
+      "publisher": "Art Institute of Chicago",
+      "url": "https://archive.artic.edu/sciarttech/2c1.html",
+      "supports": [
+        "Sıcak ve soğuk renkler için geleneksel sanat eğitimi gruplandırması",
+        "Renk algısının bağlama göre değişmesi",
+        "Simultaneous contrast ve mekânsal ilişkiler"
+      ],
+      "licenseNote": "Kurumsal eğitim kaynağı; içerik kullanılırken kaynak gösterilmelidir."
+    },
+    {
+      "id": "S2",
+      "title": "Warm versus cool colors and their relation to color perception",
+      "authors": "Jake Manalansan, Lorne A. Whitehead, Michael A. Webster",
+      "publication": "Journal of Vision, 25(4), 13 (2025)",
+      "doi": "10.1167/jov.25.4.13",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12025320/",
+      "license": "CC BY 4.0",
+      "supports": [
+        "Warm-cool dimension is studied psychophysically",
+        "Warm/cool peak and boundary positions vary along a cone-opponent dimension",
+        "CIELAB chroma is related to the observed pattern"
+      ],
+      "limitation": "Makaledeki ölçüm açıları cone-opponent LvsM/SvsLM uzayındadır; HSL hue veya HEX açısıyla doğrudan aynı değildir."
+    },
+    {
+      "id": "S3",
+      "title": "‘Warm,’ ‘cool,’ and the colors",
+      "authors": "Jan J. Koenderink, Andrea J. van Doorn, Doris I. Braun",
+      "publication": "Journal of Vision, 24(7), 5 (2024)",
+      "doi": "10.1167/jov.24.7.5",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11235144/",
+      "license": "CC BY 4.0",
+      "supports": [
+        "Renk sıcaklığının fiziksel sıcaklık olmadığı",
+        "Sıcak-soğuk ilişkilerinin bağlama ve gözlemciye göre değişebilmesi",
+        "Renkler arasında göreli daha sıcak/soğuk değerlendirmesi"
+      ]
+    },
+    {
+      "id": "S4",
+      "title": "CSS Color Module Level 4",
+      "publisher": "W3C",
+      "url": "https://www.w3.org/TR/css-color-4/",
+      "supports": [
+        "sRGB/HSL renk gösterimi",
+        "HSL hue için kırmızı 0°, yeşil 120°, mavi 240° referansları",
+        "HSL'nin algısal olarak eşit aralıklı olmaması"
+      ],
+      "licenseNote": "W3C teknik standardı; HSL matematiğini tanımlar, sıcak/soğuk sınıflandırmasını standartlaştırmaz."
+    }
+  ]
+}

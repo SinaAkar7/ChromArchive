@@ -10,7 +10,14 @@ import {
   ColorFamily,
   ColorTemperature,
   DominantColor,
+  SpatialTemperatureRelation,
 } from '../types';
+import {
+  classifyColorTemperature,
+  enrichPaletteWithTemperatureAnalysis,
+  getTemperatureRules,
+  rgbToHsvSaturation,
+} from './colorTemperatureService';
 
 /**
  * RGB değerlerini HEX formatına dönüştürür.
@@ -97,28 +104,14 @@ export function colorDistance(
 }
 
 /**
- * Rengin sıcak, soğuk veya nötr kategorisini belirler.
+ * Rengin sıcak, soğuk veya nötr kategorisini yerel JSON kural motoruyla belirler.
  */
 export function determineTemperature(
   r: number,
   g: number,
   b: number
 ): ColorTemperature {
-  const [h, s, l] = rgbToHsl(r, g, b);
-
-  if (s < 0.16 || l < 0.1 || l > 0.9) {
-    return 'Nötr';
-  }
-
-  if (h >= 330 || h <= 65) {
-    return 'Sıcak';
-  } else if (h > 65 && h < 150) {
-    return s > 0.4 && h < 100 ? 'Sıcak' : 'Nötr';
-  } else if (h >= 150 && h <= 290) {
-    return 'Soğuk';
-  } else {
-    return 'Sıcak';
-  }
+  return classifyColorTemperature(r, g, b).legacyTemperature;
 }
 
 /**
@@ -130,17 +123,24 @@ export function determineColorNameAndFamily(
   b: number
 ): { name: string; family: ColorFamily } {
   const [h, s, l] = rgbToHsl(r, g, b);
+  const hsvSat = rgbToHsvSaturation(r, g, b);
 
-  if (l < 0.15) {
+  if (l < 0.13) {
     return { name: 'Kömür Karası / Gece', family: 'Nötr' };
   }
-  if (l > 0.88 && s < 0.18) {
+  if (l > 0.86 && hsvSat < 0.14) {
     return { name: 'Tebeşir / Alabaster Beyazı', family: 'Nötr' };
   }
-  if (s < 0.15) {
+  if (s < 0.14 || hsvSat < 0.14) {
     if (l < 0.4) return { name: 'Antrasit Grisi', family: 'Nötr' };
     if (l < 0.7) return { name: 'Küllü Müze Grisi', family: 'Nötr' };
     return { name: 'Kırık Parşömen Beji', family: 'Nötr' };
+  }
+  if (l > 0.66 && hsvSat < 0.28 && h >= 20 && h <= 55) {
+    return {
+      name: 'Açık Kum / Parşömen Beji',
+      family: hsvSat < 0.2 ? 'Nötr' : 'Turuncu',
+    };
   }
 
   if (h >= 350 || h < 15) {
@@ -198,8 +198,9 @@ export function analyzeImagePixelsWithCanvas(
     throw new Error('Tarayıcıda Canvas 2D bağlamı oluşturulamadı.');
   }
 
-  // Büyük görseller için örnekleme boyutu (en fazla 240px)
-  const maxDimension = 240;
+  const tempRules = getTemperatureRules();
+  const maxDimension =
+    tempRules.spatialContext.recommendedSampling.maxCanvasDimensionPx || 240;
   let width = imgElement.naturalWidth || imgElement.width || 300;
   let height = imgElement.naturalHeight || imgElement.height || 300;
 
@@ -236,17 +237,62 @@ export function analyzeImagePixelsWithCanvas(
 
   const data = imageData.data;
   const pixels: Array<[number, number, number]> = [];
-  const step = 2; // Performans ve doğruluk dengesi için her 2 pikselde bir örnekleme
+  const pixelGridIndices: number[] = [];
+  const step = Math.max(
+    1,
+    tempRules.spatialContext.recommendedSampling.sampleStepPx || 2
+  ); // Performans ve doğruluk dengesi için her 2 pikselde bir grid örnekleme
+  const gridW = Math.ceil(width / step);
+  const gridH = Math.ceil(height / step);
 
-  for (let i = 0; i < data.length; i += 4 * step) {
-    const alpha = data[i + 3];
-    if (alpha < 128) continue; // Saydam pikselleri atla
-    pixels.push([data[i], data[i + 1], data[i + 2]]);
+  for (let y = 0, gy = 0; y < height; y += step, gy++) {
+    for (let x = 0, gx = 0; x < width; x += step, gx++) {
+      const idx = (y * width + x) * 4;
+      const alpha = data[idx + 3];
+      if (alpha < 128) continue; // Saydam pikselleri atla
+      pixels.push([data[idx], data[idx + 1], data[idx + 2]]);
+      pixelGridIndices.push(gy * gridW + gx);
+    }
   }
 
+  return analyzePixelSamples({
+    pixels,
+    width,
+    height,
+    step,
+    pixelGridIndices,
+    requestedK,
+  });
+}
+
+export interface AnalyzePixelSamplesParams {
+  pixels: Array<[number, number, number]>;
+  width: number;
+  height: number;
+  step?: number;
+  pixelGridIndices?: number[];
+  requestedK?: ClusterCountOption;
+}
+
+/**
+ * Doğrudan sRGB piksel dizisi üzerinde K-Means++ kümeleme, renk adlandırma,
+ * sıcaklık analizi ve örneklem grid komşuluk ilişkilerini çalıştıran saf motor.
+ */
+export function analyzePixelSamples({
+  pixels,
+  width,
+  height,
+  step = 2,
+  pixelGridIndices = [],
+  requestedK = 'auto',
+}: AnalyzePixelSamplesParams): ColorAnalysisResult {
   if (pixels.length === 0) {
     throw new Error('Görselde analiz edilecek geçerli renk pikseli bulunamadı.');
   }
+
+  const tempRules = getTemperatureRules();
+  const gridW = Math.ceil(width / Math.max(1, step));
+  const gridH = Math.ceil(height / Math.max(1, step));
 
   // Küme Sayısını (K) belirleme (5-8 arası)
   let k = 6;
@@ -376,39 +422,63 @@ export function analyzeImagePixelsWithCanvas(
   }
 
   const rawClusters: Array<{
+    rawId: number;
     rgb: [number, number, number];
     count: number;
   }> = [];
   for (let j = 0; j < k; j++) {
     if (finalCounts[j] > 0) {
       rawClusters.push({
+        rawId: j,
         rgb: centroids[j],
         count: finalCounts[j],
       });
     }
   }
 
-  // Aşırı yakın kümeleri birleştir (Delta-E < 16)
+  // Aşırı yakın kümeleri birleştir (Delta-E < 16) ve grid indeks eşlemesini koru
   const clusters: Array<{
+    mergedId: number;
     rgb: [number, number, number];
     count: number;
   }> = [];
+  const rawToMerged = new Int16Array(k).fill(-1);
 
   for (const cl of rawClusters) {
     let merged = false;
     for (const m of clusters) {
       if (colorDistance(cl.rgb, m.rgb) < 16) {
         m.count += cl.count;
+        rawToMerged[cl.rawId] = m.mergedId;
         merged = true;
         break;
       }
     }
     if (!merged) {
-      clusters.push({ ...cl });
+      const mergedId = clusters.length;
+      clusters.push({
+        mergedId,
+        rgb: cl.rgb,
+        count: cl.count,
+      });
+      rawToMerged[cl.rawId] = mergedId;
     }
   }
 
   clusters.sort((a, b) => b.count - a.count);
+
+  const mergedToFinal = new Int16Array(clusters.length).fill(-1);
+  clusters.forEach((cl, finalIdx) => {
+    mergedToFinal[cl.mergedId] = finalIdx;
+  });
+
+  const rawToFinal = new Int16Array(k).fill(-1);
+  for (let rawId = 0; rawId < k; rawId++) {
+    const mId = rawToMerged[rawId];
+    if (mId >= 0) {
+      rawToFinal[rawId] = mergedToFinal[mId];
+    }
+  }
 
   const totalPixelsCount =
     clusters.reduce((sum, c) => sum + c.count, 0) || 1;
@@ -421,10 +491,11 @@ export function analyzeImagePixelsWithCanvas(
       cluster.rgb[1],
       cluster.rgb[2]
     );
-    const temperature = determineTemperature(
+    const classified = classifyColorTemperature(
       cluster.rgb[0],
       cluster.rgb[1],
-      cluster.rgb[2]
+      cluster.rgb[2],
+      family
     );
 
     return {
@@ -434,7 +505,15 @@ export function analyzeImagePixelsWithCanvas(
       percentage: parseFloat(rawPercent.toFixed(1)),
       name,
       family,
-      temperature,
+      temperature: classified.legacyTemperature,
+      warmthScore: classified.warmthScore,
+      temperatureCategory: classified.categoryId,
+      temperatureLabel: classified.labelTr,
+      temperatureConfidence: classified.confidence,
+      temperatureConfidenceLabel: classified.confidenceLabelTr,
+      temperatureBasis: classified.basis,
+      undertoneNote: classified.undertoneNote,
+      cielabChroma: classified.cielabChroma,
     };
   });
 
@@ -446,28 +525,102 @@ export function analyzeImagePixelsWithCanvas(
     );
   }
 
-  // Genel sıcaklık profili
-  let warmScore = 0;
-  let coolScore = 0;
-  dominantColors.forEach((c) => {
-    if (c.temperature === 'Sıcak') warmScore += c.percentage;
-    if (c.temperature === 'Soğuk') coolScore += c.percentage;
-  });
+  // Örneklem grid'i üzerinde 4-komşuluk mekânsal sıcaklık ilişkilerini çıkar (yalnızca özet)
+  let spatialTemperatureRelations: SpatialTemperatureRelation[] | undefined;
+  if (
+    tempRules.spatialContext.enabled &&
+    dominantColors.length > 1 &&
+    pixelGridIndices.length === pixels.length
+  ) {
+    const gridClusters = new Int16Array(gridW * gridH).fill(-1);
+    for (let i = 0; i < pixels.length; i++) {
+      const gridIdx = pixelGridIndices[i];
+      const finalIdx = rawToFinal[assignments[i]];
+      if (gridIdx !== undefined && finalIdx >= 0) {
+        gridClusters[gridIdx] = finalIdx;
+      }
+    }
 
-  let overallTemperature = 'Dengeli';
-  if (warmScore > 55) overallTemperature = 'Sıcak Ağırlıklı';
-  else if (coolScore > 55) overallTemperature = 'Soğuk Ağıdrıklı';
-  else if (warmScore > coolScore + 12) overallTemperature = 'Sıcak / Ilık Nüanslı';
-  else if (coolScore > warmScore + 12) overallTemperature = 'Soğuk / Serin Nüanslı';
+    const pairCounts = new Map<string, number>();
+    const addBoundaryPair = (c1: number, c2: number) => {
+      if (c1 < 0 || c2 < 0 || c1 === c2) return;
+      const a = c1 < c2 ? c1 : c2;
+      const b = c1 < c2 ? c2 : c1;
+      const key = `${a}:${b}`;
+      pairCounts.set(key, (pairCounts.get(key) ?? 0) + 1);
+    };
+
+    for (let gy = 0; gy < gridH; gy++) {
+      for (let gx = 0; gx < gridW; gx++) {
+        const idx = gy * gridW + gx;
+        const c = gridClusters[idx];
+        if (c < 0) continue;
+        if (gx + 1 < gridW) {
+          addBoundaryPair(c, gridClusters[idx + 1]);
+        }
+        if (gy + 1 < gridH) {
+          addBoundaryPair(c, gridClusters[idx + gridW]);
+        }
+      }
+    }
+
+    const minSharedSamples =
+      tempRules.spatialContext.recommendedSampling.minSharedBoundarySamples || 8;
+    const minScoreDiff =
+      tempRules.paletteAggregation.relativeToPalette.deltaThreshold || 8;
+
+    const relations: SpatialTemperatureRelation[] = [];
+    pairCounts.forEach((sharedBoundarySamples, key) => {
+      if (sharedBoundarySamples < minSharedSamples) return;
+      const [idxA, idxB] = key.split(':').map(Number);
+      const colA = dominantColors[idxA];
+      const colB = dominantColors[idxB];
+      if (!colA || !colB) return;
+
+      const scoreA = colA.warmthScore ?? 50;
+      const scoreB = colB.warmthScore ?? 50;
+      const diff = Math.abs(scoreA - scoreB);
+      if (diff < minScoreDiff) return;
+
+      const warmer = scoreA >= scoreB ? colA : colB;
+      const cooler = scoreA >= scoreB ? colB : colA;
+
+      relations.push({
+        clusterA: warmer.hex,
+        clusterAName: warmer.name,
+        clusterB: cooler.hex,
+        clusterBName: cooler.name,
+        relation: `${warmer.hex} (${warmer.name}), komşu ${cooler.hex} (${cooler.name}) kümesine göre daha sıcak yönelimli`,
+        warmthScoreDifference: Math.round(diff),
+        sharedBoundarySamples,
+        evidence: 'shared_sampled_boundary',
+      });
+    });
+
+    if (relations.length > 0) {
+      relations.sort(
+        (a, b) =>
+          b.sharedBoundarySamples * b.warmthScoreDifference -
+          a.sharedBoundarySamples * a.warmthScoreDifference
+      );
+      spatialTemperatureRelations = relations.slice(0, 6);
+    }
+  }
+
+  // Palet düzeyinde ağırlıklı sıcaklık profili ve göreli karşılaştırmalar
+  const paletteTemp = enrichPaletteWithTemperatureAnalysis(
+    dominantColors,
+    spatialTemperatureRelations
+  );
 
   // Renk çeşitlilik endeksi
   let totalPairwiseDist = 0;
   let pairCount = 0;
-  for (let i = 0; i < dominantColors.length; i++) {
-    for (let j = i + 1; j < dominantColors.length; j++) {
+  for (let i = 0; i < paletteTemp.dominantColors.length; i++) {
+    for (let j = i + 1; j < paletteTemp.dominantColors.length; j++) {
       totalPairwiseDist += colorDistance(
-        dominantColors[i].rgb,
-        dominantColors[j].rgb
+        paletteTemp.dominantColors[i].rgb,
+        paletteTemp.dominantColors[j].rgb
       );
       pairCount++;
     }
@@ -479,12 +632,20 @@ export function analyzeImagePixelsWithCanvas(
   );
 
   return {
-    dominantColors,
-    overallTemperature,
+    dominantColors: paletteTemp.dominantColors,
+    overallTemperature: paletteTemp.overallTemperature,
     colorDiversityScore,
-    clusterCountUsed: dominantColors.length,
+    clusterCountUsed: paletteTemp.dominantColors.length,
     analyzedPixels: pixels.length,
     sampleResolution: `${width}×${height} px`,
+    warmthScoreWeightedMean: paletteTemp.warmthScoreWeightedMean,
+    warmSharePercent: paletteTemp.warmSharePercent,
+    coolSharePercent: paletteTemp.coolSharePercent,
+    transitionalSharePercent: paletteTemp.transitionalSharePercent,
+    neutralSharePercent: paletteTemp.neutralSharePercent,
+    temperatureSummary: paletteTemp.temperatureSummary,
+    temperatureModelVersion: paletteTemp.temperatureModelVersion,
+    spatialTemperatureRelations: paletteTemp.spatialTemperatureRelations,
   };
 }
 
@@ -568,6 +729,14 @@ export async function analyzeImageSource(
           dominantCount: analysis.dominantColors.length,
           analysisDate: dateStr,
           colorDiversityScore: analysis.colorDiversityScore,
+          warmthScoreWeightedMean: analysis.warmthScoreWeightedMean,
+          warmSharePercent: analysis.warmSharePercent,
+          coolSharePercent: analysis.coolSharePercent,
+          transitionalSharePercent: analysis.transitionalSharePercent,
+          neutralSharePercent: analysis.neutralSharePercent,
+          temperatureSummary: analysis.temperatureSummary,
+          temperatureModelVersion: analysis.temperatureModelVersion,
+          spatialTemperatureRelations: analysis.spatialTemperatureRelations,
           fileFormat: metaOverrides?.fileFormat || 'JPEG',
           isCustom: true,
         };

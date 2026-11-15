@@ -109,13 +109,26 @@ export const ArchiveGallery: React.FC<ArchiveGalleryProps> = ({
       // Sıcaklık filtresi
       let matchesTemp = true;
       if (temperatureFilter !== 'all') {
+        const tf = temperatureFilter.toLowerCase();
         const overall = (item.overallTemperature || '').toLowerCase();
-        matchesTemp =
-          overall.includes(temperatureFilter.toLowerCase()) ||
-          (item.dominantColors?.some((c) =>
-            c.temperature.toLowerCase().includes(temperatureFilter.toLowerCase())
-          ) ??
-            false);
+        if (tf === 'dengeli') {
+          matchesTemp =
+            overall.includes('dengeli') ||
+            overall.includes('geçişli') ||
+            overall.includes('nötr') ||
+            (item.dominantColors?.some((c) => {
+              const lbl = (c.temperatureLabel || c.temperature || '').toLowerCase();
+              return lbl.includes('geçişli') || lbl.includes('nötr');
+            }) ??
+              false);
+        } else {
+          matchesTemp =
+            overall.includes(tf) ||
+            (item.dominantColors?.some((c) =>
+              (c.temperatureLabel || c.temperature || '').toLowerCase().includes(tf)
+            ) ??
+              false);
+        }
       }
 
       return matchesQuery && matchesCategory && matchesTemp;
@@ -206,7 +219,7 @@ export const ArchiveGallery: React.FC<ArchiveGalleryProps> = ({
                 color: archiveSubView === 'meanings' ? '#ffffff' : 'var(--text-secondary, #666)'
               }}
             >
-              10 Renk
+              {colorMeaningsList.length} Renk
             </span>
           </button>
         </div>
@@ -540,8 +553,12 @@ export const ArchiveGallery: React.FC<ArchiveGalleryProps> = ({
                             color: 'var(--text-muted)',
                             marginLeft: 'auto',
                           }}
+                          title={item.temperatureSummary || item.overallTemperature}
                         >
                           {item.overallTemperature}
+                          {typeof item.warmthScoreWeightedMean === 'number'
+                            ? ` · ${item.warmthScoreWeightedMean}/100`
+                            : ''}
                         </span>
                       </>
                     ) : (

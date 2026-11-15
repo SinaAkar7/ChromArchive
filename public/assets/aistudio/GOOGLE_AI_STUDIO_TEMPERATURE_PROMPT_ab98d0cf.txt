@@ -1,0 +1,123 @@
+CHROMARCHIVE – SICAK/SOĞUK RENK ANALİZİ VE GÖRSEL BAĞLAM ENTEGRASYONU
+
+Mevcut ChromArchive projesini geliştirmek istiyorum. Bu prompt ile birlikte iki JSON dosyası yükleyeceğim:
+1. src/data/colorTemperatureRules.json
+2. src/data/warmCoolResearchReference.json
+
+ÖNEMLİ: Sıfırdan proje oluşturma. Mevcut React 19 + TypeScript Strict + Vite mimarisini, tasarımını, K-Means++ analizini, arşivini, arama sistemini ve Vercel dağıtımını koru. Önce ilgili dosyaları incele, sonra küçük ve kontrollü değişiklikler yap.
+
+MEVCUT PROJEDEKİ ÖNEMLİ NOKTALAR
+- src/services/colorAnalyzer.ts içinde rgbToHsl() ve determineTemperature() zaten var.
+- determineTemperature() şu anda sabit HSL aralıklarıyla basit bir sıcak/soğuk/nötr etiketi üretiyor. Yeni JSON kurallarına göre bunu geliştir.
+- Aynı dosyada K-Means++ ile dominantColors ve percentage hesaplanıyor.
+- src/types/index.ts içinde ColorTemperature, DominantColor ve ColorAnalysisResult tipleri bulunuyor.
+- src/components/ColorPalette.tsx her dominant renk için HEX, RGB, yüzde, isim, temperature ve family gösteriyor.
+- Arşiv kayıtları localStorage üzerinden tutuluyor; eski kayıtlar geriye dönük çalışmaya devam etmeli.
+- src/services/colorSearchService.ts içinde CIELAB dönüşümü ve Delta E 2000 sistemi var. Benzerlik/renk farkı aramasını bozma.
+
+AMAÇ 1 – JSON KURAL DOSYASINI KULLAN
+colorTemperatureRules.json dosyasını uygulamaya yerel import ile bağla. Çalışma sırasında harici API veya internet bağlantısı gerektirme.
+JSON içindeki kuralları TypeScript tarafında güvenli tiplerle kullan. Sabit sıcak/soğuk eşiklerini farklı dosyalara tekrar tekrar yazma.
+
+Sınıflandırma şu şekilde çalışmalı:
+1. HEX/RGB değerinden mevcut rgbToHsl() ile hue, saturation ve lightness çıkar.
+2. Projede mevcut ve uyumlu CIELAB dönüşüm fonksiyonunu yeniden kullanarak CIELAB chroma (C*ab) değerini hesapla. Yeni renk kütüphanesi ekleme. Gerekirse ortak yardımcı fonksiyon oluştur; circular import oluşturma.
+3. JSON içindeki neutralGate koşullarını uygula. Düşük doygunluklu veya düşük chroma değerli renklerde hue açısına bakarak zorla sıcak/soğuk etiketi verme; Nötr / belirsiz döndür.
+4. JSON içindeki warmPoleHueDeg, coolPoleHueDeg ve warmthScore formülünü uygula. Dairesel hue farkını doğru hesapla ve 0–360 sınırlarını normalize et.
+5. Skor 60 veya üzerindeyse sıcak yönelimli; 40 veya altındaysa soğuk yönelimli; aradaysa geçişli/dengeli olarak sınıflandır.
+6. JSON'daki confidence formülünü kullanarak yüksek/orta/düşük güven seviyesi üret.
+7. Her renk kümesi için skor, kategori, güven seviyesi ve kısa alt-ton açıklaması üret.
+
+ÖNEMLİ BİLİMSEL SINIR:
+Bu model fiziksel sıcaklık ölçmez. JSON'daki HSL referansları ChromArchive için açıklanabilir bir görsel sınıflandırma sezgisidir. Manalansan, Whitehead & Webster (2025) araştırmasındaki açıları HSL/HEX açılarıymış gibi kullanma. warmCoolResearchReference.json içindeki açılar cone-opponent LvsM/SvsLM koordinat sistemindedir; doğrudan sRGB HSL hue değerlerine dönüştürülemez. Bu dosya yalnızca araştırma dayanağı/atıf göstermek içindir.
+
+AMAÇ 2 – PALET DÜZEYİNDE SICAKLIK ANALİZİ
+K-Means sonucundaki her kümenin percentage değeri ile ağırlıklı analiz yap:
+- warmthScoreWeightedMean
+- warmSharePercent
+- coolSharePercent
+- transitionalSharePercent
+- neutralSharePercent
+Nötr renkleri kromatik sıcak/soğuk ortalamaya dahil etme; ancak nötr yüzdesini ayrı göster. Yüzdelerin toplamı yuvarlama toleransı içinde %100 olmalı.
+
+Her renk kartına ayrıca:
+- sıcaklık skoru (0–100)
+- sıcak/soğuk/geçişli/nötr etiketi
+- güven seviyesi
+- palet ortalamasına göre daha sıcak / daha soğuk / benzer açıklaması
+ekle.
+
+Palet özeti, görselin genelinde sıcak mı soğuk mu yönelimin baskın olduğunu yüzde ve anlaşılır etiketle anlatsın. Yalnızca dominant renk sayısını sayma; percentage ile ağırlıklandır.
+
+AMAÇ 3 – AYNI RENK AİLESİNDE GÖRELI ALT TON
+JSON içindeki familyRelativeUndertones alanını kullan.
+Örneğin:
+- Kırmızı: turuncuya kayan daha sıcak, viyoleye kayan daha soğuk.
+- Sarı: turuncuya kayan daha sıcak, yeşile kayan daha serin.
+- Yeşil: sarıya kayan daha sıcak, camgöbeğine/maviye kayan daha soğuk.
+- Mavi: viyoleye kayan daha sıcak, camgöbeğine kayan daha soğuk.
+- Mor: kırmızı/magentaya kayan daha sıcak, maviye kayan daha soğuk.
+Bu açıklamaları kesin evrensel kurallar gibi değil, aynı renk ailesi içindeki göreli alt-ton karşılaştırmaları olarak sun.
+
+AMAÇ 4 – TABLO / ESER GÖRSELİNDE RENKLERİN BİRBİRİYLE İLİŞKİSİ
+Sadece bağımsız renkleri etiketlemekle kalma. Mümkünse mevcut Canvas örneklemesinin koordinat bilgisini koruyarak renk kümelerinin mekânsal komşuluğunu analiz et:
+- Örnekleme grid'indeki her piksel örneği için x/y veya grid koordinatı sakla.
+- K-Means cluster atamalarını aynı grid düzeninde tut.
+- Dört yönlü komşu hücrelerdeki farklı kümeleri tespit et.
+- Komşu iki kümenin warmthScore farkı 8 puan veya daha fazlaysa hangisinin diğerine göre daha sıcak/soğuk yönelimli olduğunu göster.
+- Yeterli komşuluk örneği yoksa mekânsal ilişki iddiası üretme; palet ortalamasına göre karşılaştırma kullan.
+- Bütün piksel haritasını localStorage'a kaydetme; yalnızca küçük özet istatistikleri sakla.
+- Örneklem tabanlı bir analiz olduğunu kullanıcıya açıkla.
+
+Bu mekânsal ekleme mevcut K-Means performansını belirgin biçimde düşürecekse, önce basit palette-relative karşılaştırmayı tamamla; sonra düşük maliyetli bir grid örneklemesi kullan. Analiz motorunu baştan yazma.
+
+AMAÇ 5 – ARŞİV VE TABLOLARLA UYUMLULUK
+- Yeni temperature alanlarını DominantColor tipine ekleyeceksen opsiyonel tut veya eski kayıtlar için güvenli varsayılan üret.
+- localStorage'da daha önce kaydedilmiş analizler eksik alanlar nedeniyle çökmemeli.
+- Eski arşiv kayıtlarında warmthScore yoksa mevcut dominantColors HEX/RGB değerlerinden yeniden hesapla.
+- Arşiv galerisi, eser detay modalı ve istatistik ekranı mümkün olduğunca yeni sıcaklık özetini kullansın.
+- Eser metadata dışa aktarım JSON'u yeni alanları içerebilir; mevcut alan adlarını silme veya değiştirme.
+- Tarihsel pigment/renk anlamı verilerini sıcak/soğuk skorundan türetme; bu özelliklerle birbirini karıştırma.
+
+AMAÇ 6 – ARAYÜZ
+Mevcut ChromArchive tasarım dilini koru. Renk kartlarında küçük ve okunaklı bir sıcak-soğuk göstergesi sun:
+- Sıcaklık yönelim skoru
+- Kısa etiket
+- Güven seviyesi
+- Palete göre göreli açıklama
+Genel palet için sıcak–geçişli–soğuk dağılım çubuğu veya benzer bir görsel özet ekle. Kırmızı/mavi gibi sabit renkli ikonlarla sıcaklığı kodlamak zorunda değilsin; metin etiketleri de erişilebilir olmalı.
+Renk sıcaklığını Kelvin cinsinden gösterme. Bu bir fiziksel renk sıcaklığı ölçümü değildir.
+
+ARAŞTIRMA REFERANSI
+warmCoolResearchReference.json içindeki çalışmanın künyesini ve kaynak URL'sini, ilgili bilgi balonu/“Yöntem ve Kaynaklar” alanında göster. Açılar farklı renk uzayında olduğundan sayısal sınıflandırma eşiği olarak kullanma. Kullanıcıya kısa bir açıklamayla araştırma ile uygulama sezgisinin ayrımını belirt.
+
+ZORUNLU GÜVENLİK / UYUMLULUK KURALLARI
+- package.json ve package-lock.json dosyalarını gereksiz yere değiştirme.
+- Yeni npm bağımlılığı ekleme.
+- Node.js'e özgü API'leri tarayıcı koduna ekleme.
+- Canvas API, K-Means++, CIELAB ve Delta E 2000 işlevlerini bozma.
+- Vercel yapılandırmasını, Vite output dizinini ve SPA yönlendirmelerini koru.
+- Harici API veya API anahtarı gerektiren çözüm kullanma.
+- JSON import yolu ve TypeScript modül ayarlarının uyumlu olduğundan emin ol.
+- Hatalı/eksik HEX, null CIELAB, sıfır örnek veya sadece nötr renkli görsel durumlarında çökme olmasın.
+
+TESTLER
+Değişiklikten sonra mevcut proje komutlarını kontrol et ve çalıştır:
+1. npm install (yalnızca gerekli ise; lock dosyasını sebepsiz değiştirme)
+2. npm run lint
+3. npm run build
+Ayrıca test et:
+- kırmızı, turuncu ve sarı tonları sıcak yöne gidiyor mu?
+- camgöbeği/mavi tonları soğuk yöne gidiyor mu?
+- yeşil/mor geçişlerinde güven ve geçiş etiketi anlamlı mı?
+- düşük doygunluklu gri ve bejler nötr/ düşük güven döndürüyor mu?
+- aynı ailede daha turuncu kırmızıyı daha sıcak kırmızı diye ayırt edebiliyor mu?
+- palette yüzdeleri doğru ağırlıklandırılıyor mu?
+- eski localStorage kayıtları açılıyor mu?
+- arşiv, arama, eser modalı ve JSON dışa aktarımı çalışıyor mu?
+- Vercel production build başarılı mı?
+
+SON RAPOR
+Tamamlandığında değiştirilen dosyaları ve değişiklikleri listele. Her testin gerçek sonucunu yaz. Build veya lint başarısızsa sorunu gizleme, düzelt ve tekrar çalıştır. Herhangi bir kontrolü çalıştıramadıysan çalışmış gibi gösterme.
+
+ÖNCELİK: Mevcut ChromArchive sistemini bozmadan açıklanabilir, bağlama duyarlı, yerel JSON ile çalışan ve Vercel uyumlu sıcak-soğuk renk analizi eklemek.

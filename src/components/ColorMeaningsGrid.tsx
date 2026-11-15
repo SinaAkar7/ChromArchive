@@ -1,22 +1,16 @@
 /**
  * @file src/components/ColorMeaningsGrid.tsx
- * @description Renk arşivinde ana renk ailelerini (10 renk) kartlar halinde listeleyen,
+ * @description Renk arşivinde ana renk ailelerini (11 renk) kartlar halinde listeleyen,
  * tarihsel pigmentleri, kültürel anlamları ve kaynakları gösteren galeri bileşeni.
  */
 
 import React from 'react';
 import {
-  BookOpen,
   ArrowRight,
-  Info,
-  Sparkles,
-  ExternalLink
+  Info
 } from 'lucide-react';
 import { ColorMeaningEntry } from '../types';
-import {
-  getColorMeanings,
-  getSourcesForIds
-} from '../services/colorMeaningsService';
+import { getColorMeanings } from '../services/colorMeaningsService';
 
 interface ColorMeaningsGridProps {
   onInspectColor: (color: ColorMeaningEntry) => void;

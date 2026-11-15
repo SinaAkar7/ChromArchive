@@ -4,13 +4,23 @@
  */
 
 import initialArchiveData from '../data/archiveData.json';
+import archiveColorIndexRaw from '../data/archiveColorIndex.json';
 import {
+  ArchiveColorIndexEntry,
   ArchiveStatistics,
   ArtworkMetadata,
   ColorFamilyStat,
 } from '../types';
+import { hydrateLegacyArtworkTemperature } from './colorTemperatureService';
 
 const STORAGE_KEY = 'chromarchive_user_items';
+
+const COLOR_INDEX_BY_OBJECT_ID = new Map<number, ArchiveColorIndexEntry>(
+  (archiveColorIndexRaw as ArchiveColorIndexEntry[]).map((entry) => [
+    entry.objectId,
+    entry,
+  ])
+);
 
 /**
  * Ham arşiv verisini tam ve kararlı ArtworkMetadata modeline dönüştürür.
@@ -19,7 +29,17 @@ export function normalizeArchiveItem(raw: any): ArtworkMetadata {
   const objectId = raw.objectId || (raw.id && !isNaN(Number(raw.id)) ? Number(raw.id) : undefined);
   const id = String(raw.id || raw.objectId || Math.random().toString(36).substring(2, 9));
 
-  return {
+  const hasOwnColors = Array.isArray(raw.dominantColors) && raw.dominantColors.length > 0;
+  const indexedEntry =
+    !hasOwnColors && typeof objectId === 'number'
+      ? COLOR_INDEX_BY_OBJECT_ID.get(objectId)
+      : undefined;
+
+  const dominantColors = hasOwnColors
+    ? raw.dominantColors
+    : indexedEntry?.dominantColors ?? [];
+
+  const normalized: ArtworkMetadata = {
     id,
     objectId,
     title: raw.title || 'İsimsiz Eser',
@@ -45,16 +65,59 @@ export function normalizeArchiveItem(raw: any): ArtworkMetadata {
     thumbnailUrl: raw.thumbnailUrl || raw.imageUrl,
     culture: raw.culture || '',
     tags: raw.tags || (raw.department ? [raw.department, 'The Met', 'Open Access'] : ['The Met', 'Open Access']),
-    dominantColors: Array.isArray(raw.dominantColors) ? raw.dominantColors : [],
-    overallTemperature: raw.overallTemperature || 'Dengeli / Nötr',
-    dominantCount: Array.isArray(raw.dominantColors) ? raw.dominantColors.length : 0,
-    analysisDate: raw.analysisDate || new Date().toISOString().split('T')[0],
-    colorDiversityScore: raw.colorDiversityScore || 75,
+    dominantColors,
+    overallTemperature:
+      raw.overallTemperature ||
+      indexedEntry?.overallTemperature ||
+      'Dengeli / Nötr',
+    dominantCount: dominantColors.length,
+    analysisDate:
+      raw.analysisDate ||
+      indexedEntry?.analysisDate ||
+      new Date().toISOString().split('T')[0],
+    colorDiversityScore:
+      raw.colorDiversityScore ?? indexedEntry?.colorDiversityScore ?? 75,
+    warmthScoreWeightedMean:
+      typeof raw.warmthScoreWeightedMean === 'number' || raw.warmthScoreWeightedMean === null
+        ? raw.warmthScoreWeightedMean
+        : indexedEntry?.warmthScoreWeightedMean,
+    warmSharePercent:
+      typeof raw.warmSharePercent === 'number'
+        ? raw.warmSharePercent
+        : indexedEntry?.warmSharePercent,
+    coolSharePercent:
+      typeof raw.coolSharePercent === 'number'
+        ? raw.coolSharePercent
+        : indexedEntry?.coolSharePercent,
+    transitionalSharePercent:
+      typeof raw.transitionalSharePercent === 'number'
+        ? raw.transitionalSharePercent
+        : indexedEntry?.transitionalSharePercent,
+    neutralSharePercent:
+      typeof raw.neutralSharePercent === 'number'
+        ? raw.neutralSharePercent
+        : indexedEntry?.neutralSharePercent,
+    temperatureSummary:
+      typeof raw.temperatureSummary === 'string'
+        ? raw.temperatureSummary
+        : indexedEntry?.temperatureSummary,
+    temperatureModelVersion:
+      typeof raw.temperatureModelVersion === 'string'
+        ? raw.temperatureModelVersion
+        : indexedEntry?.temperatureModelVersion,
+    spatialTemperatureRelations: Array.isArray(raw.spatialTemperatureRelations)
+      ? raw.spatialTemperatureRelations
+      : undefined,
+    fileFormat: raw.fileFormat,
+    isCustom: raw.isCustom,
   };
+
+  return hydrateLegacyArtworkTemperature(normalized);
 }
 
 /**
- * Başlangıç verisi ve kullanıcının yerel kayıtlarını birleştirerek tüm arşivi döndürür.
+ * Başlangıç verisi, doğrulanmış renk indeksi ve kullanıcının yerel kayıtlarını
+ * objectId/id tekilliğini koruyarak birleştirir.
  */
 export function getArchiveItems(): ArtworkMetadata[] {
   const normalizedDefault = (initialArchiveData as any[]).map(normalizeArchiveItem);
@@ -70,7 +133,22 @@ export function getArchiveItems(): ArtworkMetadata[] {
     const userItems: any[] = JSON.parse(raw);
     if (Array.isArray(userItems)) {
       const normalizedUser = userItems.map(normalizeArchiveItem);
-      return [...normalizedUser, ...normalizedDefault];
+      const userIds = new Set(normalizedUser.map((u) => u.id));
+      const userObjectIds = new Set(
+        normalizedUser
+          .map((u) => u.objectId)
+          .filter((oid): oid is number => typeof oid === 'number')
+      );
+
+      const dedupedDefault = normalizedDefault.filter((item) => {
+        if (userIds.has(item.id)) return false;
+        if (typeof item.objectId === 'number' && userObjectIds.has(item.objectId)) {
+          return false;
+        }
+        return true;
+      });
+
+      return [...normalizedUser, ...dedupedDefault];
     }
   } catch (err) {
     console.error('LocalStorage okuma hatası:', err);
@@ -193,24 +271,53 @@ export function calculateArchiveStatistics(
 
   let warmCount = 0;
   let coolCount = 0;
+  let transitionalCount = 0;
   let neutralCount = 0;
 
-  items.forEach((item) => {
+  let analyzedArtworkCount = 0;
+  let sumWarmShare = 0;
+  let sumCoolShare = 0;
+  let sumTransitionalShare = 0;
+  let sumNeutralShare = 0;
+  let warmthScoreSum = 0;
+  let warmthScoreCount = 0;
+
+  items.forEach((rawItem) => {
+    const item = hydrateLegacyArtworkTemperature(rawItem);
     const t = (item.overallTemperature || '').toLowerCase();
     if (t.includes('sıcak')) warmCount++;
     else if (t.includes('soğuk')) coolCount++;
+    else if (t.includes('geçişli') || t.includes('dengeli')) transitionalCount++;
     else neutralCount++;
+
+    if (item.dominantColors && item.dominantColors.length > 0) {
+      analyzedArtworkCount++;
+      sumWarmShare += item.warmSharePercent ?? 0;
+      sumCoolShare += item.coolSharePercent ?? 0;
+      sumTransitionalShare += item.transitionalSharePercent ?? 0;
+      sumNeutralShare += item.neutralSharePercent ?? 0;
+      if (typeof item.warmthScoreWeightedMean === 'number') {
+        warmthScoreSum += item.warmthScoreWeightedMean;
+        warmthScoreCount++;
+      }
+    }
   });
 
   const warmPercent = Math.round((warmCount / totalArtworks) * 100);
   const coolPercent = Math.round((coolCount / totalArtworks) * 100);
-  const neutralPercent = Math.max(0, 100 - warmPercent - coolPercent);
+  const transitionalPercent = Math.round((transitionalCount / totalArtworks) * 100);
+  const neutralPercent = Math.max(
+    0,
+    100 - warmPercent - coolPercent - transitionalPercent
+  );
 
   const dominantTemperature =
-    warmCount >= coolCount && warmCount >= neutralCount
-      ? 'Sıcak Ağırlıklı'
-      : coolCount >= warmCount && coolCount >= neutralCount
-      ? 'Soğuk Ağırlıklı'
+    warmCount > coolCount && warmCount >= transitionalCount
+      ? 'Sıcak ağırlıklı'
+      : coolCount > warmCount && coolCount >= transitionalCount
+      ? 'Soğuk ağırlıklı'
+      : transitionalCount > 0
+      ? 'Dengeli / geçişli'
       : 'Dengeli / Nötr';
 
   const familyCountMap: Record<string, number> = {};
@@ -256,6 +363,27 @@ export function calculateArchiveStatistics(
     coolPercent,
     neutralCount,
     neutralPercent,
+    transitionalCount,
+    transitionalPercent,
+    analyzedArtworkCount,
+    avgWarmthScore:
+      warmthScoreCount > 0 ? Math.round(warmthScoreSum / warmthScoreCount) : null,
+    weightedWarmSharePercent:
+      analyzedArtworkCount > 0
+        ? parseFloat((sumWarmShare / analyzedArtworkCount).toFixed(1))
+        : 0,
+    weightedCoolSharePercent:
+      analyzedArtworkCount > 0
+        ? parseFloat((sumCoolShare / analyzedArtworkCount).toFixed(1))
+        : 0,
+    weightedTransitionalSharePercent:
+      analyzedArtworkCount > 0
+        ? parseFloat((sumTransitionalShare / analyzedArtworkCount).toFixed(1))
+        : 0,
+    weightedNeutralSharePercent:
+      analyzedArtworkCount > 0
+        ? parseFloat((sumNeutralShare / analyzedArtworkCount).toFixed(1))
+        : 0,
     topFamilies,
   };
 }

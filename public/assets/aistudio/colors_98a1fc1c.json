@@ -1,0 +1,9027 @@
+{
+  "schemaVersion": "1.1.0",
+  "dataset": {
+    "id": "chromarchive-open-color-dictionary-v1-1",
+    "name": "ChromArchive Açık Erişimli Renk Sözlüğü",
+    "totalColors": 368,
+    "generatedAt": "2026-11-15",
+    "sourceRecordCounts": {
+      "Dictionary of Color Combinations": 130,
+      "XKCD Color Survey": 99,
+      "W3C CSS Color Module Level 4": 148
+    },
+    "uniqueHexCount": 368,
+    "familyCounts": {
+      "red": 27,
+      "orange": 38,
+      "yellow": 34,
+      "green": 71,
+      "cyan": 40,
+      "blue": 34,
+      "purple": 40,
+      "pink": 29,
+      "brown": 16,
+      "beige": 13,
+      "gray": 15,
+      "black": 2,
+      "white": 9
+    },
+    "sourceCounts": {
+      "Dictionary of Color Combinations": 130,
+      "W3C CSS Color Module Level 4": 139,
+      "XKCD Color Survey": 99
+    },
+    "analysisMethodNote": "Bu kayıtlar görsel piksel kümeleriyle karşılaştırılacak sRGB referans örnekleridir. Uygulama mevcut rgbToCielab ve CIEDE2000/Delta E 2000 fonksiyonlarıyla en yakın renkleri bulabilir. Renk adları ve HEX değerleri pigment kimliği veya tarihsel numune ölçümü anlamına gelmez.",
+    "sources": [
+      {
+        "name": "The Dictionary of Color Combinations (Sanzo Wada digitized color data)",
+        "url": "https://colorcombinations.org/data/",
+        "license": "CC BY 4.0",
+        "attribution": "Data: The Dictionary of Color Combinations (colorcombinations.org), CC BY 4.0."
+      },
+      {
+        "name": "XKCD Color Survey via Corpora",
+        "url": "https://github.com/dariusk/corpora/blob/master/data/colors/xkcd.json",
+        "license": "CC0 1.0",
+        "attribution": "XKCD color-name survey data; Corpora project, CC0 1.0."
+      },
+      {
+        "name": "W3C CSS Color Module Level 4 – Named Colors",
+        "url": "https://www.w3.org/TR/css-color-4/#named-colors",
+        "license": "Standardized sRGB named-color values from the W3C specification; consult W3C document terms for the specification itself.",
+        "attribution": "W3C CSS Color Module Level 4, §6.1 Named Colors."
+      }
+    ],
+    "excludedSourcesNote": "Yüklenen projedeki eski 540 kayıtlı sözlükte bulunan Coloripedia kayıtları bu sürüme alınmadı; mevcut dosyanın kaynak/lisans alanında açık bir lisans tanımı bulunmadığı için yalnızca lisansı veya standardı açıkça belgelenebilen kaynaklardan derlenmiş bu ayrı sürüm oluşturuldu."
+  },
+  "colors": [
+    {
+      "id": "color-001",
+      "name": "Aconite Violet",
+      "hex": "#A36AA5",
+      "rgb": {
+        "r": 163,
+        "g": 106,
+        "b": 165
+      },
+      "hsl": {
+        "h": 298,
+        "s": 25,
+        "l": 53
+      },
+      "family": "purple",
+      "tags": [
+        "menekse",
+        "menekşe",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "mor",
+        "eflatun",
+        "purple"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-002",
+      "name": "Alice Blue",
+      "hex": "#F0F8FF",
+      "rgb": {
+        "r": 240,
+        "g": 248,
+        "b": 255
+      },
+      "hsl": {
+        "h": 208,
+        "s": 100,
+        "l": 97
+      },
+      "family": "white",
+      "tags": [
+        "css:aliceblue",
+        "beyaz",
+        "white",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-003",
+      "name": "Andover Green",
+      "hex": "#6D7E77",
+      "rgb": {
+        "r": 109,
+        "g": 126,
+        "b": 119
+      },
+      "hsl": {
+        "h": 155,
+        "s": 7,
+        "l": 46
+      },
+      "family": "gray",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "gri",
+        "gray",
+        "grey"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-004",
+      "name": "Antique White",
+      "hex": "#FAEBD7",
+      "rgb": {
+        "r": 250,
+        "g": 235,
+        "b": 215
+      },
+      "hsl": {
+        "h": 34,
+        "s": 78,
+        "l": 91
+      },
+      "family": "orange",
+      "tags": [
+        "css:antiquewhite",
+        "turuncu",
+        "orange",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-005",
+      "name": "Antwarp Blue",
+      "hex": "#007190",
+      "rgb": {
+        "r": 0,
+        "g": 113,
+        "b": 144
+      },
+      "hsl": {
+        "h": 193,
+        "s": 100,
+        "l": 28
+      },
+      "family": "cyan",
+      "tags": [
+        "mavi",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-006",
+      "name": "Apricot Orange",
+      "hex": "#F68C50",
+      "rgb": {
+        "r": 246,
+        "g": 140,
+        "b": 80
+      },
+      "hsl": {
+        "h": 22,
+        "s": 90,
+        "l": 64
+      },
+      "family": "orange",
+      "tags": [
+        "turuncu",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "orange"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-007",
+      "name": "Apricot Yellow",
+      "hex": "#FFDD00",
+      "rgb": {
+        "r": 255,
+        "g": 221,
+        "b": 0
+      },
+      "hsl": {
+        "h": 52,
+        "s": 100,
+        "l": 50
+      },
+      "family": "yellow",
+      "tags": [
+        "sari",
+        "sarı",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "yellow"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-008",
+      "name": "Aqua",
+      "hex": "#00FFFF",
+      "rgb": {
+        "r": 0,
+        "g": 255,
+        "b": 255
+      },
+      "hsl": {
+        "h": 180,
+        "s": 100,
+        "l": 50
+      },
+      "family": "cyan",
+      "tags": [
+        "css:aqua",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan",
+        "w3c css named color",
+        "css:cyan"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-009",
+      "name": "Aqua Marine",
+      "hex": "#7FFFD4",
+      "rgb": {
+        "r": 127,
+        "g": 255,
+        "b": 212
+      },
+      "hsl": {
+        "h": 160,
+        "s": 100,
+        "l": 75
+      },
+      "family": "green",
+      "tags": [
+        "css:aquamarine",
+        "yesil",
+        "yeşil",
+        "green",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-010",
+      "name": "Artemesia Green",
+      "hex": "#709390",
+      "rgb": {
+        "r": 112,
+        "g": 147,
+        "b": 144
+      },
+      "hsl": {
+        "h": 175,
+        "s": 14,
+        "l": 51
+      },
+      "family": "cyan",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-011",
+      "name": "Azul",
+      "hex": "#1D5DEC",
+      "rgb": {
+        "r": 29,
+        "g": 93,
+        "b": 236
+      },
+      "hsl": {
+        "h": 221,
+        "s": 84,
+        "l": 52
+      },
+      "family": "blue",
+      "tags": [
+        "xkcd survey",
+        "mavi",
+        "blue"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-012",
+      "name": "Azure",
+      "hex": "#F0FFFF",
+      "rgb": {
+        "r": 240,
+        "g": 255,
+        "b": 255
+      },
+      "hsl": {
+        "h": 180,
+        "s": 100,
+        "l": 97
+      },
+      "family": "white",
+      "tags": [
+        "css:azure",
+        "beyaz",
+        "white",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-013",
+      "name": "Baby Purple",
+      "hex": "#CA9BF7",
+      "rgb": {
+        "r": 202,
+        "g": 155,
+        "b": 247
+      },
+      "hsl": {
+        "h": 271,
+        "s": 85,
+        "l": 79
+      },
+      "family": "purple",
+      "tags": [
+        "mor",
+        "xkcd survey",
+        "eflatun",
+        "purple"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-014",
+      "name": "Battleship Grey",
+      "hex": "#6B7C85",
+      "rgb": {
+        "r": 107,
+        "g": 124,
+        "b": 133
+      },
+      "hsl": {
+        "h": 201,
+        "s": 11,
+        "l": 47
+      },
+      "family": "gray",
+      "tags": [
+        "gri",
+        "xkcd survey",
+        "gray",
+        "grey"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-015",
+      "name": "Beige",
+      "hex": "#F5F5DC",
+      "rgb": {
+        "r": 245,
+        "g": 245,
+        "b": 220
+      },
+      "hsl": {
+        "h": 60,
+        "s": 56,
+        "l": 91
+      },
+      "family": "beige",
+      "tags": [
+        "css:beige",
+        "bej",
+        "krem",
+        "beige",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-016",
+      "name": "Benzol Green",
+      "hex": "#00978D",
+      "rgb": {
+        "r": 0,
+        "g": 151,
+        "b": 141
+      },
+      "hsl": {
+        "h": 176,
+        "s": 100,
+        "l": 30
+      },
+      "family": "cyan",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-017",
+      "name": "Bisque",
+      "hex": "#FFE4C4",
+      "rgb": {
+        "r": 255,
+        "g": 228,
+        "b": 196
+      },
+      "hsl": {
+        "h": 33,
+        "s": 100,
+        "l": 88
+      },
+      "family": "beige",
+      "tags": [
+        "css:bisque",
+        "bej",
+        "krem",
+        "beige",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-018",
+      "name": "Black",
+      "hex": "#000000",
+      "rgb": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
+      "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 0
+      },
+      "family": "black",
+      "tags": [
+        "css:black",
+        "siyah",
+        "black",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-019",
+      "name": "Blackish Olive",
+      "hex": "#42533E",
+      "rgb": {
+        "r": 66,
+        "g": 83,
+        "b": 62
+      },
+      "hsl": {
+        "h": 109,
+        "s": 14,
+        "l": 28
+      },
+      "family": "green",
+      "tags": [
+        "zeytin",
+        "zeytin yesili",
+        "zeytin yeşili",
+        "siyah",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "yesil",
+        "yeşil",
+        "green"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-020",
+      "name": "Blanched Almond",
+      "hex": "#FFEBCD",
+      "rgb": {
+        "r": 255,
+        "g": 235,
+        "b": 205
+      },
+      "hsl": {
+        "h": 36,
+        "s": 100,
+        "l": 90
+      },
+      "family": "orange",
+      "tags": [
+        "css:blanchedalmond",
+        "turuncu",
+        "orange",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-021",
+      "name": "Blue",
+      "hex": "#0000FF",
+      "rgb": {
+        "r": 0,
+        "g": 0,
+        "b": 255
+      },
+      "hsl": {
+        "h": 240,
+        "s": 100,
+        "l": 50
+      },
+      "family": "blue",
+      "tags": [
+        "css:blue",
+        "mavi",
+        "blue",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-022",
+      "name": "Blue Blue",
+      "hex": "#2242C7",
+      "rgb": {
+        "r": 34,
+        "g": 66,
+        "b": 199
+      },
+      "hsl": {
+        "h": 228,
+        "s": 71,
+        "l": 46
+      },
+      "family": "blue",
+      "tags": [
+        "mavi",
+        "xkcd survey",
+        "blue"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-023",
+      "name": "Blue Violet",
+      "hex": "#8A2BE2",
+      "rgb": {
+        "r": 138,
+        "g": 43,
+        "b": 226
+      },
+      "hsl": {
+        "h": 271,
+        "s": 76,
+        "l": 53
+      },
+      "family": "purple",
+      "tags": [
+        "css:blueviolet",
+        "mor",
+        "eflatun",
+        "purple",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-024",
+      "name": "Bright Sea Green",
+      "hex": "#05FFA6",
+      "rgb": {
+        "r": 5,
+        "g": 255,
+        "b": 166
+      },
+      "hsl": {
+        "h": 159,
+        "s": 100,
+        "l": 51
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "xkcd survey",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-025",
+      "name": "Bright Yellow Green",
+      "hex": "#9DFF00",
+      "rgb": {
+        "r": 157,
+        "g": 255,
+        "b": 0
+      },
+      "hsl": {
+        "h": 83,
+        "s": 100,
+        "l": 50
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "sari",
+        "sarı",
+        "xkcd survey",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-026",
+      "name": "Brown",
+      "hex": "#A52A2A",
+      "rgb": {
+        "r": 165,
+        "g": 42,
+        "b": 42
+      },
+      "hsl": {
+        "h": 0,
+        "s": 59,
+        "l": 41
+      },
+      "family": "red",
+      "tags": [
+        "css:brown",
+        "kirmizi",
+        "kırmızı",
+        "red",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-027",
+      "name": "Browny Green",
+      "hex": "#6F6C0A",
+      "rgb": {
+        "r": 111,
+        "g": 108,
+        "b": 10
+      },
+      "hsl": {
+        "h": 58,
+        "s": 83,
+        "l": 24
+      },
+      "family": "yellow",
+      "tags": [
+        "kahverengi",
+        "yesil",
+        "yeşil",
+        "xkcd survey",
+        "sari",
+        "sarı",
+        "yellow"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-028",
+      "name": "Browny Orange",
+      "hex": "#CA6B02",
+      "rgb": {
+        "r": 202,
+        "g": 107,
+        "b": 2
+      },
+      "hsl": {
+        "h": 32,
+        "s": 98,
+        "l": 40
+      },
+      "family": "brown",
+      "tags": [
+        "kahverengi",
+        "turuncu",
+        "xkcd survey",
+        "brown"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-029",
+      "name": "Buffy Citrine",
+      "hex": "#96874D",
+      "rgb": {
+        "r": 150,
+        "g": 135,
+        "b": 77
+      },
+      "hsl": {
+        "h": 48,
+        "s": 32,
+        "l": 45
+      },
+      "family": "yellow",
+      "tags": [
+        "archival",
+        "sanzo wada",
+        "historical",
+        "sari",
+        "sarı",
+        "yellow"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-030",
+      "name": "Burly Wood",
+      "hex": "#DEB887",
+      "rgb": {
+        "r": 222,
+        "g": 184,
+        "b": 135
+      },
+      "hsl": {
+        "h": 34,
+        "s": 57,
+        "l": 70
+      },
+      "family": "orange",
+      "tags": [
+        "css:burlywood",
+        "turuncu",
+        "orange",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-031",
+      "name": "Burnt Siena",
+      "hex": "#B75203",
+      "rgb": {
+        "r": 183,
+        "g": 82,
+        "b": 3
+      },
+      "hsl": {
+        "h": 26,
+        "s": 97,
+        "l": 36
+      },
+      "family": "brown",
+      "tags": [
+        "xkcd survey",
+        "kahverengi",
+        "brown"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-032",
+      "name": "Burple",
+      "hex": "#6832E3",
+      "rgb": {
+        "r": 104,
+        "g": 50,
+        "b": 227
+      },
+      "hsl": {
+        "h": 258,
+        "s": 76,
+        "l": 54
+      },
+      "family": "purple",
+      "tags": [
+        "xkcd survey",
+        "mor",
+        "eflatun",
+        "purple"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-033",
+      "name": "Butterscotch",
+      "hex": "#FDB147",
+      "rgb": {
+        "r": 253,
+        "g": 177,
+        "b": 71
+      },
+      "hsl": {
+        "h": 35,
+        "s": 98,
+        "l": 64
+      },
+      "family": "orange",
+      "tags": [
+        "xkcd survey",
+        "turuncu",
+        "orange"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-034",
+      "name": "Cadet Blue",
+      "hex": "#5F9EA0",
+      "rgb": {
+        "r": 95,
+        "g": 158,
+        "b": 160
+      },
+      "hsl": {
+        "h": 182,
+        "s": 25,
+        "l": 50
+      },
+      "family": "cyan",
+      "tags": [
+        "css:cadetblue",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-035",
+      "name": "Calamine Blue",
+      "hex": "#78CDD0",
+      "rgb": {
+        "r": 120,
+        "g": 205,
+        "b": 208
+      },
+      "hsl": {
+        "h": 182,
+        "s": 48,
+        "l": 64
+      },
+      "family": "cyan",
+      "tags": [
+        "mavi",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-036",
+      "name": "Camo",
+      "hex": "#7F8F4E",
+      "rgb": {
+        "r": 127,
+        "g": 143,
+        "b": 78
+      },
+      "hsl": {
+        "h": 75,
+        "s": 29,
+        "l": 43
+      },
+      "family": "green",
+      "tags": [
+        "xkcd survey",
+        "yesil",
+        "yeşil",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-037",
+      "name": "Carmine Red",
+      "hex": "#A62C37",
+      "rgb": {
+        "r": 166,
+        "g": 44,
+        "b": 55
+      },
+      "hsl": {
+        "h": 355,
+        "s": 58,
+        "l": 41
+      },
+      "family": "red",
+      "tags": [
+        "kirmizi",
+        "kırmızı",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "red"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-038",
+      "name": "Cerulian Blue",
+      "hex": "#0093A5",
+      "rgb": {
+        "r": 0,
+        "g": 147,
+        "b": 165
+      },
+      "hsl": {
+        "h": 187,
+        "s": 100,
+        "l": 32
+      },
+      "family": "cyan",
+      "tags": [
+        "mavi",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-039",
+      "name": "Charcoal Grey",
+      "hex": "#3C4142",
+      "rgb": {
+        "r": 60,
+        "g": 65,
+        "b": 66
+      },
+      "hsl": {
+        "h": 190,
+        "s": 5,
+        "l": 25
+      },
+      "family": "gray",
+      "tags": [
+        "antrasit",
+        "komur grisi",
+        "gri",
+        "xkcd survey",
+        "gray",
+        "grey"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-040",
+      "name": "Chartreuse",
+      "hex": "#7FFF00",
+      "rgb": {
+        "r": 127,
+        "g": 255,
+        "b": 0
+      },
+      "hsl": {
+        "h": 90,
+        "s": 100,
+        "l": 50
+      },
+      "family": "green",
+      "tags": [
+        "css:chartreuse",
+        "yesil",
+        "yeşil",
+        "green",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-041",
+      "name": "Chocolate",
+      "hex": "#D2691E",
+      "rgb": {
+        "r": 210,
+        "g": 105,
+        "b": 30
+      },
+      "hsl": {
+        "h": 25,
+        "s": 75,
+        "l": 47
+      },
+      "family": "orange",
+      "tags": [
+        "css:chocolate",
+        "turuncu",
+        "orange",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-042",
+      "name": "Chromium Green",
+      "hex": "#719470",
+      "rgb": {
+        "r": 113,
+        "g": 148,
+        "b": 112
+      },
+      "hsl": {
+        "h": 118,
+        "s": 14,
+        "l": 51
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "green"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-043",
+      "name": "Cinnamon Buff",
+      "hex": "#FDC57E",
+      "rgb": {
+        "r": 253,
+        "g": 197,
+        "b": 126
+      },
+      "hsl": {
+        "h": 34,
+        "s": 97,
+        "l": 74
+      },
+      "family": "beige",
+      "tags": [
+        "archival",
+        "sanzo wada",
+        "historical",
+        "bej",
+        "krem",
+        "beige"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-044",
+      "name": "Cinnamon Rufous",
+      "hex": "#C27544",
+      "rgb": {
+        "r": 194,
+        "g": 117,
+        "b": 68
+      },
+      "hsl": {
+        "h": 23,
+        "s": 51,
+        "l": 51
+      },
+      "family": "brown",
+      "tags": [
+        "archival",
+        "sanzo wada",
+        "historical",
+        "kahverengi",
+        "brown"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-045",
+      "name": "Citron Yellow",
+      "hex": "#B2B73E",
+      "rgb": {
+        "r": 178,
+        "g": 183,
+        "b": 62
+      },
+      "hsl": {
+        "h": 62,
+        "s": 49,
+        "l": 48
+      },
+      "family": "yellow",
+      "tags": [
+        "sari",
+        "sarı",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "yellow"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-046",
+      "name": "Clear Blue",
+      "hex": "#247AFD",
+      "rgb": {
+        "r": 36,
+        "g": 122,
+        "b": 253
+      },
+      "hsl": {
+        "h": 216,
+        "s": 98,
+        "l": 57
+      },
+      "family": "blue",
+      "tags": [
+        "mavi",
+        "xkcd survey",
+        "blue"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-047",
+      "name": "Cloudy Blue",
+      "hex": "#ACC2D9",
+      "rgb": {
+        "r": 172,
+        "g": 194,
+        "b": 217
+      },
+      "hsl": {
+        "h": 211,
+        "s": 37,
+        "l": 76
+      },
+      "family": "blue",
+      "tags": [
+        "mavi",
+        "xkcd survey",
+        "blue"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-048",
+      "name": "Cobalt",
+      "hex": "#1E488F",
+      "rgb": {
+        "r": 30,
+        "g": 72,
+        "b": 143
+      },
+      "hsl": {
+        "h": 218,
+        "s": 65,
+        "l": 34
+      },
+      "family": "blue",
+      "tags": [
+        "xkcd survey",
+        "mavi",
+        "blue"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-049",
+      "name": "Cobalt Green",
+      "hex": "#96D1AA",
+      "rgb": {
+        "r": 150,
+        "g": 209,
+        "b": 170
+      },
+      "hsl": {
+        "h": 140,
+        "s": 39,
+        "l": 70
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "green"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-050",
+      "name": "Cocoa",
+      "hex": "#875F42",
+      "rgb": {
+        "r": 135,
+        "g": 95,
+        "b": 66
+      },
+      "hsl": {
+        "h": 25,
+        "s": 34,
+        "l": 39
+      },
+      "family": "brown",
+      "tags": [
+        "xkcd survey",
+        "kahverengi",
+        "brown"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-051",
+      "name": "Coral",
+      "hex": "#FF7F50",
+      "rgb": {
+        "r": 255,
+        "g": 127,
+        "b": 80
+      },
+      "hsl": {
+        "h": 16,
+        "s": 100,
+        "l": 66
+      },
+      "family": "orange",
+      "tags": [
+        "css:coral",
+        "turuncu",
+        "orange",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-052",
+      "name": "Coral Red",
+      "hex": "#F58E84",
+      "rgb": {
+        "r": 245,
+        "g": 142,
+        "b": 132
+      },
+      "hsl": {
+        "h": 5,
+        "s": 85,
+        "l": 74
+      },
+      "family": "pink",
+      "tags": [
+        "mercan",
+        "kirmizi",
+        "kırmızı",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "pembe",
+        "pink"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-053",
+      "name": "Corinthian Pink",
+      "hex": "#F8B6BA",
+      "rgb": {
+        "r": 248,
+        "g": 182,
+        "b": 186
+      },
+      "hsl": {
+        "h": 356,
+        "s": 82,
+        "l": 84
+      },
+      "family": "pink",
+      "tags": [
+        "pembe",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "pink"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-054",
+      "name": "Cornflower Blue",
+      "hex": "#6495ED",
+      "rgb": {
+        "r": 100,
+        "g": 149,
+        "b": 237
+      },
+      "hsl": {
+        "h": 219,
+        "s": 79,
+        "l": 66
+      },
+      "family": "blue",
+      "tags": [
+        "css:cornflowerblue",
+        "mavi",
+        "blue",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-055",
+      "name": "Cornsilk",
+      "hex": "#FFF8DC",
+      "rgb": {
+        "r": 255,
+        "g": 248,
+        "b": 220
+      },
+      "hsl": {
+        "h": 48,
+        "s": 100,
+        "l": 93
+      },
+      "family": "beige",
+      "tags": [
+        "css:cornsilk",
+        "bej",
+        "krem",
+        "beige",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-056",
+      "name": "Cossack Green",
+      "hex": "#437742",
+      "rgb": {
+        "r": 67,
+        "g": 119,
+        "b": 66
+      },
+      "hsl": {
+        "h": 119,
+        "s": 29,
+        "l": 36
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "green"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-057",
+      "name": "Cotinga Purple",
+      "hex": "#501345",
+      "rgb": {
+        "r": 80,
+        "g": 19,
+        "b": 69
+      },
+      "hsl": {
+        "h": 311,
+        "s": 62,
+        "l": 19
+      },
+      "family": "purple",
+      "tags": [
+        "mor",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "eflatun",
+        "purple"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-058",
+      "name": "Cream Yellow",
+      "hex": "#FDBF68",
+      "rgb": {
+        "r": 253,
+        "g": 191,
+        "b": 104
+      },
+      "hsl": {
+        "h": 35,
+        "s": 97,
+        "l": 70
+      },
+      "family": "beige",
+      "tags": [
+        "krem",
+        "sari",
+        "sarı",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "bej",
+        "beige"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-059",
+      "name": "Creme",
+      "hex": "#FFFFB6",
+      "rgb": {
+        "r": 255,
+        "g": 255,
+        "b": 182
+      },
+      "hsl": {
+        "h": 60,
+        "s": 100,
+        "l": 86
+      },
+      "family": "yellow",
+      "tags": [
+        "xkcd survey",
+        "sari",
+        "sarı",
+        "yellow"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-060",
+      "name": "Crimson",
+      "hex": "#DC143C",
+      "rgb": {
+        "r": 220,
+        "g": 20,
+        "b": 60
+      },
+      "hsl": {
+        "h": 348,
+        "s": 83,
+        "l": 47
+      },
+      "family": "red",
+      "tags": [
+        "css:crimson",
+        "kirmizi",
+        "kırmızı",
+        "red",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-061",
+      "name": "Custard",
+      "hex": "#FFFD78",
+      "rgb": {
+        "r": 255,
+        "g": 253,
+        "b": 120
+      },
+      "hsl": {
+        "h": 59,
+        "s": 100,
+        "l": 74
+      },
+      "family": "yellow",
+      "tags": [
+        "xkcd survey",
+        "sari",
+        "sarı",
+        "yellow"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-062",
+      "name": "Dark Citrine",
+      "hex": "#8B835B",
+      "rgb": {
+        "r": 139,
+        "g": 131,
+        "b": 91
+      },
+      "hsl": {
+        "h": 50,
+        "s": 21,
+        "l": 45
+      },
+      "family": "yellow",
+      "tags": [
+        "archival",
+        "sanzo wada",
+        "historical",
+        "sari",
+        "sarı",
+        "yellow"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-063",
+      "name": "Dark Cream",
+      "hex": "#FFF39A",
+      "rgb": {
+        "r": 255,
+        "g": 243,
+        "b": 154
+      },
+      "hsl": {
+        "h": 53,
+        "s": 100,
+        "l": 80
+      },
+      "family": "beige",
+      "tags": [
+        "krem",
+        "xkcd survey",
+        "bej",
+        "beige"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-064",
+      "name": "Dark Grass Green",
+      "hex": "#388004",
+      "rgb": {
+        "r": 56,
+        "g": 128,
+        "b": 4
+      },
+      "hsl": {
+        "h": 95,
+        "s": 94,
+        "l": 26
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "xkcd survey",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-065",
+      "name": "Dark Green Blue",
+      "hex": "#1F6357",
+      "rgb": {
+        "r": 31,
+        "g": 99,
+        "b": 87
+      },
+      "hsl": {
+        "h": 169,
+        "s": 52,
+        "l": 25
+      },
+      "family": "cyan",
+      "tags": [
+        "mavi",
+        "yesil",
+        "yeşil",
+        "xkcd survey",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-066",
+      "name": "Dark Greenish Glaucous",
+      "hex": "#B7C2A9",
+      "rgb": {
+        "r": 183,
+        "g": 194,
+        "b": 169
+      },
+      "hsl": {
+        "h": 86,
+        "s": 17,
+        "l": 71
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "green"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-067",
+      "name": "Dark Medici Blue",
+      "hex": "#547076",
+      "rgb": {
+        "r": 84,
+        "g": 112,
+        "b": 118
+      },
+      "hsl": {
+        "h": 191,
+        "s": 17,
+        "l": 40
+      },
+      "family": "cyan",
+      "tags": [
+        "mavi",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-068",
+      "name": "Dark Pastel Green",
+      "hex": "#56AE57",
+      "rgb": {
+        "r": 86,
+        "g": 174,
+        "b": 87
+      },
+      "hsl": {
+        "h": 121,
+        "s": 35,
+        "l": 51
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "xkcd survey",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-069",
+      "name": "Dark Slate Purple",
+      "hex": "#704357",
+      "rgb": {
+        "r": 112,
+        "g": 67,
+        "b": 87
+      },
+      "hsl": {
+        "h": 333,
+        "s": 25,
+        "l": 35
+      },
+      "family": "pink",
+      "tags": [
+        "mor",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "pembe",
+        "pink"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-070",
+      "name": "Dark Soft Violet",
+      "hex": "#66629C",
+      "rgb": {
+        "r": 102,
+        "g": 98,
+        "b": 156
+      },
+      "hsl": {
+        "h": 244,
+        "s": 23,
+        "l": 50
+      },
+      "family": "purple",
+      "tags": [
+        "menekse",
+        "menekşe",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "mor",
+        "eflatun",
+        "purple"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-071",
+      "name": "Dark Tyrian Blue",
+      "hex": "#12354E",
+      "rgb": {
+        "r": 18,
+        "g": 53,
+        "b": 78
+      },
+      "hsl": {
+        "h": 205,
+        "s": 63,
+        "l": 19
+      },
+      "family": "blue",
+      "tags": [
+        "mavi",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "blue"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-072",
+      "name": "Darkblue",
+      "hex": "#00008B",
+      "rgb": {
+        "r": 0,
+        "g": 0,
+        "b": 139
+      },
+      "hsl": {
+        "h": 240,
+        "s": 100,
+        "l": 27
+      },
+      "family": "blue",
+      "tags": [
+        "css:darkblue",
+        "mavi",
+        "blue",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-073",
+      "name": "Darkcyan",
+      "hex": "#008B8B",
+      "rgb": {
+        "r": 0,
+        "g": 139,
+        "b": 139
+      },
+      "hsl": {
+        "h": 180,
+        "s": 100,
+        "l": 27
+      },
+      "family": "cyan",
+      "tags": [
+        "css:darkcyan",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-074",
+      "name": "Darker Blue",
+      "hex": "#011288",
+      "rgb": {
+        "r": 1,
+        "g": 18,
+        "b": 136
+      },
+      "hsl": {
+        "h": 232,
+        "s": 99,
+        "l": 27
+      },
+      "family": "blue",
+      "tags": [
+        "mavi",
+        "xkcd survey",
+        "blue"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-075",
+      "name": "Darker Green",
+      "hex": "#087804",
+      "rgb": {
+        "r": 8,
+        "g": 120,
+        "b": 4
+      },
+      "hsl": {
+        "h": 118,
+        "s": 94,
+        "l": 24
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "xkcd survey",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-076",
+      "name": "Darker Pink",
+      "hex": "#C4387F",
+      "rgb": {
+        "r": 196,
+        "g": 56,
+        "b": 127
+      },
+      "hsl": {
+        "h": 330,
+        "s": 56,
+        "l": 49
+      },
+      "family": "pink",
+      "tags": [
+        "pembe",
+        "xkcd survey",
+        "pink"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-077",
+      "name": "Darker Purple",
+      "hex": "#5F1B6B",
+      "rgb": {
+        "r": 95,
+        "g": 27,
+        "b": 107
+      },
+      "hsl": {
+        "h": 291,
+        "s": 60,
+        "l": 26
+      },
+      "family": "purple",
+      "tags": [
+        "mor",
+        "xkcd survey",
+        "eflatun",
+        "purple"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-078",
+      "name": "Darkgolden Rod",
+      "hex": "#B8860B",
+      "rgb": {
+        "r": 184,
+        "g": 134,
+        "b": 11
+      },
+      "hsl": {
+        "h": 43,
+        "s": 89,
+        "l": 38
+      },
+      "family": "brown",
+      "tags": [
+        "css:darkgoldenrod",
+        "kahverengi",
+        "brown",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-079",
+      "name": "Darkgray",
+      "hex": "#A9A9A9",
+      "rgb": {
+        "r": 169,
+        "g": 169,
+        "b": 169
+      },
+      "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 66
+      },
+      "family": "gray",
+      "tags": [
+        "css:darkgray",
+        "gri",
+        "gray",
+        "grey",
+        "w3c css named color",
+        "css:darkgrey"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-080",
+      "name": "Darkgreen",
+      "hex": "#006400",
+      "rgb": {
+        "r": 0,
+        "g": 100,
+        "b": 0
+      },
+      "hsl": {
+        "h": 120,
+        "s": 100,
+        "l": 20
+      },
+      "family": "green",
+      "tags": [
+        "css:darkgreen",
+        "yesil",
+        "yeşil",
+        "green",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-081",
+      "name": "Darkgreen",
+      "hex": "#054907",
+      "rgb": {
+        "r": 5,
+        "g": 73,
+        "b": 7
+      },
+      "hsl": {
+        "h": 122,
+        "s": 87,
+        "l": 15
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "xkcd survey",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-082",
+      "name": "Darkkhaki",
+      "hex": "#BDB76B",
+      "rgb": {
+        "r": 189,
+        "g": 183,
+        "b": 107
+      },
+      "hsl": {
+        "h": 56,
+        "s": 38,
+        "l": 58
+      },
+      "family": "yellow",
+      "tags": [
+        "css:darkkhaki",
+        "sari",
+        "sarı",
+        "yellow",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-083",
+      "name": "Darkmagenta",
+      "hex": "#8B008B",
+      "rgb": {
+        "r": 139,
+        "g": 0,
+        "b": 139
+      },
+      "hsl": {
+        "h": 300,
+        "s": 100,
+        "l": 27
+      },
+      "family": "purple",
+      "tags": [
+        "css:darkmagenta",
+        "mor",
+        "eflatun",
+        "purple",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-084",
+      "name": "Darkolive Green",
+      "hex": "#556B2F",
+      "rgb": {
+        "r": 85,
+        "g": 107,
+        "b": 47
+      },
+      "hsl": {
+        "h": 82,
+        "s": 39,
+        "l": 30
+      },
+      "family": "green",
+      "tags": [
+        "css:darkolivegreen",
+        "yesil",
+        "yeşil",
+        "green",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-085",
+      "name": "Darkorange",
+      "hex": "#FF8C00",
+      "rgb": {
+        "r": 255,
+        "g": 140,
+        "b": 0
+      },
+      "hsl": {
+        "h": 33,
+        "s": 100,
+        "l": 50
+      },
+      "family": "orange",
+      "tags": [
+        "css:darkorange",
+        "turuncu",
+        "orange",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-086",
+      "name": "Darkorchid",
+      "hex": "#9932CC",
+      "rgb": {
+        "r": 153,
+        "g": 50,
+        "b": 204
+      },
+      "hsl": {
+        "h": 280,
+        "s": 61,
+        "l": 50
+      },
+      "family": "purple",
+      "tags": [
+        "css:darkorchid",
+        "mor",
+        "eflatun",
+        "purple",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-087",
+      "name": "Darkred",
+      "hex": "#8B0000",
+      "rgb": {
+        "r": 139,
+        "g": 0,
+        "b": 0
+      },
+      "hsl": {
+        "h": 0,
+        "s": 100,
+        "l": 27
+      },
+      "family": "red",
+      "tags": [
+        "css:darkred",
+        "kirmizi",
+        "kırmızı",
+        "red",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-088",
+      "name": "Darksalmon",
+      "hex": "#E9967A",
+      "rgb": {
+        "r": 233,
+        "g": 150,
+        "b": 122
+      },
+      "hsl": {
+        "h": 15,
+        "s": 72,
+        "l": 70
+      },
+      "family": "orange",
+      "tags": [
+        "css:darksalmon",
+        "turuncu",
+        "orange",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-089",
+      "name": "Darkseagreen",
+      "hex": "#8FBC8F",
+      "rgb": {
+        "r": 143,
+        "g": 188,
+        "b": 143
+      },
+      "hsl": {
+        "h": 120,
+        "s": 25,
+        "l": 65
+      },
+      "family": "green",
+      "tags": [
+        "css:darkseagreen",
+        "yesil",
+        "yeşil",
+        "green",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-090",
+      "name": "Darkslate Blue",
+      "hex": "#483D8B",
+      "rgb": {
+        "r": 72,
+        "g": 61,
+        "b": 139
+      },
+      "hsl": {
+        "h": 248,
+        "s": 39,
+        "l": 39
+      },
+      "family": "blue",
+      "tags": [
+        "css:darkslateblue",
+        "mavi",
+        "blue",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-091",
+      "name": "Darkslate Gray",
+      "hex": "#2F4F4F",
+      "rgb": {
+        "r": 47,
+        "g": 79,
+        "b": 79
+      },
+      "hsl": {
+        "h": 180,
+        "s": 25,
+        "l": 25
+      },
+      "family": "cyan",
+      "tags": [
+        "css:darkslategray",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan",
+        "w3c css named color",
+        "css:darkslategrey"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-092",
+      "name": "Darkturquoise",
+      "hex": "#00CED1",
+      "rgb": {
+        "r": 0,
+        "g": 206,
+        "b": 209
+      },
+      "hsl": {
+        "h": 181,
+        "s": 100,
+        "l": 41
+      },
+      "family": "cyan",
+      "tags": [
+        "css:darkturquoise",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-093",
+      "name": "Darkviolet",
+      "hex": "#9400D3",
+      "rgb": {
+        "r": 148,
+        "g": 0,
+        "b": 211
+      },
+      "hsl": {
+        "h": 282,
+        "s": 100,
+        "l": 41
+      },
+      "family": "purple",
+      "tags": [
+        "css:darkviolet",
+        "mor",
+        "eflatun",
+        "purple",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-094",
+      "name": "Deep Aqua",
+      "hex": "#08787F",
+      "rgb": {
+        "r": 8,
+        "g": 120,
+        "b": 127
+      },
+      "hsl": {
+        "h": 184,
+        "s": 88,
+        "l": 26
+      },
+      "family": "cyan",
+      "tags": [
+        "xkcd survey",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-095",
+      "name": "Deep Brown",
+      "hex": "#410200",
+      "rgb": {
+        "r": 65,
+        "g": 2,
+        "b": 0
+      },
+      "hsl": {
+        "h": 2,
+        "s": 100,
+        "l": 13
+      },
+      "family": "red",
+      "tags": [
+        "kahverengi",
+        "xkcd survey",
+        "kirmizi",
+        "kırmızı",
+        "red"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-096",
+      "name": "Deep Grayish Olive",
+      "hex": "#635A3A",
+      "rgb": {
+        "r": 99,
+        "g": 90,
+        "b": 58
+      },
+      "hsl": {
+        "h": 47,
+        "s": 26,
+        "l": 31
+      },
+      "family": "green",
+      "tags": [
+        "zeytin",
+        "zeytin yesili",
+        "zeytin yeşili",
+        "gri",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "yesil",
+        "yeşil",
+        "green"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-097",
+      "name": "Deep Indigo",
+      "hex": "#051230",
+      "rgb": {
+        "r": 5,
+        "g": 18,
+        "b": 48
+      },
+      "hsl": {
+        "h": 222,
+        "s": 81,
+        "l": 10
+      },
+      "family": "blue",
+      "tags": [
+        "civit",
+        "çivit mavisi",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "mavi",
+        "blue"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-098",
+      "name": "Deep Lilac",
+      "hex": "#966EBD",
+      "rgb": {
+        "r": 150,
+        "g": 110,
+        "b": 189
+      },
+      "hsl": {
+        "h": 270,
+        "s": 37,
+        "l": 59
+      },
+      "family": "purple",
+      "tags": [
+        "xkcd survey",
+        "mor",
+        "eflatun",
+        "purple"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-099",
+      "name": "Deep Lyons Blue",
+      "hex": "#1C4286",
+      "rgb": {
+        "r": 28,
+        "g": 66,
+        "b": 134
+      },
+      "hsl": {
+        "h": 218,
+        "s": 65,
+        "l": 32
+      },
+      "family": "blue",
+      "tags": [
+        "mavi",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "blue"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-100",
+      "name": "Deep Slate Green",
+      "hex": "#112F2C",
+      "rgb": {
+        "r": 17,
+        "g": 47,
+        "b": 44
+      },
+      "hsl": {
+        "h": 174,
+        "s": 47,
+        "l": 13
+      },
+      "family": "black",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "siyah",
+        "black"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-101",
+      "name": "Deep Slate Olive",
+      "hex": "#253122",
+      "rgb": {
+        "r": 37,
+        "g": 49,
+        "b": 34
+      },
+      "hsl": {
+        "h": 108,
+        "s": 18,
+        "l": 16
+      },
+      "family": "gray",
+      "tags": [
+        "zeytin",
+        "zeytin yesili",
+        "zeytin yeşili",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "gri",
+        "gray",
+        "grey"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-102",
+      "name": "Deep Turquoise",
+      "hex": "#017374",
+      "rgb": {
+        "r": 1,
+        "g": 115,
+        "b": 116
+      },
+      "hsl": {
+        "h": 181,
+        "s": 98,
+        "l": 23
+      },
+      "family": "cyan",
+      "tags": [
+        "turkuaz",
+        "firuze",
+        "xkcd survey",
+        "camgobegi",
+        "camgöbeği",
+        "cyan"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-103",
+      "name": "Deep Violet / Plumbeous",
+      "hex": "#70727C",
+      "rgb": {
+        "r": 112,
+        "g": 114,
+        "b": 124
+      },
+      "hsl": {
+        "h": 230,
+        "s": 5,
+        "l": 46
+      },
+      "family": "gray",
+      "tags": [
+        "menekse",
+        "menekşe",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "gri",
+        "gray",
+        "grey"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-104",
+      "name": "Deeppink",
+      "hex": "#FF1493",
+      "rgb": {
+        "r": 255,
+        "g": 20,
+        "b": 147
+      },
+      "hsl": {
+        "h": 328,
+        "s": 100,
+        "l": 54
+      },
+      "family": "pink",
+      "tags": [
+        "css:deeppink",
+        "pembe",
+        "pink",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-105",
+      "name": "Deepsky Blue",
+      "hex": "#00BFFF",
+      "rgb": {
+        "r": 0,
+        "g": 191,
+        "b": 255
+      },
+      "hsl": {
+        "h": 195,
+        "s": 100,
+        "l": 50
+      },
+      "family": "cyan",
+      "tags": [
+        "css:deepskyblue",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-106",
+      "name": "Desert",
+      "hex": "#CCAD60",
+      "rgb": {
+        "r": 204,
+        "g": 173,
+        "b": 96
+      },
+      "hsl": {
+        "h": 43,
+        "s": 51,
+        "l": 59
+      },
+      "family": "yellow",
+      "tags": [
+        "xkcd survey",
+        "sari",
+        "sarı",
+        "yellow"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-107",
+      "name": "Diamine Green",
+      "hex": "#1A7444",
+      "rgb": {
+        "r": 26,
+        "g": 116,
+        "b": 68
+      },
+      "hsl": {
+        "h": 148,
+        "s": 63,
+        "l": 28
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "green"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-108",
+      "name": "Dimgray",
+      "hex": "#696969",
+      "rgb": {
+        "r": 105,
+        "g": 105,
+        "b": 105
+      },
+      "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 41
+      },
+      "family": "gray",
+      "tags": [
+        "css:dimgray",
+        "gri",
+        "gray",
+        "grey",
+        "w3c css named color",
+        "css:dimgrey"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-109",
+      "name": "Dodger Blue",
+      "hex": "#1E90FF",
+      "rgb": {
+        "r": 30,
+        "g": 144,
+        "b": 255
+      },
+      "hsl": {
+        "h": 210,
+        "s": 100,
+        "l": 56
+      },
+      "family": "blue",
+      "tags": [
+        "css:dodgerblue",
+        "mavi",
+        "blue",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-110",
+      "name": "Dull Blue Violet",
+      "hex": "#80719E",
+      "rgb": {
+        "r": 128,
+        "g": 113,
+        "b": 158
+      },
+      "hsl": {
+        "h": 260,
+        "s": 19,
+        "l": 53
+      },
+      "family": "purple",
+      "tags": [
+        "menekse",
+        "menekşe",
+        "mavi",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "mor",
+        "eflatun",
+        "purple"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-111",
+      "name": "Dull Violet Black",
+      "hex": "#1E0E3F",
+      "rgb": {
+        "r": 30,
+        "g": 14,
+        "b": 63
+      },
+      "hsl": {
+        "h": 260,
+        "s": 64,
+        "l": 15
+      },
+      "family": "purple",
+      "tags": [
+        "menekse",
+        "menekşe",
+        "siyah",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "mor",
+        "eflatun",
+        "purple"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-112",
+      "name": "Dull Viridian Green",
+      "hex": "#009465",
+      "rgb": {
+        "r": 0,
+        "g": 148,
+        "b": 101
+      },
+      "hsl": {
+        "h": 161,
+        "s": 100,
+        "l": 29
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "green"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-113",
+      "name": "Dusk Blue",
+      "hex": "#26538D",
+      "rgb": {
+        "r": 38,
+        "g": 83,
+        "b": 141
+      },
+      "hsl": {
+        "h": 214,
+        "s": 58,
+        "l": 35
+      },
+      "family": "blue",
+      "tags": [
+        "mavi",
+        "xkcd survey",
+        "blue"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-114",
+      "name": "Dusky Green",
+      "hex": "#004F46",
+      "rgb": {
+        "r": 0,
+        "g": 79,
+        "b": 70
+      },
+      "hsl": {
+        "h": 173,
+        "s": 100,
+        "l": 15
+      },
+      "family": "cyan",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-115",
+      "name": "Dusky Madder Violet",
+      "hex": "#4E1D4C",
+      "rgb": {
+        "r": 78,
+        "g": 29,
+        "b": 76
+      },
+      "hsl": {
+        "h": 302,
+        "s": 46,
+        "l": 21
+      },
+      "family": "purple",
+      "tags": [
+        "menekse",
+        "menekşe",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "mor",
+        "eflatun",
+        "purple"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-116",
+      "name": "Dust",
+      "hex": "#B2996E",
+      "rgb": {
+        "r": 178,
+        "g": 153,
+        "b": 110
+      },
+      "hsl": {
+        "h": 38,
+        "s": 31,
+        "l": 56
+      },
+      "family": "orange",
+      "tags": [
+        "xkcd survey",
+        "turuncu",
+        "orange"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-117",
+      "name": "Dusty Lavender",
+      "hex": "#AC86A8",
+      "rgb": {
+        "r": 172,
+        "g": 134,
+        "b": 168
+      },
+      "hsl": {
+        "h": 306,
+        "s": 19,
+        "l": 60
+      },
+      "family": "purple",
+      "tags": [
+        "lavanta",
+        "acik mor",
+        "açık mor",
+        "xkcd survey",
+        "mor",
+        "eflatun",
+        "purple"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-118",
+      "name": "Dusty Teal",
+      "hex": "#4C9085",
+      "rgb": {
+        "r": 76,
+        "g": 144,
+        "b": 133
+      },
+      "hsl": {
+        "h": 170,
+        "s": 31,
+        "l": 43
+      },
+      "family": "cyan",
+      "tags": [
+        "petrol mavisi",
+        "deniz mavisi",
+        "xkcd survey",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-119",
+      "name": "Egg Shell",
+      "hex": "#FFFCC4",
+      "rgb": {
+        "r": 255,
+        "g": 252,
+        "b": 196
+      },
+      "hsl": {
+        "h": 57,
+        "s": 100,
+        "l": 88
+      },
+      "family": "yellow",
+      "tags": [
+        "xkcd survey",
+        "sari",
+        "sarı",
+        "yellow"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-120",
+      "name": "Eggplant Purple",
+      "hex": "#430541",
+      "rgb": {
+        "r": 67,
+        "g": 5,
+        "b": 65
+      },
+      "hsl": {
+        "h": 302,
+        "s": 86,
+        "l": 14
+      },
+      "family": "purple",
+      "tags": [
+        "mor",
+        "xkcd survey",
+        "eflatun",
+        "purple"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-121",
+      "name": "English Red",
+      "hex": "#D96629",
+      "rgb": {
+        "r": 217,
+        "g": 102,
+        "b": 41
+      },
+      "hsl": {
+        "h": 21,
+        "s": 70,
+        "l": 51
+      },
+      "family": "orange",
+      "tags": [
+        "kirmizi",
+        "kırmızı",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "turuncu",
+        "orange"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-122",
+      "name": "Eosine Pink",
+      "hex": "#F37F94",
+      "rgb": {
+        "r": 243,
+        "g": 127,
+        "b": 148
+      },
+      "hsl": {
+        "h": 349,
+        "s": 83,
+        "l": 73
+      },
+      "family": "pink",
+      "tags": [
+        "pembe",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "pink"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-123",
+      "name": "Etruscan Red",
+      "hex": "#C55347",
+      "rgb": {
+        "r": 197,
+        "g": 83,
+        "b": 71
+      },
+      "hsl": {
+        "h": 6,
+        "s": 52,
+        "l": 53
+      },
+      "family": "red",
+      "tags": [
+        "kirmizi",
+        "kırmızı",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "red"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-124",
+      "name": "Eugenia Red",
+      "hex": "#E2625E",
+      "rgb": {
+        "r": 226,
+        "g": 98,
+        "b": 94
+      },
+      "hsl": {
+        "h": 2,
+        "s": 69,
+        "l": 63
+      },
+      "family": "red",
+      "tags": [
+        "kirmizi",
+        "kırmızı",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "red"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-125",
+      "name": "Eupatorium Purple",
+      "hex": "#BF5892",
+      "rgb": {
+        "r": 191,
+        "g": 88,
+        "b": 146
+      },
+      "hsl": {
+        "h": 326,
+        "s": 45,
+        "l": 55
+      },
+      "family": "pink",
+      "tags": [
+        "mor",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "pembe",
+        "pink"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-126",
+      "name": "Firebrick",
+      "hex": "#B22222",
+      "rgb": {
+        "r": 178,
+        "g": 34,
+        "b": 34
+      },
+      "hsl": {
+        "h": 0,
+        "s": 68,
+        "l": 42
+      },
+      "family": "red",
+      "tags": [
+        "css:firebrick",
+        "kirmizi",
+        "kırmızı",
+        "red",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-127",
+      "name": "Floral White",
+      "hex": "#FFFAF0",
+      "rgb": {
+        "r": 255,
+        "g": 250,
+        "b": 240
+      },
+      "hsl": {
+        "h": 40,
+        "s": 100,
+        "l": 97
+      },
+      "family": "white",
+      "tags": [
+        "css:floralwhite",
+        "beyaz",
+        "white",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-128",
+      "name": "Foam Green",
+      "hex": "#90FDA9",
+      "rgb": {
+        "r": 144,
+        "g": 253,
+        "b": 169
+      },
+      "hsl": {
+        "h": 134,
+        "s": 96,
+        "l": 78
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "xkcd survey",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-129",
+      "name": "Forestgreen",
+      "hex": "#228B22",
+      "rgb": {
+        "r": 34,
+        "g": 139,
+        "b": 34
+      },
+      "hsl": {
+        "h": 120,
+        "s": 61,
+        "l": 34
+      },
+      "family": "green",
+      "tags": [
+        "css:forestgreen",
+        "yesil",
+        "yeşil",
+        "green",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-130",
+      "name": "Fresh Color",
+      "hex": "#F6917E",
+      "rgb": {
+        "r": 246,
+        "g": 145,
+        "b": 126
+      },
+      "hsl": {
+        "h": 9,
+        "s": 87,
+        "l": 73
+      },
+      "family": "pink",
+      "tags": [
+        "archival",
+        "sanzo wada",
+        "historical",
+        "pembe",
+        "pink"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-131",
+      "name": "Fresh Green",
+      "hex": "#69D84F",
+      "rgb": {
+        "r": 105,
+        "g": 216,
+        "b": 79
+      },
+      "hsl": {
+        "h": 109,
+        "s": 64,
+        "l": 58
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "xkcd survey",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-132",
+      "name": "Fuchsia",
+      "hex": "#FF00FF",
+      "rgb": {
+        "r": 255,
+        "g": 0,
+        "b": 255
+      },
+      "hsl": {
+        "h": 300,
+        "s": 100,
+        "l": 50
+      },
+      "family": "purple",
+      "tags": [
+        "css:fuchsia",
+        "mor",
+        "eflatun",
+        "purple",
+        "w3c css named color",
+        "css:magenta"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-133",
+      "name": "Gainsboro",
+      "hex": "#DCDCDC",
+      "rgb": {
+        "r": 220,
+        "g": 220,
+        "b": 220
+      },
+      "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 86
+      },
+      "family": "gray",
+      "tags": [
+        "css:gainsboro",
+        "gri",
+        "gray",
+        "grey",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-134",
+      "name": "Ghost White",
+      "hex": "#F8F8FF",
+      "rgb": {
+        "r": 248,
+        "g": 248,
+        "b": 255
+      },
+      "hsl": {
+        "h": 240,
+        "s": 100,
+        "l": 99
+      },
+      "family": "white",
+      "tags": [
+        "css:ghostwhite",
+        "beyaz",
+        "white",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-135",
+      "name": "Glaucous Green",
+      "hex": "#B4CDC2",
+      "rgb": {
+        "r": 180,
+        "g": 205,
+        "b": 194
+      },
+      "hsl": {
+        "h": 154,
+        "s": 20,
+        "l": 75
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "green"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-136",
+      "name": "Gold",
+      "hex": "#FFD700",
+      "rgb": {
+        "r": 255,
+        "g": 215,
+        "b": 0
+      },
+      "hsl": {
+        "h": 51,
+        "s": 100,
+        "l": 50
+      },
+      "family": "yellow",
+      "tags": [
+        "css:gold",
+        "sari",
+        "sarı",
+        "yellow",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-137",
+      "name": "Golden Yellow",
+      "hex": "#F3A257",
+      "rgb": {
+        "r": 243,
+        "g": 162,
+        "b": 87
+      },
+      "hsl": {
+        "h": 29,
+        "s": 87,
+        "l": 65
+      },
+      "family": "orange",
+      "tags": [
+        "altin",
+        "altın",
+        "sari",
+        "sarı",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "turuncu",
+        "orange"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-138",
+      "name": "Goldenrod",
+      "hex": "#DAA520",
+      "rgb": {
+        "r": 218,
+        "g": 165,
+        "b": 32
+      },
+      "hsl": {
+        "h": 43,
+        "s": 74,
+        "l": 49
+      },
+      "family": "yellow",
+      "tags": [
+        "css:goldenrod",
+        "sari",
+        "sarı",
+        "yellow",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-139",
+      "name": "Gray",
+      "hex": "#808080",
+      "rgb": {
+        "r": 128,
+        "g": 128,
+        "b": 128
+      },
+      "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 50
+      },
+      "family": "gray",
+      "tags": [
+        "css:gray",
+        "gri",
+        "gray",
+        "grey",
+        "w3c css named color",
+        "css:grey"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-140",
+      "name": "Grayish Lavender",
+      "hex": "#B5B1D8",
+      "rgb": {
+        "r": 181,
+        "g": 177,
+        "b": 216
+      },
+      "hsl": {
+        "h": 246,
+        "s": 33,
+        "l": 77
+      },
+      "family": "purple",
+      "tags": [
+        "lavanta",
+        "acik mor",
+        "açık mor",
+        "gri",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "mor",
+        "eflatun",
+        "purple"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-141",
+      "name": "Green",
+      "hex": "#008000",
+      "rgb": {
+        "r": 0,
+        "g": 128,
+        "b": 0
+      },
+      "hsl": {
+        "h": 120,
+        "s": 100,
+        "l": 25
+      },
+      "family": "green",
+      "tags": [
+        "css:green",
+        "yesil",
+        "yeşil",
+        "green",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-142",
+      "name": "Green Blue",
+      "hex": "#099197",
+      "rgb": {
+        "r": 9,
+        "g": 145,
+        "b": 151
+      },
+      "hsl": {
+        "h": 183,
+        "s": 89,
+        "l": 31
+      },
+      "family": "cyan",
+      "tags": [
+        "mavi",
+        "yesil",
+        "yeşil",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-143",
+      "name": "Green Teal",
+      "hex": "#0CB577",
+      "rgb": {
+        "r": 12,
+        "g": 181,
+        "b": 119
+      },
+      "hsl": {
+        "h": 158,
+        "s": 88,
+        "l": 38
+      },
+      "family": "cyan",
+      "tags": [
+        "petrol mavisi",
+        "deniz mavisi",
+        "yesil",
+        "yeşil",
+        "xkcd survey",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-144",
+      "name": "Green Yellow",
+      "hex": "#ADFF2F",
+      "rgb": {
+        "r": 173,
+        "g": 255,
+        "b": 47
+      },
+      "hsl": {
+        "h": 84,
+        "s": 100,
+        "l": 59
+      },
+      "family": "green",
+      "tags": [
+        "css:greenyellow",
+        "yesil",
+        "yeşil",
+        "green",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-145",
+      "name": "Green/Yellow",
+      "hex": "#B5CE08",
+      "rgb": {
+        "r": 181,
+        "g": 206,
+        "b": 8
+      },
+      "hsl": {
+        "h": 68,
+        "s": 93,
+        "l": 42
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "sari",
+        "sarı",
+        "xkcd survey",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-146",
+      "name": "Grenadine Pink",
+      "hex": "#F48067",
+      "rgb": {
+        "r": 244,
+        "g": 128,
+        "b": 103
+      },
+      "hsl": {
+        "h": 11,
+        "s": 87,
+        "l": 68
+      },
+      "family": "pink",
+      "tags": [
+        "pembe",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "pink"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-147",
+      "name": "Grey",
+      "hex": "#929591",
+      "rgb": {
+        "r": 146,
+        "g": 149,
+        "b": 145
+      },
+      "hsl": {
+        "h": 105,
+        "s": 2,
+        "l": 58
+      },
+      "family": "gray",
+      "tags": [
+        "gri",
+        "xkcd survey",
+        "gray",
+        "grey"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-148",
+      "name": "Grey Teal",
+      "hex": "#5E9B8A",
+      "rgb": {
+        "r": 94,
+        "g": 155,
+        "b": 138
+      },
+      "hsl": {
+        "h": 163,
+        "s": 24,
+        "l": 49
+      },
+      "family": "cyan",
+      "tags": [
+        "petrol mavisi",
+        "deniz mavisi",
+        "gri",
+        "xkcd survey",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-149",
+      "name": "Grey/Green",
+      "hex": "#86A17D",
+      "rgb": {
+        "r": 134,
+        "g": 161,
+        "b": 125
+      },
+      "hsl": {
+        "h": 105,
+        "s": 16,
+        "l": 56
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "gri",
+        "xkcd survey",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-150",
+      "name": "Hay's Russet",
+      "hex": "#793327",
+      "rgb": {
+        "r": 121,
+        "g": 51,
+        "b": 39
+      },
+      "hsl": {
+        "h": 9,
+        "s": 51,
+        "l": 31
+      },
+      "family": "brown",
+      "tags": [
+        "archival",
+        "sanzo wada",
+        "historical",
+        "kahverengi",
+        "brown"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-151",
+      "name": "Helvetia Blue",
+      "hex": "#005B8D",
+      "rgb": {
+        "r": 0,
+        "g": 91,
+        "b": 141
+      },
+      "hsl": {
+        "h": 201,
+        "s": 100,
+        "l": 28
+      },
+      "family": "cyan",
+      "tags": [
+        "mavi",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-152",
+      "name": "Hermosa Pink",
+      "hex": "#F9C1CE",
+      "rgb": {
+        "r": 249,
+        "g": 193,
+        "b": 206
+      },
+      "hsl": {
+        "h": 346,
+        "s": 82,
+        "l": 87
+      },
+      "family": "pink",
+      "tags": [
+        "pembe",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "pink"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-153",
+      "name": "Honey Dew",
+      "hex": "#F0FFF0",
+      "rgb": {
+        "r": 240,
+        "g": 255,
+        "b": 240
+      },
+      "hsl": {
+        "h": 120,
+        "s": 100,
+        "l": 97
+      },
+      "family": "white",
+      "tags": [
+        "css:honeydew",
+        "beyaz",
+        "white",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-154",
+      "name": "Hotpink",
+      "hex": "#FF69B4",
+      "rgb": {
+        "r": 255,
+        "g": 105,
+        "b": 180
+      },
+      "hsl": {
+        "h": 330,
+        "s": 100,
+        "l": 71
+      },
+      "family": "pink",
+      "tags": [
+        "css:hotpink",
+        "pembe",
+        "pink",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-155",
+      "name": "Hydrangea Red",
+      "hex": "#A94151",
+      "rgb": {
+        "r": 169,
+        "g": 65,
+        "b": 81
+      },
+      "hsl": {
+        "h": 351,
+        "s": 44,
+        "l": 46
+      },
+      "family": "red",
+      "tags": [
+        "kirmizi",
+        "kırmızı",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "red"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-156",
+      "name": "Indian Lake",
+      "hex": "#C53C69",
+      "rgb": {
+        "r": 197,
+        "g": 60,
+        "b": 105
+      },
+      "hsl": {
+        "h": 340,
+        "s": 54,
+        "l": 50
+      },
+      "family": "red",
+      "tags": [
+        "archival",
+        "sanzo wada",
+        "historical",
+        "kirmizi",
+        "kırmızı",
+        "red"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-157",
+      "name": "Indianred",
+      "hex": "#CD5C5C",
+      "rgb": {
+        "r": 205,
+        "g": 92,
+        "b": 92
+      },
+      "hsl": {
+        "h": 0,
+        "s": 53,
+        "l": 58
+      },
+      "family": "red",
+      "tags": [
+        "css:indianred",
+        "kirmizi",
+        "kırmızı",
+        "red",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-158",
+      "name": "Indigo",
+      "hex": "#4B0082",
+      "rgb": {
+        "r": 75,
+        "g": 0,
+        "b": 130
+      },
+      "hsl": {
+        "h": 275,
+        "s": 100,
+        "l": 25
+      },
+      "family": "purple",
+      "tags": [
+        "css:indigo",
+        "mor",
+        "eflatun",
+        "purple",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-159",
+      "name": "Isabella Color",
+      "hex": "#C5A56E",
+      "rgb": {
+        "r": 197,
+        "g": 165,
+        "b": 110
+      },
+      "hsl": {
+        "h": 38,
+        "s": 43,
+        "l": 60
+      },
+      "family": "orange",
+      "tags": [
+        "archival",
+        "sanzo wada",
+        "historical",
+        "turuncu",
+        "orange"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-160",
+      "name": "Ivory",
+      "hex": "#FFFFF0",
+      "rgb": {
+        "r": 255,
+        "g": 255,
+        "b": 240
+      },
+      "hsl": {
+        "h": 60,
+        "s": 100,
+        "l": 97
+      },
+      "family": "beige",
+      "tags": [
+        "css:ivory",
+        "bej",
+        "krem",
+        "beige",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-161",
+      "name": "Ivory Buff",
+      "hex": "#EBD3A2",
+      "rgb": {
+        "r": 235,
+        "g": 211,
+        "b": 162
+      },
+      "hsl": {
+        "h": 40,
+        "s": 65,
+        "l": 78
+      },
+      "family": "beige",
+      "tags": [
+        "fildisi",
+        "fildişi",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "bej",
+        "krem",
+        "beige"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-162",
+      "name": "Jasper Red",
+      "hex": "#EB5324",
+      "rgb": {
+        "r": 235,
+        "g": 83,
+        "b": 36
+      },
+      "hsl": {
+        "h": 14,
+        "s": 83,
+        "l": 53
+      },
+      "family": "orange",
+      "tags": [
+        "kirmizi",
+        "kırmızı",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "turuncu",
+        "orange"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-163",
+      "name": "Kelley Green",
+      "hex": "#009337",
+      "rgb": {
+        "r": 0,
+        "g": 147,
+        "b": 55
+      },
+      "hsl": {
+        "h": 142,
+        "s": 100,
+        "l": 29
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "xkcd survey",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-164",
+      "name": "Khaki",
+      "hex": "#F0E68C",
+      "rgb": {
+        "r": 240,
+        "g": 230,
+        "b": 140
+      },
+      "hsl": {
+        "h": 54,
+        "s": 77,
+        "l": 75
+      },
+      "family": "yellow",
+      "tags": [
+        "css:khaki",
+        "sari",
+        "sarı",
+        "yellow",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-165",
+      "name": "Kiwi Green",
+      "hex": "#8EE53F",
+      "rgb": {
+        "r": 142,
+        "g": 229,
+        "b": 63
+      },
+      "hsl": {
+        "h": 91,
+        "s": 76,
+        "l": 57
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "xkcd survey",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-166",
+      "name": "Krongbergs Green",
+      "hex": "#84875E",
+      "rgb": {
+        "r": 132,
+        "g": 135,
+        "b": 94
+      },
+      "hsl": {
+        "h": 64,
+        "s": 18,
+        "l": 45
+      },
+      "family": "yellow",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "sari",
+        "sarı",
+        "yellow"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-167",
+      "name": "Laelia Pink",
+      "hex": "#CA92A8",
+      "rgb": {
+        "r": 202,
+        "g": 146,
+        "b": 168
+      },
+      "hsl": {
+        "h": 336,
+        "s": 35,
+        "l": 68
+      },
+      "family": "pink",
+      "tags": [
+        "pembe",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "pink"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-168",
+      "name": "Lavender",
+      "hex": "#E6E6FA",
+      "rgb": {
+        "r": 230,
+        "g": 230,
+        "b": 250
+      },
+      "hsl": {
+        "h": 240,
+        "s": 67,
+        "l": 94
+      },
+      "family": "purple",
+      "tags": [
+        "css:lavender",
+        "mor",
+        "eflatun",
+        "purple",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-169",
+      "name": "Lavender Blush",
+      "hex": "#FFF0F5",
+      "rgb": {
+        "r": 255,
+        "g": 240,
+        "b": 245
+      },
+      "hsl": {
+        "h": 340,
+        "s": 100,
+        "l": 97
+      },
+      "family": "white",
+      "tags": [
+        "css:lavenderblush",
+        "beyaz",
+        "white",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-170",
+      "name": "Lavender Pink",
+      "hex": "#DD85D7",
+      "rgb": {
+        "r": 221,
+        "g": 133,
+        "b": 215
+      },
+      "hsl": {
+        "h": 304,
+        "s": 56,
+        "l": 69
+      },
+      "family": "purple",
+      "tags": [
+        "lavanta",
+        "acik mor",
+        "açık mor",
+        "pembe",
+        "xkcd survey",
+        "mor",
+        "eflatun",
+        "purple"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-171",
+      "name": "Lawngreen",
+      "hex": "#7CFC00",
+      "rgb": {
+        "r": 124,
+        "g": 252,
+        "b": 0
+      },
+      "hsl": {
+        "h": 90,
+        "s": 100,
+        "l": 49
+      },
+      "family": "green",
+      "tags": [
+        "css:lawngreen",
+        "yesil",
+        "yeşil",
+        "green",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-172",
+      "name": "Lemon Yellow",
+      "hex": "#F8ED43",
+      "rgb": {
+        "r": 248,
+        "g": 237,
+        "b": 67
+      },
+      "hsl": {
+        "h": 56,
+        "s": 93,
+        "l": 62
+      },
+      "family": "yellow",
+      "tags": [
+        "sari",
+        "sarı",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "yellow"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-173",
+      "name": "Lemonchiffon",
+      "hex": "#FFFACD",
+      "rgb": {
+        "r": 255,
+        "g": 250,
+        "b": 205
+      },
+      "hsl": {
+        "h": 54,
+        "s": 100,
+        "l": 90
+      },
+      "family": "yellow",
+      "tags": [
+        "css:lemonchiffon",
+        "sari",
+        "sarı",
+        "yellow",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-174",
+      "name": "Lichen",
+      "hex": "#8FB67B",
+      "rgb": {
+        "r": 143,
+        "g": 182,
+        "b": 123
+      },
+      "hsl": {
+        "h": 100,
+        "s": 29,
+        "l": 60
+      },
+      "family": "green",
+      "tags": [
+        "xkcd survey",
+        "yesil",
+        "yeşil",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-175",
+      "name": "Light Blue",
+      "hex": "#ADD8E6",
+      "rgb": {
+        "r": 173,
+        "g": 216,
+        "b": 230
+      },
+      "hsl": {
+        "h": 195,
+        "s": 53,
+        "l": 79
+      },
+      "family": "cyan",
+      "tags": [
+        "css:lightblue",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-176",
+      "name": "Light Bright Green",
+      "hex": "#53FE5C",
+      "rgb": {
+        "r": 83,
+        "g": 254,
+        "b": 92
+      },
+      "hsl": {
+        "h": 123,
+        "s": 99,
+        "l": 66
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "xkcd survey",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-177",
+      "name": "Light Brown Drab",
+      "hex": "#B59392",
+      "rgb": {
+        "r": 181,
+        "g": 147,
+        "b": 146
+      },
+      "hsl": {
+        "h": 2,
+        "s": 19,
+        "l": 64
+      },
+      "family": "red",
+      "tags": [
+        "kahverengi",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "kirmizi",
+        "kırmızı",
+        "red"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-178",
+      "name": "Light Brownish Olive",
+      "hex": "#806E4B",
+      "rgb": {
+        "r": 128,
+        "g": 110,
+        "b": 75
+      },
+      "hsl": {
+        "h": 40,
+        "s": 26,
+        "l": 40
+      },
+      "family": "brown",
+      "tags": [
+        "zeytin",
+        "zeytin yesili",
+        "zeytin yeşili",
+        "kahverengi",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "brown"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-179",
+      "name": "Light Coral",
+      "hex": "#F08080",
+      "rgb": {
+        "r": 240,
+        "g": 128,
+        "b": 128
+      },
+      "hsl": {
+        "h": 0,
+        "s": 79,
+        "l": 72
+      },
+      "family": "pink",
+      "tags": [
+        "css:lightcoral",
+        "pembe",
+        "pink",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-180",
+      "name": "Light Cyan",
+      "hex": "#E0FFFF",
+      "rgb": {
+        "r": 224,
+        "g": 255,
+        "b": 255
+      },
+      "hsl": {
+        "h": 180,
+        "s": 100,
+        "l": 94
+      },
+      "family": "cyan",
+      "tags": [
+        "css:lightcyan",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-181",
+      "name": "Light Eggplant",
+      "hex": "#894585",
+      "rgb": {
+        "r": 137,
+        "g": 69,
+        "b": 133
+      },
+      "hsl": {
+        "h": 304,
+        "s": 33,
+        "l": 40
+      },
+      "family": "purple",
+      "tags": [
+        "xkcd survey",
+        "mor",
+        "eflatun",
+        "purple"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-182",
+      "name": "Light Glaucous Blue",
+      "hex": "#A5C8D1",
+      "rgb": {
+        "r": 165,
+        "g": 200,
+        "b": 209
+      },
+      "hsl": {
+        "h": 192,
+        "s": 32,
+        "l": 73
+      },
+      "family": "cyan",
+      "tags": [
+        "mavi",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-183",
+      "name": "Light Gray",
+      "hex": "#D3D3D3",
+      "rgb": {
+        "r": 211,
+        "g": 211,
+        "b": 211
+      },
+      "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 83
+      },
+      "family": "gray",
+      "tags": [
+        "css:lightgray",
+        "gri",
+        "gray",
+        "grey",
+        "w3c css named color",
+        "css:lightgrey"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-184",
+      "name": "Light Grayish Olive",
+      "hex": "#848061",
+      "rgb": {
+        "r": 132,
+        "g": 128,
+        "b": 97
+      },
+      "hsl": {
+        "h": 53,
+        "s": 15,
+        "l": 45
+      },
+      "family": "green",
+      "tags": [
+        "zeytin",
+        "zeytin yesili",
+        "zeytin yeşili",
+        "gri",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "yesil",
+        "yeşil",
+        "green"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-185",
+      "name": "Light Green",
+      "hex": "#90EE90",
+      "rgb": {
+        "r": 144,
+        "g": 238,
+        "b": 144
+      },
+      "hsl": {
+        "h": 120,
+        "s": 73,
+        "l": 75
+      },
+      "family": "green",
+      "tags": [
+        "css:lightgreen",
+        "yesil",
+        "yeşil",
+        "green",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-186",
+      "name": "Light Green Yellow",
+      "hex": "#C7D14F",
+      "rgb": {
+        "r": 199,
+        "g": 209,
+        "b": 79
+      },
+      "hsl": {
+        "h": 65,
+        "s": 59,
+        "l": 56
+      },
+      "family": "yellow",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "sari",
+        "sarı",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "yellow"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-187",
+      "name": "Light Grey Green",
+      "hex": "#B7E1A1",
+      "rgb": {
+        "r": 183,
+        "g": 225,
+        "b": 161
+      },
+      "hsl": {
+        "h": 99,
+        "s": 52,
+        "l": 76
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "gri",
+        "xkcd survey",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-188",
+      "name": "Light Lavendar",
+      "hex": "#EFC0FE",
+      "rgb": {
+        "r": 239,
+        "g": 192,
+        "b": 254
+      },
+      "hsl": {
+        "h": 285,
+        "s": 97,
+        "l": 87
+      },
+      "family": "purple",
+      "tags": [
+        "xkcd survey",
+        "mor",
+        "eflatun",
+        "purple"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-189",
+      "name": "Light Light Green",
+      "hex": "#C8FFB0",
+      "rgb": {
+        "r": 200,
+        "g": 255,
+        "b": 176
+      },
+      "hsl": {
+        "h": 102,
+        "s": 100,
+        "l": 85
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "xkcd survey",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-190",
+      "name": "Light Mauve",
+      "hex": "#9A72AA",
+      "rgb": {
+        "r": 154,
+        "g": 114,
+        "b": 170
+      },
+      "hsl": {
+        "h": 283,
+        "s": 25,
+        "l": 56
+      },
+      "family": "purple",
+      "tags": [
+        "archival",
+        "sanzo wada",
+        "historical",
+        "mor",
+        "eflatun",
+        "purple"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-191",
+      "name": "Light Moss Green",
+      "hex": "#A6C875",
+      "rgb": {
+        "r": 166,
+        "g": 200,
+        "b": 117
+      },
+      "hsl": {
+        "h": 85,
+        "s": 43,
+        "l": 62
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "xkcd survey",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-192",
+      "name": "Light Neon Green",
+      "hex": "#4EFD54",
+      "rgb": {
+        "r": 78,
+        "g": 253,
+        "b": 84
+      },
+      "hsl": {
+        "h": 122,
+        "s": 98,
+        "l": 65
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "xkcd survey",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-193",
+      "name": "Light Pastel Green",
+      "hex": "#B2FBA5",
+      "rgb": {
+        "r": 178,
+        "g": 251,
+        "b": 165
+      },
+      "hsl": {
+        "h": 111,
+        "s": 91,
+        "l": 82
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "xkcd survey",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-194",
+      "name": "Light Pea Green",
+      "hex": "#C4FE82",
+      "rgb": {
+        "r": 196,
+        "g": 254,
+        "b": 130
+      },
+      "hsl": {
+        "h": 88,
+        "s": 98,
+        "l": 75
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "xkcd survey",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-195",
+      "name": "Light Pink",
+      "hex": "#FFB6C1",
+      "rgb": {
+        "r": 255,
+        "g": 182,
+        "b": 193
+      },
+      "hsl": {
+        "h": 351,
+        "s": 100,
+        "l": 86
+      },
+      "family": "pink",
+      "tags": [
+        "css:lightpink",
+        "pembe",
+        "pink",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-196",
+      "name": "Light Pinkish Cinnamon",
+      "hex": "#FCC79B",
+      "rgb": {
+        "r": 252,
+        "g": 199,
+        "b": 155
+      },
+      "hsl": {
+        "h": 27,
+        "s": 94,
+        "l": 80
+      },
+      "family": "orange",
+      "tags": [
+        "pembe",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "turuncu",
+        "orange"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-197",
+      "name": "Light Porcelain Green",
+      "hex": "#00908A",
+      "rgb": {
+        "r": 0,
+        "g": 144,
+        "b": 138
+      },
+      "hsl": {
+        "h": 177,
+        "s": 100,
+        "l": 28
+      },
+      "family": "cyan",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-198",
+      "name": "Light Royal Blue",
+      "hex": "#3A2EFE",
+      "rgb": {
+        "r": 58,
+        "g": 46,
+        "b": 254
+      },
+      "hsl": {
+        "h": 243,
+        "s": 99,
+        "l": 59
+      },
+      "family": "blue",
+      "tags": [
+        "mavi",
+        "xkcd survey",
+        "blue"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-199",
+      "name": "Light Salmon",
+      "hex": "#FFA07A",
+      "rgb": {
+        "r": 255,
+        "g": 160,
+        "b": 122
+      },
+      "hsl": {
+        "h": 17,
+        "s": 100,
+        "l": 74
+      },
+      "family": "orange",
+      "tags": [
+        "css:lightsalmon",
+        "turuncu",
+        "orange",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-200",
+      "name": "Light Seafoam",
+      "hex": "#A0FEBF",
+      "rgb": {
+        "r": 160,
+        "g": 254,
+        "b": 191
+      },
+      "hsl": {
+        "h": 140,
+        "s": 98,
+        "l": 81
+      },
+      "family": "green",
+      "tags": [
+        "xkcd survey",
+        "yesil",
+        "yeşil",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-201",
+      "name": "Light Seafoam Green",
+      "hex": "#A7FFB5",
+      "rgb": {
+        "r": 167,
+        "g": 255,
+        "b": 181
+      },
+      "hsl": {
+        "h": 130,
+        "s": 100,
+        "l": 83
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "xkcd survey",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-202",
+      "name": "Light Yellow",
+      "hex": "#FFFFE0",
+      "rgb": {
+        "r": 255,
+        "g": 255,
+        "b": 224
+      },
+      "hsl": {
+        "h": 60,
+        "s": 100,
+        "l": 94
+      },
+      "family": "yellow",
+      "tags": [
+        "css:lightyellow",
+        "sari",
+        "sarı",
+        "yellow",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-203",
+      "name": "Lightgolden Rod Yellow",
+      "hex": "#FAFAD2",
+      "rgb": {
+        "r": 250,
+        "g": 250,
+        "b": 210
+      },
+      "hsl": {
+        "h": 60,
+        "s": 80,
+        "l": 90
+      },
+      "family": "yellow",
+      "tags": [
+        "css:lightgoldenrodyellow",
+        "sari",
+        "sarı",
+        "yellow",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-204",
+      "name": "Lightseagreen",
+      "hex": "#20B2AA",
+      "rgb": {
+        "r": 32,
+        "g": 178,
+        "b": 170
+      },
+      "hsl": {
+        "h": 177,
+        "s": 70,
+        "l": 41
+      },
+      "family": "cyan",
+      "tags": [
+        "css:lightseagreen",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-205",
+      "name": "Lightsky Blue",
+      "hex": "#87CEFA",
+      "rgb": {
+        "r": 135,
+        "g": 206,
+        "b": 250
+      },
+      "hsl": {
+        "h": 203,
+        "s": 92,
+        "l": 75
+      },
+      "family": "blue",
+      "tags": [
+        "css:lightskyblue",
+        "mavi",
+        "blue",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-206",
+      "name": "Lightslate Gray",
+      "hex": "#778899",
+      "rgb": {
+        "r": 119,
+        "g": 136,
+        "b": 153
+      },
+      "hsl": {
+        "h": 210,
+        "s": 14,
+        "l": 53
+      },
+      "family": "blue",
+      "tags": [
+        "css:lightslategray",
+        "mavi",
+        "blue",
+        "w3c css named color",
+        "css:lightslategrey"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-207",
+      "name": "Lightsteel Blue",
+      "hex": "#B0C4DE",
+      "rgb": {
+        "r": 176,
+        "g": 196,
+        "b": 222
+      },
+      "hsl": {
+        "h": 214,
+        "s": 41,
+        "l": 78
+      },
+      "family": "blue",
+      "tags": [
+        "css:lightsteelblue",
+        "mavi",
+        "blue",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-208",
+      "name": "Liliac",
+      "hex": "#C48EFD",
+      "rgb": {
+        "r": 196,
+        "g": 142,
+        "b": 253
+      },
+      "hsl": {
+        "h": 269,
+        "s": 97,
+        "l": 77
+      },
+      "family": "purple",
+      "tags": [
+        "xkcd survey",
+        "mor",
+        "eflatun",
+        "purple"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-209",
+      "name": "Lime",
+      "hex": "#00FF00",
+      "rgb": {
+        "r": 0,
+        "g": 255,
+        "b": 0
+      },
+      "hsl": {
+        "h": 120,
+        "s": 100,
+        "l": 50
+      },
+      "family": "green",
+      "tags": [
+        "css:lime",
+        "yesil",
+        "yeşil",
+        "green",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-210",
+      "name": "Lime Green",
+      "hex": "#32CD32",
+      "rgb": {
+        "r": 50,
+        "g": 205,
+        "b": 50
+      },
+      "hsl": {
+        "h": 120,
+        "s": 61,
+        "l": 50
+      },
+      "family": "green",
+      "tags": [
+        "css:limegreen",
+        "yesil",
+        "yeşil",
+        "green",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-211",
+      "name": "Linen",
+      "hex": "#FAF0E6",
+      "rgb": {
+        "r": 250,
+        "g": 240,
+        "b": 230
+      },
+      "hsl": {
+        "h": 30,
+        "s": 67,
+        "l": 94
+      },
+      "family": "beige",
+      "tags": [
+        "css:linen",
+        "bej",
+        "krem",
+        "beige",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-212",
+      "name": "Macaroni And Cheese",
+      "hex": "#EFB435",
+      "rgb": {
+        "r": 239,
+        "g": 180,
+        "b": 53
+      },
+      "hsl": {
+        "h": 41,
+        "s": 85,
+        "l": 57
+      },
+      "family": "yellow",
+      "tags": [
+        "xkcd survey",
+        "sari",
+        "sarı",
+        "yellow"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-213",
+      "name": "Madder Brown",
+      "hex": "#762C19",
+      "rgb": {
+        "r": 118,
+        "g": 44,
+        "b": 25
+      },
+      "hsl": {
+        "h": 12,
+        "s": 65,
+        "l": 28
+      },
+      "family": "brown",
+      "tags": [
+        "kahverengi",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "brown"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-214",
+      "name": "Manilla",
+      "hex": "#FFFA86",
+      "rgb": {
+        "r": 255,
+        "g": 250,
+        "b": 134
+      },
+      "hsl": {
+        "h": 58,
+        "s": 100,
+        "l": 76
+      },
+      "family": "yellow",
+      "tags": [
+        "xkcd survey",
+        "sari",
+        "sarı",
+        "yellow"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-215",
+      "name": "Maple",
+      "hex": "#C59F6B",
+      "rgb": {
+        "r": 197,
+        "g": 159,
+        "b": 107
+      },
+      "hsl": {
+        "h": 35,
+        "s": 44,
+        "l": 60
+      },
+      "family": "orange",
+      "tags": [
+        "archival",
+        "sanzo wada",
+        "historical",
+        "turuncu",
+        "orange"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-216",
+      "name": "Maroon",
+      "hex": "#800000",
+      "rgb": {
+        "r": 128,
+        "g": 0,
+        "b": 0
+      },
+      "hsl": {
+        "h": 0,
+        "s": 100,
+        "l": 25
+      },
+      "family": "red",
+      "tags": [
+        "css:maroon",
+        "kirmizi",
+        "kırmızı",
+        "red",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-217",
+      "name": "Mars Brown Tobacco",
+      "hex": "#653514",
+      "rgb": {
+        "r": 101,
+        "g": 53,
+        "b": 20
+      },
+      "hsl": {
+        "h": 24,
+        "s": 67,
+        "l": 24
+      },
+      "family": "brown",
+      "tags": [
+        "kahverengi",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "brown"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-218",
+      "name": "Mediumaquamarine",
+      "hex": "#66CDAA",
+      "rgb": {
+        "r": 102,
+        "g": 205,
+        "b": 170
+      },
+      "hsl": {
+        "h": 160,
+        "s": 51,
+        "l": 60
+      },
+      "family": "green",
+      "tags": [
+        "css:mediumaquamarine",
+        "yesil",
+        "yeşil",
+        "green",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-219",
+      "name": "Mediumblue",
+      "hex": "#0000CD",
+      "rgb": {
+        "r": 0,
+        "g": 0,
+        "b": 205
+      },
+      "hsl": {
+        "h": 240,
+        "s": 100,
+        "l": 40
+      },
+      "family": "blue",
+      "tags": [
+        "css:mediumblue",
+        "mavi",
+        "blue",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-220",
+      "name": "Mediumorchid",
+      "hex": "#BA55D3",
+      "rgb": {
+        "r": 186,
+        "g": 85,
+        "b": 211
+      },
+      "hsl": {
+        "h": 288,
+        "s": 59,
+        "l": 58
+      },
+      "family": "purple",
+      "tags": [
+        "css:mediumorchid",
+        "mor",
+        "eflatun",
+        "purple",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-221",
+      "name": "Mediumpurple",
+      "hex": "#9370DB",
+      "rgb": {
+        "r": 147,
+        "g": 112,
+        "b": 219
+      },
+      "hsl": {
+        "h": 260,
+        "s": 60,
+        "l": 65
+      },
+      "family": "purple",
+      "tags": [
+        "css:mediumpurple",
+        "mor",
+        "eflatun",
+        "purple",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-222",
+      "name": "Mediumseagreen",
+      "hex": "#3CB371",
+      "rgb": {
+        "r": 60,
+        "g": 179,
+        "b": 113
+      },
+      "hsl": {
+        "h": 147,
+        "s": 50,
+        "l": 47
+      },
+      "family": "green",
+      "tags": [
+        "css:mediumseagreen",
+        "yesil",
+        "yeşil",
+        "green",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-223",
+      "name": "Mediumslateblue",
+      "hex": "#7B68EE",
+      "rgb": {
+        "r": 123,
+        "g": 104,
+        "b": 238
+      },
+      "hsl": {
+        "h": 249,
+        "s": 80,
+        "l": 67
+      },
+      "family": "blue",
+      "tags": [
+        "css:mediumslateblue",
+        "mavi",
+        "blue",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-224",
+      "name": "Mediumspringgreen",
+      "hex": "#00FA9A",
+      "rgb": {
+        "r": 0,
+        "g": 250,
+        "b": 154
+      },
+      "hsl": {
+        "h": 157,
+        "s": 100,
+        "l": 49
+      },
+      "family": "green",
+      "tags": [
+        "css:mediumspringgreen",
+        "yesil",
+        "yeşil",
+        "green",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-225",
+      "name": "Mediumturquoise",
+      "hex": "#48D1CC",
+      "rgb": {
+        "r": 72,
+        "g": 209,
+        "b": 204
+      },
+      "hsl": {
+        "h": 178,
+        "s": 60,
+        "l": 55
+      },
+      "family": "cyan",
+      "tags": [
+        "css:mediumturquoise",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-226",
+      "name": "Mediumvioletred",
+      "hex": "#C71585",
+      "rgb": {
+        "r": 199,
+        "g": 21,
+        "b": 133
+      },
+      "hsl": {
+        "h": 322,
+        "s": 81,
+        "l": 43
+      },
+      "family": "purple",
+      "tags": [
+        "css:mediumvioletred",
+        "mor",
+        "eflatun",
+        "purple",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-227",
+      "name": "Midnightblue",
+      "hex": "#191970",
+      "rgb": {
+        "r": 25,
+        "g": 25,
+        "b": 112
+      },
+      "hsl": {
+        "h": 240,
+        "s": 64,
+        "l": 27
+      },
+      "family": "blue",
+      "tags": [
+        "css:midnightblue",
+        "mavi",
+        "blue",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-228",
+      "name": "Mineral Gray",
+      "hex": "#A2B0AD",
+      "rgb": {
+        "r": 162,
+        "g": 176,
+        "b": 173
+      },
+      "hsl": {
+        "h": 167,
+        "s": 8,
+        "l": 66
+      },
+      "family": "gray",
+      "tags": [
+        "gri",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "gray",
+        "grey"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-229",
+      "name": "Mintcream",
+      "hex": "#F5FFFA",
+      "rgb": {
+        "r": 245,
+        "g": 255,
+        "b": 250
+      },
+      "hsl": {
+        "h": 150,
+        "s": 100,
+        "l": 98
+      },
+      "family": "white",
+      "tags": [
+        "css:mintcream",
+        "beyaz",
+        "white",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-230",
+      "name": "Mistyrose",
+      "hex": "#FFE4E1",
+      "rgb": {
+        "r": 255,
+        "g": 228,
+        "b": 225
+      },
+      "hsl": {
+        "h": 6,
+        "s": 100,
+        "l": 94
+      },
+      "family": "pink",
+      "tags": [
+        "css:mistyrose",
+        "pembe",
+        "pink",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-231",
+      "name": "Moccasin",
+      "hex": "#FFE4B5",
+      "rgb": {
+        "r": 255,
+        "g": 228,
+        "b": 181
+      },
+      "hsl": {
+        "h": 38,
+        "s": 100,
+        "l": 85
+      },
+      "family": "orange",
+      "tags": [
+        "css:moccasin",
+        "turuncu",
+        "orange",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-232",
+      "name": "Navajo White",
+      "hex": "#FFDEAD",
+      "rgb": {
+        "r": 255,
+        "g": 222,
+        "b": 173
+      },
+      "hsl": {
+        "h": 36,
+        "s": 100,
+        "l": 84
+      },
+      "family": "orange",
+      "tags": [
+        "css:navajowhite",
+        "turuncu",
+        "orange",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-233",
+      "name": "Navy",
+      "hex": "#000080",
+      "rgb": {
+        "r": 0,
+        "g": 0,
+        "b": 128
+      },
+      "hsl": {
+        "h": 240,
+        "s": 100,
+        "l": 25
+      },
+      "family": "blue",
+      "tags": [
+        "css:navy",
+        "mavi",
+        "blue",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-234",
+      "name": "Navy",
+      "hex": "#01153E",
+      "rgb": {
+        "r": 1,
+        "g": 21,
+        "b": 62
+      },
+      "hsl": {
+        "h": 220,
+        "s": 97,
+        "l": 12
+      },
+      "family": "blue",
+      "tags": [
+        "lacivert",
+        "denizci mavisi",
+        "xkcd survey",
+        "mavi",
+        "blue"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-235",
+      "name": "Neutral Gray",
+      "hex": "#B6BFC1",
+      "rgb": {
+        "r": 182,
+        "g": 191,
+        "b": 193
+      },
+      "hsl": {
+        "h": 191,
+        "s": 8,
+        "l": 74
+      },
+      "family": "gray",
+      "tags": [
+        "gri",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "gray",
+        "grey"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-236",
+      "name": "Nice Blue",
+      "hex": "#107AB0",
+      "rgb": {
+        "r": 16,
+        "g": 122,
+        "b": 176
+      },
+      "hsl": {
+        "h": 200,
+        "s": 83,
+        "l": 38
+      },
+      "family": "cyan",
+      "tags": [
+        "mavi",
+        "xkcd survey",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-237",
+      "name": "Night Green",
+      "hex": "#87C540",
+      "rgb": {
+        "r": 135,
+        "g": 197,
+        "b": 64
+      },
+      "hsl": {
+        "h": 88,
+        "s": 53,
+        "l": 51
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "green"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-238",
+      "name": "Nile Blue",
+      "hex": "#BCE4E5",
+      "rgb": {
+        "r": 188,
+        "g": 228,
+        "b": 229
+      },
+      "hsl": {
+        "h": 181,
+        "s": 44,
+        "l": 82
+      },
+      "family": "cyan",
+      "tags": [
+        "mavi",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-239",
+      "name": "Ochraceous Salmon",
+      "hex": "#D8A37B",
+      "rgb": {
+        "r": 216,
+        "g": 163,
+        "b": 123
+      },
+      "hsl": {
+        "h": 26,
+        "s": 54,
+        "l": 66
+      },
+      "family": "orange",
+      "tags": [
+        "somon",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "turuncu",
+        "orange"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-240",
+      "name": "Ochre Red",
+      "hex": "#AB544D",
+      "rgb": {
+        "r": 171,
+        "g": 84,
+        "b": 77
+      },
+      "hsl": {
+        "h": 4,
+        "s": 38,
+        "l": 49
+      },
+      "family": "red",
+      "tags": [
+        "hardal",
+        "okre",
+        "toprak sarisi",
+        "kirmizi",
+        "kırmızı",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "red"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-241",
+      "name": "Off Blue",
+      "hex": "#5684AE",
+      "rgb": {
+        "r": 86,
+        "g": 132,
+        "b": 174
+      },
+      "hsl": {
+        "h": 209,
+        "s": 35,
+        "l": 51
+      },
+      "family": "blue",
+      "tags": [
+        "mavi",
+        "xkcd survey",
+        "blue"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-242",
+      "name": "Oil Green",
+      "hex": "#819238",
+      "rgb": {
+        "r": 129,
+        "g": 146,
+        "b": 56
+      },
+      "hsl": {
+        "h": 71,
+        "s": 45,
+        "l": 40
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "green"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-243",
+      "name": "Old Rose",
+      "hex": "#D46D7A",
+      "rgb": {
+        "r": 212,
+        "g": 109,
+        "b": 122
+      },
+      "hsl": {
+        "h": 352,
+        "s": 54,
+        "l": 63
+      },
+      "family": "pink",
+      "tags": [
+        "gul",
+        "gül",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "pembe",
+        "pink"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-244",
+      "name": "Oldlace",
+      "hex": "#FDF5E6",
+      "rgb": {
+        "r": 253,
+        "g": 245,
+        "b": 230
+      },
+      "hsl": {
+        "h": 39,
+        "s": 85,
+        "l": 95
+      },
+      "family": "orange",
+      "tags": [
+        "css:oldlace",
+        "turuncu",
+        "orange",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-245",
+      "name": "Olive",
+      "hex": "#808000",
+      "rgb": {
+        "r": 128,
+        "g": 128,
+        "b": 0
+      },
+      "hsl": {
+        "h": 60,
+        "s": 100,
+        "l": 25
+      },
+      "family": "green",
+      "tags": [
+        "css:olive",
+        "yesil",
+        "yeşil",
+        "green",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-246",
+      "name": "Olive Buff",
+      "hex": "#C1C494",
+      "rgb": {
+        "r": 193,
+        "g": 196,
+        "b": 148
+      },
+      "hsl": {
+        "h": 64,
+        "s": 29,
+        "l": 67
+      },
+      "family": "beige",
+      "tags": [
+        "zeytin",
+        "zeytin yesili",
+        "zeytin yeşili",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "bej",
+        "krem",
+        "beige"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-247",
+      "name": "Olive Green",
+      "hex": "#6B7140",
+      "rgb": {
+        "r": 107,
+        "g": 113,
+        "b": 64
+      },
+      "hsl": {
+        "h": 67,
+        "s": 28,
+        "l": 35
+      },
+      "family": "green",
+      "tags": [
+        "zeytin",
+        "zeytin yesili",
+        "zeytin yeşili",
+        "yesil",
+        "yeşil",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "green"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-248",
+      "name": "Olive Ocher",
+      "hex": "#D6B43E",
+      "rgb": {
+        "r": 214,
+        "g": 180,
+        "b": 62
+      },
+      "hsl": {
+        "h": 47,
+        "s": 65,
+        "l": 54
+      },
+      "family": "green",
+      "tags": [
+        "zeytin",
+        "zeytin yesili",
+        "zeytin yeşili",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "yesil",
+        "yeşil",
+        "green"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-249",
+      "name": "Olive Yellow",
+      "hex": "#A6A159",
+      "rgb": {
+        "r": 166,
+        "g": 161,
+        "b": 89
+      },
+      "hsl": {
+        "h": 56,
+        "s": 30,
+        "l": 50
+      },
+      "family": "green",
+      "tags": [
+        "zeytin",
+        "zeytin yesili",
+        "zeytin yeşili",
+        "sari",
+        "sarı",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "yesil",
+        "yeşil",
+        "green"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-250",
+      "name": "Olivedrab",
+      "hex": "#6B8E23",
+      "rgb": {
+        "r": 107,
+        "g": 142,
+        "b": 35
+      },
+      "hsl": {
+        "h": 80,
+        "s": 60,
+        "l": 35
+      },
+      "family": "green",
+      "tags": [
+        "css:olivedrab",
+        "yesil",
+        "yeşil",
+        "green",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-251",
+      "name": "Olympic Blue",
+      "hex": "#5A82B3",
+      "rgb": {
+        "r": 90,
+        "g": 130,
+        "b": 179
+      },
+      "hsl": {
+        "h": 213,
+        "s": 37,
+        "l": 53
+      },
+      "family": "blue",
+      "tags": [
+        "mavi",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "blue"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-252",
+      "name": "Orange",
+      "hex": "#FFA500",
+      "rgb": {
+        "r": 255,
+        "g": 165,
+        "b": 0
+      },
+      "hsl": {
+        "h": 39,
+        "s": 100,
+        "l": 50
+      },
+      "family": "orange",
+      "tags": [
+        "css:orange",
+        "turuncu",
+        "orange",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-253",
+      "name": "Orange Citrine",
+      "hex": "#986F2D",
+      "rgb": {
+        "r": 152,
+        "g": 111,
+        "b": 45
+      },
+      "hsl": {
+        "h": 37,
+        "s": 54,
+        "l": 39
+      },
+      "family": "brown",
+      "tags": [
+        "turuncu",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "kahverengi",
+        "brown"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-254",
+      "name": "Orange Pink",
+      "hex": "#FF6F52",
+      "rgb": {
+        "r": 255,
+        "g": 111,
+        "b": 82
+      },
+      "hsl": {
+        "h": 10,
+        "s": 100,
+        "l": 66
+      },
+      "family": "pink",
+      "tags": [
+        "turuncu",
+        "pembe",
+        "xkcd survey",
+        "pink"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-255",
+      "name": "Orange Red",
+      "hex": "#FF4500",
+      "rgb": {
+        "r": 255,
+        "g": 69,
+        "b": 0
+      },
+      "hsl": {
+        "h": 16,
+        "s": 100,
+        "l": 50
+      },
+      "family": "orange",
+      "tags": [
+        "css:orangered",
+        "turuncu",
+        "orange",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-256",
+      "name": "Orange Rufous",
+      "hex": "#C16B27",
+      "rgb": {
+        "r": 193,
+        "g": 107,
+        "b": 39
+      },
+      "hsl": {
+        "h": 26,
+        "s": 66,
+        "l": 45
+      },
+      "family": "orange",
+      "tags": [
+        "turuncu",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "orange"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-257",
+      "name": "Orange Yellow",
+      "hex": "#FCB315",
+      "rgb": {
+        "r": 252,
+        "g": 179,
+        "b": 21
+      },
+      "hsl": {
+        "h": 41,
+        "s": 97,
+        "l": 54
+      },
+      "family": "yellow",
+      "tags": [
+        "sari",
+        "sarı",
+        "turuncu",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "yellow"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-258",
+      "name": "Orangey Yellow",
+      "hex": "#FDB915",
+      "rgb": {
+        "r": 253,
+        "g": 185,
+        "b": 21
+      },
+      "hsl": {
+        "h": 42,
+        "s": 98,
+        "l": 54
+      },
+      "family": "yellow",
+      "tags": [
+        "sari",
+        "sarı",
+        "turuncu",
+        "xkcd survey",
+        "yellow"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-259",
+      "name": "Orchid",
+      "hex": "#DA70D6",
+      "rgb": {
+        "r": 218,
+        "g": 112,
+        "b": 214
+      },
+      "hsl": {
+        "h": 302,
+        "s": 59,
+        "l": 65
+      },
+      "family": "purple",
+      "tags": [
+        "css:orchid",
+        "mor",
+        "eflatun",
+        "purple",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-260",
+      "name": "Pale Burnt Lake",
+      "hex": "#802626",
+      "rgb": {
+        "r": 128,
+        "g": 38,
+        "b": 38
+      },
+      "hsl": {
+        "h": 0,
+        "s": 54,
+        "l": 33
+      },
+      "family": "red",
+      "tags": [
+        "archival",
+        "sanzo wada",
+        "historical",
+        "kirmizi",
+        "kırmızı",
+        "red"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-261",
+      "name": "Pale Gold",
+      "hex": "#FDDE6C",
+      "rgb": {
+        "r": 253,
+        "g": 222,
+        "b": 108
+      },
+      "hsl": {
+        "h": 47,
+        "s": 97,
+        "l": 71
+      },
+      "family": "yellow",
+      "tags": [
+        "altin",
+        "altın",
+        "xkcd survey",
+        "sari",
+        "sarı",
+        "yellow"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-262",
+      "name": "Pale King's Blue",
+      "hex": "#A7D4E4",
+      "rgb": {
+        "r": 167,
+        "g": 212,
+        "b": 228
+      },
+      "hsl": {
+        "h": 196,
+        "s": 53,
+        "l": 77
+      },
+      "family": "cyan",
+      "tags": [
+        "mavi",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-263",
+      "name": "Pale Lemon Yellow",
+      "hex": "#FFEFAE",
+      "rgb": {
+        "r": 255,
+        "g": 239,
+        "b": 174
+      },
+      "hsl": {
+        "h": 48,
+        "s": 100,
+        "l": 84
+      },
+      "family": "yellow",
+      "tags": [
+        "sari",
+        "sarı",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "yellow"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-264",
+      "name": "Pale Light Green",
+      "hex": "#B1FC99",
+      "rgb": {
+        "r": 177,
+        "g": 252,
+        "b": 153
+      },
+      "hsl": {
+        "h": 105,
+        "s": 94,
+        "l": 79
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "xkcd survey",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-265",
+      "name": "Pale Raw Umber",
+      "hex": "#71502F",
+      "rgb": {
+        "r": 113,
+        "g": 80,
+        "b": 47
+      },
+      "hsl": {
+        "h": 30,
+        "s": 41,
+        "l": 31
+      },
+      "family": "brown",
+      "tags": [
+        "archival",
+        "sanzo wada",
+        "historical",
+        "kahverengi",
+        "brown"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-266",
+      "name": "Palegoldenrod",
+      "hex": "#EEE8AA",
+      "rgb": {
+        "r": 238,
+        "g": 232,
+        "b": 170
+      },
+      "hsl": {
+        "h": 55,
+        "s": 67,
+        "l": 80
+      },
+      "family": "yellow",
+      "tags": [
+        "css:palegoldenrod",
+        "sari",
+        "sarı",
+        "yellow",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-267",
+      "name": "Palegreen",
+      "hex": "#98FB98",
+      "rgb": {
+        "r": 152,
+        "g": 251,
+        "b": 152
+      },
+      "hsl": {
+        "h": 120,
+        "s": 93,
+        "l": 79
+      },
+      "family": "green",
+      "tags": [
+        "css:palegreen",
+        "yesil",
+        "yeşil",
+        "green",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-268",
+      "name": "Paleturquoise",
+      "hex": "#AFEEEE",
+      "rgb": {
+        "r": 175,
+        "g": 238,
+        "b": 238
+      },
+      "hsl": {
+        "h": 180,
+        "s": 65,
+        "l": 81
+      },
+      "family": "cyan",
+      "tags": [
+        "css:paleturquoise",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-269",
+      "name": "Palevioletred",
+      "hex": "#DB7093",
+      "rgb": {
+        "r": 219,
+        "g": 112,
+        "b": 147
+      },
+      "hsl": {
+        "h": 340,
+        "s": 60,
+        "l": 65
+      },
+      "family": "pink",
+      "tags": [
+        "css:palevioletred",
+        "pembe",
+        "pink",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-270",
+      "name": "Pansy Purple",
+      "hex": "#7D133A",
+      "rgb": {
+        "r": 125,
+        "g": 19,
+        "b": 58
+      },
+      "hsl": {
+        "h": 338,
+        "s": 74,
+        "l": 28
+      },
+      "family": "purple",
+      "tags": [
+        "mor",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "eflatun",
+        "purple"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-271",
+      "name": "Papaya Whip",
+      "hex": "#FFEFD5",
+      "rgb": {
+        "r": 255,
+        "g": 239,
+        "b": 213
+      },
+      "hsl": {
+        "h": 37,
+        "s": 100,
+        "l": 92
+      },
+      "family": "orange",
+      "tags": [
+        "css:papayawhip",
+        "turuncu",
+        "orange",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-272",
+      "name": "Peach Red",
+      "hex": "#F15A30",
+      "rgb": {
+        "r": 241,
+        "g": 90,
+        "b": 48
+      },
+      "hsl": {
+        "h": 13,
+        "s": 87,
+        "l": 57
+      },
+      "family": "orange",
+      "tags": [
+        "kirmizi",
+        "kırmızı",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "turuncu",
+        "orange"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-273",
+      "name": "Peachpuff",
+      "hex": "#FFDAB9",
+      "rgb": {
+        "r": 255,
+        "g": 218,
+        "b": 185
+      },
+      "hsl": {
+        "h": 28,
+        "s": 100,
+        "l": 86
+      },
+      "family": "orange",
+      "tags": [
+        "css:peachpuff",
+        "turuncu",
+        "orange",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-274",
+      "name": "Peachy Pink",
+      "hex": "#FF9A8A",
+      "rgb": {
+        "r": 255,
+        "g": 154,
+        "b": 138
+      },
+      "hsl": {
+        "h": 8,
+        "s": 100,
+        "l": 77
+      },
+      "family": "pink",
+      "tags": [
+        "pembe",
+        "xkcd survey",
+        "pink"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-275",
+      "name": "Peacock Blue",
+      "hex": "#00939B",
+      "rgb": {
+        "r": 0,
+        "g": 147,
+        "b": 155
+      },
+      "hsl": {
+        "h": 183,
+        "s": 100,
+        "l": 30
+      },
+      "family": "cyan",
+      "tags": [
+        "mavi",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-276",
+      "name": "Peru",
+      "hex": "#CD853F",
+      "rgb": {
+        "r": 205,
+        "g": 133,
+        "b": 63
+      },
+      "hsl": {
+        "h": 30,
+        "s": 59,
+        "l": 53
+      },
+      "family": "orange",
+      "tags": [
+        "css:peru",
+        "turuncu",
+        "orange",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-277",
+      "name": "Pig Pink",
+      "hex": "#E78EA5",
+      "rgb": {
+        "r": 231,
+        "g": 142,
+        "b": 165
+      },
+      "hsl": {
+        "h": 344,
+        "s": 65,
+        "l": 73
+      },
+      "family": "pink",
+      "tags": [
+        "pembe",
+        "xkcd survey",
+        "pink"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-278",
+      "name": "Pink",
+      "hex": "#FFC0CB",
+      "rgb": {
+        "r": 255,
+        "g": 192,
+        "b": 203
+      },
+      "hsl": {
+        "h": 350,
+        "s": 100,
+        "l": 88
+      },
+      "family": "pink",
+      "tags": [
+        "css:pink",
+        "pembe",
+        "pink",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-279",
+      "name": "Pinkish Cinnamon",
+      "hex": "#EEB480",
+      "rgb": {
+        "r": 238,
+        "g": 180,
+        "b": 128
+      },
+      "hsl": {
+        "h": 28,
+        "s": 76,
+        "l": 72
+      },
+      "family": "orange",
+      "tags": [
+        "pembe",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "turuncu",
+        "orange"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-280",
+      "name": "Pistachio Green",
+      "hex": "#648F7B",
+      "rgb": {
+        "r": 100,
+        "g": 143,
+        "b": 123
+      },
+      "hsl": {
+        "h": 152,
+        "s": 18,
+        "l": 48
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "green"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-281",
+      "name": "Plum",
+      "hex": "#DDA0DD",
+      "rgb": {
+        "r": 221,
+        "g": 160,
+        "b": 221
+      },
+      "hsl": {
+        "h": 300,
+        "s": 47,
+        "l": 75
+      },
+      "family": "purple",
+      "tags": [
+        "css:plum",
+        "mor",
+        "eflatun",
+        "purple",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-282",
+      "name": "Poison Green",
+      "hex": "#40FD14",
+      "rgb": {
+        "r": 64,
+        "g": 253,
+        "b": 20
+      },
+      "hsl": {
+        "h": 109,
+        "s": 98,
+        "l": 54
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "xkcd survey",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-283",
+      "name": "Pomegranite Purple",
+      "hex": "#B71F57",
+      "rgb": {
+        "r": 183,
+        "g": 31,
+        "b": 87
+      },
+      "hsl": {
+        "h": 338,
+        "s": 71,
+        "l": 42
+      },
+      "family": "pink",
+      "tags": [
+        "mor",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "pembe",
+        "pink"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-284",
+      "name": "Pompeian Red",
+      "hex": "#AB2439",
+      "rgb": {
+        "r": 171,
+        "g": 36,
+        "b": 57
+      },
+      "hsl": {
+        "h": 351,
+        "s": 65,
+        "l": 41
+      },
+      "family": "red",
+      "tags": [
+        "kirmizi",
+        "kırmızı",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "red"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-285",
+      "name": "Powder Pink",
+      "hex": "#FFB2D0",
+      "rgb": {
+        "r": 255,
+        "g": 178,
+        "b": 208
+      },
+      "hsl": {
+        "h": 337,
+        "s": 100,
+        "l": 85
+      },
+      "family": "pink",
+      "tags": [
+        "pembe",
+        "xkcd survey",
+        "pink"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-286",
+      "name": "Powderblue",
+      "hex": "#B0E0E6",
+      "rgb": {
+        "r": 176,
+        "g": 224,
+        "b": 230
+      },
+      "hsl": {
+        "h": 187,
+        "s": 52,
+        "l": 80
+      },
+      "family": "cyan",
+      "tags": [
+        "css:powderblue",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-287",
+      "name": "Purple",
+      "hex": "#800080",
+      "rgb": {
+        "r": 128,
+        "g": 0,
+        "b": 128
+      },
+      "hsl": {
+        "h": 300,
+        "s": 100,
+        "l": 25
+      },
+      "family": "purple",
+      "tags": [
+        "css:purple",
+        "mor",
+        "eflatun",
+        "purple",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-288",
+      "name": "Purple Drab",
+      "hex": "#84565B",
+      "rgb": {
+        "r": 132,
+        "g": 86,
+        "b": 91
+      },
+      "hsl": {
+        "h": 353,
+        "s": 21,
+        "l": 43
+      },
+      "family": "red",
+      "tags": [
+        "mor",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "kirmizi",
+        "kırmızı",
+        "red"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-289",
+      "name": "Purpley Grey",
+      "hex": "#947E94",
+      "rgb": {
+        "r": 148,
+        "g": 126,
+        "b": 148
+      },
+      "hsl": {
+        "h": 300,
+        "s": 9,
+        "l": 54
+      },
+      "family": "gray",
+      "tags": [
+        "mor",
+        "gri",
+        "xkcd survey",
+        "gray",
+        "grey"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-290",
+      "name": "Purply",
+      "hex": "#983FB2",
+      "rgb": {
+        "r": 152,
+        "g": 63,
+        "b": 178
+      },
+      "hsl": {
+        "h": 286,
+        "s": 48,
+        "l": 47
+      },
+      "family": "purple",
+      "tags": [
+        "xkcd survey",
+        "mor",
+        "eflatun",
+        "purple"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-291",
+      "name": "Pyrite Yellow",
+      "hex": "#CAB356",
+      "rgb": {
+        "r": 202,
+        "g": 179,
+        "b": 86
+      },
+      "hsl": {
+        "h": 48,
+        "s": 52,
+        "l": 56
+      },
+      "family": "yellow",
+      "tags": [
+        "sari",
+        "sarı",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "yellow"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-292",
+      "name": "Radioactive Green",
+      "hex": "#2CFA1F",
+      "rgb": {
+        "r": 44,
+        "g": 250,
+        "b": 31
+      },
+      "hsl": {
+        "h": 116,
+        "s": 96,
+        "l": 55
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "xkcd survey",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-293",
+      "name": "Rainette Green",
+      "hex": "#8FA071",
+      "rgb": {
+        "r": 143,
+        "g": 160,
+        "b": 113
+      },
+      "hsl": {
+        "h": 82,
+        "s": 20,
+        "l": 54
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "green"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-294",
+      "name": "Rebecca Purple",
+      "hex": "#663399",
+      "rgb": {
+        "r": 102,
+        "g": 51,
+        "b": 153
+      },
+      "hsl": {
+        "h": 270,
+        "s": 50,
+        "l": 40
+      },
+      "family": "purple",
+      "tags": [
+        "css:rebeccapurple",
+        "mor",
+        "eflatun",
+        "purple",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-295",
+      "name": "Red",
+      "hex": "#A72144",
+      "rgb": {
+        "r": 167,
+        "g": 33,
+        "b": 68
+      },
+      "hsl": {
+        "h": 344,
+        "s": 67,
+        "l": 39
+      },
+      "family": "red",
+      "tags": [
+        "kirmizi",
+        "kırmızı",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "red"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-296",
+      "name": "Red",
+      "hex": "#FF0000",
+      "rgb": {
+        "r": 255,
+        "g": 0,
+        "b": 0
+      },
+      "hsl": {
+        "h": 0,
+        "s": 100,
+        "l": 50
+      },
+      "family": "red",
+      "tags": [
+        "css:red",
+        "kirmizi",
+        "kırmızı",
+        "red",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-297",
+      "name": "Red Orange",
+      "hex": "#DD4027",
+      "rgb": {
+        "r": 221,
+        "g": 64,
+        "b": 39
+      },
+      "hsl": {
+        "h": 8,
+        "s": 73,
+        "l": 51
+      },
+      "family": "red",
+      "tags": [
+        "kirmizi",
+        "kırmızı",
+        "turuncu",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "red"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-298",
+      "name": "Red Violet",
+      "hex": "#59256A",
+      "rgb": {
+        "r": 89,
+        "g": 37,
+        "b": 106
+      },
+      "hsl": {
+        "h": 285,
+        "s": 48,
+        "l": 28
+      },
+      "family": "purple",
+      "tags": [
+        "menekse",
+        "menekşe",
+        "kirmizi",
+        "kırmızı",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "mor",
+        "eflatun",
+        "purple"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-299",
+      "name": "Rosolanc Purple",
+      "hex": "#B73F74",
+      "rgb": {
+        "r": 183,
+        "g": 63,
+        "b": 116
+      },
+      "hsl": {
+        "h": 334,
+        "s": 49,
+        "l": 48
+      },
+      "family": "pink",
+      "tags": [
+        "mor",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "pembe",
+        "pink"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-300",
+      "name": "Rosy Brown",
+      "hex": "#BC8F8F",
+      "rgb": {
+        "r": 188,
+        "g": 143,
+        "b": 143
+      },
+      "hsl": {
+        "h": 0,
+        "s": 25,
+        "l": 65
+      },
+      "family": "red",
+      "tags": [
+        "css:rosybrown",
+        "kirmizi",
+        "kırmızı",
+        "red",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-301",
+      "name": "Rosy Pink",
+      "hex": "#F6688E",
+      "rgb": {
+        "r": 246,
+        "g": 104,
+        "b": 142
+      },
+      "hsl": {
+        "h": 344,
+        "s": 89,
+        "l": 69
+      },
+      "family": "pink",
+      "tags": [
+        "pembe",
+        "xkcd survey",
+        "pink"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-302",
+      "name": "Royalblue",
+      "hex": "#4169E1",
+      "rgb": {
+        "r": 65,
+        "g": 105,
+        "b": 225
+      },
+      "hsl": {
+        "h": 225,
+        "s": 73,
+        "l": 57
+      },
+      "family": "blue",
+      "tags": [
+        "css:royalblue",
+        "mavi",
+        "blue",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-303",
+      "name": "Rust Brown",
+      "hex": "#8B3103",
+      "rgb": {
+        "r": 139,
+        "g": 49,
+        "b": 3
+      },
+      "hsl": {
+        "h": 20,
+        "s": 96,
+        "l": 28
+      },
+      "family": "brown",
+      "tags": [
+        "kahverengi",
+        "xkcd survey",
+        "brown"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-304",
+      "name": "Saddlebrown",
+      "hex": "#8B4513",
+      "rgb": {
+        "r": 139,
+        "g": 69,
+        "b": 19
+      },
+      "hsl": {
+        "h": 25,
+        "s": 76,
+        "l": 31
+      },
+      "family": "brown",
+      "tags": [
+        "css:saddlebrown",
+        "kahverengi",
+        "brown",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-305",
+      "name": "Salmon",
+      "hex": "#FA8072",
+      "rgb": {
+        "r": 250,
+        "g": 128,
+        "b": 114
+      },
+      "hsl": {
+        "h": 6,
+        "s": 93,
+        "l": 71
+      },
+      "family": "pink",
+      "tags": [
+        "css:salmon",
+        "pembe",
+        "pink",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-306",
+      "name": "Salvia Blue",
+      "hex": "#97ACC8",
+      "rgb": {
+        "r": 151,
+        "g": 172,
+        "b": 200
+      },
+      "hsl": {
+        "h": 214,
+        "s": 31,
+        "l": 69
+      },
+      "family": "blue",
+      "tags": [
+        "mavi",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "blue"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-307",
+      "name": "Sand Brown",
+      "hex": "#CBA560",
+      "rgb": {
+        "r": 203,
+        "g": 165,
+        "b": 96
+      },
+      "hsl": {
+        "h": 39,
+        "s": 51,
+        "l": 59
+      },
+      "family": "orange",
+      "tags": [
+        "kahverengi",
+        "xkcd survey",
+        "turuncu",
+        "orange"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-308",
+      "name": "Sandybrown",
+      "hex": "#F4A460",
+      "rgb": {
+        "r": 244,
+        "g": 164,
+        "b": 96
+      },
+      "hsl": {
+        "h": 28,
+        "s": 87,
+        "l": 67
+      },
+      "family": "orange",
+      "tags": [
+        "css:sandybrown",
+        "turuncu",
+        "orange",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-309",
+      "name": "Seagreen",
+      "hex": "#2E8B57",
+      "rgb": {
+        "r": 46,
+        "g": 139,
+        "b": 87
+      },
+      "hsl": {
+        "h": 146,
+        "s": 50,
+        "l": 36
+      },
+      "family": "green",
+      "tags": [
+        "css:seagreen",
+        "yesil",
+        "yeşil",
+        "green",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-310",
+      "name": "Seashell",
+      "hex": "#FFF5EE",
+      "rgb": {
+        "r": 255,
+        "g": 245,
+        "b": 238
+      },
+      "hsl": {
+        "h": 25,
+        "s": 100,
+        "l": 97
+      },
+      "family": "beige",
+      "tags": [
+        "css:seashell",
+        "bej",
+        "krem",
+        "beige",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-311",
+      "name": "Seashell Pink",
+      "hex": "#FDD4BD",
+      "rgb": {
+        "r": 253,
+        "g": 212,
+        "b": 189
+      },
+      "hsl": {
+        "h": 22,
+        "s": 94,
+        "l": 87
+      },
+      "family": "orange",
+      "tags": [
+        "pembe",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "turuncu",
+        "orange"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-312",
+      "name": "Sienna",
+      "hex": "#A0522D",
+      "rgb": {
+        "r": 160,
+        "g": 82,
+        "b": 45
+      },
+      "hsl": {
+        "h": 19,
+        "s": 56,
+        "l": 40
+      },
+      "family": "brown",
+      "tags": [
+        "css:sienna",
+        "kahverengi",
+        "brown",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-313",
+      "name": "Silver",
+      "hex": "#C0C0C0",
+      "rgb": {
+        "r": 192,
+        "g": 192,
+        "b": 192
+      },
+      "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 75
+      },
+      "family": "gray",
+      "tags": [
+        "css:silver",
+        "gri",
+        "gray",
+        "grey",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-314",
+      "name": "Sky Blue",
+      "hex": "#87CEEB",
+      "rgb": {
+        "r": 135,
+        "g": 206,
+        "b": 235
+      },
+      "hsl": {
+        "h": 197,
+        "s": 71,
+        "l": 73
+      },
+      "family": "cyan",
+      "tags": [
+        "css:skyblue",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-315",
+      "name": "Slate Blue",
+      "hex": "#6A5ACD",
+      "rgb": {
+        "r": 106,
+        "g": 90,
+        "b": 205
+      },
+      "hsl": {
+        "h": 248,
+        "s": 53,
+        "l": 58
+      },
+      "family": "blue",
+      "tags": [
+        "css:slateblue",
+        "mavi",
+        "blue",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-316",
+      "name": "Slate Color",
+      "hex": "#34454C",
+      "rgb": {
+        "r": 52,
+        "g": 69,
+        "b": 76
+      },
+      "hsl": {
+        "h": 198,
+        "s": 19,
+        "l": 25
+      },
+      "family": "cyan",
+      "tags": [
+        "archival",
+        "sanzo wada",
+        "historical",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-317",
+      "name": "Slategray",
+      "hex": "#708090",
+      "rgb": {
+        "r": 112,
+        "g": 128,
+        "b": 144
+      },
+      "hsl": {
+        "h": 210,
+        "s": 13,
+        "l": 50
+      },
+      "family": "blue",
+      "tags": [
+        "css:slategray",
+        "mavi",
+        "blue",
+        "w3c css named color",
+        "css:slategrey"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-318",
+      "name": "Snow",
+      "hex": "#FFFAFA",
+      "rgb": {
+        "r": 255,
+        "g": 250,
+        "b": 250
+      },
+      "hsl": {
+        "h": 0,
+        "s": 100,
+        "l": 99
+      },
+      "family": "beige",
+      "tags": [
+        "css:snow",
+        "bej",
+        "krem",
+        "beige",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-319",
+      "name": "Spectrum Red",
+      "hex": "#E31F26",
+      "rgb": {
+        "r": 227,
+        "g": 31,
+        "b": 38
+      },
+      "hsl": {
+        "h": 358,
+        "s": 78,
+        "l": 51
+      },
+      "family": "red",
+      "tags": [
+        "kirmizi",
+        "kırmızı",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "red"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-320",
+      "name": "Spinel Red",
+      "hex": "#F27291",
+      "rgb": {
+        "r": 242,
+        "g": 114,
+        "b": 145
+      },
+      "hsl": {
+        "h": 345,
+        "s": 83,
+        "l": 70
+      },
+      "family": "pink",
+      "tags": [
+        "kirmizi",
+        "kırmızı",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "pembe",
+        "pink"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-321",
+      "name": "Springgreen",
+      "hex": "#00FF7F",
+      "rgb": {
+        "r": 0,
+        "g": 255,
+        "b": 127
+      },
+      "hsl": {
+        "h": 150,
+        "s": 100,
+        "l": 50
+      },
+      "family": "green",
+      "tags": [
+        "css:springgreen",
+        "yesil",
+        "yeşil",
+        "green",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-322",
+      "name": "Spruce",
+      "hex": "#0A5F38",
+      "rgb": {
+        "r": 10,
+        "g": 95,
+        "b": 56
+      },
+      "hsl": {
+        "h": 152,
+        "s": 81,
+        "l": 21
+      },
+      "family": "green",
+      "tags": [
+        "xkcd survey",
+        "yesil",
+        "yeşil",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-323",
+      "name": "Squash",
+      "hex": "#F2AB15",
+      "rgb": {
+        "r": 242,
+        "g": 171,
+        "b": 21
+      },
+      "hsl": {
+        "h": 41,
+        "s": 89,
+        "l": 52
+      },
+      "family": "yellow",
+      "tags": [
+        "xkcd survey",
+        "sari",
+        "sarı",
+        "yellow"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-324",
+      "name": "Steelblue",
+      "hex": "#4682B4",
+      "rgb": {
+        "r": 70,
+        "g": 130,
+        "b": 180
+      },
+      "hsl": {
+        "h": 207,
+        "s": 44,
+        "l": 49
+      },
+      "family": "blue",
+      "tags": [
+        "css:steelblue",
+        "mavi",
+        "blue",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-325",
+      "name": "Stormy Blue",
+      "hex": "#507B9C",
+      "rgb": {
+        "r": 80,
+        "g": 123,
+        "b": 156
+      },
+      "hsl": {
+        "h": 206,
+        "s": 32,
+        "l": 46
+      },
+      "family": "blue",
+      "tags": [
+        "mavi",
+        "xkcd survey",
+        "blue"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-326",
+      "name": "Strong Blue",
+      "hex": "#0C06F7",
+      "rgb": {
+        "r": 12,
+        "g": 6,
+        "b": 247
+      },
+      "hsl": {
+        "h": 241,
+        "s": 95,
+        "l": 50
+      },
+      "family": "blue",
+      "tags": [
+        "mavi",
+        "xkcd survey",
+        "blue"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-327",
+      "name": "Strong Pink",
+      "hex": "#FF0789",
+      "rgb": {
+        "r": 255,
+        "g": 7,
+        "b": 137
+      },
+      "hsl": {
+        "h": 329,
+        "s": 100,
+        "l": 51
+      },
+      "family": "pink",
+      "tags": [
+        "pembe",
+        "xkcd survey",
+        "pink"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-328",
+      "name": "Sudan Brown",
+      "hex": "#A36752",
+      "rgb": {
+        "r": 163,
+        "g": 103,
+        "b": 82
+      },
+      "hsl": {
+        "h": 16,
+        "s": 33,
+        "l": 48
+      },
+      "family": "brown",
+      "tags": [
+        "kahverengi",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "brown"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-329",
+      "name": "Sulpher Yellow",
+      "hex": "#F5ECC2",
+      "rgb": {
+        "r": 245,
+        "g": 236,
+        "b": 194
+      },
+      "hsl": {
+        "h": 49,
+        "s": 72,
+        "l": 86
+      },
+      "family": "yellow",
+      "tags": [
+        "sari",
+        "sarı",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "yellow"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-330",
+      "name": "Sulphine Yellow",
+      "hex": "#C19F2C",
+      "rgb": {
+        "r": 193,
+        "g": 159,
+        "b": 44
+      },
+      "hsl": {
+        "h": 46,
+        "s": 63,
+        "l": 46
+      },
+      "family": "yellow",
+      "tags": [
+        "sari",
+        "sarı",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "yellow"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-331",
+      "name": "Sun Yellow",
+      "hex": "#FFDF22",
+      "rgb": {
+        "r": 255,
+        "g": 223,
+        "b": 34
+      },
+      "hsl": {
+        "h": 51,
+        "s": 100,
+        "l": 57
+      },
+      "family": "yellow",
+      "tags": [
+        "sari",
+        "sarı",
+        "xkcd survey",
+        "yellow"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-332",
+      "name": "Sunny Yellow",
+      "hex": "#FFF917",
+      "rgb": {
+        "r": 255,
+        "g": 249,
+        "b": 23
+      },
+      "hsl": {
+        "h": 58,
+        "s": 100,
+        "l": 55
+      },
+      "family": "yellow",
+      "tags": [
+        "sari",
+        "sarı",
+        "xkcd survey",
+        "yellow"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-333",
+      "name": "Swamp",
+      "hex": "#698339",
+      "rgb": {
+        "r": 105,
+        "g": 131,
+        "b": 57
+      },
+      "hsl": {
+        "h": 81,
+        "s": 39,
+        "l": 37
+      },
+      "family": "green",
+      "tags": [
+        "xkcd survey",
+        "yesil",
+        "yeşil",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-334",
+      "name": "Tan",
+      "hex": "#D2B48C",
+      "rgb": {
+        "r": 210,
+        "g": 180,
+        "b": 140
+      },
+      "hsl": {
+        "h": 34,
+        "s": 44,
+        "l": 69
+      },
+      "family": "orange",
+      "tags": [
+        "css:tan",
+        "turuncu",
+        "orange",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-335",
+      "name": "Tan Green",
+      "hex": "#A9BE70",
+      "rgb": {
+        "r": 169,
+        "g": 190,
+        "b": 112
+      },
+      "hsl": {
+        "h": 76,
+        "s": 38,
+        "l": 59
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "xkcd survey",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-336",
+      "name": "Taupe Brown",
+      "hex": "#7A4456",
+      "rgb": {
+        "r": 122,
+        "g": 68,
+        "b": 86
+      },
+      "hsl": {
+        "h": 340,
+        "s": 28,
+        "l": 37
+      },
+      "family": "red",
+      "tags": [
+        "boz kahve",
+        "vizyon",
+        "kahverengi",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "kirmizi",
+        "kırmızı",
+        "red"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-337",
+      "name": "Tea",
+      "hex": "#65AB7C",
+      "rgb": {
+        "r": 101,
+        "g": 171,
+        "b": 124
+      },
+      "hsl": {
+        "h": 140,
+        "s": 29,
+        "l": 53
+      },
+      "family": "green",
+      "tags": [
+        "xkcd survey",
+        "yesil",
+        "yeşil",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-338",
+      "name": "Teal",
+      "hex": "#008080",
+      "rgb": {
+        "r": 0,
+        "g": 128,
+        "b": 128
+      },
+      "hsl": {
+        "h": 180,
+        "s": 100,
+        "l": 25
+      },
+      "family": "cyan",
+      "tags": [
+        "css:teal",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-339",
+      "name": "Terracota",
+      "hex": "#CB6843",
+      "rgb": {
+        "r": 203,
+        "g": 104,
+        "b": 67
+      },
+      "hsl": {
+        "h": 16,
+        "s": 57,
+        "l": 53
+      },
+      "family": "orange",
+      "tags": [
+        "xkcd survey",
+        "turuncu",
+        "orange"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-340",
+      "name": "Thistle",
+      "hex": "#D8BFD8",
+      "rgb": {
+        "r": 216,
+        "g": 191,
+        "b": 216
+      },
+      "hsl": {
+        "h": 300,
+        "s": 24,
+        "l": 80
+      },
+      "family": "purple",
+      "tags": [
+        "css:thistle",
+        "mor",
+        "eflatun",
+        "purple",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-341",
+      "name": "Tiffany Blue",
+      "hex": "#7BF2DA",
+      "rgb": {
+        "r": 123,
+        "g": 242,
+        "b": 218
+      },
+      "hsl": {
+        "h": 168,
+        "s": 82,
+        "l": 72
+      },
+      "family": "cyan",
+      "tags": [
+        "mavi",
+        "xkcd survey",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-342",
+      "name": "Tomato",
+      "hex": "#FF6347",
+      "rgb": {
+        "r": 255,
+        "g": 99,
+        "b": 71
+      },
+      "hsl": {
+        "h": 9,
+        "s": 100,
+        "l": 64
+      },
+      "family": "red",
+      "tags": [
+        "css:tomato",
+        "kirmizi",
+        "kırmızı",
+        "red",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-343",
+      "name": "Toupe",
+      "hex": "#C7AC7D",
+      "rgb": {
+        "r": 199,
+        "g": 172,
+        "b": 125
+      },
+      "hsl": {
+        "h": 38,
+        "s": 40,
+        "l": 64
+      },
+      "family": "orange",
+      "tags": [
+        "xkcd survey",
+        "turuncu",
+        "orange"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-344",
+      "name": "Toxic Green",
+      "hex": "#61DE2A",
+      "rgb": {
+        "r": 97,
+        "g": 222,
+        "b": 42
+      },
+      "hsl": {
+        "h": 102,
+        "s": 73,
+        "l": 52
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "xkcd survey",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-345",
+      "name": "Turquoise",
+      "hex": "#40E0D0",
+      "rgb": {
+        "r": 64,
+        "g": 224,
+        "b": 208
+      },
+      "hsl": {
+        "h": 174,
+        "s": 72,
+        "l": 56
+      },
+      "family": "cyan",
+      "tags": [
+        "css:turquoise",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-346",
+      "name": "Turquoise Green",
+      "hex": "#B5DECC",
+      "rgb": {
+        "r": 181,
+        "g": 222,
+        "b": 204
+      },
+      "hsl": {
+        "h": 154,
+        "s": 38,
+        "l": 79
+      },
+      "family": "green",
+      "tags": [
+        "turkuaz",
+        "firuze",
+        "yesil",
+        "yeşil",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "green"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-347",
+      "name": "Vandar Poel's Blue",
+      "hex": "#064F6E",
+      "rgb": {
+        "r": 6,
+        "g": 79,
+        "b": 110
+      },
+      "hsl": {
+        "h": 198,
+        "s": 90,
+        "l": 23
+      },
+      "family": "cyan",
+      "tags": [
+        "mavi",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-348",
+      "name": "Vandyke Brown",
+      "hex": "#4B3317",
+      "rgb": {
+        "r": 75,
+        "g": 51,
+        "b": 23
+      },
+      "hsl": {
+        "h": 32,
+        "s": 53,
+        "l": 19
+      },
+      "family": "brown",
+      "tags": [
+        "kahverengi",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "brown"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-349",
+      "name": "Vandyke Red",
+      "hex": "#82241F",
+      "rgb": {
+        "r": 130,
+        "g": 36,
+        "b": 31
+      },
+      "hsl": {
+        "h": 3,
+        "s": 61,
+        "l": 32
+      },
+      "family": "red",
+      "tags": [
+        "kirmizi",
+        "kırmızı",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "red"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-350",
+      "name": "Venice Green",
+      "hex": "#62C6BF",
+      "rgb": {
+        "r": 98,
+        "g": 198,
+        "b": 191
+      },
+      "hsl": {
+        "h": 176,
+        "s": 47,
+        "l": 58
+      },
+      "family": "cyan",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "camgobegi",
+        "camgöbeği",
+        "turkuaz",
+        "cyan"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-351",
+      "name": "Veronia Purple",
+      "hex": "#8C4C62",
+      "rgb": {
+        "r": 140,
+        "g": 76,
+        "b": 98
+      },
+      "hsl": {
+        "h": 339,
+        "s": 30,
+        "l": 42
+      },
+      "family": "pink",
+      "tags": [
+        "mor",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "pembe",
+        "pink"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-352",
+      "name": "Vinaceous Cinnamon",
+      "hex": "#EEA78C",
+      "rgb": {
+        "r": 238,
+        "g": 167,
+        "b": 140
+      },
+      "hsl": {
+        "h": 17,
+        "s": 74,
+        "l": 74
+      },
+      "family": "orange",
+      "tags": [
+        "archival",
+        "sanzo wada",
+        "historical",
+        "turuncu",
+        "orange"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-353",
+      "name": "Vinaceous Tawny",
+      "hex": "#C56127",
+      "rgb": {
+        "r": 197,
+        "g": 97,
+        "b": 39
+      },
+      "hsl": {
+        "h": 22,
+        "s": 67,
+        "l": 46
+      },
+      "family": "orange",
+      "tags": [
+        "archival",
+        "sanzo wada",
+        "historical",
+        "turuncu",
+        "orange"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-354",
+      "name": "Violet",
+      "hex": "#EE82EE",
+      "rgb": {
+        "r": 238,
+        "g": 130,
+        "b": 238
+      },
+      "hsl": {
+        "h": 300,
+        "s": 76,
+        "l": 72
+      },
+      "family": "purple",
+      "tags": [
+        "css:violet",
+        "mor",
+        "eflatun",
+        "purple",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-355",
+      "name": "Violet Blue",
+      "hex": "#40456A",
+      "rgb": {
+        "r": 64,
+        "g": 69,
+        "b": 106
+      },
+      "hsl": {
+        "h": 233,
+        "s": 25,
+        "l": 33
+      },
+      "family": "purple",
+      "tags": [
+        "menekse",
+        "menekşe",
+        "mavi",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "mor",
+        "eflatun",
+        "purple"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-356",
+      "name": "Violet Carmine",
+      "hex": "#713B4C",
+      "rgb": {
+        "r": 113,
+        "g": 59,
+        "b": 76
+      },
+      "hsl": {
+        "h": 341,
+        "s": 31,
+        "l": 34
+      },
+      "family": "red",
+      "tags": [
+        "menekse",
+        "menekşe",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "kirmizi",
+        "kırmızı",
+        "red"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-357",
+      "name": "Violet Red",
+      "hex": "#642D5E",
+      "rgb": {
+        "r": 100,
+        "g": 45,
+        "b": 94
+      },
+      "hsl": {
+        "h": 307,
+        "s": 38,
+        "l": 28
+      },
+      "family": "purple",
+      "tags": [
+        "menekse",
+        "menekşe",
+        "kirmizi",
+        "kırmızı",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "mor",
+        "eflatun",
+        "purple"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-358",
+      "name": "Vistoris Lake",
+      "hex": "#6D4145",
+      "rgb": {
+        "r": 109,
+        "g": 65,
+        "b": 69
+      },
+      "hsl": {
+        "h": 355,
+        "s": 25,
+        "l": 34
+      },
+      "family": "red",
+      "tags": [
+        "archival",
+        "sanzo wada",
+        "historical",
+        "kirmizi",
+        "kırmızı",
+        "red"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-359",
+      "name": "Warm Purple",
+      "hex": "#952E8F",
+      "rgb": {
+        "r": 149,
+        "g": 46,
+        "b": 143
+      },
+      "hsl": {
+        "h": 303,
+        "s": 53,
+        "l": 38
+      },
+      "family": "purple",
+      "tags": [
+        "mor",
+        "xkcd survey",
+        "eflatun",
+        "purple"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-360",
+      "name": "Washed Out Green",
+      "hex": "#BCF5A6",
+      "rgb": {
+        "r": 188,
+        "g": 245,
+        "b": 166
+      },
+      "hsl": {
+        "h": 103,
+        "s": 80,
+        "l": 81
+      },
+      "family": "green",
+      "tags": [
+        "yesil",
+        "yeşil",
+        "xkcd survey",
+        "green"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-361",
+      "name": "Wheat",
+      "hex": "#F5DEB3",
+      "rgb": {
+        "r": 245,
+        "g": 222,
+        "b": 179
+      },
+      "hsl": {
+        "h": 39,
+        "s": 77,
+        "l": 83
+      },
+      "family": "beige",
+      "tags": [
+        "css:wheat",
+        "bej",
+        "krem",
+        "beige",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-362",
+      "name": "White",
+      "hex": "#FFFFFF",
+      "rgb": {
+        "r": 255,
+        "g": 255,
+        "b": 255
+      },
+      "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 100
+      },
+      "family": "white",
+      "tags": [
+        "css:white",
+        "beyaz",
+        "white",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-363",
+      "name": "White Smoke",
+      "hex": "#F5F5F5",
+      "rgb": {
+        "r": 245,
+        "g": 245,
+        "b": 245
+      },
+      "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 96
+      },
+      "family": "white",
+      "tags": [
+        "css:whitesmoke",
+        "beyaz",
+        "white",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-364",
+      "name": "Windows Blue",
+      "hex": "#3778BF",
+      "rgb": {
+        "r": 55,
+        "g": 120,
+        "b": 191
+      },
+      "hsl": {
+        "h": 211,
+        "s": 55,
+        "l": 48
+      },
+      "family": "blue",
+      "tags": [
+        "mavi",
+        "xkcd survey",
+        "blue"
+      ],
+      "source": "XKCD Color Survey"
+    },
+    {
+      "id": "color-365",
+      "name": "Yellow",
+      "hex": "#FFFF00",
+      "rgb": {
+        "r": 255,
+        "g": 255,
+        "b": 0
+      },
+      "hsl": {
+        "h": 60,
+        "s": 100,
+        "l": 50
+      },
+      "family": "yellow",
+      "tags": [
+        "css:yellow",
+        "sari",
+        "sarı",
+        "yellow",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    },
+    {
+      "id": "color-366",
+      "name": "Yellow Ocher",
+      "hex": "#E2B540",
+      "rgb": {
+        "r": 226,
+        "g": 181,
+        "b": 64
+      },
+      "hsl": {
+        "h": 43,
+        "s": 74,
+        "l": 57
+      },
+      "family": "yellow",
+      "tags": [
+        "sari",
+        "sarı",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "yellow"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-367",
+      "name": "Yellow Orange",
+      "hex": "#F99D1B",
+      "rgb": {
+        "r": 249,
+        "g": 157,
+        "b": 27
+      },
+      "hsl": {
+        "h": 35,
+        "s": 95,
+        "l": 54
+      },
+      "family": "orange",
+      "tags": [
+        "sari",
+        "sarı",
+        "turuncu",
+        "archival",
+        "sanzo wada",
+        "historical",
+        "orange"
+      ],
+      "source": "Dictionary of Color Combinations"
+    },
+    {
+      "id": "color-368",
+      "name": "Yellowgreen",
+      "hex": "#9ACD32",
+      "rgb": {
+        "r": 154,
+        "g": 205,
+        "b": 50
+      },
+      "hsl": {
+        "h": 80,
+        "s": 61,
+        "l": 50
+      },
+      "family": "green",
+      "tags": [
+        "css:yellowgreen",
+        "yesil",
+        "yeşil",
+        "green",
+        "w3c css named color"
+      ],
+      "source": "W3C CSS Color Module Level 4"
+    }
+  ]
+}
