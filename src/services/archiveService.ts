@@ -4,6 +4,7 @@
  */
 
 import initialArchiveData from '../data/archiveData.json';
+import cmaAdditionsRaw from '../data/archive-additions-100-paintings.json';
 import archiveColorIndexRaw from '../data/archiveColorIndex.json';
 import {
   ArchiveColorIndexEntry,
@@ -15,29 +16,69 @@ import { hydrateLegacyArtworkTemperature } from './colorTemperatureService';
 
 const STORAGE_KEY = 'chromarchive_user_items';
 
-const COLOR_INDEX_BY_OBJECT_ID = new Map<number, ArchiveColorIndexEntry>(
-  (archiveColorIndexRaw as ArchiveColorIndexEntry[]).map((entry) => [
-    entry.objectId,
-    entry,
-  ])
-);
+const COLOR_INDEX_BY_OBJECT_ID = new Map<number, ArchiveColorIndexEntry>();
+const COLOR_INDEX_BY_ARTWORK_ID = new Map<string, ArchiveColorIndexEntry>();
+
+for (const entry of archiveColorIndexRaw as ArchiveColorIndexEntry[]) {
+  if (typeof entry.objectId === 'number') {
+    COLOR_INDEX_BY_OBJECT_ID.set(entry.objectId, entry);
+  }
+  if (typeof entry.artworkId === 'string' && entry.artworkId.trim()) {
+    COLOR_INDEX_BY_ARTWORK_ID.set(entry.artworkId.trim(), entry);
+  }
+}
+
+function normKey(value?: string): string {
+  return (value || '').trim().toLowerCase().replace(/\s+/g, ' ');
+}
+
+function buildDedupeKeys(item: ArtworkMetadata): string[] {
+  const keys: string[] = [];
+  if (item.id) keys.push(`id:${normKey(item.id)}`);
+  if (typeof item.objectId === 'number') keys.push(`oid:${item.objectId}`);
+  if (item.museumRecordId) keys.push(`mrid:${normKey(item.museumRecordId)}`);
+  if (item.accessionNumber) {
+    const museumName = normKey(item.museum || item.institution || 'met');
+    keys.push(`acc:${museumName}::${normKey(item.accessionNumber)}`);
+  }
+  return keys;
+}
 
 /**
  * Ham arşiv verisini tam ve kararlı ArtworkMetadata modeline dönüştürür.
  */
 export function normalizeArchiveItem(raw: any): ArtworkMetadata {
-  const objectId = raw.objectId || (raw.id && !isNaN(Number(raw.id)) ? Number(raw.id) : undefined);
+  const objectId =
+    typeof raw.objectId === 'number'
+      ? raw.objectId
+      : raw.id && !isNaN(Number(raw.id))
+      ? Number(raw.id)
+      : undefined;
   const id = String(raw.id || raw.objectId || Math.random().toString(36).substring(2, 9));
 
   const hasOwnColors = Array.isArray(raw.dominantColors) && raw.dominantColors.length > 0;
-  const indexedEntry =
-    !hasOwnColors && typeof objectId === 'number'
-      ? COLOR_INDEX_BY_OBJECT_ID.get(objectId)
-      : undefined;
+  const indexedEntry = !hasOwnColors
+    ? COLOR_INDEX_BY_ARTWORK_ID.get(id) ??
+      (typeof objectId === 'number' ? COLOR_INDEX_BY_OBJECT_ID.get(objectId) : undefined)
+    : undefined;
 
   const dominantColors = hasOwnColors
     ? raw.dominantColors
     : indexedEntry?.dominantColors ?? [];
+
+  const isAnalyzed = dominantColors.length > 0;
+  const analysisStatus: ArtworkMetadata['analysisStatus'] = isAnalyzed
+    ? 'analyzed'
+    : raw.analysisStatus === 'failed_image_analysis'
+    ? 'failed_image_analysis'
+    : 'pending_image_analysis';
+
+  const museumName =
+    raw.museum || raw.institution || raw.source || 'The Metropolitan Museum of Art';
+  const defaultRecordUrl =
+    raw.museumRecordUrl ||
+    raw.museumUrl ||
+    (objectId ? `https://www.metmuseum.org/art/collection/search/${objectId}` : '');
 
   const normalized: ArtworkMetadata = {
     id,
@@ -46,65 +87,86 @@ export function normalizeArchiveItem(raw: any): ArtworkMetadata {
     artist: raw.artist || 'Bilinmeyen Sanatçı',
     date: raw.date || raw.year || 'Tarih Belirtilmemiş',
     year: raw.year || raw.date || 'Tarih Belirtilmemiş',
-    category: raw.department || raw.category || 'Müze Arşivi',
+    category: raw.category || raw.period || raw.department || 'Müze Arşivi',
     department: raw.department || 'European Paintings',
     period: raw.period || raw.department || 'Açık Erişim Koleksiyonu',
-    institution: raw.source || raw.institution || 'The Metropolitan Museum of Art',
-    source: raw.source || 'The Metropolitan Museum of Art',
+    institution: museumName,
+    museum: museumName,
+    museumRecordId: raw.museumRecordId,
+    source: raw.source || museumName,
     accessionNumber: raw.accessionNumber || (objectId ? `MET-${objectId}` : 'MET-OA'),
-    sourceUrl: raw.museumRecordUrl || raw.sourceUrl || (objectId ? `https://www.metmuseum.org/art/collection/search/${objectId}` : ''),
-    museumUrl: raw.museumRecordUrl || raw.museumUrl || (objectId ? `https://www.metmuseum.org/art/collection/search/${objectId}` : ''),
-    museumRecordUrl: raw.museumRecordUrl || (objectId ? `https://www.metmuseum.org/art/collection/search/${objectId}` : ''),
+    sourceApiUrl: raw.sourceApiUrl,
+    sourceUrl: raw.sourceApiUrl || raw.sourceUrl || defaultRecordUrl,
+    museumUrl: defaultRecordUrl,
+    museumRecordUrl: defaultRecordUrl,
     license: raw.license || 'Kamu Malı (Public Domain / CC0)',
-    rights: raw.rights || 'Kamu Malı (Public Domain / CC0)',
+    rights: raw.rights || raw.license || 'Kamu Malı (Public Domain / CC0)',
     isPublicDomain: raw.isPublicDomain ?? true,
-    medium: raw.medium || 'Tuval üzerine yağlıboya',
+    medium: raw.medium || 'Belirtilmemiş',
     dimensions: raw.dimensions || 'Müze Arşiv Standartları',
-    description: raw.description || `${raw.artist || 'Sanatçı'} tarafından ${raw.date || ''} tarihinde üretilen, The Metropolitan Museum of Art açık erişim koleksiyonunda yer alan kamu malı başyapıt.`,
+    description:
+      raw.description ||
+      `${raw.artist || 'Sanatçı'} tarafından ${raw.date || ''} tarihinde üretilen${
+        raw.medium ? ` (${raw.medium})` : ''
+      }, ${museumName} açık erişim koleksiyonunda yer alan kamu malı eser.`,
     imageUrl: raw.imageUrl,
     thumbnailUrl: raw.thumbnailUrl || raw.imageUrl,
     culture: raw.culture || '',
-    tags: raw.tags || (raw.department ? [raw.department, 'The Met', 'Open Access'] : ['The Met', 'Open Access']),
+    tags:
+      raw.tags ||
+      [raw.department, raw.workFormatLabelTr, raw.museum || 'The Met', 'Open Access'].filter(
+        Boolean
+      ),
+    workType: raw.workType,
+    workFormat: raw.workFormat,
+    workFormatLabelTr: raw.workFormatLabelTr,
+    analysisStatus,
     dominantColors,
-    overallTemperature:
-      raw.overallTemperature ||
-      indexedEntry?.overallTemperature ||
-      'Dengeli / Nötr',
+    overallTemperature: isAnalyzed
+      ? raw.overallTemperature || indexedEntry?.overallTemperature || 'Dengeli / geçişli'
+      : 'Analiz Bekleniyor',
     dominantCount: dominantColors.length,
-    analysisDate:
-      raw.analysisDate ||
-      indexedEntry?.analysisDate ||
-      new Date().toISOString().split('T')[0],
-    colorDiversityScore:
-      raw.colorDiversityScore ?? indexedEntry?.colorDiversityScore ?? 75,
-    warmthScoreWeightedMean:
-      typeof raw.warmthScoreWeightedMean === 'number' || raw.warmthScoreWeightedMean === null
+    analysisDate: isAnalyzed
+      ? raw.analysisDate || indexedEntry?.analysisDate || new Date().toISOString().split('T')[0]
+      : '',
+    colorDiversityScore: isAnalyzed
+      ? raw.colorDiversityScore ?? indexedEntry?.colorDiversityScore
+      : undefined,
+    warmthScoreWeightedMean: isAnalyzed
+      ? typeof raw.warmthScoreWeightedMean === 'number' || raw.warmthScoreWeightedMean === null
         ? raw.warmthScoreWeightedMean
-        : indexedEntry?.warmthScoreWeightedMean,
-    warmSharePercent:
-      typeof raw.warmSharePercent === 'number'
+        : indexedEntry?.warmthScoreWeightedMean
+      : undefined,
+    warmSharePercent: isAnalyzed
+      ? typeof raw.warmSharePercent === 'number'
         ? raw.warmSharePercent
-        : indexedEntry?.warmSharePercent,
-    coolSharePercent:
-      typeof raw.coolSharePercent === 'number'
+        : indexedEntry?.warmSharePercent
+      : undefined,
+    coolSharePercent: isAnalyzed
+      ? typeof raw.coolSharePercent === 'number'
         ? raw.coolSharePercent
-        : indexedEntry?.coolSharePercent,
-    transitionalSharePercent:
-      typeof raw.transitionalSharePercent === 'number'
+        : indexedEntry?.coolSharePercent
+      : undefined,
+    transitionalSharePercent: isAnalyzed
+      ? typeof raw.transitionalSharePercent === 'number'
         ? raw.transitionalSharePercent
-        : indexedEntry?.transitionalSharePercent,
-    neutralSharePercent:
-      typeof raw.neutralSharePercent === 'number'
+        : indexedEntry?.transitionalSharePercent
+      : undefined,
+    neutralSharePercent: isAnalyzed
+      ? typeof raw.neutralSharePercent === 'number'
         ? raw.neutralSharePercent
-        : indexedEntry?.neutralSharePercent,
-    temperatureSummary:
-      typeof raw.temperatureSummary === 'string'
+        : indexedEntry?.neutralSharePercent
+      : undefined,
+    temperatureSummary: isAnalyzed
+      ? typeof raw.temperatureSummary === 'string'
         ? raw.temperatureSummary
-        : indexedEntry?.temperatureSummary,
-    temperatureModelVersion:
-      typeof raw.temperatureModelVersion === 'string'
+        : indexedEntry?.temperatureSummary
+      : undefined,
+    temperatureModelVersion: isAnalyzed
+      ? typeof raw.temperatureModelVersion === 'string'
         ? raw.temperatureModelVersion
-        : indexedEntry?.temperatureModelVersion,
+        : indexedEntry?.temperatureModelVersion
+      : undefined,
     spatialTemperatureRelations: Array.isArray(raw.spatialTemperatureRelations)
       ? raw.spatialTemperatureRelations
       : undefined,
@@ -112,15 +174,32 @@ export function normalizeArchiveItem(raw: any): ArtworkMetadata {
     isCustom: raw.isCustom,
   };
 
-  return hydrateLegacyArtworkTemperature(normalized);
+  return isAnalyzed ? hydrateLegacyArtworkTemperature(normalized) : normalized;
 }
 
 /**
- * Başlangıç verisi, doğrulanmış renk indeksi ve kullanıcının yerel kayıtlarını
- * objectId/id tekilliğini koruyarak birleştirir.
+ * Başlangıç verisi (The Met + CMA ek koleksiyonu), doğrulanmış renk indeksi ve
+ * kullanıcının yerel kayıtlarını tekilliği koruyarak birleştirir.
  */
 export function getArchiveItems(): ArtworkMetadata[] {
-  const normalizedDefault = (initialArchiveData as any[]).map(normalizeArchiveItem);
+  const metRecords = Array.isArray(initialArchiveData) ? initialArchiveData : [];
+  const cmaRecords = Array.isArray((cmaAdditionsRaw as { artworks?: unknown[] })?.artworks)
+    ? (cmaAdditionsRaw as { artworks: unknown[] }).artworks
+    : [];
+
+  const combinedDefaultsRaw = [...metRecords, ...cmaRecords];
+  const seenKeys = new Set<string>();
+  const normalizedDefault: ArtworkMetadata[] = [];
+
+  for (const rawItem of combinedDefaultsRaw) {
+    const item = normalizeArchiveItem(rawItem);
+    const keys = buildDedupeKeys(item);
+    if (keys.some((k) => seenKeys.has(k))) {
+      continue;
+    }
+    keys.forEach((k) => seenKeys.add(k));
+    normalizedDefault.push(item);
+  }
 
   if (typeof window === 'undefined') {
     return normalizedDefault;
@@ -133,20 +212,12 @@ export function getArchiveItems(): ArtworkMetadata[] {
     const userItems: any[] = JSON.parse(raw);
     if (Array.isArray(userItems)) {
       const normalizedUser = userItems.map(normalizeArchiveItem);
-      const userIds = new Set(normalizedUser.map((u) => u.id));
-      const userObjectIds = new Set(
-        normalizedUser
-          .map((u) => u.objectId)
-          .filter((oid): oid is number => typeof oid === 'number')
-      );
+      const userKeySet = new Set<string>();
+      normalizedUser.forEach((u) => buildDedupeKeys(u).forEach((k) => userKeySet.add(k)));
 
-      const dedupedDefault = normalizedDefault.filter((item) => {
-        if (userIds.has(item.id)) return false;
-        if (typeof item.objectId === 'number' && userObjectIds.has(item.objectId)) {
-          return false;
-        }
-        return true;
-      });
+      const dedupedDefault = normalizedDefault.filter(
+        (item) => !buildDedupeKeys(item).some((k) => userKeySet.has(k))
+      );
 
       return [...normalizedUser, ...dedupedDefault];
     }
@@ -255,19 +326,35 @@ export function calculateArchiveStatistics(
       coolPercent: 0,
       neutralCount: 0,
       neutralPercent: 0,
+      transitionalCount: 0,
+      transitionalPercent: 0,
+      analyzedArtworkCount: 0,
+      avgWarmthScore: null,
+      weightedWarmSharePercent: 0,
+      weightedCoolSharePercent: 0,
+      weightedTransitionalSharePercent: 0,
+      weightedNeutralSharePercent: 0,
       topFamilies: [],
     };
   }
 
-  const totalColors = items.reduce(
-    (sum, item) => sum + (item.dominantColors?.length || 0),
+  const analyzedItems = items.filter(
+    (item) => Array.isArray(item.dominantColors) && item.dominantColors.length > 0
+  );
+
+  const totalColors = analyzedItems.reduce(
+    (sum, item) => sum + item.dominantColors.length,
     0
   );
 
-  const avgDiversity = Math.round(
-    items.reduce((sum, item) => sum + (item.colorDiversityScore || 75), 0) /
-      totalArtworks
-  );
+  const diversityScores = analyzedItems
+    .map((item) => item.colorDiversityScore)
+    .filter((s): s is number => typeof s === 'number' && Number.isFinite(s));
+
+  const avgDiversity =
+    diversityScores.length > 0
+      ? Math.round(diversityScores.reduce((sum, s) => sum + s, 0) / diversityScores.length)
+      : 0;
 
   let warmCount = 0;
   let coolCount = 0;
@@ -283,6 +370,13 @@ export function calculateArchiveStatistics(
   let warmthScoreCount = 0;
 
   items.forEach((rawItem) => {
+    const hasColors =
+      Array.isArray(rawItem.dominantColors) && rawItem.dominantColors.length > 0;
+    if (!hasColors) {
+      neutralCount++;
+      return;
+    }
+
     const item = hydrateLegacyArtworkTemperature(rawItem);
     const t = (item.overallTemperature || '').toLowerCase();
     if (t.includes('sıcak')) warmCount++;
@@ -290,16 +384,14 @@ export function calculateArchiveStatistics(
     else if (t.includes('geçişli') || t.includes('dengeli')) transitionalCount++;
     else neutralCount++;
 
-    if (item.dominantColors && item.dominantColors.length > 0) {
-      analyzedArtworkCount++;
-      sumWarmShare += item.warmSharePercent ?? 0;
-      sumCoolShare += item.coolSharePercent ?? 0;
-      sumTransitionalShare += item.transitionalSharePercent ?? 0;
-      sumNeutralShare += item.neutralSharePercent ?? 0;
-      if (typeof item.warmthScoreWeightedMean === 'number') {
-        warmthScoreSum += item.warmthScoreWeightedMean;
-        warmthScoreCount++;
-      }
+    analyzedArtworkCount++;
+    sumWarmShare += item.warmSharePercent ?? 0;
+    sumCoolShare += item.coolSharePercent ?? 0;
+    sumTransitionalShare += item.transitionalSharePercent ?? 0;
+    sumNeutralShare += item.neutralSharePercent ?? 0;
+    if (typeof item.warmthScoreWeightedMean === 'number') {
+      warmthScoreSum += item.warmthScoreWeightedMean;
+      warmthScoreCount++;
     }
   });
 
@@ -312,22 +404,22 @@ export function calculateArchiveStatistics(
   );
 
   const dominantTemperature =
-    warmCount > coolCount && warmCount >= transitionalCount
+    analyzedArtworkCount === 0
+      ? '—'
+      : warmCount > coolCount && warmCount >= transitionalCount
       ? 'Sıcak ağırlıklı'
       : coolCount > warmCount && coolCount >= transitionalCount
       ? 'Soğuk ağırlıklı'
       : transitionalCount > 0
       ? 'Dengeli / geçişli'
-      : 'Dengeli / Nötr';
+      : 'Nötr ağırlıklı';
 
   const familyCountMap: Record<string, number> = {};
-  items.forEach((item) => {
-    if (item.dominantColors) {
-      item.dominantColors.forEach((c) => {
-        const fam = c.family || 'Nötr';
-        familyCountMap[fam] = (familyCountMap[fam] || 0) + 1;
-      });
-    }
+  analyzedItems.forEach((item) => {
+    item.dominantColors.forEach((c) => {
+      const fam = c.family || 'Nötr';
+      familyCountMap[fam] = (familyCountMap[fam] || 0) + 1;
+    });
   });
 
   const familyColors: Record<string, string> = {
@@ -344,9 +436,7 @@ export function calculateArchiveStatistics(
     .map((key) => ({
       family: key,
       count: familyCountMap[key],
-      percent: Math.round(
-        (familyCountMap[key] / (totalColors || 1)) * 100
-      ),
+      percent: Math.round((familyCountMap[key] / (totalColors || 1)) * 100),
       color: familyColors[key] || '#78716c',
     }))
     .sort((a, b) => b.count - a.count)

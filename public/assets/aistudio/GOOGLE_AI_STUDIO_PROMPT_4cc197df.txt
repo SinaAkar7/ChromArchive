@@ -1,0 +1,182 @@
+CHROMARCHIVE — 100 YENİ RESİM/TABLO EKLEME + İSTATİSTİK AÇIKLAMA BALONLARI
+
+Bu görev için sana şu dosyayı yüklüyorum:
+`src/data/archive-additions-100-paintings.json`
+
+ÖNEMLİ BAĞLAM:
+- Bu dosya, önceki konuşmada hazırlanan 100 yeni Cleveland Museum of Art (CMA) açık erişim eser listesinin temizlenmiş sürümüdür.
+- Dosyada 100 kayıt vardır ve kayıtların tamamında kaynak `department` alanı `Painting` değerindedir.
+- Dosya içindeki alt formatlar: 72 yağlıboya; 23 asma/el rulosu resmi; 3 suluboya veya kâğıt üzeri karma teknik; 2 kâğıt/ipek üzerine mürekkep ve renk resmi.
+- Bu nedenle hepsi resim kategorisindedir; hepsinin tuval üzerine yağlıboya olduğu iddia edilmemelidir.
+- Dosya içindeki kayıtlar accessionNumber ve id bakımından kendi içinde benzersizdir. Fakat mevcut uygulamadaki eski arşivle çakışıp çakışmadıkları henüz karşılaştırılmamıştır.
+
+HEDEF:
+Mevcut ChromArchive arşivine, eski kayıtları koruyarak 100 yeni ve farklı resim/tablo eklemek. Aynı zamanda İstatistikler bölümündeki şu dört verinin yanına/altına soru işareti simgesi koy:
+1. İndekslenen eser
+2. Toplam renk kümesi
+3. Kromatik çeşitlilik
+4. Ağırlık sıcaklık
+Soru işaretine mouse ile gelindiğinde açıklama balonu açılsın; klavye ile focus olduğunda ve mobilde dokunulduğunda da erişilebilir olsun.
+
+KATI KURAL:
+Projeyi baştan oluşturma veya büyük refactor yapma. React 19, TypeScript Strict Mode, Vite, mevcut CSS/tasarım dili, K-Means++ analiz motoru, renk sözlüğü, tarihsel pigment sistemi, renk arama sistemi, localStorage ve Vercel ayarlarını koru.
+
+==================================================
+BÖLÜM A — 100 RESİM KAYDINI MEVCUT ARŞİVE EKLE
+==================================================
+
+1. Önce mevcut arşiv dosyasını ve veri akışını incele. Özellikle:
+- src/data/archiveData.json (veya uygulamanın gerçek başlangıç arşiv dosyası)
+- public/archive-data.json (kullanılıyorsa)
+- src/services/archiveService.ts
+- src/types/index.ts
+- src/components/ArchiveGallery.tsx
+- src/components/ArtworkModal.tsx
+- src/components/Statistics.tsx
+- src/App.tsx
+
+2. Yüklediğim `archive-additions-100-paintings.json` dosyasını oku. Kaydın `artworks` dizisini kullan. `audit`, `classificationSummary` ve kaynak alanlarını da koru.
+
+3. EKLEMEDEN ÖNCE TEKRAR KONTROLÜ YAP:
+- Birincil eşleştirme: museum + accessionNumber.
+- İkincil eşleştirme: museumRecordId veya id.
+- Başlık + sanatçı yalnızca muhtemel tekrar uyarısı üretmek için kullanılsın; farklı müzelerde aynı başlık ve sanatçıya ait ayrı eserleri otomatik silme.
+- Mevcut arşivde aynı CMA accession number zaten varsa tekrar ekleme.
+- JSON dosyasındaki 100 kayıt içinde tekrar yoktur; mevcut projedeki eski 105 kayıtla karşılaştırma henüz yapılmadığından kesin kontrolü sen yap.
+- Çakışan bir kayıt bulunursa veri kaynağından başka bir CC0, görselli, `type=Painting` eseri getirerek 100 yeni ve farklı kayıt hedefine ulaş. Uydurma kayıt oluşturma.
+
+4. CMA kaynağını ve lisansı koru:
+- Museum: The Cleveland Museum of Art
+- License: CC0 1.0
+- Kaynak eser sayfası: `museumRecordUrl`
+- Kaynak API: `sourceApiUrl`
+- Görsel: `imageUrl` / `thumbnailUrl`
+- `accessionNumber`, `culture`, `period`, `department`, `medium` ve `workFormat` alanlarını kaybetme.
+- Görsel bağlantısı bozuk veya 404 ise CMA Open Access API'den aynı eser için gerçek `images.web.url` alanını alıp düzelt. Düzeltilemiyorsa kaydı başarılı görsel olarak sayma; başka uygun CC0 Painting kaydıyla değiştir.
+- Her kayıt için görseli kontrol et. Uygulama açıldığında her seferinde API'ye bağlanma; doğrulama/indeksleme bir defalık hazırlık işlemi olsun.
+
+CMA API dokümantasyonu:
+https://openaccess-api.clevelandart.org/
+Sorgu parametreleri: `cc0`, `has_image=1`, `type=Painting`, `limit`, `skip`.
+Örnek arama: `https://openaccess-api.clevelandart.org/api/artworks/?cc0=1&has_image=1&type=Painting&limit=100&skip=0`
+API yanıtındaki gerçek alan adlarını dokümantasyondan kontrol et; tahmin ederek alan üretme.
+
+5. MEVCUT ArtworkMetadata TİPİNE GÜVENLİ EŞLE:
+- Mevcut tipte zorunlu alanları incele.
+- CMA alanlarını doğru karşılıklarına eşle:
+  - id: kararlı `cma-${accessionNumber}`
+  - title: title
+  - artist: artist
+  - date/year: date
+  - institution: The Cleveland Museum of Art
+  - accessionNumber: accessionNumber
+  - sourceUrl: sourceApiUrl
+  - museumUrl: museumRecordUrl
+  - license/rights: CC0 1.0
+  - medium: medium
+  - culture: culture
+  - period: period
+  - imageUrl/thumbnailUrl: kayıttaki doğrulanmış URL
+- `dominantColors` için uydurma renk paleti oluşturma. Analiz edilmemiş kayıtları `dominantColors: []` ve açık bir `analysisStatus: pending_image_analysis` veya projedeki eşdeğer durumla kaydet.
+- Renk analizi yapılmadan `dominantCount`, `overallTemperature`, `colorDiversityScore` veya sıcak/soğuk yüzdelerini tahmin etme.
+- Mevcut interface zorunluysa geriye uyumlu ve doğru varsayılanları dikkatli kullan; analiz yapılmamış bir eseri analiz edilmiş gibi gösterme.
+
+6. ARŞİVİ BÜYÜT:
+- Eski 105 civarındaki kayıtları silme veya üzerine yazma.
+- Yeni ve eski kayıtları tek bir başlangıç arşiv akışında birleştir.
+- Aynı kaydı iki kez ekleme.
+- JSON listesi ve localStorage kayıtları birbiriyle çakışmasın.
+- Mümkünse arşiv toplamını gerçek benzersiz eser sayısından üret; eklenen 100 sayısını sabit yazma.
+- Başlık, sanatçı, dönem, teknik ve görsel bağlantıları ArchiveGallery ve ArtworkModal içinde görünür olsun.
+- Yeni resimler de mevcut eser modalı ve analizöre aktar işlevini kullanabilsin.
+
+7. RENK ANALİZİ / ARAMA İNDEKSİ:
+- Bu 100 eser için renk paleti henüz JSON içinde verilmemiştir.
+- Renk paletlerini gerçek görsel piksel verisinden, projedeki mevcut Canvas + K-Means++ motoruyla oluştur.
+- Renk analizi başarısız olursa `pending` / `failed` durumunu sakla; renkleri elle uydurma.
+- Arşivdeki eserlerin tamamını her uygulama açılışında tekrar analiz etme. Bir defalık geliştirme/indeksleme işlemi veya talep üzerine analiz yap ve sonuçları mevcut arşiv formatına uygun şekilde sakla.
+- Renk arama sonuçlarına yalnızca gerçekten dominantColors verisi bulunan eserleri dahil et.
+- CORS hatasını kullanıcıya anlaşılır göster; bozuk URL nedeniyle tüm uygulamayı çökertme.
+
+==================================================
+BÖLÜM B — İSTATİSTİKLERDE 4 AÇIKLAMA BALONU
+==================================================
+
+İstatistik kartlarında bu dört başlığın hemen yanında küçük, sade bir `?` simgesi ekle:
+- İndekslenen eser
+- Toplam renk kümesi
+- Kromatik çeşitlilik
+- Ağırlık sıcaklık
+
+Bunların hepsinde aynı erişilebilir tooltip davranışı olsun:
+- Desktop: mouse hover ve klavye focus ile açılmalı.
+- Mobil: dokunma ile açılıp kapatılmalı.
+- Tooltip ekran dışına taşmamalı; mobilde viewport içine yerleşmeli.
+- `aria-label`, `aria-describedby`, `role="tooltip"` veya uygun erişilebilir semantik kullan.
+- Sadece hover'a bağlı bir çözüm yapma.
+- Mevcut ikon paketi (lucide-react) varsa `CircleHelp` veya `HelpCircle` kullan; yeni paket yükleme.
+- Renkleri ve tipografiyi mevcut ChromArchive tasarımına uydur.
+
+AÇIKLAMA METİNLERİ (Türkçe ve sade):
+
+1) İndekslenen eser:
+“Arşivde kayıtlı ve uygulamanın eser kataloğunda aranabilir durumda olan benzersiz eser sayısıdır. Bu sayı, renk analizi tamamlanan eser sayısıyla aynı olmak zorunda değildir.”
+
+2) Toplam renk kümesi:
+“Renk analizi tamamlanan eserlerde K-Means algoritmasının belirlediği baskın renk gruplarının toplamıdır. Bir eserde birden fazla renk kümesi bulunabilir.”
+
+3) Kromatik çeşitlilik:
+“Bir eserin baskın renklerinin birbirinden ne kadar farklı olduğunu özetleyen çeşitlilik puanıdır. Yüksek değer, paletin daha çeşitli renkler içerdiğini gösterir; renk sayısı anlamına gelmez.”
+
+4) Ağırlık sıcaklık:
+“Analiz edilen renklerin görselde kapladıkları alan oranlarına göre hesaplanan genel sıcak-soğuk yönelimidir. Nötr ve geçişli tonlar ayrı değerlendirilir; fiziksel sıcaklık veya Kelvin ölçümü değildir.”
+
+ÖNEMLİ HESAPLAMA KONTROLÜ:
+- Önce Statistics.tsx ve istatistik verilerini üreten servislerde dört değerin gerçek hesaplama kaynağını incele.
+- Tooltip metni gerçek formülle uyumlu olsun. Mevcut hesap farklıysa formülü sessizce değiştirme; açıklama metnini gerçek davranışa uyarla ve raporda açıkla.
+- “İndekslenen eser” ile “renk analizi tamamlanan eser” sayaçlarını birbirine karıştırma. Gerekirse ayrı küçük bir “Renk analizi tamamlanan” alt sayısı ekle; ana tasarımı bozma.
+- Toplam renk kümesini benzersiz HEX renk sayısı olarak değil, mevcut uygulamanın gerçekten hesapladığı küme toplamı olarak açıkla.
+- Kromatik çeşitliliğin mevcut `colorDiversityScore` formülüne dayanıp dayanmadığını kontrol et.
+- Ağırlık sıcaklık için dominant color percentage ağırlıklarının toplamını doğrula; yüzdelerin toplamı tolerans içinde 100 olmalı.
+
+==================================================
+BÖLÜM C — TEST VE VERCEL GÜVENLİĞİ
+==================================================
+
+- Yeni npm paketi ekleme.
+- package.json, lock dosyaları, vite.config ve vercel.json dosyalarını gereksiz yere değiştirme.
+- Node.js'e özgü modülleri frontend'e ekleme.
+- Harici API'yi runtime'da her açılışta çağırma.
+- TypeScript Strict Mode'u koru.
+- Büyük görselleri JSON içine gömme; sadece URL sakla.
+- Mevcut 105 eserin verilerini ve kullanıcı localStorage kayıtlarını koru.
+
+Testler:
+1. Yeni 100 kaydın tümü gerçek Painting kaydı mı?
+2. Mevcut arşivle birleştirme sonrası tam 100 yeni benzersiz kayıt eklendi mi? Çakışma varsa yerine yenisini bul.
+3. Her eserin accessionNumber alanı benzersiz mi?
+4. Görsel URL'leri geçerli mi? Bozuk olanlar yenilendi mi?
+5. Arşiv toplamı gerçek benzersiz kayıt sayısını gösteriyor mu?
+6. Renk analizi yapılmamış eserlerde sahte dominantColors üretilmiyor mu?
+7. 4 istatistik simgesi hover, focus ve mobil dokunmada açıklama açıyor mu?
+8. Tooltip metinleri gerçek istatistik hesaplarıyla uyumlu mu?
+9. İstatistikler ve renk analizleri veri yokken hata vermiyor mu?
+10. Arşiv araması, eser modalı, analizöre aktar ve renk arama özellikleri bozulmadı mı?
+11. Mobil düzen korunuyor mu?
+
+Son olarak gerçekten çalıştır:
+- `npm run lint`
+- `npm run build`
+
+Başarısız testleri çözmeden başarılı deme. Çalıştıramadığın testleri açıkça belirt.
+
+SON RAPORDA ŞUNLARI VER:
+- Eklenen yeni ve benzersiz eser sayısı.
+- Çakışma nedeniyle çıkarılan ve yerine eklenen eserler.
+- Görseli doğrulanmış eser sayısı ve başarısız olanlar.
+- Arşivin güncel toplam kayıt sayısı.
+- Yeni/ değişen dosya listesi.
+- Dört tooltip'in eklendiği bileşen ve gerçek formüller.
+- Lint ve build sonuçları.
+
+EN ÖNEMLİ KURAL: 100 gerçek, farklı, resim/tablo eseri hedefle. Heykel, mobilya, seramik, tekstil, dekoratif obje veya başka resim dışı eserleri ekleme. Scroll painting ve kâğıt/ipek üzerine resimler de resim türüdür; bunları sırf tuval üzerine yağlıboya olmadıkları için çıkarma.

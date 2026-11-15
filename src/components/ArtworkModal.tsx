@@ -110,6 +110,7 @@ export const ArtworkModal: React.FC<ArtworkModalProps> = ({
                   src={hydratedArtwork.imageUrl}
                   alt={hydratedArtwork.title}
                   className="modal-image-preview"
+                  referrerPolicy="no-referrer"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400"><rect fill="%23232529" width="600" height="400"/><text fill="%23EAE5D9" x="50%" y="50%" text-anchor="middle" font-family="serif">Görsel Yüklenemedi</text></svg>';
                   }}

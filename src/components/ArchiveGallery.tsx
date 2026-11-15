@@ -568,7 +568,7 @@ export const ArchiveGallery: React.FC<ArchiveGalleryProps> = ({
                           color: 'var(--text-muted)',
                         }}
                       >
-                        Açık Erişim · The Met
+                        Açık Erişim · {item.museum || item.institution || 'The Met'}
                       </span>
                     )}
                   </div>

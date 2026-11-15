@@ -5,8 +5,18 @@
  * dominant color families, and collection diversity scores.
  */
 
-import React, { useMemo } from 'react';
-import { BarChart3, PieChart, Flame, Snowflake, Scale, Layers, Sparkles, Database } from 'lucide-react';
+import React, { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import {
+  BarChart3,
+  PieChart,
+  Flame,
+  Snowflake,
+  Scale,
+  Layers,
+  Sparkles,
+  Database,
+  CircleHelp,
+} from 'lucide-react';
 import type { ArtworkMetadata } from '../types';
 import { calculateArchiveStatistics } from '../services/archiveService';
 
@@ -15,8 +25,154 @@ interface StatisticsProps {
   onSelectArtwork?: (artwork: ArtworkMetadata) => void;
 }
 
+type TooltipState = {
+  id: string;
+  mode: 'hover' | 'focus' | 'pinned';
+} | null;
+
+interface MetricTooltipProps {
+  id: string;
+  label: string;
+  description: string;
+  openTooltip: TooltipState;
+  setOpenTooltip: React.Dispatch<React.SetStateAction<TooltipState>>;
+  lastPointerTouchRef: React.MutableRefObject<boolean>;
+}
+
+const MetricTooltip: React.FC<MetricTooltipProps> = ({
+  id,
+  label,
+  description,
+  openTooltip,
+  setOpenTooltip,
+  lastPointerTouchRef,
+}) => {
+  const reactId = useId();
+  const tooltipDomId = `stat-tooltip-${id}-${reactId.replace(/:/g, '')}`;
+  const isOpen = openTooltip?.id === id;
+  const popoverRef = useRef<HTMLDivElement | null>(null);
+  const [shiftX, setShiftX] = useState<number>(0);
+
+  useLayoutEffect(() => {
+    if (!isOpen || !popoverRef.current) {
+      setShiftX(0);
+      return;
+    }
+    const el = popoverRef.current;
+    // Reset shift first so measurement reflects natural centered position
+    el.style.setProperty('--tooltip-shift-x', '0px');
+    const rect = el.getBoundingClientRect();
+    const margin = 12;
+    let delta = 0;
+    if (rect.right > window.innerWidth - margin) {
+      delta = window.innerWidth - margin - rect.right;
+    } else if (rect.left < margin) {
+      delta = margin - rect.left;
+    }
+    setShiftX(Math.round(delta));
+  }, [isOpen]);
+
+  return (
+    <div
+      className="stat-tooltip-wrap"
+      data-tooltip-wrap="true"
+      onPointerEnter={(e) => {
+        if (e.pointerType === 'touch') return;
+        setOpenTooltip((prev) =>
+          prev?.id === id && prev.mode === 'pinned' ? prev : { id, mode: 'hover' }
+        );
+      }}
+      onPointerLeave={(e) => {
+        if (e.pointerType === 'touch') return;
+        setOpenTooltip((prev) =>
+          prev?.id === id && prev.mode === 'hover' ? null : prev
+        );
+      }}
+      onFocus={() => {
+        if (lastPointerTouchRef.current) return;
+        setOpenTooltip((prev) =>
+          prev?.id === id && prev.mode === 'pinned' ? prev : { id, mode: 'focus' }
+        );
+      }}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+          setOpenTooltip((prev) =>
+            prev?.id === id && prev.mode === 'focus' ? null : prev
+          );
+        }
+      }}
+    >
+      <button
+        type="button"
+        className={`stat-help-btn ${isOpen ? 'active' : ''}`}
+        aria-label={`${label} açıklaması`}
+        aria-describedby={isOpen ? tooltipDomId : undefined}
+        aria-expanded={isOpen}
+        onPointerDown={(e) => {
+          lastPointerTouchRef.current =
+            e.pointerType === 'touch' || e.pointerType === 'pen';
+        }}
+        onClick={(e) => {
+          e.stopPropagation();
+          setOpenTooltip((prev) =>
+            prev?.id === id && prev.mode === 'pinned' ? null : { id, mode: 'pinned' }
+          );
+        }}
+      >
+        <CircleHelp size={14} aria-hidden="true" />
+      </button>
+
+      {isOpen && (
+        <div
+          ref={popoverRef}
+          id={tooltipDomId}
+          role="tooltip"
+          className="stat-tooltip-popover"
+          style={{ '--tooltip-shift-x': `${shiftX}px` } as React.CSSProperties}
+        >
+          <div className="stat-tooltip-title">{label}</div>
+          <p className="stat-tooltip-text">{description}</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const STAT_TOOLTIPS = {
+  indexed:
+    'Arşivde kayıtlı ve uygulamanın eser kataloğunda aranabilir durumda olan benzersiz eser sayısıdır. Bu sayı, renk analizi tamamlanan eser sayısıyla aynı olmak zorunda değildir.',
+  clusters:
+    'Renk analizi tamamlanan eserlerde K-Means++ algoritmasının belirlediği baskın renk gruplarının toplamıdır (benzersiz HEX sayısı değildir). Bir eserde birden fazla renk kümesi bulunabilir.',
+  diversity:
+    'Renk analizi tamamlanan eserlerin baskın renkleri arasındaki ortalama algısal mesafeyi (colorDiversityScore) özetleyen çeşitlilik puanıdır. Yüksek değer paletin daha çeşitli renkler içerdiğini gösterir; renk sayısı anlamına gelmez.',
+  temperature:
+    'Analiz edilen eserlerde baskın renklerin görselde kapladıkları alan oranlarına (% pay toplamı 100) göre sınıflandırılan genel sıcak-soğuk yöneliminin koleksiyondaki baskın eğilimidir. Nötr ve geçişli tonlar ayrı değerlendirilir; fiziksel sıcaklık veya Kelvin ölçümü değildir.',
+};
+
 export const Statistics: React.FC<StatisticsProps> = ({ archiveItems }) => {
   const stats = useMemo(() => calculateArchiveStatistics(archiveItems), [archiveItems]);
+  const [openTooltip, setOpenTooltip] = useState<TooltipState>(null);
+  const lastPointerTouchRef = useRef<boolean>(false);
+
+  useEffect(() => {
+    const handleOutsidePointer = (e: PointerEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (!target?.closest('[data-tooltip-wrap="true"]')) {
+        setOpenTooltip(null);
+      }
+    };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setOpenTooltip(null);
+      }
+    };
+    document.addEventListener('pointerdown', handleOutsidePointer);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('pointerdown', handleOutsidePointer);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   // Group by artwork period/categories for taxonomy breakdown
   const categoryBreakdown = useMemo(() => {
@@ -46,16 +202,38 @@ export const Statistics: React.FC<StatisticsProps> = ({ archiveItems }) => {
       <div className="stats-cards-grid">
         <div className="stat-card">
           <div className="stat-card-header">
-            <span className="stat-label">İndekslenen Eser</span>
+            <div className="stat-label-with-help">
+              <span className="stat-label">İndekslenen Eser</span>
+              <MetricTooltip
+                id="indexed"
+                label="İndekslenen Eser"
+                description={STAT_TOOLTIPS.indexed}
+                openTooltip={openTooltip}
+                setOpenTooltip={setOpenTooltip}
+                lastPointerTouchRef={lastPointerTouchRef}
+              />
+            </div>
             <Database size={18} className="stat-icon text-accent" />
           </div>
           <div className="stat-value">{stats.totalArtworks}</div>
-          <span className="stat-sub">Müze & Açık Erişim Kaydı</span>
+          <span className="stat-sub">
+            {stats.analyzedArtworkCount ?? 0} renk analizi tamamlanan · Müze Kaydı
+          </span>
         </div>
 
         <div className="stat-card">
           <div className="stat-card-header">
-            <span className="stat-label">Toplam Renk Kümesi</span>
+            <div className="stat-label-with-help">
+              <span className="stat-label">Toplam Renk Kümesi</span>
+              <MetricTooltip
+                id="clusters"
+                label="Toplam Renk Kümesi"
+                description={STAT_TOOLTIPS.clusters}
+                openTooltip={openTooltip}
+                setOpenTooltip={setOpenTooltip}
+                lastPointerTouchRef={lastPointerTouchRef}
+              />
+            </div>
             <Layers size={18} className="stat-icon text-accent" />
           </div>
           <div className="stat-value">{stats.totalColors}</div>
@@ -64,7 +242,17 @@ export const Statistics: React.FC<StatisticsProps> = ({ archiveItems }) => {
 
         <div className="stat-card">
           <div className="stat-card-header">
-            <span className="stat-label">Kromatik Çeşitlilik</span>
+            <div className="stat-label-with-help">
+              <span className="stat-label">Kromatik Çeşitlilik</span>
+              <MetricTooltip
+                id="diversity"
+                label="Kromatik Çeşitlilik"
+                description={STAT_TOOLTIPS.diversity}
+                openTooltip={openTooltip}
+                setOpenTooltip={setOpenTooltip}
+                lastPointerTouchRef={lastPointerTouchRef}
+              />
+            </div>
             <Sparkles size={18} className="stat-icon text-accent" />
           </div>
           <div className="stat-value">%{stats.avgDiversity}</div>
@@ -73,7 +261,17 @@ export const Statistics: React.FC<StatisticsProps> = ({ archiveItems }) => {
 
         <div className="stat-card">
           <div className="stat-card-header">
-            <span className="stat-label">Ağırlıklı Sıcaklık</span>
+            <div className="stat-label-with-help">
+              <span className="stat-label">Ağırlıklı Sıcaklık</span>
+              <MetricTooltip
+                id="temperature"
+                label="Ağırlıklı Sıcaklık"
+                description={STAT_TOOLTIPS.temperature}
+                openTooltip={openTooltip}
+                setOpenTooltip={setOpenTooltip}
+                lastPointerTouchRef={lastPointerTouchRef}
+              />
+            </div>
             <Scale size={18} className="stat-icon text-accent" />
           </div>
           <div className="stat-value">{stats.dominantTemperature}</div>

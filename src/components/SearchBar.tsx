@@ -670,6 +670,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                         src={thumbSrc}
                         alt={artwork.title}
                         loading="lazy"
+                        referrerPolicy="no-referrer"
                         className="artwork-match-thumb"
                         onError={(e) => {
                           (e.target as HTMLImageElement).src = FALLBACK_ARTWORK_THUMB;

@@ -1,0 +1,19 @@
+{
+  "reviewedCount": 100,
+  "includedPaintingCount": 100,
+  "excludedNonPaintingCount": 0,
+  "excludedRecords": [],
+  "uniqueAccessionNumbers": 100,
+  "uniqueIds": 100,
+  "formatCounts": {
+    "oil_painting": 72,
+    "scroll_painting": 23,
+    "ink_and_color_painting_on_paper_or_silk": 2,
+    "watercolor_or_mixed_media_on_paper": 3
+  },
+  "imageUrlsPresent": 100,
+  "cc0Marked": 100,
+  "imageUrlsIndividuallyLiveVerified": false,
+  "existingArchiveDuplicateCheckPerformed": false,
+  "note": "Kaynak JSON içindeki department alanları kullanılarak sınıflandırma yapıldı. 100 kaydın tamamı Painting; resim dışı eser yok. Bu sınıflandırma görsel URL’lerinin HTTP durumunu doğrulamaz."
+}

@@ -109,10 +109,18 @@ export interface ArtworkMetadata {
   isPublicDomain?: boolean;
   museumRecordUrl?: string;
   source?: string;
+  museum?: string;
+  museumRecordId?: string;
+  sourceApiUrl?: string;
+  workType?: string;
+  workFormat?: string;
+  workFormatLabelTr?: string;
+  analysisStatus?: 'analyzed' | 'pending_image_analysis' | 'failed_image_analysis';
 }
 
 export interface ArchiveColorIndexEntry {
-  objectId: number;
+  artworkId?: string;
+  objectId?: number;
   dominantColors: DominantColor[];
   overallTemperature: string;
   clusterCountUsed: number;
