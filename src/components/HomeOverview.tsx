@@ -1,382 +1,462 @@
 /**
  * @file src/components/HomeOverview.tsx
- * @description Ana sayfa alt bölümü için zengin editoryal içerik düzeni:
- * A) Proje Hakkında, B) Nasıl Çalışır? (4 aşamalı iş akışı),
- * C) Temel Özellikler (8 modüler kart), D) Projenin Amacı ve Kullanım Alanları.
+ * @description ChromArchive Ana Sayfa (Müze ve Dijital Kürasyon Editoryal Giriş Ekranı).
+ * Görsel yükleme ve analiz çalışma alanından tamamen bağımsızdır; projeyi,
+ * dijital arşivi, renk analiz metodolojisini, kromatik aramayı ve tarihsel pigment sistemini tanıtır.
  */
 
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import {
-  Palette,
-  Upload,
-  Cpu,
-  Layers,
-  FileJson,
-  Hash,
-  Percent,
-  Search,
-  Scale,
-  Sparkles,
+  ArrowRight,
   BookOpen,
-  Landmark,
   Compass,
-  ArrowRight
+  Cpu,
+  Database,
+  History,
+  Image as ImageIcon,
+  Landmark,
+  Palette,
+  Search,
 } from 'lucide-react';
-import type { NavigationSection } from '../types';
+import type { ArtworkMetadata, NavigationSection } from '../types';
 
-interface HomeOverviewProps {
-  onNavigate: (section: NavigationSection) => void;
+interface FeaturedPlateSpec {
+  id: string;
+  title: string;
+  artist: string;
+  date: string;
+  institution: string;
+  src: string;
+  fallbackSrc: string;
+  matchObjectId?: number;
+  caption: string;
 }
 
-export const HomeOverview: React.FC<HomeOverviewProps> = ({ onNavigate }) => {
+const FEATURED_PLATES: FeaturedPlateSpec[] = [
+  {
+    id: 'plate-vermeer',
+    title: 'Süt Döken Kadın (The Milkmaid)',
+    artist: 'Johannes Vermeer',
+    date: 'y. 1658',
+    institution: 'Rijksmuseum / Açık Erişim Seçkisi',
+    src: 'images/met_vermeer_milkmaid_1794382514298.jpg',
+    fallbackSrc: 'images/vermeer.jpg',
+    caption: 'Doğal ultramarin ve kurşun-kalay sarısı kontrastı',
+  },
+  {
+    id: 'plate-hokusai',
+    title: 'Kanagawa Açıklarında Büyük Dalga',
+    artist: 'Katsushika Hokusai',
+    date: 'y. 1831',
+    institution: 'Edo Ukiyo-e / The Met Seçkisi',
+    src: 'images/hokusai_great_wave_1794382514699.jpg',
+    fallbackSrc: 'images/hokusai.jpg',
+    matchObjectId: 45434,
+    caption: 'Prusya mavisi ve fildişi tonları arasında yüksek kontrast',
+  },
+  {
+    id: 'plate-monet',
+    title: 'Nilüferler ve Japon Köprüsü',
+    artist: 'Claude Monet',
+    date: '1899',
+    institution: 'İzlenimcilik / The Met Seçkisi',
+    src: 'images/monet_water_lilies_1794382515387.jpg',
+    fallbackSrc: 'images/monet.jpg',
+    matchObjectId: 436965,
+    caption: 'Soğuk su yansımaları ve yumuşak botanik yeşiller',
+  },
+  {
+    id: 'plate-cezanne',
+    title: 'Elmalı Natürmort (Still Life with Apples)',
+    artist: 'Paul Cézanne',
+    date: '1893–1894',
+    institution: 'Post-İzlenimcilik / The Met Seçkisi',
+    src: 'images/cezanne_still_life_1794382516386.jpg',
+    fallbackSrc: 'images/cezanne.jpg',
+    matchObjectId: 435882,
+    caption: 'Sıcak toprak sarısı, vermilyon ve seramik beyazı dengesi',
+  },
+];
+
+interface HomeOverviewProps {
+  archiveItems: ArtworkMetadata[];
+  onNavigate: (section: NavigationSection) => void;
+  onInspectArtwork?: (artwork: ArtworkMetadata) => void;
+}
+
+export const HomeOverview: React.FC<HomeOverviewProps> = ({
+  archiveItems,
+  onNavigate,
+  onInspectArtwork,
+}) => {
+  const [activePlateIdx, setActivePlateIdx] = useState<number>(0);
+  const [imgStage, setImgStage] = useState<'primary' | 'fallback' | 'broken'>('primary');
+
+  const activePlate = FEATURED_PLATES[activePlateIdx] || FEATURED_PLATES[0];
+
+  const statsSummary = useMemo(() => {
+    const total = archiveItems.length;
+    const analyzed = archiveItems.filter(
+      (item) => Array.isArray(item.dominantColors) && item.dominantColors.length > 0
+    ).length;
+    return { total, analyzed };
+  }, [archiveItems]);
+
+  const matchedArchiveArtwork = useMemo(() => {
+    if (activePlate.matchObjectId) {
+      const byOid = archiveItems.find((a) => a.objectId === activePlate.matchObjectId);
+      if (byOid) return byOid;
+    }
+    const lowerArtist = activePlate.artist.toLowerCase();
+    return archiveItems.find((a) => a.artist.toLowerCase().includes(lowerArtist)) || null;
+  }, [archiveItems, activePlate]);
+
+  const handleSelectPlate = (idx: number) => {
+    setActivePlateIdx(idx);
+    setImgStage('primary');
+  };
+
+  const currentImageSrc =
+    imgStage === 'primary' ? activePlate.src : activePlate.fallbackSrc;
+
   return (
-    <div className="home-editorial-sections">
+    <div className="home-curatorial-page">
       {/* ==================================================================
-          A) PROJE HAKKINDA (ABOUT THE PROJECT)
+          HERO: EDİTORYAL MÜZE AÇILIŞ ALANI
           ================================================================== */}
-      <section className="editorial-block about-chromarchive">
-        <div className="editorial-header">
-          <div className="badge-tag">
-            <BookOpen size={13} />
-            <span>KÜRATÖRYEL VİZYON & DİJİTAL MİRAS</span>
+      <section className="home-hero-grid" aria-labelledby="homeHeroHeadline">
+        <div className="home-hero-copy">
+          <div className="home-eyebrow-line">
+            <span>Dijital Sanat Arşivi ve Renk Araştırma Platformu</span>
+            <span aria-hidden="true">·</span>
+            <span>Açık Erişim Koleksiyonu</span>
           </div>
-          <h2 className="editorial-title">ChromArchive Hakkında</h2>
-          <p className="editorial-lead">
-            Sanat eserlerinin ve açık erişimli dijital koleksiyonların renk DNA’sını
-            bilgisayarlı görü algoritmalarıyla çözen, kataloglayan ve aranabilir kılan yeni nesil dijital arşiv platformu.
+
+          <h1 id="homeHeroHeadline" className="home-hero-title">
+            Sanatı, renklerin izinden keşfedin.
+          </h1>
+
+          <p className="home-hero-lead">
+            Sanat eserlerinin görsel dünyasını yalnızca sanatçı ve dönem bilgileriyle
+            değil, onları oluşturan renklerle de inceleyin. Görselleri analiz edin,
+            açık erişimli koleksiyonda gezinin ve benzer tonları keşfedin.
           </p>
-        </div>
 
-        <div className="about-overview-grid">
-          <div className="about-main-card">
-            <div className="about-card-badge">DİJİTAL BİLGİ YÖNETİMİ</div>
-            <h3 className="about-card-headline">
-              Renk Odaklı Bilgi Keşfi ve Görsel Bellek
-            </h3>
-            <p className="about-card-body">
-              Geleneksel dijital kütüphaneler ve müze katalogları, sanat eserlerini çoğunlukla sanatçı adı, yapım yılı ve teknik gibi sözel etiketlerle sınıflandırır. <strong>ChromArchive</strong>, açık erişimli dijital görsel koleksiyonlarını doğrudan piksellerinden okuyarak kromatik kompozisyonları bağımsız birer bilgi katmanı ve arama kriteri hâline getirir.
-            </p>
-            <p className="about-card-subbody">
-              The Metropolitan Museum of Art Open Access ve Wikimedia Commons CC0 veri şemalarıyla tam uyumlu mimarisi sayesinde, kültürel mirasın renk paletleri şeffaf, ölçülebilir ve doğrudan araştırmacıların erişimine açık olarak modellenir.
-            </p>
-            <div className="about-highlights-row">
-              <div className="highlight-item">
-                <span className="hl-number">%100</span>
-                <span className="hl-desc">İstemci Taraflı (Canvas API)</span>
-              </div>
-              <div className="highlight-item">
-                <span className="hl-number">K-Means++</span>
-                <span className="hl-desc">Algısal Ağırlıklı Kümeleme</span>
-              </div>
-              <div className="highlight-item">
-                <span className="hl-number">CC0 / PD</span>
-                <span className="hl-desc">Açık Erişim Standartları</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="about-side-features">
-            <div className="side-feature-box">
-              <div className="side-feature-icon">
-                <Cpu size={20} />
-              </div>
-              <div className="side-feature-content">
-                <h4>Sıfır Sunucu & Yüksek Gizlilik</h4>
-                <p>
-                  Yüklediğiniz görseller hiçbir uzak sunucuya aktarılmaz; tüm piksel matrisi doğrudan cihazınızın tarayıcı belleğinde güvenle taranır.
-                </p>
-              </div>
-            </div>
-
-            <div className="side-feature-box">
-              <div className="side-feature-icon">
-                <FileJson size={20} />
-              </div>
-              <div className="side-feature-content">
-                <h4>Yapılandırılmış Metadata</h4>
-                <p>
-                  Her analiz; HEX, RGB, renk ailesi, yaklaşık sıcaklık ve kullanım oranlarını içeren uluslararası müze standartlarında JSON nesnesi üretir.
-                </p>
-              </div>
-            </div>
-
-            <div className="side-feature-box">
-              <div className="side-feature-icon">
-                <Search size={20} />
-              </div>
-              <div className="side-feature-content">
-                <h4>Kromatik Benzerlik Arama Motoru</h4>
-                <p>
-                  İnsan retinasının spektral hassasiyetine göre kalibre edilmiş formül ile hedef bir renge en yakın başyapıtlar anında eşleştirilir.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ==================================================================
-          B) NASIL ÇALIŞIR? (HOW IT WORKS - 4-STEP WORKFLOW)
-          ================================================================== */}
-      <section className="editorial-block workflow-section">
-        <div className="editorial-header">
-          <div className="badge-tag">
-            <Layers size={13} />
-            <span>DÖRT ADIMDA İŞ AKIŞI</span>
-          </div>
-          <h2 className="editorial-title">Nasıl Çalışır?</h2>
-          <p className="editorial-lead">
-            Kullanıcı arayüzünden piksel matrisine, kümeleme algoritmasından dijital arşive uzanan bilimsel analiz adımları.
-          </p>
-        </div>
-
-        <div className="workflow-steps-grid">
-          {/* Adım 1 */}
-          <div className="workflow-step-card">
-            <div className="step-badge-row">
-              <span className="step-num-pill">01</span>
-              <Upload size={18} className="step-icon" />
-            </div>
-            <h3 className="step-title">Görsel Yükleme</h3>
-            <p className="step-description">
-              JPG, JPEG, PNG veya WEBP formatındaki görselinizi sürükleyip bırakın ya da Vermeer, Hokusai veya Mona Lisa gibi hazır başyapıt örneklerinden birini seçin.
-            </p>
-            <div className="step-footer-tag">Yerel Dosya veya Örnek</div>
-          </div>
-
-          {/* Adım 2 */}
-          <div className="workflow-step-card">
-            <div className="step-badge-row">
-              <span className="step-num-pill">02</span>
-              <Cpu size={18} className="step-icon" />
-            </div>
-            <h3 className="step-title">Piksel Verisi Analizi</h3>
-            <p className="step-description">
-              HTML5 2D Canvas API kullanılarak görsel optimize edilmiş matrise çizilir. Saydam pikseller elenir ve on binlerce renk vektörü milisaniyeler içinde örneklenir.
-            </p>
-            <div className="step-footer-tag">Canvas 2D Örnekleme</div>
-          </div>
-
-          {/* Adım 3 */}
-          <div className="workflow-step-card">
-            <div className="step-badge-row">
-              <span className="step-num-pill">03</span>
-              <Palette size={18} className="step-icon" />
-            </div>
-            <h3 className="step-title">Baskın Renk Kümeleme</h3>
-            <p className="step-description">
-              K-Means++ algoritması, ağırlıklı algısal renk mesafesi formülüyle kompozisyondaki en belirgin 5 ila 8 renk merkezini ve piksel kullanım oranlarını tespit eder.
-            </p>
-            <div className="step-footer-tag">K-Means++ & Ağırlıklı Öklid</div>
-          </div>
-
-          {/* Adım 4 */}
-          <div className="workflow-step-card">
-            <div className="step-badge-row">
-              <span className="step-num-pill">04</span>
-              <Sparkles size={18} className="step-icon" />
-            </div>
-            <h3 className="step-title">Metadata & Akıllı Arama</h3>
-            <p className="step-description">
-              Çıkarılan palet; sıcaklık, renk ailesi ve HEX kodlarıyla doğrulanır. Eser yerel arşive eklenir ve hedef renk benzerlik aramalarında taranabilir hâle gelir.
-            </p>
-            <div className="step-footer-tag">Kalıcı Arşivleme & JSON</div>
-          </div>
-        </div>
-      </section>
-
-      {/* ==================================================================
-          C) TEMEL ÖZELLİKLER (CORE FEATURES - 8 DISTINCT CARDS)
-          ================================================================== */}
-      <section className="editorial-block features-catalog-section">
-        <div className="editorial-header">
-          <div className="badge-tag">
-            <Sparkles size={13} />
-            <span>KAPSAMLI YETENEKLER</span>
-          </div>
-          <h2 className="editorial-title">Temel Özellikler</h2>
-          <p className="editorial-lead">
-            ChromArchive'ın araştırmacılar, sanat tarihçileri, küratörler ve tasarımcılar için sunduğu modüler araçlar.
-          </p>
-        </div>
-
-        <div className="features-eight-grid">
-          {/* Kart 1 */}
-          <div className="feature-item-card">
-            <div className="feature-icon-wrapper">
-              <Cpu size={20} />
-            </div>
-            <h3 className="feature-heading">Otomatik Renk Analizi</h3>
-            <p className="feature-detail">
-              Tarayıcı içi JavaScript Canvas motoru sayesinde hiçbir dış API veya sunucuya ihtiyaç duymadan gerçek zamanlı analiz.
-            </p>
-          </div>
-
-          {/* Kart 2 */}
-          <div className="feature-item-card">
-            <div className="feature-icon-wrapper">
-              <Palette size={20} />
-            </div>
-            <h3 className="feature-heading">Baskın Renklerin Tespiti</h3>
-            <p className="feature-detail">
-              K-Means++ merkez başlatma ile görselin en karakteristik 5–8 renk kümesini yerel minimumlara takılmadan matematiksel kesinlikle yakalama.
-            </p>
-          </div>
-
-          {/* Kart 3 */}
-          <div className="feature-item-card">
-            <div className="feature-icon-wrapper">
-              <Hash size={20} />
-            </div>
-            <h3 className="feature-heading">HEX ve RGB Kodları</h3>
-            <p className="feature-detail">
-              Her küme için web standartlarında HEX kodu ve 24-bit sRGB renk uzayı koordinatları. Tek tıkla panoya kopyalama desteği.
-            </p>
-          </div>
-
-          {/* Kart 4 */}
-          <div className="feature-item-card">
-            <div className="feature-icon-wrapper">
-              <Percent size={20} />
-            </div>
-            <h3 className="feature-heading">Renk Yüzdeleri</h3>
-            <p className="feature-detail">
-              Kompozisyon içindeki piksel dağılımını normalize edilmiş yüzdelerle hesaplama ve oransal spektrum renk çubuğunda görselleştirme.
-            </p>
-          </div>
-
-          {/* Kart 5 */}
-          <div className="feature-item-card">
-            <div className="feature-icon-wrapper">
-              <Landmark size={20} />
-            </div>
-            <h3 className="feature-heading">Dijital Görsel Arşivi</h3>
-            <p className="feature-detail">
-              Açık erişimli başyapıtların yer aldığı, sanat akımı, tarih, teknik ve renk ailesi bazında filtrelenebilir zengin koleksiyon.
-            </p>
-          </div>
-
-          {/* Kart 6 */}
-          <div className="feature-item-card">
-            <div className="feature-icon-wrapper">
-              <Search size={20} />
-            </div>
-            <h3 className="feature-heading">Renk Temelli Arama</h3>
-            <p className="feature-detail">
-              Renk seçici ile belirlenen hedef tonun tüm koleksiyon içindeki en yakın benzerlerini algısal Öklid metriğiyle sıralama.
-            </p>
-          </div>
-
-          {/* Kart 7 */}
-          <div className="feature-item-card">
-            <div className="feature-icon-wrapper">
-              <FileJson size={20} />
-            </div>
-            <h3 className="feature-heading">Metadata Oluşturma</h3>
-            <p className="feature-detail">
-              The Met Open Access ve Wikimedia veri modeliyle uyumlu arka plan JSON metadata nesnesi oluşturma ve tek tıkla indirme.
-            </p>
-          </div>
-
-          {/* Kart 8 */}
-          <div className="feature-item-card">
-            <div className="feature-icon-wrapper">
-              <Scale size={20} />
-            </div>
-            <h3 className="feature-heading">Görsel Karşılaştırma</h3>
-            <p className="feature-detail">
-              Farklı eserlerin renk sıcaklığı (Sıcak, Soğuk, Nötr) ve spektral çeşitlilik endeksleri üzerinden karşılaştırmalı analizi.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ==================================================================
-          D) PROJENİN AMACI VE KULLANIM ALANLARI (MISSION & USE CASES)
-          ================================================================== */}
-      <section className="editorial-block use-cases-section">
-        <div className="editorial-header">
-          <div className="badge-tag">
-            <Compass size={13} />
-            <span>MİSYON & UYGULAMA ALANLARI</span>
-          </div>
-          <h2 className="editorial-title">Projenin Amacı ve Kullanım Alanları</h2>
-          <p className="editorial-lead">
-            Görsel arşivleme, dijital kültürel miras ve bilgiye erişim ekseninde ChromArchive'ın kullanım senaryoları.
-          </p>
-        </div>
-
-        <div className="use-cases-grid">
-          {/* Alan 1 */}
-          <div className="use-case-box">
-            <div className="uc-header">
-              <span className="uc-index">A.1</span>
-              <h3 className="uc-title">Görsel Arşivleme & Bilgi Yönetimi</h3>
-            </div>
-            <p className="uc-body">
-              Görsel materyallerin yalnızca anahtar kelimelerle değil, içerdikleri kromatik özelliklerle indekslenmesini sağlar. Büyük dijital koleksiyonlarda renk temelli sorgulama imkânı sunarak bilgiye erişim yollarını zenginleştirir.
-            </p>
-          </div>
-
-          {/* Alan 2 */}
-          <div className="use-case-box">
-            <div className="uc-header">
-              <span className="uc-index">A.2</span>
-              <h3 className="uc-title">Dijital Kültürel Mirasın Korunması</h3>
-            </div>
-            <p className="uc-body">
-              Dünya müzelerindeki kamu malı başyapıtların renk paletlerini matematiksel olarak kayıt altına alır. Sanat eserlerinin zamana bağlı solma veya restorasyon süreçlerinin dijital referanslarla takip edilmesine katkıda bulunur.
-            </p>
-          </div>
-
-          {/* Alan 3 */}
-          <div className="use-case-box">
-            <div className="uc-header">
-              <span className="uc-index">A.3</span>
-              <h3 className="uc-title">Sanat Eserlerinin Sınıflandırılması</h3>
-            </div>
-            <p className="uc-body">
-              Farklı dönemlerin (Barok, İzlenimcilik, Ukiyo-e, Rönesans) ve sanatçıların (Vermeer, Monet, Cézanne) renk tercih eğilimlerini nesnel verilerle analiz ederek sanat tarihi araştırmalarına nicel destek sağlar.
-            </p>
-          </div>
-
-          {/* Alan 4 */}
-          <div className="use-case-box">
-            <div className="uc-header">
-              <span className="uc-index">A.4</span>
-              <h3 className="uc-title">Tasarım & Yaratıcı İlham Kaynağı</h3>
-            </div>
-            <p className="uc-body">
-              Grafik tasarımcılar, illüstratörler ve mimarlar için tarihsel başyapıtlardan türetilmiş doğrulanmış renk paletleri sunar. Projelerde kullanılmak üzere HEX kodlarını anında panoya kopyalama kolaylığı sağlar.
-            </p>
-          </div>
-        </div>
-
-        {/* Alt Aksiyon Çağrısı (Call to Action) */}
-        <div className="home-footer-cta-card">
-          <div className="cta-content">
-            <h3 className="cta-title">Kendi Görsellerinizin Renk Spektrumunu Keşfedin</h3>
-            <p className="cta-subtext">
-              Bir fotoğraf yükleyerek piksel analizi yapın veya açık arşivdeki onlarca başyapıtın renk profillerini inceleyin.
-            </p>
-          </div>
-          <div className="cta-buttons">
+          <div className="home-hero-cta-row">
             <button
               type="button"
-              className="btn-primary"
+              className="hero-cta-primary"
               onClick={() => onNavigate('analyzer')}
             >
-              <span>Analizöre Git</span>
-              <ArrowRight size={16} />
+              <span>Görsel analizine başla</span>
+              <ArrowRight size={17} />
             </button>
             <button
               type="button"
-              className="btn-secondary"
-              onClick={() => onNavigate('search')}
+              className="hero-cta-secondary"
+              onClick={() => onNavigate('archive')}
             >
-              <span>Renk Araması Yap</span>
+              <span>Dijital arşivi keşfet</span>
             </button>
           </div>
+
+          {/* Doğrulanmış Koleksiyon Özeti (Gerçek Verilere Dayalı Metrik Şeridi) */}
+          <dl className="home-proof-strip" aria-label="Arşiv ve sistem özeti">
+            <div className="home-proof-item">
+              <dt>Arşiv Eseri</dt>
+              <dd className="tabular-nums">{statsSummary.total}</dd>
+            </div>
+            <div className="home-proof-item">
+              <dt>Hazır Palet</dt>
+              <dd className="tabular-nums">{statsSummary.analyzed}</dd>
+            </div>
+            <div className="home-proof-item">
+              <dt>Renk Sözlüğü</dt>
+              <dd className="tabular-nums">368</dd>
+            </div>
+            <div className="home-proof-item">
+              <dt>Tarihsel Pigment</dt>
+              <dd className="tabular-nums">38</dd>
+            </div>
+          </dl>
+        </div>
+
+        {/* Sağ Vitrin: Yerel Sanat Eseri Plakası & Canlı Palet Şeridi */}
+        <aside className="home-showcase-card" aria-label="Öne çıkan sanat eseri seçkisi">
+          <div className="home-showcase-media">
+            {imgStage === 'broken' ? (
+              <div className="home-showcase-fallback" role="img" aria-label={activePlate.title}>
+                <ImageIcon size={36} className="fallback-icon" />
+                <div className="fallback-title">{activePlate.title}</div>
+                <div className="fallback-sub">{activePlate.artist} · {activePlate.date}</div>
+              </div>
+            ) : (
+              <img
+                src={currentImageSrc}
+                alt={`${activePlate.title} — ${activePlate.artist}`}
+                className="home-showcase-img"
+                referrerPolicy="no-referrer"
+                onError={() => {
+                  if (imgStage === 'primary' && activePlate.fallbackSrc !== activePlate.src) {
+                    setImgStage('fallback');
+                  } else {
+                    setImgStage('broken');
+                  }
+                }}
+              />
+            )}
+          </div>
+
+          {/* Seçili eserin gerçek renk spektrumu (arşivde analiz edilmişse) */}
+          {matchedArchiveArtwork &&
+            matchedArchiveArtwork.dominantColors &&
+            matchedArchiveArtwork.dominantColors.length > 0 && (
+              <div className="home-showcase-spectrum" aria-label="Eserin baskın renk dağılımı">
+                {matchedArchiveArtwork.dominantColors.map((col, idx) => (
+                  <div
+                    key={idx}
+                    className="home-spectrum-seg"
+                    style={{ flex: col.percentage, backgroundColor: col.hex }}
+                    title={`${col.name} (${col.hex}) · %${col.percentage}`}
+                  />
+                ))}
+              </div>
+            )}
+
+          <div className="home-showcase-caption">
+            <div className="showcase-meta-row">
+              <span>{activePlate.artist}</span>
+              <span aria-hidden="true">·</span>
+              <span>{activePlate.date}</span>
+              <span aria-hidden="true">·</span>
+              <span>{activePlate.institution}</span>
+            </div>
+            <div className="showcase-title-row">
+              <h2 className="showcase-artwork-title">{activePlate.title}</h2>
+              {matchedArchiveArtwork && onInspectArtwork && (
+                <button
+                  type="button"
+                  className="showcase-inspect-link"
+                  onClick={() => onInspectArtwork(matchedArchiveArtwork)}
+                >
+                  Arşiv Kaydını Aç
+                </button>
+              )}
+            </div>
+            <p className="showcase-note">{activePlate.caption}</p>
+          </div>
+
+          {/* Yerel Başyapıt Seçici */}
+          <div className="home-plate-selector" role="tablist" aria-label="Örnek sanat eserleri">
+            {FEATURED_PLATES.map((plate, idx) => {
+              const isActive = idx === activePlateIdx;
+              return (
+                <button
+                  key={plate.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  className={`home-plate-btn ${isActive ? 'active' : ''}`}
+                  onClick={() => handleSelectPlate(idx)}
+                >
+                  <img
+                    src={plate.fallbackSrc}
+                    alt={plate.artist}
+                    className="home-plate-thumb"
+                    loading="lazy"
+                    referrerPolicy="no-referrer"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
+                  />
+                  <span className="home-plate-label">{plate.artist.split(' ').pop()}</span>
+                </button>
+              );
+            })}
+          </div>
+        </aside>
+      </section>
+
+      {/* ==================================================================
+          BÖLÜM 1: PROJENİN KISA TANITIMI & DİJİTAL ARŞİV YAKLAŞIMI
+          ================================================================== */}
+      <section className="home-editorial-band" aria-labelledby="homeIntroTitle">
+        <div className="home-band-header">
+          <span className="home-band-kicker">01 · Küratöryel Yaklaşım</span>
+          <h2 id="homeIntroTitle" className="home-band-title">
+            Geleneksel Katalogların Ötesinde Renk Odaklı Keşif
+          </h2>
+          <p className="home-band-lead">
+            Müze katalogları eserleri çoğunlukla sanatçı adı, dönem ve envanter numarasıyla
+            dizinler. ChromArchive bu yapıya doğrudan piksel verisinden çıkarılan ölçülebilir
+            renk profillerini ekler.
+          </p>
+        </div>
+
+        <div className="home-two-col-editorial">
+          <article className="home-editorial-card">
+            <div className="card-icon-row">
+              <Landmark size={18} className="text-navy" />
+              <h3>Açık Erişimli Müze Koleksiyonu</h3>
+            </div>
+            <p>
+              The Metropolitan Museum of Art ve Cleveland Museum of Art açık erişim (CC0)
+              koleksiyonlarından derlenen <strong>{statsSummary.total}</strong> eser kaydı;
+              dönem, sanatçı, teknik, envanter numarası ve telif bilgileriyle birlikte
+              yapılandırılmış JSON şemasında sunulur.
+            </p>
+            <div className="home-card-footer-meta">
+              <span>The Met &amp; CMA CC0</span>
+              <span aria-hidden="true">·</span>
+              <span>JSON Metadata Dışa Aktarma</span>
+            </div>
+          </article>
+
+          <article className="home-editorial-card">
+            <div className="card-icon-row">
+              <Database size={18} className="text-terracotta" />
+              <h3>Kalıcı Tarayıcı Palet Belleği</h3>
+            </div>
+            <p>
+              Kullanıcıların yüklediği analizler ve dijital arşivde eksikleri tamamlanan
+              paletler uzak bir sunucuya gönderilmeden tarayıcı belleğinde kalıcı olarak
+              saklanır; sayfa yenilendiğinde tüm renk şeritleri korunur.
+            </p>
+            <div className="home-card-footer-meta">
+              <span>%100 İstemci Taraflı Analiz</span>
+              <span aria-hidden="true">·</span>
+              <span>LocalStorage Önbelleği</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      {/* ==================================================================
+          BÖLÜM 2: SİSTEM MODÜLLERİ (GERÇEK ÇALIŞAN ÖZELLİKLER)
+          ================================================================== */}
+      <section className="home-editorial-band" aria-labelledby="homeModulesTitle">
+        <div className="home-band-header">
+          <span className="home-band-kicker">02 · Modüler Yapı</span>
+          <h2 id="homeModulesTitle" className="home-band-title">
+            Analiz, Arşivleme ve Kromatik Araştırma Araçları
+          </h2>
+        </div>
+
+        <div className="home-four-col-grid">
+          <article className="home-module-card">
+            <div className="module-top-row">
+              <Cpu size={19} />
+              <span className="module-index mono-font">01</span>
+            </div>
+            <h3>Canvas &amp; K-Means++ Analizi</h3>
+            <p>
+              JPG, PNG ve WEBP görseller HTML5 Canvas üzerinde taranır; insan gözü ağırlıklı
+              Öklid mesafesiyle 5–8 baskın renk, HEX, RGB ve piksel oranı hesaplanır.
+            </p>
+            <button
+              type="button"
+              className="module-action-link"
+              onClick={() => onNavigate('analyzer')}
+            >
+              <span>Görsel Analizini Aç</span>
+              <ArrowRight size={14} />
+            </button>
+          </article>
+
+          <article className="home-module-card">
+            <div className="module-top-row">
+              <Palette size={19} />
+              <span className="module-index mono-font">02</span>
+            </div>
+            <h3>Eksik Palet Tamamlama</h3>
+            <p>
+              Dijital arşivde renk verisi henüz bulunmayan eserler tekil olarak veya en fazla iki
+              eşzamanlı işlemle gerçek piksellerden analiz edilip önbelleğe kaydedilir.
+            </p>
+            <button
+              type="button"
+              className="module-action-link"
+              onClick={() => onNavigate('archive')}
+            >
+              <span>Arşiv Kataloğuna Git</span>
+              <ArrowRight size={14} />
+            </button>
+          </article>
+
+          <article className="home-module-card">
+            <div className="module-top-row">
+              <Search size={19} />
+              <span className="module-index mono-font">03</span>
+            </div>
+            <h3>CIELAB &amp; Delta E 2000 Arama</h3>
+            <p>
+              HEX, RGB veya renk adıyla 368 kayıtlı sözlük rengi taranır; aynı zamanda paleti
+              analiz edilmiş sanat eserleri algısal ΔE yakınlığına göre sıralanır.
+            </p>
+            <button
+              type="button"
+              className="module-action-link"
+              onClick={() => onNavigate('search')}
+            >
+              <span>Renk Aramayı Başlat</span>
+              <ArrowRight size={14} />
+            </button>
+          </article>
+
+          <article className="home-module-card">
+            <div className="module-top-row">
+              <History size={19} />
+              <span className="module-index mono-font">04</span>
+            </div>
+            <h3>Tarihsel Pigment &amp; Anlamlar</h3>
+            <p>
+              11 ana renk ailesinin tarihsel bağlamları ile 38 pigmentin kimyasal bileşimi,
+              koruma notları ve kaynaklandırılmış kültürel anlamları incelenir.
+            </p>
+            <button
+              type="button"
+              className="module-action-link"
+              onClick={() => onNavigate('about')}
+            >
+              <span>Metodolojiyi İncele</span>
+              <ArrowRight size={14} />
+            </button>
+          </article>
+        </div>
+      </section>
+
+      {/* ==================================================================
+          BÖLÜM 3: KAPANIŞ YÖNLENDİRME ŞERİDİ
+          ================================================================== */}
+      <section className="home-closing-banner" aria-label="Hızlı başlangıç">
+        <div className="closing-copy">
+          <div className="closing-kicker">
+            <BookOpen size={15} />
+            <span>Tarayıcı İçi Bilimsel Renk İncelemesi</span>
+          </div>
+          <h2>Kendi görselinizi analiz edin veya müze koleksiyonunu araştırın</h2>
+          <p>
+            Çalışma ekranları arasında geçiş yaptığınızda yüklediğiniz görsel ve son analiz
+            sonuçlarınız oturum boyunca korunur.
+          </p>
+        </div>
+        <div className="closing-actions">
+          <button
+            type="button"
+            className="closing-btn-primary"
+            onClick={() => onNavigate('analyzer')}
+          >
+            <span>Görsel analizine başla</span>
+            <ArrowRight size={16} />
+          </button>
+          <button
+            type="button"
+            className="closing-btn-secondary"
+            onClick={() => onNavigate('stats')}
+          >
+            <Compass size={16} />
+            <span>Arşiv İstatistikleri</span>
+          </button>
         </div>
       </section>
     </div>

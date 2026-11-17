@@ -116,6 +116,26 @@ export interface ArtworkMetadata {
   workFormat?: string;
   workFormatLabelTr?: string;
   analysisStatus?: 'analyzed' | 'pending_image_analysis' | 'failed_image_analysis';
+  analysisError?: string;
+}
+
+export interface CachedArtworkPaletteEntry {
+  id: string;
+  dominantColors: DominantColor[];
+  overallTemperature: string;
+  dominantCount: number;
+  analysisDate: string;
+  colorDiversityScore: number;
+  dimensions?: string;
+  warmthScoreWeightedMean?: number | null;
+  warmSharePercent?: number;
+  coolSharePercent?: number;
+  transitionalSharePercent?: number;
+  neutralSharePercent?: number;
+  temperatureSummary?: string;
+  temperatureModelVersion?: string;
+  spatialTemperatureRelations?: SpatialTemperatureRelation[];
+  cachedAt: string;
 }
 
 export interface ArchiveColorIndexEntry {
@@ -176,6 +196,7 @@ export interface ArchiveStatistics {
   transitionalCount?: number;
   transitionalPercent?: number;
   analyzedArtworkCount?: number;
+  pendingArtworkCount?: number;
   avgWarmthScore?: number | null;
   weightedWarmSharePercent?: number;
   weightedCoolSharePercent?: number;

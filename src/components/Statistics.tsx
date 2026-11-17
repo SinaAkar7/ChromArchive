@@ -146,7 +146,7 @@ const STAT_TOOLTIPS = {
   diversity:
     'Renk analizi tamamlanan eserlerin baskın renkleri arasındaki ortalama algısal mesafeyi (colorDiversityScore) özetleyen çeşitlilik puanıdır. Yüksek değer paletin daha çeşitli renkler içerdiğini gösterir; renk sayısı anlamına gelmez.',
   temperature:
-    'Analiz edilen eserlerde baskın renklerin görselde kapladıkları alan oranlarına (% pay toplamı 100) göre sınıflandırılan genel sıcak-soğuk yöneliminin koleksiyondaki baskın eğilimidir. Nötr ve geçişli tonlar ayrı değerlendirilir; fiziksel sıcaklık veya Kelvin ölçümü değildir.',
+    'Renk analizi tamamlanan eserlerin baskın sıcaklık yönelimine göre koleksiyondaki dağılımıdır. Paleti henüz oluşturulmamış eserler nötr sayılmaz ve sıcaklık hesaplamasına dahil edilmez; fiziksel Kelvin ölçümü değildir.',
 };
 
 export const Statistics: React.FC<StatisticsProps> = ({ archiveItems }) => {
@@ -217,7 +217,7 @@ export const Statistics: React.FC<StatisticsProps> = ({ archiveItems }) => {
           </div>
           <div className="stat-value">{stats.totalArtworks}</div>
           <span className="stat-sub">
-            {stats.analyzedArtworkCount ?? 0} renk analizi tamamlanan · Müze Kaydı
+            {stats.analyzedArtworkCount ?? 0} analiz edilmiş · {stats.pendingArtworkCount ?? 0} palet bekliyor
           </span>
         </div>
 
@@ -329,7 +329,7 @@ export const Statistics: React.FC<StatisticsProps> = ({ archiveItems }) => {
               <div
                 className="temp-bar-segment neutral-segment"
                 style={{ width: `${stats.neutralPercent}%` }}
-                title={`Nötr / Analiz Edilmemiş: %${stats.neutralPercent}`}
+                title={`Nötr ağırlıklı: %${stats.neutralPercent}`}
               >
                 <span>%{stats.neutralPercent}</span>
               </div>
@@ -368,7 +368,7 @@ export const Statistics: React.FC<StatisticsProps> = ({ archiveItems }) => {
             <div className="temp-indicator-card neutral">
               <div className="indicator-top">
                 <Scale size={16} />
-                <span className="indicator-title">Nötr / Katalog</span>
+                <span className="indicator-title">Nötr Ağırlıklı</span>
               </div>
               <div className="indicator-val">%{stats.neutralPercent}</div>
               <span className="indicator-count">{stats.neutralCount} eser</span>
@@ -386,6 +386,8 @@ export const Statistics: React.FC<StatisticsProps> = ({ archiveItems }) => {
               {stats.weightedNeutralSharePercent ?? 0} nötr
               {typeof stats.avgWarmthScore === 'number' &&
                 ` · Ortalama Kromatik Skor: ${stats.avgWarmthScore}/100`}
+              {(stats.pendingArtworkCount ?? 0) > 0 &&
+                ` · Paleti bekleyen ${stats.pendingArtworkCount} eser sıcaklık hesabına katılmadı.`}
             </div>
           )}
         </div>

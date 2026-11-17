@@ -720,7 +720,8 @@ export async function analyzeImageSource(
           description:
             metaOverrides?.description ||
             `HTML5 Canvas API ve K-Means++ algoritması ile analiz edilen ${analysis.dominantColors.length} baskın renkli dijital görsel kaydı.`,
-          imageUrl: source,
+          imageUrl: metaOverrides?.imageUrl || source,
+          thumbnailUrl: metaOverrides?.thumbnailUrl,
           tags: metaOverrides?.tags || ['renk-analizi', 'k-means', 'dijital-arsiv'],
           culture: metaOverrides?.culture || 'Evrensel',
           category: metaOverrides?.category || 'Dijital Analiz',
@@ -738,7 +739,8 @@ export async function analyzeImageSource(
           temperatureModelVersion: analysis.temperatureModelVersion,
           spatialTemperatureRelations: analysis.spatialTemperatureRelations,
           fileFormat: metaOverrides?.fileFormat || 'JPEG',
-          isCustom: true,
+          isCustom: metaOverrides?.isCustom ?? true,
+          analysisStatus: 'analyzed',
         };
 
         resolve(fullMetadata);

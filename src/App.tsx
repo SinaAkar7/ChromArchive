@@ -4,7 +4,7 @@
  * Modern, strict TypeScript + React SPA application with client-side Canvas K-Means++ analysis.
  */
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import {
   ArtworkMetadata,
   ClusterCountOption,
@@ -16,10 +16,18 @@ import { analyzeImageSource } from './services/colorAnalyzer';
 import {
   getArchiveItems,
   saveUserArtwork,
+  saveArtworkPaletteToCache,
   exportMetadataAsJson
 } from './services/archiveService';
+import {
+  analyzeArchiveArtworkPalette,
+  isAllowedMetCrdImageUrl,
+  runBatchArchivePaletteAnalysis,
+  type BatchAnalysisProgress
+} from './services/archivePaletteService';
 
 import { Navbar } from './components/Navbar';
+import { HomeOverview } from './components/HomeOverview';
 import { ImageUploader } from './components/ImageUploader';
 import { ColorPalette } from './components/ColorPalette';
 import { ArchiveGallery } from './components/ArchiveGallery';
@@ -36,13 +44,20 @@ export default function App() {
   const [paletteViewMode, setPaletteViewMode] = useState<PaletteViewMode>('horizontal');
   const [clusterCount, setClusterCount] = useState<ClusterCountOption>('auto');
 
-  // Archive & Analysis State
+  // Archive & Analysis State (Preserved across section switches)
   const [archiveItems, setArchiveItems] = useState<ArtworkMetadata[]>([]);
   const [selectedImageSrc, setSelectedImageSrc] = useState<string | null>(null);
   const [currentArtworkMeta, setCurrentArtworkMeta] = useState<Partial<ArtworkMetadata>>({});
   const [analysisData, setAnalysisData] = useState<ArtworkMetadata | null>(null);
   const [currentMetaStrip, setCurrentMetaStrip] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  // Archive Palette Extraction State (Single + Max-2 Batch)
+  const [analyzingArtworkIds, setAnalyzingArtworkIds] = useState<string[]>([]);
+  const [failedArtworkErrors, setFailedArtworkErrors] = useState<Record<string, string>>({});
+  const [batchProgress, setBatchProgress] = useState<BatchAnalysisProgress | null>(null);
+  const [isBatchRunning, setIsBatchRunning] = useState<boolean>(false);
+  const batchAbortControllerRef = useRef<AbortController | null>(null);
 
   // Gallery Filters
   const [gallerySearchQuery, setGallerySearchQuery] = useState<string>('');
@@ -56,10 +71,13 @@ export default function App() {
   // Toast Notifications
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
 
-  // Load archive items on mount
+  // Load archive items on mount & clean up batch abort controller on unmount
   useEffect(() => {
     const items = getArchiveItems();
     setArchiveItems(items);
+    return () => {
+      batchAbortControllerRef.current?.abort();
+    };
   }, []);
 
   // Toast dispatch helper
@@ -90,7 +108,21 @@ export default function App() {
     [showToast]
   );
 
-  // Core Canvas K-Means analysis runner
+  // Sync a freshly analyzed archive artwork into state + open modal
+  const applyAnalyzedArtworkUpdate = useCallback((updatedArtwork: ArtworkMetadata) => {
+    setArchiveItems((prev) =>
+      prev.map((item) => (item.id === updatedArtwork.id ? updatedArtwork : item))
+    );
+    setFailedArtworkErrors((prev) => {
+      if (!(updatedArtwork.id in prev)) return prev;
+      const next = { ...prev };
+      delete next[updatedArtwork.id];
+      return next;
+    });
+    setModalArtwork((prev) => (prev && prev.id === updatedArtwork.id ? updatedArtwork : prev));
+  }, []);
+
+  // Core Canvas K-Means analysis runner (supports /api/met-image fallback ONLY for Met CRD URLs)
   const performAnalysis = useCallback(
     async (
       src: string,
@@ -99,11 +131,32 @@ export default function App() {
     ) => {
       setIsLoading(true);
       try {
-        const result = await analyzeImageSource(src, kOption, metaOverrides);
+        let result: ArtworkMetadata;
+        try {
+          result = await analyzeImageSource(src, kOption, metaOverrides);
+        } catch (directErr) {
+          if (isAllowedMetCrdImageUrl(src)) {
+            const proxyUrl = `/api/met-image?url=${encodeURIComponent(src)}`;
+            result = await analyzeImageSource(proxyUrl, kOption, {
+              ...metaOverrides,
+              imageUrl: metaOverrides.imageUrl || src,
+            });
+          } else {
+            throw directErr;
+          }
+        }
+
         setAnalysisData(result);
         setCurrentMetaStrip(
-          `${result.dimensions || '300x300'} · ${result.dominantColors.length} Küme · ${result.overallTemperature} Ton`
+          `${result.dimensions || '300x300'} · ${result.dominantColors.length} Küme · ${result.overallTemperature}`
         );
+
+        // If this came from an existing catalog record without custom override, persist palette cache
+        if (metaOverrides.id && metaOverrides.isCustom === false && kOption === 'auto') {
+          saveArtworkPaletteToCache(result);
+          applyAnalyzedArtworkUpdate(result);
+        }
+
         showToast(
           `Analiz tamamlandı: ${result.dominantColors.length} baskın renk kümelendi.`,
           'success'
@@ -116,7 +169,7 @@ export default function App() {
         setIsLoading(false);
       }
     },
-    [showToast]
+    [showToast, applyAnalyzedArtworkUpdate]
   );
 
   // Handle new image upload or preset click
@@ -125,8 +178,7 @@ export default function App() {
       setSelectedImageSrc(src);
       setCurrentArtworkMeta(meta);
       performAnalysis(src, meta, clusterCount);
-      // Auto switch or scroll to analyzer if on home
-      if (activeSection === 'home') {
+      if (activeSection !== 'analyzer') {
         setActiveSection('analyzer');
       }
     },
@@ -143,6 +195,111 @@ export default function App() {
     },
     [selectedImageSrc, currentArtworkMeta, performAnalysis]
   );
+
+  // Single archive artwork real-pixel palette extraction
+  const handleGenerateArtworkPalette = useCallback(
+    async (artwork: ArtworkMetadata) => {
+      setAnalyzingArtworkIds((prev) =>
+        prev.includes(artwork.id) ? prev : [...prev, artwork.id]
+      );
+      setFailedArtworkErrors((prev) => {
+        if (!(artwork.id in prev)) return prev;
+        const next = { ...prev };
+        delete next[artwork.id];
+        return next;
+      });
+
+      const res = await analyzeArchiveArtworkPalette(artwork, 'auto');
+
+      setAnalyzingArtworkIds((prev) => prev.filter((id) => id !== artwork.id));
+
+      if (res.ok && res.artwork) {
+        applyAnalyzedArtworkUpdate(res.artwork);
+        showToast(`'${artwork.title}' için renk paleti çıkarıldı ve kaydedildi.`, 'success');
+      } else {
+        const errMsg = res.error || 'Görsel erişimi başarısız.';
+        setFailedArtworkErrors((prev) => ({
+          ...prev,
+          [artwork.id]: errMsg,
+        }));
+        setArchiveItems((prev) =>
+          prev.map((item) =>
+            item.id === artwork.id
+              ? { ...item, analysisStatus: 'failed_image_analysis', analysisError: errMsg }
+              : item
+          )
+        );
+        showToast(`'${artwork.title}' analiz edilemedi: ${errMsg}`, 'error');
+      }
+    },
+    [applyAnalyzedArtworkUpdate, showToast]
+  );
+
+  // Batch archive palette extraction (max 2 concurrent requests, cancelable)
+  const handleRunBatchPaletteAnalysis = useCallback(async () => {
+    if (isBatchRunning) return;
+
+    const pendingItems = archiveItems.filter(
+      (item) => !Array.isArray(item.dominantColors) || item.dominantColors.length === 0
+    );
+
+    if (pendingItems.length === 0) {
+      showToast('Tüm arşiv eserlerinin renk paletleri zaten hazır.', 'info');
+      return;
+    }
+
+    const controller = new AbortController();
+    batchAbortControllerRef.current = controller;
+    setIsBatchRunning(true);
+
+    const summary = await runBatchArchivePaletteAnalysis(pendingItems, {
+      concurrency: 2,
+      signal: controller.signal,
+      onProgress: (progress) => {
+        setBatchProgress({ ...progress });
+      },
+      onItemSuccess: (updatedArtwork) => {
+        applyAnalyzedArtworkUpdate(updatedArtwork);
+      },
+      onItemFailure: (artworkId, errorMessage) => {
+        setFailedArtworkErrors((prev) => ({
+          ...prev,
+          [artworkId]: errorMessage,
+        }));
+        setArchiveItems((prev) =>
+          prev.map((item) =>
+            item.id === artworkId
+              ? { ...item, analysisStatus: 'failed_image_analysis', analysisError: errorMessage }
+              : item
+          )
+        );
+      },
+    });
+
+    setIsBatchRunning(false);
+    batchAbortControllerRef.current = null;
+
+    if (summary.cancelled) {
+      showToast(
+        `Toplu analiz durduruldu: ${summary.succeeded} palet kaydedildi.`,
+        'info'
+      );
+    } else if (summary.failed > 0) {
+      showToast(
+        `Toplu analiz tamamlandı: ${summary.succeeded} başarılı, ${summary.failed} başarısız.`,
+        'info'
+      );
+    } else {
+      showToast(
+        `${summary.succeeded} arşiv eserinin renk paleti başarıyla oluşturuldu.`,
+        'success'
+      );
+    }
+  }, [archiveItems, isBatchRunning, applyAnalyzedArtworkUpdate, showToast]);
+
+  const handleStopBatchPaletteAnalysis = useCallback(() => {
+    batchAbortControllerRef.current?.abort();
+  }, []);
 
   // Save analysis to local archive
   const handleSaveToArchive = useCallback(() => {
@@ -175,11 +332,16 @@ export default function App() {
     setModalArtwork(null);
   }, []);
 
-  // Load modal artwork directly into analyzer
+  // Load modal or archive artwork directly into analyzer
   const handleLoadIntoAnalyzer = useCallback(
     (artwork: ArtworkMetadata) => {
-      setSelectedImageSrc(artwork.imageUrl);
-      setCurrentArtworkMeta(artwork);
+      const sourceUrl = artwork.thumbnailUrl || artwork.imageUrl;
+      const metaForAnalyzer: Partial<ArtworkMetadata> = {
+        ...artwork,
+        isCustom: artwork.isCustom ?? false,
+      };
+      setSelectedImageSrc(sourceUrl);
+      setCurrentArtworkMeta(metaForAnalyzer);
       setActiveSection('analyzer');
 
       if (artwork.dominantColors && artwork.dominantColors.length > 0) {
@@ -190,7 +352,7 @@ export default function App() {
         showToast(`'${artwork.title}' analizöre aktarıldı.`, 'info');
       } else {
         showToast(`'${artwork.title}' için piksel renk analizi başlatılıyor...`, 'info');
-        performAnalysis(artwork.imageUrl, artwork, clusterCount);
+        performAnalysis(sourceUrl, metaForAnalyzer, clusterCount);
       }
     },
     [showToast, clusterCount, performAnalysis]
@@ -203,64 +365,14 @@ export default function App() {
 
       {/* Main Content Area */}
       <main className="main-content container" id="mainContent">
-        {/* HERO / HOME SECTION */}
+        {/* HOME SECTION (Strict Editorial Showcase — Separate from Analyzer) */}
         {activeSection === 'home' && (
-          <section className="hero-section">
-            <div className="hero-text-container">
-              <div className="curatorial-badge">
-                <span className="badge-dot" />
-                <span>MÜZE & AÇIK ERİŞİM DİJİTAL ARŞİVİ</span>
-              </div>
-              <h1 className="hero-headline">
-                Yapay Zekâ Destekli Görsel Renk Analizi ve Dijital Arşiv Sistemi
-              </h1>
-              <p className="hero-subline">
-                The Metropolitan Museum of Art ve Wikimedia Commons açık erişimli sanat koleksiyonlarının
-                kromatik mirasını piksel düzeyinde keşfedin. K-Means++ kümeleme algoritmasıyla kendi görsellerinizi
-                tarayıcınızda doğrudan analiz edin ve renk benzerliklerine göre arşivde arama yapın.
-              </p>
-              <div className="hero-cta-group">
-                <button
-                  type="button"
-                  className="hero-btn-primary"
-                  onClick={() => setActiveSection('analyzer')}
-                >
-                  Görsel Analizörünü Başlat
-                </button>
-                <button
-                  type="button"
-                  className="hero-btn-secondary"
-                  onClick={() => setActiveSection('archive')}
-                >
-                  Koleksiyonu İncele ({archiveItems.length} Eser)
-                </button>
-              </div>
-            </div>
-
-            {/* Quick Demo Preview on Home */}
-            <div className="hero-feature-panel">
-              <ImageUploader
-                onImageSelected={handleImageSelected}
-                currentPreviewSrc={selectedImageSrc}
-                currentMetaStrip={currentMetaStrip}
-                isLoading={isLoading}
-                onShowToast={showToast}
-              />
-              {analysisData && (
-                <div style={{ marginTop: '2rem' }}>
-                  <ColorPalette
-                    analysisData={analysisData}
-                    clusterCount={clusterCount}
-                    onClusterCountChange={handleClusterCountChange}
-                    paletteViewMode={paletteViewMode}
-                    onPaletteViewModeChange={setPaletteViewMode}
-                    onSaveToArchive={handleSaveToArchive}
-                    onDownloadJson={handleDownloadJson}
-                    onCopyHex={handleCopyHex}
-                  />
-                </div>
-              )}
-            </div>
+          <section className="app-section active" aria-label="Ana Sayfa">
+            <HomeOverview
+              archiveItems={archiveItems}
+              onNavigate={setActiveSection}
+              onInspectArtwork={handleInspectArtwork}
+            />
           </section>
         )}
 
@@ -313,6 +425,13 @@ export default function App() {
               onTemperatureFilterChange={setGalleryTempFilter}
               onInspectArtwork={handleInspectArtwork}
               onAnalyzeArtwork={handleLoadIntoAnalyzer}
+              onGenerateArtworkPalette={handleGenerateArtworkPalette}
+              onRunBatchPaletteAnalysis={handleRunBatchPaletteAnalysis}
+              onStopBatchPaletteAnalysis={handleStopBatchPaletteAnalysis}
+              analyzingArtworkIds={analyzingArtworkIds}
+              failedArtworkErrors={failedArtworkErrors}
+              batchProgress={batchProgress}
+              isBatchRunning={isBatchRunning}
             />
           </section>
         )}

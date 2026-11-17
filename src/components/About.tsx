@@ -112,8 +112,8 @@ export const About: React.FC = () => {
             </div>
             <h4 className="step-title">Görsel Seçimi</h4>
             <p className="step-description">
-              JPG, PNG veya WEBP formatında bir görsel yükleyin ya da arşivdeki 105 doğrulanmış The Met
-              eserinden birini doğrudan analizöre aktarın.
+              JPG, PNG veya WEBP formatında bir görsel yükleyin ya da arşivdeki 205 doğrulanmış
+              açık erişimli müze eserinden birini doğrudan analizöre aktarın.
             </p>
           </div>
           <div className="workflow-step-card">
@@ -302,7 +302,7 @@ export const About: React.FC = () => {
           <div className="attr-item">
             <Globe2 size={16} className="attr-icon" />
             <span>
-              <strong>Sanat Eserleri Kataloğu:</strong> The Metropolitan Museum of Art Open Access API (<strong>CC0 1.0 Public Domain</strong>) ve Wikimedia Commons kamu malı görselleri.
+              <strong>Sanat Eserleri Kataloğu:</strong> The Metropolitan Museum of Art Open Access API ve Cleveland Museum of Art Open Access koleksiyonları (<strong>CC0 1.0 Public Domain</strong>) ile yerel başyapıt seçkileri.
             </span>
           </div>
           <div className="attr-item">

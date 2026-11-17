@@ -4,7 +4,9 @@
  */
 
 import React, { useMemo, useState } from 'react';
+import { AlertCircle, CheckCircle2, Loader2, Palette, RefreshCw, Square } from 'lucide-react';
 import { ArtworkMetadata, ColorMeaningEntry } from '../types';
+import type { BatchAnalysisProgress } from '../services/archivePaletteService';
 import { ColorMeaningModal } from './ColorMeaningModal';
 import { ColorMeaningsGrid } from './ColorMeaningsGrid';
 import { getColorMeanings } from '../services/colorMeaningsService';
@@ -19,6 +21,13 @@ interface ArchiveGalleryProps {
   onTemperatureFilterChange: (temp: string) => void;
   onInspectArtwork: (item: ArtworkMetadata) => void;
   onAnalyzeArtwork?: (item: ArtworkMetadata) => void;
+  onGenerateArtworkPalette?: (item: ArtworkMetadata) => Promise<void>;
+  onRunBatchPaletteAnalysis?: () => Promise<void>;
+  onStopBatchPaletteAnalysis?: () => void;
+  analyzingArtworkIds?: string[];
+  failedArtworkErrors?: Record<string, string>;
+  batchProgress?: BatchAnalysisProgress | null;
+  isBatchRunning?: boolean;
 }
 
 export const ArchiveGallery: React.FC<ArchiveGalleryProps> = ({
@@ -31,12 +40,35 @@ export const ArchiveGallery: React.FC<ArchiveGalleryProps> = ({
   onTemperatureFilterChange,
   onInspectArtwork,
   onAnalyzeArtwork,
+  onGenerateArtworkPalette,
+  onRunBatchPaletteAnalysis,
+  onStopBatchPaletteAnalysis,
+  analyzingArtworkIds = [],
+  failedArtworkErrors = {},
+  batchProgress = null,
+  isBatchRunning = false,
 }) => {
   const [artistFilter, setArtistFilter] = useState<string>('all');
   const [departmentFilter, setDepartmentFilter] = useState<string>('all');
   const [archiveSubView, setArchiveSubView] = useState<'artworks' | 'meanings'>('artworks');
   const [selectedColorMeaning, setSelectedColorMeaning] = useState<ColorMeaningEntry | null>(null);
   const [isColorModalOpen, setIsColorModalOpen] = useState<boolean>(false);
+
+  const paletteStats = useMemo(() => {
+    const total = items.length;
+    const ready = items.filter(
+      (item) => Array.isArray(item.dominantColors) && item.dominantColors.length > 0
+    ).length;
+    const pending = Math.max(0, total - ready);
+    const failed = Object.keys(failedArtworkErrors).filter((id) =>
+      items.some(
+        (item) =>
+          item.id === id &&
+          (!Array.isArray(item.dominantColors) || item.dominantColors.length === 0)
+      )
+    ).length;
+    return { total, ready, pending, failed };
+  }, [items, failedArtworkErrors]);
 
   const colorMeaningsList = useMemo(() => getColorMeanings(), []);
 
@@ -262,6 +294,117 @@ export const ArchiveGallery: React.FC<ArchiveGalleryProps> = ({
           </div>
         ) : (
           <>
+            {/* Dijital Arşiv Toplu Renk Analizi Yönetim Alanı */}
+            <div className="archive-batch-panel" aria-label="Arşiv renk paleti analiz durumu">
+              <div className="archive-batch-top">
+                <div className="archive-batch-metrics">
+                  <div className="batch-metric-item">
+                    <span className="batch-metric-label">Toplam Arşiv Eseri</span>
+                    <strong className="batch-metric-val tabular-nums">{paletteStats.total}</strong>
+                  </div>
+                  <div className="batch-metric-item">
+                    <span className="batch-metric-label">Paleti Hazır Eser</span>
+                    <strong className="batch-metric-val batch-ready tabular-nums">
+                      {paletteStats.ready}
+                    </strong>
+                  </div>
+                  <div className="batch-metric-item">
+                    <span className="batch-metric-label">Palet Bekleyen Eser</span>
+                    <strong className="batch-metric-val batch-pending tabular-nums">
+                      {paletteStats.pending}
+                    </strong>
+                  </div>
+                  <div className="batch-metric-item">
+                    <span className="batch-metric-label">Başarısız Analiz</span>
+                    <strong className="batch-metric-val batch-failed tabular-nums">
+                      {isBatchRunning && batchProgress
+                        ? batchProgress.failed
+                        : paletteStats.failed}
+                    </strong>
+                  </div>
+                </div>
+
+                <div className="archive-batch-actions">
+                  {isBatchRunning ? (
+                    <button
+                      type="button"
+                      className="batch-stop-btn"
+                      onClick={onStopBatchPaletteAnalysis}
+                    >
+                      <Square size={14} />
+                      <span>Analizi Durdur</span>
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      className="batch-run-btn"
+                      disabled={paletteStats.pending === 0 || !onRunBatchPaletteAnalysis}
+                      onClick={() => {
+                        void onRunBatchPaletteAnalysis?.();
+                      }}
+                    >
+                      <Palette size={15} />
+                      <span>
+                        {paletteStats.pending > 0
+                          ? `Eksik paletleri oluştur (${paletteStats.pending})`
+                          : 'Tüm Paletler Hazır'}
+                      </span>
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {(isBatchRunning || (batchProgress && batchProgress.total > 0)) && batchProgress && (
+                <div className="archive-batch-progress-box" role="status" aria-live="polite">
+                  <div className="batch-progress-meta">
+                    <div className="batch-progress-status">
+                      {isBatchRunning ? (
+                        <>
+                          <Loader2 size={14} className="spin-icon" />
+                          <span>
+                            Analiz ediliyor:{' '}
+                            <strong>
+                              {batchProgress.activeTitles.length > 0
+                                ? batchProgress.activeTitles.join(' · ')
+                                : 'Sıradaki eser hazırlanıyor...'}
+                            </strong>
+                          </span>
+                        </>
+                      ) : (
+                        <>
+                          <CheckCircle2 size={14} className="text-sage" />
+                          <span>
+                            {batchProgress.cancelled
+                              ? 'Toplu analiz durduruldu.'
+                              : 'Toplu arşiv renk analizi tamamlandı.'}
+                          </span>
+                        </>
+                      )}
+                    </div>
+                    <div className="batch-progress-counts tabular-nums">
+                      <span>
+                        {batchProgress.completed} / {batchProgress.total} tamamlandı
+                      </span>
+                      <span aria-hidden="true">·</span>
+                      <span>Başarısız: {batchProgress.failed}</span>
+                    </div>
+                  </div>
+                  <div className="batch-progress-track">
+                    <div
+                      className="batch-progress-fill"
+                      style={{
+                        width: `${
+                          batchProgress.total > 0
+                            ? Math.round((batchProgress.completed / batchProgress.total) * 100)
+                            : 0
+                        }%`,
+                      }}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+
             {/* Hızlı Renk Filtre Şeridi */}
             <div
               style={{
@@ -479,7 +622,13 @@ export const ArchiveGallery: React.FC<ArchiveGalleryProps> = ({
               </p>
             </div>
           ) : (
-            filteredItems.map((item) => (
+            filteredItems.map((item) => {
+              const hasPalette =
+                Array.isArray(item.dominantColors) && item.dominantColors.length > 0;
+              const isAnalyzingSingle = analyzingArtworkIds.includes(item.id);
+              const failureReason = !hasPalette ? failedArtworkErrors[item.id] : undefined;
+
+              return (
               <div key={item.id} className="archive-card" data-id={item.id}>
                 <div
                   className="archive-card-image-box"
@@ -495,7 +644,6 @@ export const ArchiveGallery: React.FC<ArchiveGalleryProps> = ({
                     referrerPolicy="no-referrer"
                     onError={(e) => {
                       const target = e.currentTarget;
-                      // Fallback to primary imageUrl if thumbnailUrl failed
                       if (item.imageUrl && target.src !== item.imageUrl) {
                         target.src = item.imageUrl;
                         return;
@@ -509,16 +657,24 @@ export const ArchiveGallery: React.FC<ArchiveGalleryProps> = ({
                 </div>
 
                 <div className="archive-card-palette-strip">
-                  {item.dominantColors?.map((c, i) => (
+                  {hasPalette ? (
+                    item.dominantColors.map((c, i) => (
+                      <div
+                        key={i}
+                        style={{
+                          flex: c.percentage,
+                          backgroundColor: c.hex,
+                        }}
+                        title={`${c.name} (%${c.percentage})`}
+                      />
+                    ))
+                  ) : (
                     <div
-                      key={i}
-                      style={{
-                        flex: c.percentage,
-                        backgroundColor: c.hex,
-                      }}
-                      title={`${c.name} (%${c.percentage})`}
+                      className={`archive-strip-placeholder ${
+                        isAnalyzingSingle ? 'is-analyzing' : failureReason ? 'is-failed' : ''
+                      }`}
                     />
-                  ))}
+                  )}
                 </div>
 
                 <div className="archive-card-content">
@@ -537,7 +693,7 @@ export const ArchiveGallery: React.FC<ArchiveGalleryProps> = ({
                   <p className="archive-card-artist">{item.artist}</p>
 
                   <div className="archive-card-palette-details">
-                    {item.dominantColors && item.dominantColors.length > 0 ? (
+                    {hasPalette ? (
                       <>
                         {item.dominantColors.map((c, i) => (
                           <div
@@ -561,6 +717,16 @@ export const ArchiveGallery: React.FC<ArchiveGalleryProps> = ({
                             : ''}
                         </span>
                       </>
+                    ) : isAnalyzingSingle ? (
+                      <span className="archive-status-inline analyzing">
+                        <Loader2 size={13} className="spin-icon" />
+                        <span>Gerçek piksel paleti çıkarılıyor...</span>
+                      </span>
+                    ) : failureReason ? (
+                      <span className="archive-status-inline failed" title={failureReason}>
+                        <AlertCircle size={13} />
+                        <span>Görsel erişimi başarısız</span>
+                      </span>
                     ) : (
                       <span
                         style={{
@@ -568,7 +734,7 @@ export const ArchiveGallery: React.FC<ArchiveGalleryProps> = ({
                           color: 'var(--text-muted)',
                         }}
                       >
-                        Açık Erişim · {item.museum || item.institution || 'The Met'}
+                        Palet bekleniyor · {item.museum || item.institution || 'The Met'}
                       </span>
                     )}
                   </div>
@@ -592,39 +758,61 @@ export const ArchiveGallery: React.FC<ArchiveGalleryProps> = ({
                         <path d="M5 12h14M12 5l7 7-7 7" />
                       </svg>
                     </button>
-                    {onAnalyzeArtwork && (
-                      <button
-                        type="button"
-                        className="btn-view-detail"
-                        style={{
-                          flex: 1,
-                          minWidth: '105px',
-                          backgroundColor: 'var(--color-primary, #1e3a5f)',
-                          color: '#ffffff',
-                          borderColor: 'var(--color-primary, #1e3a5f)'
-                        }}
-                        onClick={() => onAnalyzeArtwork(item)}
-                        title="Bu eseri Canvas piksel renk analizine aktar"
-                      >
-                        <span>Renk Analizi</span>
-                        <svg
-                          width="14"
-                          height="14"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
+
+                    {hasPalette ? (
+                      onAnalyzeArtwork && (
+                        <button
+                          type="button"
+                          className="btn-view-detail btn-card-primary"
+                          style={{ flex: 1, minWidth: '115px' }}
+                          onClick={() => onAnalyzeArtwork(item)}
+                          title="Bu eserin analiz edilmiş renk paletini Görsel Analizi ekranında görüntüle"
                         >
-                          <circle cx="12" cy="12" r="10" />
-                          <path d="m4.93 4.93 4.24 4.24" />
-                          <path d="m14.83 9.17 4.24-4.24" />
-                        </svg>
-                      </button>
+                          <span>Analizi görüntüle</span>
+                        </button>
+                      )
+                    ) : failureReason ? (
+                      onGenerateArtworkPalette && (
+                        <button
+                          type="button"
+                          className="btn-view-detail btn-card-retry"
+                          style={{ flex: 1, minWidth: '115px' }}
+                          disabled={isAnalyzingSingle}
+                          onClick={() => {
+                            void onGenerateArtworkPalette(item);
+                          }}
+                          title={failureReason}
+                        >
+                          <RefreshCw size={13} />
+                          <span>Tekrar dene</span>
+                        </button>
+                      )
+                    ) : (
+                      onGenerateArtworkPalette && (
+                        <button
+                          type="button"
+                          className="btn-view-detail btn-card-primary"
+                          style={{ flex: 1, minWidth: '115px' }}
+                          disabled={isAnalyzingSingle}
+                          onClick={() => {
+                            void onGenerateArtworkPalette(item);
+                          }}
+                          title="Canvas API ve K-Means++ ile gerçek piksel paletini çıkar"
+                        >
+                          {isAnalyzingSingle ? (
+                            <Loader2 size={13} className="spin-icon" />
+                          ) : (
+                            <Palette size={13} />
+                          )}
+                          <span>{isAnalyzingSingle ? 'Analiz...' : 'Paleti oluştur'}</span>
+                        </button>
+                      )
                     )}
                   </div>
                 </div>
               </div>
-            ))
+              );
+            })
           )}
         </div>
           </>
