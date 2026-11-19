@@ -315,17 +315,17 @@ export const HomeOverview: React.FC<HomeOverviewProps> = ({
           <article className="home-editorial-card">
             <div className="card-icon-row">
               <Database size={18} className="text-terracotta" />
-              <h3>Kalıcı Tarayıcı Palet Belleği</h3>
+              <h3>Tarayıcı İçi Analiz &amp; Müze Önbelleği</h3>
             </div>
             <p>
-              Kullanıcıların yüklediği analizler ve dijital arşivde eksikleri tamamlanan
-              paletler uzak bir sunucuya gönderilmeden tarayıcı belleğinde kalıcı olarak
-              saklanır; sayfa yenilendiğinde tüm renk şeritleri korunur.
+              Yüklenen görseller ve kamera çekimleri uzak bir sunucuya veya arşive
+              kaydedilmeden yalnızca oturum içi tarayıcı belleğinde işlenir; yalnızca
+              dijital arşivdeki müze eserlerinin eksik paletleri tarayıcı önbelleğinde korunur.
             </p>
             <div className="home-card-footer-meta">
               <span>%100 İstemci Taraflı Analiz</span>
               <span aria-hidden="true">·</span>
-              <span>LocalStorage Önbelleği</span>
+              <span>Yalnızca Müze Palet Önbelleği</span>
             </div>
           </article>
         </div>

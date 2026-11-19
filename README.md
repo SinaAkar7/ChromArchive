@@ -34,7 +34,7 @@ Aşağıdaki liste yalnızca mevcut proje dosyalarında doğrulanan uygulama öz
 8. The Metropolitan Museum of Art Open Access koleksiyonundan 105 eserlik başlangıç veri seti (`src/data/archiveData.json`) — **`**Eklendi**`**
 9. Cleveland Museum of Art (CMA CC0) koleksiyonundan 100 tablo eklemesiyle toplam 205 esere genişletilmiş tekilleştirilmiş müze kataloğu (`archive-additions-100-paintings.json` ve `archiveColorIndex.json`) — **`**Eklendi**`**
 10. Eser detay inceleme penceresi (`ArtworkModal`) ve "Analizörde Aç" doğrudan aktarım akışı — **`**Eklendi**`**
-11. Kullanıcı analizlerinin tarayıcı `localStorage` alanına (`chromarchive_user_items`, maks. 25 kayıt) kaydedilmesi — **`**Eklendi**`**
+11. Kullanıcı analizlerinin geçici `chromarchive_user_items` kaydı kaldırıldı; yalnızca müze kataloğu ve palet önbelleği korunacak şekilde temizlik politikası eklendi (`archiveService.ts`) — **`**Güncellendi**`**
 12. 11 ana renk ailesi için Türkçe/İngilizce ad, tarihsel bağlam, kaynaklandırılmış kültürel anlamlar (`documentedMeanings`) ve tıklanabilir akademik referans bağlantıları (`ColorMeaningsGrid`, `ColorMeaningModal`) — **`**Eklendi**`**
 13. sRGB → Lineer RGB → CIE XYZ (D65) → CIELAB dönüşümü ve **368 kayıtlı açık erişimli renk sözlüğü** (`src/data/colors.json`) üzerinde CIEDE2000 (ΔE 2000) renk arama motoru — **`**Eklendi**`**
 14. Gelişmiş HEX / RGB / renk adı / 13 renk ailesi filtresi ve eşleşen rengin tarihsel pigment & kültürel anlam çekmecesi (`ColorHistoricalContextPanel`) — **`**Eklendi**`**
@@ -47,17 +47,33 @@ Aşağıdaki liste yalnızca mevcut proje dosyalarında doğrulanan uygulama öz
 21. Üretilen paletlerin `localStorage` kalıcı önbelleğinde (`chromarchive_archive_palette_cache_v1`) saklanması ve açılışta otomatik birleştirilmesi (`archiveService.ts`) — **`**Eklendi**`**
 22. Yalnızca `https://images.metmuseum.org/CRDImages/...` yoluna izin veren CORS görsel vekil ucu (`/api/met-image`), Vite geliştirme ara katmanı ve Vercel SPA rewrite uyarlaması (`api/met-image.ts`, `vercel.json`) — **`**Eklendi**`**
 23. Paletsiz/bekleyen eserlerin istatistiklerde nötr renk sınıfına katılmasını engelleyen ayrıştırılmış istatistik hesabı — **`**Eklendi**`**
+24. Kullanıcı fotoğraflarının arşive kaydedilmesinin kaldırılması, tek girişli `"Görsel Analiz Et"` yönlendirmesi, iki durumlu analiz çalışma alanı, `"Yeni Görsel Analiz"` sıfırlama akışı ve canlı kamera fotoğraf çekimi (`navigator.mediaDevices.getUserMedia()`, HTML5 Video + Canvas, `MediaStreamTrack.stop()` yaşam döngüsü temizliği) — **`**Eklendi**`**
 
 ---
 
 ## 4. Uygulama Özellikleri
 
 - **Ana Sayfa (`HomeOverview`):** Editoryal müze açılışı, doğrulanmış yerel başyapıt plakası değiştirici, koleksiyon metrik özeti ve modül yönlendirmeleri içerir; görsel yükleme alanı barındırmaz.
-- **Görsel Analizi (`ImageUploader`, `ColorPalette`, `ColorAnalysisInsights`):** Sürükle-bırak görsel yükleme, örnek başyapıtlar, küme sayısı seçimi (`Oto`, `5–8`), baskın renk kartları, göreli sıcaklık dağılımı, mekânsal komşuluk analizi, JSON indirme ve kişisel arşive ekleme sunar. Sekme değiştirildiğinde son yüklenen görsel ve analiz verisi korunur.
-- **Dijital Arşiv (`ArchiveGallery`, `ArtworkModal`, `ColorMeaningsGrid`, `ColorMeaningModal`):** 205 müze eseri ve kullanıcı kayıtları üzerinde metin, sanatçı, dönem/departman, renk ailesi ve sıcaklık filtreleme; eksik paletler için tekil ve toplu (maks. 2 eşzamanlı) gerçek piksel paleti üretimi; 11 renk ailesinin kültürel anlam kartları ve detay penceresi yer alır.
+- **Görsel Analizi (`ImageUploader`, `ColorPalette`, `ColorAnalysisInsights`):** Yalnızca üst menüdeki `"Görsel Analiz Et"` butonu veya Ana Sayfa CTA'sı üzerinden erişilen iki durumlu analiz çalışma alanıdır:
+  1. **Cihazdan görsel yükleme & sürükle-bırak** (`JPG`, `JPEG`, `PNG`, `WEBP`, maks. 25 MB).
+  2. **Canlı kamera fotoğraf çekimi** (`"Kamerayı Aç"` -> `<video>` canlı önizleme -> `"Fotoğraf Çek"` -> `"Kamerayı Kapat"` / `"Kamerayı Yeniden Aç"`).
+  3. **Çekilen fotoğrafı mevcut analiz boru hattında doğrudan işleme** (`analyzeImageSource`, K-Means++ 5–8 renk kümeleme, CIELAB / ΔE 2000 adlandırma ve göreli sıcaklık analizi).
+  4. **5 hazır başyapıt önayarı** (Vermeer, Hokusai, Monet, Cézanne, Mona Lisa) ile hızlı doğrulama.
+  5. **Analiz süresince/sonrasında fotoğraf önizlemesini ekranda tutma** ve giriş ekranını gizleyen odaklı iki sütunlu sonuç düzeni.
+  6. **Yeni Görsel Analiz (`onStartNewAnalysis`):** Önceki analiz verisini sıfırlayıp dosya yükleme / kamera / örnek seçim durumuna tek tıkla dönüş.
+  7. **Orantılı renk dağılımı, yatay/ızgara kart görünümleri, tek tıkla HEX kopyalama ve JSON indirme.**
+  8. **Otomatik donanım temizliği:** Fotoğraf çekimi tamamlandığında, kamera kapatıldığında, sekme değiştirildiğinde veya bileşen kapandığında tüm `MediaStreamTrack` akışları durdurulur.
+- **Dijital Arşiv (`ArchiveGallery`, `ArtworkModal`, `ColorMeaningsGrid`, `ColorMeaningModal`):** Yalnızca 205 açık erişimli müze eseri üzerinde metin, sanatçı, dönem/departman, renk ailesi ve sıcaklık filtreleme; eksik paletler için tekil ve toplu (maks. 2 eşzamanlı) gerçek piksel paleti üretimi; 11 renk ailesinin kültürel anlam kartları ve detay penceresi yer alır.
 - **Renk Arama (`SearchBar`, `ColorHistoricalContextPanel`):** HEX, RGB veya Türkçe/İngilizce ad ile arama; 368 sözlük rengi arasında en yakın 10 eşleşme; arşiv eserlerinde ΔE 2000 yakınlık araması; tarihsel pigment ve kültürel bağlam paneli sunar.
 - **İstatistikler (`Statistics`):** İndekslenen eser sayısı, analiz edilen eser sayısı, palet bekleyen eser sayısı, toplam renk kümesi, ortalama kromatik çeşitlilik, ağırlıklı göreli sıcaklık dağılımı ve en sık kullanılan renk ailelerini raporlar.
 - **Proje Hakkında (`About`):** Metodoloji, kullanım alanları, açık erişim veri kaynakları, bilimsel sıcaklık referansları ve teknik mimari bilgilerini içerir.
+
+### Gizlilik ve Veri Saklama
+
+- **Kullanıcı Görselleri Arşivlenmez:** Cihazdan yüklenen dosyalar ve kamera ile çekilen fotoğraflar yalnızca geçici olarak tarayıcı belleğinde (RAM) HTML5 Canvas API üzerinden analiz edilir; dijital arşive, `localStorage` alanına, IndexedDB'ye veya herhangi bir uzak sunucuya kaydedilmez.
+- **Eski Kayıt Temizliği:** Daha önceki oturumlardan `chromarchive_user_items` anahtarında kalmış özel kullanıcı fotoğrafı kayıtları (`isCustom: true`, `data:`, `blob:`, `custom_*`) uygulama açılışında otomatik olarak elenir.
+- **Kamera İzni Politikası:** Sayfa yüklendiğinde kamera kesinlikle otomatik başlatılmaz; erişim yalnızca kullanıcı `"Kamerayı Aç"` butonuna bastığında istenir ve çekim sonrasında, kapatmada ya da sayfadan ayrılırken `MediaStreamTrack.stop()` ile tamamen serbest bırakılır.
+- **Müze Palet Önbelleği:** Kalıcı tarayıcı önbelleği (`chromarchive_archive_palette_cache_v1`) yalnızca resmi müze kataloğu eserlerinin (`objectId` / `museumRecordId` sahibi, `isCustom: false`) eksik palet çıkarımlarını saklar.
 
 ---
 
@@ -70,8 +86,8 @@ Aşağıdaki liste yalnızca mevcut proje dosyalarında doğrulanan uygulama öz
 | Derleme & Geliştirme | Vite 8.3.0, `@vitejs/plugin-react` |
 | Stil Sistemi | Tailwind CSS v4 (`@tailwindcss/vite`) + özel küratöryel CSS (`src/styles/style.css`) |
 | İkonlar | `lucide-react` |
-| Piksel İşleme | HTML5 2D Canvas API |
-| Kalıcılık | Tarayıcı `localStorage` (`chromarchive_user_items`, `chromarchive_archive_palette_cache_v1`) |
+| Piksel ve Medya İşleme | HTML5 2D Canvas API, `navigator.mediaDevices.getUserMedia()`, HTML5 Video API (`<video>`), `MediaStreamTrack.stop()` |
+| Kalıcılık | Yalnızca resmi müze palet önbelleği: `localStorage` (`chromarchive_archive_palette_cache_v1`) |
 | Görsel CORS Vekil Ucu | Vercel Serverless Function (`api/met-image.ts`) & Vite dev middleware |
 | Çalışma Zamanı | Node.js `>=20.19.0 || >=22.12.0` (`.nvmrc`: `22.12.0`) |
 
@@ -122,11 +138,11 @@ chromarchive/
 │   │   ├── ColorHistoricalContextPanel.tsx # Pigment tarihi ve kültürel anlam çekmecesi
 │   │   ├── ColorMeaningModal.tsx           # Renk ailesi kültürel anlam detay modalı
 │   │   ├── ColorMeaningsGrid.tsx           # 11 renk ailesi kart ızgarası
-│   │   ├── ColorPalette.tsx                # Baskın palet görünümü ve JSON dışa aktarma
+│   │   ├── ColorPalette.tsx                # Baskın palet görünümü, Yeni Görsel Analiz sıfırlama ve JSON dışa aktarma
 │   │   ├── Footer.tsx                      # Kompakt kurumsal alt bilgi çubuğu
 │   │   ├── HomeOverview.tsx                # Editoryal müze ana sayfası
-│   │   ├── ImageUploader.tsx               # Görsel yükleme ve örnek seçici
-│   │   ├── Navbar.tsx                      # 3 bölgeli üst menü
+│   │   ├── ImageUploader.tsx               # İki durumlu yükleyici, canlı kamera çekimi ve örnek seçici
+│   │   ├── Navbar.tsx                      # 3 bölgeli üst menü (tek Görsel Analiz Et CTA girişi)
 │   │   ├── SearchBar.tsx                   # CIELAB / ΔE 2000 renk ve eser arama motoru
 │   │   ├── Statistics.tsx                  # Arşiv metrikleri ve erişilebilir ipucu kutuları
 │   │   └── Toast.tsx                       # Bildirim bileşeni
@@ -142,7 +158,7 @@ chromarchive/
 │   │   └── warmCoolResearchReference.json  # Bilimsel sıcaklık literatür referansları
 │   ├── services/
 │   │   ├── archivePaletteService.ts        # Tekil ve maks. 2 eşzamanlı arşiv piksel analiz servisi
-│   │   ├── archiveService.ts               # Katalog birleştirme, palet önbelleği ve istatistikler
+│   │   ├── archiveService.ts               # Müze kataloğu birleştirme, palet önbelleği, eski kullanıcı kaydı temizliği ve istatistikler
 │   │   ├── colorAnalyzer.ts                # Canvas API + K-Means++ piksel motoru
 │   │   ├── colorMeaningsService.ts         # Kültürel renk anlamları okuma servisi
 │   │   ├── colorSearchService.ts           # CIELAB dönüşümü ve CIEDE2000 (ΔE) arama

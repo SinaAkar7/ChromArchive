@@ -227,7 +227,7 @@ export const About: React.FC = () => {
             <ul className="about-list">
               <li>
                 <CheckCircle2 size={14} className="check-icon" />
-                <span>Tek tıkla JSON metadata indirme ve yerel arşiv kaydı</span>
+                <span>Tek tıkla JSON metadata indirme ve oturum içi piksel analizi</span>
               </li>
               <li>
                 <CheckCircle2 size={14} className="check-icon" />

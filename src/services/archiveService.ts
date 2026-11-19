@@ -15,7 +15,7 @@ import {
 } from '../types';
 import { hydrateLegacyArtworkTemperature } from './colorTemperatureService';
 
-const STORAGE_KEY = 'chromarchive_user_items';
+const LEGACY_USER_ITEMS_KEY = 'chromarchive_user_items';
 export const ARCHIVE_PALETTE_CACHE_KEY = 'chromarchive_archive_palette_cache_v1';
 
 const COLOR_INDEX_BY_OBJECT_ID = new Map<number, ArchiveColorIndexEntry>();
@@ -46,6 +46,31 @@ function buildDedupeKeys(item: ArtworkMetadata): string[] {
   return keys;
 }
 
+function isCustomOrLocalUserEntry(raw: any): boolean {
+  if (!raw || typeof raw !== 'object') return true;
+  if (raw.isCustom === true) return true;
+  if (typeof raw.id === 'string' && raw.id.startsWith('custom_')) return true;
+  if (typeof raw.accessionNumber === 'string' && raw.accessionNumber.startsWith('USR-')) {
+    return true;
+  }
+  if (
+    typeof raw.imageUrl === 'string' &&
+    (raw.imageUrl.startsWith('data:') || raw.imageUrl.startsWith('blob:'))
+  ) {
+    return true;
+  }
+  if (
+    typeof raw.thumbnailUrl === 'string' &&
+    (raw.thumbnailUrl.startsWith('data:') || raw.thumbnailUrl.startsWith('blob:'))
+  ) {
+    return true;
+  }
+  const hasMuseumIdentity =
+    typeof raw.objectId === 'number' ||
+    (typeof raw.museumRecordId === 'string' && raw.museumRecordId.trim().length > 0);
+  return !hasMuseumIdentity;
+}
+
 /**
  * Kalıcı palet önbelleğini localStorage'dan güvenli biçimde okur.
  * Bozuk JSON veya depolama kısıtlaması uygulamayı çökertmez.
@@ -65,6 +90,7 @@ export function loadArtworkPaletteCache(): Record<string, CachedArtworkPaletteEn
 
     const validMap: Record<string, CachedArtworkPaletteEntry> = {};
     for (const [key, entry] of Object.entries(parsed as Record<string, unknown>)) {
+      if (key.startsWith('custom_')) continue;
       if (
         entry &&
         typeof entry === 'object' &&
@@ -82,13 +108,20 @@ export function loadArtworkPaletteCache(): Record<string, CachedArtworkPaletteEn
 }
 
 /**
- * Tek bir arşiv eserinin gerçek piksel analiz paletini kalıcı önbelleğe kaydeder.
+ * Yalnızca resmî müze kataloğundaki eserlerin gerçek piksel analiz paletini kalıcı önbelleğe kaydeder.
+ * Kullanıcı yüklemeleri veya kamera fotoğrafları kesinlikle önbelleğe veya arşive yazılmaz.
  */
 export function saveArtworkPaletteToCache(
   artwork: ArtworkMetadata
 ): { success: boolean; error?: string } {
   if (typeof window === 'undefined') {
     return { success: false, error: 'Tarayıcı depolama ortamı bulunamadı.' };
+  }
+  if (isCustomOrLocalUserEntry(artwork)) {
+    return {
+      success: false,
+      error: 'Kullanıcı tarafından yüklenen veya kamerayla çekilen görseller arşive kaydedilemez.',
+    };
   }
   if (!Array.isArray(artwork.dominantColors) || artwork.dominantColors.length === 0) {
     return { success: false, error: 'Boş renk paleti önbelleğe kaydedilemez.' };
@@ -272,8 +305,49 @@ export function normalizeArchiveItem(
 }
 
 /**
- * Başlangıç verisi (The Met + CMA ek koleksiyonu), doğrulanmış renk indeksi,
- * kalıcı palet önbelleği ve kullanıcının yerel kayıtlarını tekilliği koruyarak birleştirir.
+ * Eski chromarchive_user_items kaydında yer alan kullanıcı yüklemelerini (isCustom: true
+ * ve yerel fotoğraf verilerini) temizler; varsa yalnızca resmî müze kayıtlarını korur.
+ * Başka localStorage alanlarına (ör. chromarchive_archive_palette_cache_v1) dokunmaz.
+ */
+function sanitizeLegacyUserItemsStorage(
+  paletteCache: Record<string, CachedArtworkPaletteEntry>
+): ArtworkMetadata[] {
+  if (typeof window === 'undefined') {
+    return [];
+  }
+
+  try {
+    const raw = window.localStorage.getItem(LEGACY_USER_ITEMS_KEY);
+    if (!raw) return [];
+
+    const parsed: unknown = JSON.parse(raw);
+    if (!Array.isArray(parsed)) {
+      window.localStorage.removeItem(LEGACY_USER_ITEMS_KEY);
+      return [];
+    }
+
+    const officialMuseumRaw = parsed.filter((entry) => !isCustomOrLocalUserEntry(entry));
+    if (officialMuseumRaw.length !== parsed.length) {
+      if (officialMuseumRaw.length === 0) {
+        window.localStorage.removeItem(LEGACY_USER_ITEMS_KEY);
+      } else {
+        window.localStorage.setItem(
+          LEGACY_USER_ITEMS_KEY,
+          JSON.stringify(officialMuseumRaw)
+        );
+      }
+    }
+
+    return officialMuseumRaw.map((entry) => normalizeArchiveItem(entry, paletteCache));
+  } catch (err) {
+    console.warn('Eski arşiv depolaması doğrulanamadı:', err);
+    return [];
+  }
+}
+
+/**
+ * Başlangıç müze kataloğu (The Met + CMA ek koleksiyonu), doğrulanmış renk indeksi
+ * ve kalıcı müze palet önbelleğini tekilliği koruyarak birleştirir.
  */
 export function getArchiveItems(): ArtworkMetadata[] {
   const paletteCache = loadArtworkPaletteCache();
@@ -300,72 +374,21 @@ export function getArchiveItems(): ArtworkMetadata[] {
     return normalizedDefault;
   }
 
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return normalizedDefault;
-
-    const userItems: any[] = JSON.parse(raw);
-    if (Array.isArray(userItems)) {
-      const normalizedUser = userItems.map((u) => normalizeArchiveItem(u, paletteCache));
-      const userKeySet = new Set<string>();
-      normalizedUser.forEach((u) => buildDedupeKeys(u).forEach((k) => userKeySet.add(k)));
-
-      const dedupedDefault = normalizedDefault.filter(
-        (item) => !buildDedupeKeys(item).some((k) => userKeySet.has(k))
-      );
-
-      return [...normalizedUser, ...dedupedDefault];
-    }
-  } catch (err) {
-    console.error('LocalStorage okuma hatası:', err);
+  const officialLegacyRecords = sanitizeLegacyUserItemsStorage(paletteCache);
+  if (officialLegacyRecords.length === 0) {
+    return normalizedDefault;
   }
 
-  return normalizedDefault;
-}
+  const preservedKeySet = new Set<string>();
+  officialLegacyRecords.forEach((item) =>
+    buildDedupeKeys(item).forEach((k) => preservedKeySet.add(k))
+  );
 
-/**
- * Kullanıcının analiz ettiği görseli yerel depolamaya kaydeder (Kota korumalı).
- */
-export function saveUserArtwork(
-  item: ArtworkMetadata
-): { success: boolean; message: string } {
-  if (typeof window === 'undefined') {
-    return { success: false, message: 'Tarayıcı ortamı bulunamadı.' };
-  }
+  const dedupedDefault = normalizedDefault.filter(
+    (item) => !buildDedupeKeys(item).some((k) => preservedKeySet.has(k))
+  );
 
-  try {
-    let existing: ArtworkMetadata[] = [];
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) {
-      existing = JSON.parse(raw);
-    }
-
-    const safeItem = { ...item };
-    if (safeItem.imageUrl && safeItem.imageUrl.length > 500000) {
-      console.warn('Büyük görsel boyutu, localStorage kotası için optimize ediliyor.');
-    }
-
-    const index = existing.findIndex((x) => x.id === item.id);
-    if (index >= 0) {
-      existing[index] = safeItem;
-    } else {
-      existing.unshift(safeItem);
-    }
-
-    if (existing.length > 25) {
-      existing = existing.slice(0, 25);
-    }
-
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
-    return { success: true, message: 'Eser başarıyla dijital arşive eklendi.' };
-  } catch (err) {
-    console.error('LocalStorage yazma hatası:', err);
-    return {
-      success: false,
-      message:
-        'Tarayıcı depolama kotası dolmuş olabilir. Bazı eski analizleri temizlemeyi deneyin.',
-    };
-  }
+  return [...officialLegacyRecords, ...dedupedDefault];
 }
 
 /**

@@ -4,7 +4,7 @@
  */
 
 import React, { useEffect, useMemo, useState } from 'react';
-import { ChevronDown, ChevronUp, History, Info, Layers } from 'lucide-react';
+import { ChevronDown, ChevronUp, History, Info, Layers, RotateCcw } from 'lucide-react';
 import {
   ArtworkMetadata,
   ClusterCountOption,
@@ -21,7 +21,7 @@ interface ColorPaletteProps {
   onClusterCountChange: (k: ClusterCountOption) => void;
   paletteViewMode: PaletteViewMode;
   onPaletteViewModeChange: (mode: PaletteViewMode) => void;
-  onSaveToArchive: () => void;
+  onStartNewAnalysis?: () => void;
   onDownloadJson: () => void;
   onCopyHex: (hex: string) => void;
 }
@@ -32,7 +32,7 @@ export const ColorPalette: React.FC<ColorPaletteProps> = ({
   onClusterCountChange,
   paletteViewMode,
   onPaletteViewModeChange,
-  onSaveToArchive,
+  onStartNewAnalysis,
   onDownloadJson,
   onCopyHex,
 }) => {
@@ -92,27 +92,18 @@ export const ColorPalette: React.FC<ColorPaletteProps> = ({
           <h3 className="results-title">Baskın Renk Paleti</h3>
         </div>
         <div className="results-actions">
-          <button
-            type="button"
-            className="btn-secondary"
-            id="saveToArchiveBtn"
-            onClick={onSaveToArchive}
-            title="Bu analizi yerel dijital arşive ekle"
-          >
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
+          {onStartNewAnalysis && (
+            <button
+              type="button"
+              className="btn-secondary"
+              id="startNewAnalysisBtn"
+              onClick={onStartNewAnalysis}
+              title="Mevcut sonucu temizle ve yeni görsel yükle veya kamerayı aç"
             >
-              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
-              <polyline points="17 21 17 13 7 13 7 21" />
-              <polyline points="7 3 7 8 15 8" />
-            </svg>
-            <span>Arşive Ekle</span>
-          </button>
+              <RotateCcw size={14} />
+              <span>Yeni Görsel Analiz</span>
+            </button>
+          )}
 
           <button
             type="button"

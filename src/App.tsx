@@ -15,7 +15,6 @@ import {
 import { analyzeImageSource } from './services/colorAnalyzer';
 import {
   getArchiveItems,
-  saveUserArtwork,
   saveArtworkPaletteToCache,
   exportMetadataAsJson
 } from './services/archiveService';
@@ -151,8 +150,14 @@ export default function App() {
           `${result.dimensions || '300x300'} · ${result.dominantColors.length} Küme · ${result.overallTemperature}`
         );
 
-        // If this came from an existing catalog record without custom override, persist palette cache
-        if (metaOverrides.id && metaOverrides.isCustom === false && kOption === 'auto') {
+        // Yalnızca resmi müze kataloğu eserleri için (özel yükleme veya kamera fotoğrafı değilse) palet önbelleğine yaz
+        if (
+          !src.startsWith('data:') &&
+          !src.startsWith('blob:') &&
+          metaOverrides.id &&
+          metaOverrides.isCustom === false &&
+          kOption === 'auto'
+        ) {
           saveArtworkPaletteToCache(result);
           applyAnalyzedArtworkUpdate(result);
         }
@@ -172,11 +177,13 @@ export default function App() {
     [showToast, applyAnalyzedArtworkUpdate]
   );
 
-  // Handle new image upload or preset click
+  // Handle new image upload, camera capture, or preset click
   const handleImageSelected = useCallback(
     (src: string, meta: Partial<ArtworkMetadata>) => {
       setSelectedImageSrc(src);
       setCurrentArtworkMeta(meta);
+      setAnalysisData(null);
+      setCurrentMetaStrip(null);
       performAnalysis(src, meta, clusterCount);
       if (activeSection !== 'analyzer') {
         setActiveSection('analyzer');
@@ -185,11 +192,21 @@ export default function App() {
     [clusterCount, performAnalysis, activeSection]
   );
 
+  // Reset analyzer workspace back to entry state (file upload / camera / presets)
+  const handleResetAnalysis = useCallback(() => {
+    if (isLoading) return;
+    setSelectedImageSrc(null);
+    setCurrentArtworkMeta({});
+    setAnalysisData(null);
+    setCurrentMetaStrip(null);
+  }, [isLoading]);
+
   // Handle cluster count change (re-runs analysis on current image if present)
   const handleClusterCountChange = useCallback(
     (k: ClusterCountOption) => {
       setClusterCount(k);
       if (selectedImageSrc) {
+        setAnalysisData(null);
         performAnalysis(selectedImageSrc, currentArtworkMeta, k);
       }
     },
@@ -301,18 +318,6 @@ export default function App() {
     batchAbortControllerRef.current?.abort();
   }, []);
 
-  // Save analysis to local archive
-  const handleSaveToArchive = useCallback(() => {
-    if (!analysisData) return;
-    const res = saveUserArtwork(analysisData);
-    if (res.success) {
-      setArchiveItems(getArchiveItems());
-      showToast(res.message, 'success');
-    } else {
-      showToast(res.message, 'error');
-    }
-  }, [analysisData, showToast]);
-
   // Download metadata as JSON
   const handleDownloadJson = useCallback(() => {
     if (!analysisData) return;
@@ -351,6 +356,8 @@ export default function App() {
         );
         showToast(`'${artwork.title}' analizöre aktarıldı.`, 'info');
       } else {
+        setAnalysisData(null);
+        setCurrentMetaStrip(null);
         showToast(`'${artwork.title}' için piksel renk analizi başlatılıyor...`, 'info');
         performAnalysis(sourceUrl, metaForAnalyzer, clusterCount);
       }
@@ -378,37 +385,64 @@ export default function App() {
 
         {/* ANALYZER SECTION */}
         {activeSection === 'analyzer' && (
-          <section className="section-block">
+          <section className="section-block app-section active" aria-label="Görsel Renk Analizi">
             <div className="section-header-compact">
               <div className="badge-tag">
                 <span>PİKSEL KÜMELEME MOTORU</span>
               </div>
               <h2 className="section-title">Görsel Renk Analizi ve Palet Üretici</h2>
               <p className="section-lead">
-                JPG, PNG veya WEBP formatında bir görsel yükleyin veya aşağıdaki örnek başyapıtlardan birini seçin.
-                Canvas API piksel verilerini tarar ve K-Means++ algoritması insan algısına duyarlı ağırlıklı
-                Öklid mesafesiyle baskın 5–8 rengi ve kullanım yüzdelerini hesaplar.
+                Cihazınızdan görsel yükleyin, canlı kameranızla fotoğraf çekin veya örnek başyapıtlardan birini seçin.
+                Canvas API ve K-Means++ motoru baskın 5–8 rengi ve sıcaklık profilini yalnızca tarayıcı belleğinde hesaplar;
+                kullanıcı görselleri arşive veya sunucuya kaydedilmez.
               </p>
             </div>
 
-            <ImageUploader
-              onImageSelected={handleImageSelected}
-              currentPreviewSrc={selectedImageSrc}
-              currentMetaStrip={currentMetaStrip}
-              isLoading={isLoading}
-              onShowToast={showToast}
-            />
+            <div
+              className={`analysis-workspace ${
+                selectedImageSrc || isLoading ? 'has-active-image' : 'is-empty-state'
+              }`}
+            >
+              <ImageUploader
+                onImageSelected={handleImageSelected}
+                onResetAnalysis={handleResetAnalysis}
+                currentPreviewSrc={selectedImageSrc}
+                currentMetaStrip={currentMetaStrip}
+                currentArtworkTitle={analysisData?.title || currentArtworkMeta.title}
+                isCustomAnalysis={Boolean(
+                  analysisData?.isCustom ?? currentArtworkMeta.isCustom
+                )}
+                isLoading={isLoading}
+                onShowToast={showToast}
+              />
 
-            <ColorPalette
-              analysisData={analysisData}
-              clusterCount={clusterCount}
-              onClusterCountChange={handleClusterCountChange}
-              paletteViewMode={paletteViewMode}
-              onPaletteViewModeChange={setPaletteViewMode}
-              onSaveToArchive={handleSaveToArchive}
-              onDownloadJson={handleDownloadJson}
-              onCopyHex={handleCopyHex}
-            />
+              {(selectedImageSrc || isLoading) && (
+                <div className="analysis-output-column">
+                  {isLoading ? (
+                    <div className="analysis-loading-state" id="analysisLoadingState">
+                      <div className="analysis-spinner" />
+                      <div className="analysis-loading-text">
+                        Piksel Verileri Canvas API ile Analiz Ediliyor...
+                      </div>
+                      <div className="analysis-loading-subtext">
+                        K-Means++ kümeleme algoritması çalıştırılıyor, renk merkezleri ve sıcaklık skoru hesaplanıyor.
+                      </div>
+                    </div>
+                  ) : (
+                    <ColorPalette
+                      analysisData={analysisData}
+                      clusterCount={clusterCount}
+                      onClusterCountChange={handleClusterCountChange}
+                      paletteViewMode={paletteViewMode}
+                      onPaletteViewModeChange={setPaletteViewMode}
+                      onStartNewAnalysis={handleResetAnalysis}
+                      onDownloadJson={handleDownloadJson}
+                      onCopyHex={handleCopyHex}
+                    />
+                  )}
+                </div>
+              )}
+            </div>
           </section>
         )}
 

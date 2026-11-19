@@ -63,15 +63,6 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             type="button"
             className={`nav-link ${
-              activeSection === 'analyzer' ? 'active' : ''
-            }`}
-            onClick={() => handleLinkClick('analyzer')}
-          >
-            Görsel Analizi
-          </button>
-          <button
-            type="button"
-            className={`nav-link ${
               activeSection === 'archive' ? 'active' : ''
             }`}
             onClick={() => handleLinkClick('archive')}
@@ -105,7 +96,10 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="header-actions">
           <button
             type="button"
-            className="btn-primary"
+            className={`btn-primary ${
+              activeSection === 'analyzer' ? 'is-current' : ''
+            }`}
+            aria-current={activeSection === 'analyzer' ? 'page' : undefined}
             onClick={() => handleLinkClick('analyzer')}
           >
             <svg

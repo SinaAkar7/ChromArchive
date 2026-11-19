@@ -174,9 +174,8 @@ export const ArchiveGallery: React.FC<ArchiveGalleryProps> = ({
           <span className="section-kicker">Küratöryel Koleksiyon</span>
           <h2 className="section-title">Dijital Görsel Arşivi</h2>
           <p className="section-description">
-            Açık erişimli müze koleksiyonlarından ve kullanıcı yüklemelerinden
-            oluşan, K-Means renk özelliklerine göre indekslenmiş kalıcı dijital
-            görsel arşivi.
+            Açık erişimli müze koleksiyonlarından (The Met &amp; CMA CC0) derlenen,
+            K-Means renk özelliklerine göre indekslenmiş dijital sanat eseri arşivi.
           </p>
         </div>
 
