@@ -173,7 +173,8 @@ export type NavigationSection =
   | 'archive'
   | 'search'
   | 'stats'
-  | 'about';
+  | 'about'
+  | 'help';
 
 export interface ColorFamilyStat {
   family: string;

@@ -38,9 +38,17 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <button
             type="button"
             className="footer-compact-link"
+            onClick={() => onNavigate('help')}
+          >
+            Yardım &amp; Kullanım Rehberi
+          </button>
+          <span className="footer-compact-sep" aria-hidden="true">·</span>
+          <button
+            type="button"
+            className="footer-compact-link"
             onClick={() => onNavigate('about')}
           >
-            Hakkında, Metodoloji & Veri Kaynakları
+            Hakkında, Metodoloji &amp; Veri Kaynakları
           </button>
           <button
             type="button"

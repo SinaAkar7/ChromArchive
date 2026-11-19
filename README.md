@@ -48,6 +48,7 @@ Aşağıdaki liste yalnızca mevcut proje dosyalarında doğrulanan uygulama öz
 22. Yalnızca `https://images.metmuseum.org/CRDImages/...` yoluna izin veren CORS görsel vekil ucu (`/api/met-image`), Vite geliştirme ara katmanı ve Vercel SPA rewrite uyarlaması (`api/met-image.ts`, `vercel.json`) — **`**Eklendi**`**
 23. Paletsiz/bekleyen eserlerin istatistiklerde nötr renk sınıfına katılmasını engelleyen ayrıştırılmış istatistik hesabı — **`**Eklendi**`**
 24. Kullanıcı fotoğraflarının arşive kaydedilmesinin kaldırılması, tek girişli `"Görsel Analiz Et"` yönlendirmesi, iki durumlu analiz çalışma alanı, `"Yeni Görsel Analiz"` sıfırlama akışı ve canlı kamera fotoğraf çekimi (`navigator.mediaDevices.getUserMedia()`, HTML5 Video + Canvas, `MediaStreamTrack.stop()` yaşam döngüsü temizliği) — **`**Eklendi**`**
+25. ChromArchive'ın tüm modüllerini açıklayan, görsel işlem akışları, adım adım kullanım kılavuzları, etkileşimli kümeleme/görünüm önizlemeleri, terimler sözlüğü, doğrudan modül yönlendirmeleri ve sık sorulan sorular içeren kapsamlı Yardım sayfası (`src/components/Help.tsx`, `Navbar.tsx`, `Footer.tsx`, `HomeOverview.tsx`, `App.tsx`, `src/types/index.ts`, `src/styles/style.css`) — **`**Eklendi**`**
 
 ---
 
@@ -67,6 +68,9 @@ Aşağıdaki liste yalnızca mevcut proje dosyalarında doğrulanan uygulama öz
 - **Renk Arama (`SearchBar`, `ColorHistoricalContextPanel`):** HEX, RGB veya Türkçe/İngilizce ad ile arama; 368 sözlük rengi arasında en yakın 10 eşleşme; arşiv eserlerinde ΔE 2000 yakınlık araması; tarihsel pigment ve kültürel bağlam paneli sunar.
 - **İstatistikler (`Statistics`):** İndekslenen eser sayısı, analiz edilen eser sayısı, palet bekleyen eser sayısı, toplam renk kümesi, ortalama kromatik çeşitlilik, ağırlıklı göreli sıcaklık dağılımı ve en sık kullanılan renk ailelerini raporlar.
 - **Proje Hakkında (`About`):** Metodoloji, kullanım alanları, açık erişim veri kaynakları, bilimsel sıcaklık referansları ve teknik mimari bilgilerini içerir.
+- **Yardım ve Kullanım Rehberi (`Help.tsx`):** Görsel analiz, kamera ile fotoğraf çekme, dijital arşiv, renk arama, renk sıcaklığı, istatistikler ve uygulamanın diğer özellikleri için görselleştirilmiş kullanım anlatımları, hızlı başlangıç, teknik terimler sözlüğü ve sık sorulan sorular sunar.
+  - **Navigasyon Entegrasyonu:** Üst menüye (`Navbar.tsx`) ve mobil menüye `Proje Hakkında` sonrasına **Yardım** sekmesi eklenmiş (`"Görsel Analiz Et"` sağ CTA düzeni korunmuştur); ayrıca `HomeOverview.tsx` (Ana Sayfa *"Nasıl Kullanılır?"* / *"Yardım Rehberi"*) ve `Footer.tsx` alt bilgi çubuğu üzerinden doğrudan erişim sağlanmıştır.
+  - **Kullanıcı Deneyimi:** Üst bölümde tıklanabilir içindekiler çubuğu, oklarla bağlanan 4 adımlı hızlı başlangıç şeması, açılır-kapanır modül rehberleri, etkileşimli 5–8 küme ve yatay/ızgara önizleme örnekleri, `#B2AC88` açıklamalı renk kartı, ilgili modüllere yönlendiren çalışan aksiyon butonları, erişilebilir SSS akordeonu ve tüm ekran boyutlarına uyumlu duyarlı tasarım içerir.
 
 ### Gizlilik ve Veri Saklama
 
@@ -139,10 +143,11 @@ chromarchive/
 │   │   ├── ColorMeaningModal.tsx           # Renk ailesi kültürel anlam detay modalı
 │   │   ├── ColorMeaningsGrid.tsx           # 11 renk ailesi kart ızgarası
 │   │   ├── ColorPalette.tsx                # Baskın palet görünümü, Yeni Görsel Analiz sıfırlama ve JSON dışa aktarma
-│   │   ├── Footer.tsx                      # Kompakt kurumsal alt bilgi çubuğu
-│   │   ├── HomeOverview.tsx                # Editoryal müze ana sayfası
+│   │   ├── Footer.tsx                      # Kompakt kurumsal alt bilgi çubuğu (Yardım & Hakkında bağlantıları)
+│   │   ├── Help.tsx                        # Görselleştirilmiş kapsamlı kullanım rehberi, sözlük ve SSS
+│   │   ├── HomeOverview.tsx                # Editoryal müze ana sayfası (Yardım Rehberi yönlendirmeli)
 │   │   ├── ImageUploader.tsx               # İki durumlu yükleyici, canlı kamera çekimi ve örnek seçici
-│   │   ├── Navbar.tsx                      # 3 bölgeli üst menü (tek Görsel Analiz Et CTA girişi)
+│   │   ├── Navbar.tsx                      # 3 bölgeli üst menü (Ana Sayfa–Yardım sekmeleri + tek Görsel Analiz Et CTA)
 │   │   ├── SearchBar.tsx                   # CIELAB / ΔE 2000 renk ve eser arama motoru
 │   │   ├── Statistics.tsx                  # Arşiv metrikleri ve erişilebilir ipucu kutuları
 │   │   └── Toast.tsx                       # Bildirim bileşeni

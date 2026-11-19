@@ -90,6 +90,14 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             Proje Hakkında
           </button>
+          <button
+            type="button"
+            className={`nav-link ${activeSection === 'help' ? 'active' : ''}`}
+            aria-current={activeSection === 'help' ? 'page' : undefined}
+            onClick={() => handleLinkClick('help')}
+          >
+            Yardım
+          </button>
         </nav>
 
         {/* Bölge 3: Birincil Aksiyon Butonu */}

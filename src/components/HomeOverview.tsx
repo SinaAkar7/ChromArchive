@@ -9,6 +9,7 @@ import React, { useMemo, useState } from 'react';
 import {
   ArrowRight,
   BookOpen,
+  CircleHelp,
   Compass,
   Cpu,
   Database,
@@ -157,6 +158,14 @@ export const HomeOverview: React.FC<HomeOverviewProps> = ({
               onClick={() => onNavigate('archive')}
             >
               <span>Dijital arşivi keşfet</span>
+            </button>
+            <button
+              type="button"
+              className="hero-cta-guide-link"
+              onClick={() => onNavigate('help')}
+            >
+              <CircleHelp size={16} />
+              <span>Nasıl Kullanılır?</span>
             </button>
           </div>
 
@@ -456,6 +465,14 @@ export const HomeOverview: React.FC<HomeOverviewProps> = ({
           >
             <Compass size={16} />
             <span>Arşiv İstatistikleri</span>
+          </button>
+          <button
+            type="button"
+            className="closing-btn-secondary"
+            onClick={() => onNavigate('help')}
+          >
+            <CircleHelp size={16} />
+            <span>Yardım Rehberi</span>
           </button>
         </div>
       </section>

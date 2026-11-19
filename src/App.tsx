@@ -33,6 +33,7 @@ import { ArchiveGallery } from './components/ArchiveGallery';
 import { SearchBar } from './components/SearchBar';
 import { Statistics } from './components/Statistics';
 import { About } from './components/About';
+import { Help } from './components/Help';
 import { ArtworkModal } from './components/ArtworkModal';
 import { Footer } from './components/Footer';
 import { Toast } from './components/Toast';
@@ -78,6 +79,13 @@ export default function App() {
       batchAbortControllerRef.current?.abort();
     };
   }, []);
+
+  // Scroll to top when navigating between SPA sections
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    }
+  }, [activeSection]);
 
   // Toast dispatch helper
   const showToast = useCallback((text: string, type: 'success' | 'info' | 'error' = 'info') => {
@@ -495,6 +503,13 @@ export default function App() {
         {activeSection === 'about' && (
           <section className="section-block">
             <About />
+          </section>
+        )}
+
+        {/* HELP & USAGE GUIDE SECTION */}
+        {activeSection === 'help' && (
+          <section className="section-block app-section active" aria-label="Yardım ve Kullanım Rehberi">
+            <Help onNavigate={setActiveSection} />
           </section>
         )}
       </main>
