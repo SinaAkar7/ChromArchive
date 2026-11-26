@@ -6,6 +6,7 @@
 
 ## İçindekiler
 
+- [Uygulama Ekran Görüntüleri](#uygulama-ekran-görüntüleri)
 1. [Projenin Amacı ve Kapsamı](#1-projenin-amacı-ve-kapsamı)
 2. [Geliştirme Süreci ve Eklenen Özellikler (Adım Adım)](#2-geliştirme-süreci-ve-eklenen-özellikler-adım-adım)
 3. [Kullanılan Teknolojiler ve Görevleri](#3-kullanılan-teknolojiler-ve-görevleri)
@@ -16,6 +17,16 @@
 8. [Proje Dosya Yapısı](#8-proje-dosya-yapısı)
 9. [Yerel Kurulum ve Vercel Dağıtımı](#9-yerel-kurulum-ve-vercel-dağıtımı)
 10. [Sonuç ve Değerlendirme](#10-sonuç-ve-değerlendirme)
+
+---
+
+## Uygulama Ekran Görüntüleri
+
+| | |
+| :---: | :---: |
+| **Ana Sayfa**<br><br>![ChromArchive Ana Sayfa ekran görüntüsü](docs/screenshots/ChromArchive%20Ana%20sayfa.png) | **Görsel Analizi**<br><br>![ChromArchive Görsel Analizi ekran görüntüsü](docs/screenshots/ChromArchive%20G%C3%B6rsel%20Analiz.png) |
+| **Dijital Arşiv**<br><br>![ChromArchive Dijital Arşiv ekran görüntüsü](docs/screenshots/ChromArchive%20Dijital%20Ar%C5%9Fiv.png) | **Renk Arama**<br><br>![ChromArchive Renk Arama ekran görüntüsü](docs/screenshots/Renk%20Arama.png) |
+| **Proje Hakkında**<br><br>![ChromArchive Proje Hakkında ekran görüntüsü](docs/screenshots/Proje%20hakk%C4%B1nda.png) | **Yardım**<br><br>![ChromArchive Yardım ekran görüntüsü](docs/screenshots/Yard%C4%B1m.png) |
 
 ---
 
